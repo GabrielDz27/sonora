@@ -31,8 +31,11 @@ public class Calculadora implements CalculadoraRegras {
 
         try {
             return a.divide(b);
+            //a.divide(b, 10, RoundingMode.ROUND_HALF_UP); 5 para cima
+            //ROUND_HALF_DOWN // 5 para baixo
+
         } catch (ArithmeticException e){
-            throw new ArithmeticException("Erro ao divisao");
+            throw new ArithmeticException("Erro ao dividir");
         }
     }
 

@@ -2,6 +2,8 @@ package calculadoreaTestes;
 
 import calculadora.Calculadora;
 import org.junit.Test;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,8 +28,9 @@ public class CalculadoraTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Adicao de quatro ocasioes")
     @MethodSource("dadosBigDecimalAdd")
-    void addSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
+    void adicao_addSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
         Calculadora calculadora = new Calculadora(numero1, numero2);
         assertEquals(resultado, calculadora.adicao());
     }
@@ -43,8 +46,9 @@ public class CalculadoraTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Subtracao de quatro ocasioes")
     @MethodSource("dadosBigDecimalSub")
-    void subSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
+    void subtracao_subSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
         Calculadora calculadora = new Calculadora(numero1, numero2);
         assertEquals(resultado, calculadora.subtracao());
     }
@@ -60,8 +64,9 @@ public class CalculadoraTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Multiplicação de quatro ocasioes")
     @MethodSource("dadosBigDecimalMul")
-    void mulSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
+    void multiplicar_mulSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
         Calculadora calculadora = new Calculadora(numero1, numero2);
         assertEquals(resultado, calculadora.multiplicar());
     }
@@ -77,16 +82,24 @@ public class CalculadoraTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Divisao de quatro ocasioes")
     @MethodSource("dadosBigDecimalDiv")
-    void divSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
+    void divisao_divSimples(BigDecimal numero1, BigDecimal numero2, BigDecimal resultado) {
         Calculadora calculadora = new Calculadora(numero1, numero2);
         assertEquals(resultado, calculadora.divisao());
     }
 
     @Test
-    public void divErroDivisao() {
+    @DisplayName("Divisao testando com 0 para execao")
+    public void divisao_divErroDivisao() {
         Calculadora calculadora = new Calculadora(new BigDecimal("2"), BigDecimal.ZERO);
-        assertThrows(ArithmeticException.class, calculadora::divisao);
+        assertThrows(ArithmeticException.class, () -> calculadora.divisao());
     }
 
+    @Test
+    @DisplayName("Divisao testando com 0 para execao")
+    public void divisao_divErroDivisaoPeriodica() {
+        var calculadora = new Calculadora(new BigDecimal("1"), new BigDecimal("3"));
+        assertThrows(ArithmeticException.class, () -> calculadora.divisao());
+    }
 }

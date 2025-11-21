@@ -1,6 +1,7 @@
 package exercicios;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -9,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Exercicio2Test {
 
     @ParameterizedTest
+    @DisplayName("Teste romano")
     @CsvSource({
             "I,1",
             "II,2",
@@ -61,20 +63,29 @@ public class Exercicio2Test {
             "CCCXC,390",
             "MMMCMXCIX,3999"
     })
-    public void trsnformacao (String numeroRomano, int numero) {
+    public void trsnformacao_DeveEstarCoesoComResultadoRomano (String numeroRomano, int numero) {
         var exercicio2 = new Exercicio2();
         assertEquals(numeroRomano, exercicio2.trsnformacao(numero));
     }
 
     @Test
-    public void testeErro4000 () {
+    @DisplayName("Teste Throws com numero 4000")
+    public void trsnformacao_testeErroValor4000 () {
         var exercicio2 = new Exercicio2();
         assertThrows(IllegalArgumentException.class, () -> exercicio2.trsnformacao(4000));
     }
 
     @Test
-    public void testeErro0 () {
+    @DisplayName("Teste Throws com 0")
+    public void trsnformacao_testeErroValor0 () {
         var exercicio2 = new Exercicio2();
         assertThrows(IllegalArgumentException.class, () -> exercicio2.trsnformacao(0));
+    }
+
+    @Test
+    @DisplayName("Teste Throws com -1")
+    public void trsnformacao_testeErroValorUmNegativo () {
+        var exercicio2 = new Exercicio2();
+        assertThrows(IllegalArgumentException.class, () -> exercicio2.trsnformacao(-1));
     }
 }

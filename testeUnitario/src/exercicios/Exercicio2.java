@@ -6,7 +6,7 @@ import java.util.Map;
 public class Exercicio2 {
     public String trsnformacao (int numero) {
         if (numero < 1 || numero > 3999) {
-            throw new IllegalArgumentException("Regras comuns");
+            throw new IllegalArgumentException("so pode de 1 ate 3999");
         }
 
         Map <String, String> numeroR = new HashMap<String, String>();

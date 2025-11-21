@@ -1,6 +1,7 @@
 package exercicios;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,14 +29,15 @@ public class Exercicio1Test {
     }
 
     @ParameterizedTest
+    @DisplayName("Teste de ordenacao")
     @MethodSource("dadosOrdenacao")
     public void testeOrdenacao(int[] resultado, int[] dados) {
         var exercicio1 = new Exercicio1();
-
         assertArrayEquals(resultado,exercicio1.ordenacao(dados));
     }
 
     @Test
+    @DisplayName("Teste Throws")
     public void testeExecption() {
         var exercicio1 = new Exercicio1();
         assertThrows(IllegalArgumentException.class, () -> exercicio1.ordenacao(new int[]{1, 2, 3, 4, 6,7}));

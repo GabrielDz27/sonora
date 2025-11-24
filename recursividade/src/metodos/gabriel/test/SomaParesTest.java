@@ -1,13 +1,14 @@
 package metodos.gabriel.test;
 
 import metodos.gabriel.main.SomaPares;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SomaParesTest {
+public class SomaParesTest {
 
     @ParameterizedTest
     @DisplayName("Teste do metodo da Soma de Pares")
@@ -26,4 +27,9 @@ class SomaParesTest {
         assertEquals(resultado, recursividade.somaPares(numero));
     }
 
+    @Test
+    public void somaPares_DeveAbrirUmaException() {
+        var recursividade = new SomaPares();
+        assertThrows(IllegalArgumentException.class, () -> recursividade.somaPares(-1));
+    }
 }

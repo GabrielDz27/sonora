@@ -16,6 +16,7 @@ public class Exercicio1Test {
         return Stream.of(
                 Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{1, 3, 5, 2, 4}),
                 Arguments.of(new int[]{1, 2, 3, 4, 5}, new int[]{2, 5, 1, 4, 3}),
+
                 Arguments.of(new int[]{1,2,3,4,5},new int[]{3,1,4,5,2}),
                 Arguments.of(new int[]{1,2,3,4,5},new int[]{5,2,4,1,3}),
                 Arguments.of(new int[]{1,2,3,4,5},new int[]{4,1,3,5,2}),

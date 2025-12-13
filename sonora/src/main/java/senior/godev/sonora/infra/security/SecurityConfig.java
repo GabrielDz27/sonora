@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-                        .requestMatchers("/admistrador/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers("/administrador/**").hasRole("ADMINISTRADOR")
                         .anyRequest().authenticated())
                 .userDetailsService(myUserDetailService)
                 .exceptionHandling(exceptionHandling -> exceptionHandling

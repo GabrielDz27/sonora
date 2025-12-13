@@ -77,6 +77,4 @@ public class TratardorErros {
     public ResponseEntity cabecalhoVazioDeletar(EmptyResultDataAccessException ex) {
         return ResponseEntity.notFound().build();
     }
-
-
 }

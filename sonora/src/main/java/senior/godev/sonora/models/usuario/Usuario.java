@@ -33,4 +33,12 @@ public class Usuario {
         this.email = dados.email();
         this.role = dados.role();
     }
+
+    public void atualizarEmail(String email) {
+        this.email = email;
+    }
+
+    public void atualizarSenha(String senha) {
+        this.senha = senha;
+    }
 }

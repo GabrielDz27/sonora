@@ -21,6 +21,7 @@ CREATE TABLE membros
     cep             VARCHAR(9)         NOT NULL,
     complemento     VARCHAR(100),
     numero          VARCHAR(20),
+    ativo           SMALLINT,
     uf              CHAR(2)            NOT NULL,
     cidade          VARCHAR(100)       NOT NULL,
     telefone        VARCHAR(20)        NOT NULL
@@ -37,7 +38,7 @@ CREATE TABLE salas
 CREATE TABLE instrumentos
 (
     id                 SERIAL PRIMARY KEY NOT NULL,
-    tipos_instrumentos VARCHAR(50),
+    tipo_instrumento   VARCHAR(50),
     nome               VARCHAR(100)       NOT NULL,
     modelo             VARCHAR(100)       NOT NULL,
     numero_serie       VARCHAR(100) UNIQUE,

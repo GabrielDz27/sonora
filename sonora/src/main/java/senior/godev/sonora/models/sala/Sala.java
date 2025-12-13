@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
+import senior.godev.sonora.models.sala.formatacao.DadosAtualizacaoSala;
+import senior.godev.sonora.models.sala.formatacao.DadosCadastroSala;
 
 import java.util.List;
 
@@ -25,8 +28,10 @@ public class Sala {
 
     private Boolean tem_abafadores;
 
+    @OneToMany(mappedBy = "sala_fixa_id")
+    private List<Instrumento> instrumentos;
 
-    @OneToMany(mappedBy = "salas", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "sala", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Reserva> reservas;
 
     public Sala(DadosCadastroSala dadosCadastroSala) {
@@ -51,7 +56,7 @@ public class Sala {
 
     public void removerReserva(Reserva reserva) {
         reservas.remove(reserva);
-        reserva.setPaciente(null);
+        reserva.setSala(null);
     }
 
 }

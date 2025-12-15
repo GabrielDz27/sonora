@@ -9,7 +9,7 @@ public record DadosDetalhamentoMembro(
         Long id,
         String login,
         String cpf,
-        LocalDate data_nascimento,
+        LocalDate dataNascimento,
         String nome,
         String email,
         Endereco endereco
@@ -19,7 +19,7 @@ public record DadosDetalhamentoMembro(
                 membro.getId(),
                 loginUsuario,
                 membro.getCpf(),
-                membro.getData_nascimento(),
+                membro.getDataNascimento(),
                 membro.getNome(),
                 membro.getEmail(),
                 membro.getEndereco()

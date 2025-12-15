@@ -3,6 +3,7 @@ package senior.godev.sonora.models.instrumento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import senior.godev.sonora.models.instrumento.formatacao.DadosAtualizacaoInstrumento;
 import senior.godev.sonora.models.instrumento.formatacao.DadosCadastroInstrumento;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Instrumento {
 
     @Id
@@ -30,13 +32,13 @@ public class Instrumento {
 
     private String modelo;
 
-    private String numero_serie;
+    private String numeroSerie;
 
-    private int ano_fabricacao;
+    private int anoFabricacao;
 
-    private String pais_origem;
+    private String paisOrigem;
 
-    private String estado_conservacao;
+    private String estadoConservacao;
 
     private String caracteristica;
 
@@ -50,10 +52,10 @@ public class Instrumento {
     public Instrumento(DadosCadastroInstrumento dados) {
         this.nome = dados.nome();
         this.modelo = dados.modelo();
-        this.numero_serie = dados.numero_serie();
-        this.ano_fabricacao = dados.ano_fabricacao();
-        this.pais_origem = dados.pais_origem();
-        this.estado_conservacao = dados.estado_conservacao();
+        this.numeroSerie = dados.numeroSerie();
+        this.anoFabricacao = dados.anoFabricacao();
+        this.paisOrigem = dados.paisOrigem();
+        this.estadoConservacao = dados.estadoConservacao();
         this.caracteristica = dados.caracteristica();
     }
 
@@ -64,17 +66,17 @@ public class Instrumento {
         if (dados.modelo() != null) {
             this.modelo = dados.modelo();
         }
-        if (dados.numero_serie() != null) {
-            this.numero_serie = dados.numero_serie();
+        if (dados.numeroSerie() != null) {
+            this.numeroSerie = dados.numeroSerie();
         }
-        if (dados.ano_fabricacao() > 0) {
-            this.ano_fabricacao = dados.ano_fabricacao();
+        if (dados.anoFabricacao() > 0) {
+            this.anoFabricacao = dados.anoFabricacao();
         }
-        if (dados.pais_origem() != null) {
-            this.pais_origem = dados.pais_origem();
+        if (dados.paisOrigem() != null) {
+            this.paisOrigem = dados.paisOrigem();
         }
-        if (dados.estado_conservacao() != null) {
-            this.estado_conservacao = dados.estado_conservacao();
+        if (dados.estadoConservacao() != null) {
+            this.estadoConservacao = dados.estadoConservacao();
         }
         if (dados.caracteristica() != null) {
             this.caracteristica = dados.caracteristica();

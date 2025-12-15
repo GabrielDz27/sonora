@@ -21,8 +21,8 @@ public record DadosAtualizacaoMembro(
         String cpf,
 
         @NotBlank(message = "A data de nascimento é obrigatório")
-        @Past
-        LocalDate data_nascimento,
+        @Past(message = "A data de nascimento tem que ser no passado")
+        LocalDate dataNascimento,
 
         @NotBlank(message = "O nome é obrigatório")
         @Size(min = 1, max = 255)

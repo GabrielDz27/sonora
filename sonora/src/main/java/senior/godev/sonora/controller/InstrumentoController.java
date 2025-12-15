@@ -13,10 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import senior.godev.sonora.models.instrumento.Instrumento;
-import senior.godev.sonora.models.instrumento.formatacao.DadosAtualizacaoInstrumento;
-import senior.godev.sonora.models.instrumento.formatacao.DadosCadastroInstrumento;
-import senior.godev.sonora.models.instrumento.formatacao.DadosDetalhamentoInstrumento;
-import senior.godev.sonora.models.instrumento.formatacao.DadosListagemInstrumento;
+import senior.godev.sonora.models.instrumento.formatacao.*;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.repository.InstrumentoRepository;
 
@@ -102,6 +99,20 @@ class InstrumentoController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemInstrumento>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         var page = instrumentoRepository.findAll(paginacao).map(DadosListagemInstrumento::new);
+        return ResponseEntity.ok(page);
+    }
+
+    /**
+     * @Instrumentos
+     * @Reservas Quando for pesquisar o instrumento para reservar, precisa aparecer se estar reservado ou não, dando dado mais coeso, com true e false;
+     */
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhamentoInstrumentoEReserva>> listarInstrumentoReserva(@RequestBody DadosListagemInstrumentoReserva dadosListagemInstrumentoReserva) {
+        var page = instrumentoRepository.findAllAndReserva(
+                dadosListagemInstrumentoReserva.paginacao(),
+                dadosListagemInstrumentoReserva.dataHoraInicio(),
+                dadosListagemInstrumentoReserva.dataHoraFinal()
+        ).map(DadosDetalhamentoInstrumentoEReserva::new);
         return ResponseEntity.ok(page);
     }
 }

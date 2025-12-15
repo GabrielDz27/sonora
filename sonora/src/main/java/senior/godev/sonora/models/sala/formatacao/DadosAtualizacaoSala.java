@@ -17,6 +17,6 @@ public record DadosAtualizacaoSala(
         int capacidade,
 
         @NotNull
-        Boolean tem_abafadores
+        Boolean temAbafadores
 ) {
 }

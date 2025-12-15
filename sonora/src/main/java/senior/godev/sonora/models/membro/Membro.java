@@ -3,6 +3,7 @@ package senior.godev.sonora.models.membro;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import senior.godev.sonora.models.membro.endereco.Endereco;
 import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
@@ -17,16 +18,17 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Membro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private UUID usuario_id;
+    private UUID usuarioId;
 
     private String cpf;
-    private LocalDate data_nascimento;
+    private LocalDate dataNascimento;
     private String nome;
     private String email;
 
@@ -42,10 +44,10 @@ public class Membro {
             throw new RuntimeException("Cpf invalido");
         }
 
-        this.usuario_id = usuarioId;
+        this.usuarioId = usuarioId;
         this.email = usuarioEmail;
         this.cpf = dadosCadastroMembro.cpf();
-        this.data_nascimento = dadosCadastroMembro.data_nascimento();
+        this.dataNascimento = dadosCadastroMembro.dataNascimento();
         this.nome = dadosCadastroMembro.nome();
         this.ativo = true;
     }
@@ -63,8 +65,8 @@ public class Membro {
             this.nome = dadosAtualizacaoMembro.nome();
         }
 
-        if (dadosAtualizacaoMembro.data_nascimento() != null) {
-            this.data_nascimento = dadosAtualizacaoMembro.data_nascimento();
+        if (dadosAtualizacaoMembro.dataNascimento() != null) {
+            this.dataNascimento = dadosAtualizacaoMembro.dataNascimento();
         }
 
         if (dadosAtualizacaoMembro.endereco() != null) {
@@ -74,5 +76,9 @@ public class Membro {
                 this.endereco.atualizarInformacoes(dadosAtualizacaoMembro.endereco());
             }
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

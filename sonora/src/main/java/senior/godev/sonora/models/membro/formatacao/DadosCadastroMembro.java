@@ -19,7 +19,7 @@ public record DadosCadastroMembro(
 
         @NotBlank(message = "A data de nascimento é obrigatório")
         @Past
-        LocalDate data_nascimento,
+        LocalDate dataNascimento,
 
         @NotBlank(message = "O nome é obrigatório")
         @Size(min = 1, max = 255)

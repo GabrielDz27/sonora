@@ -3,6 +3,7 @@ package senior.godev.sonora.models.sala;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Sala {
 
     @Id
@@ -26,9 +28,9 @@ public class Sala {
 
     private int capacidade;
 
-    private Boolean tem_abafadores;
+    private Boolean temAbafadores;
 
-    @OneToMany(mappedBy = "sala_fixa_id")
+    @OneToMany(mappedBy = "sala_fixa_id", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Instrumento> instrumentos;
 
     @OneToMany(mappedBy = "sala", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -37,7 +39,7 @@ public class Sala {
     public Sala(DadosCadastroSala dadosCadastroSala) {
         this.capacidade = dadosCadastroSala.capacidade();
         this.nome = dadosCadastroSala.nome();
-        this.tem_abafadores = dadosCadastroSala.tem_abafadores();
+        this.temAbafadores = dadosCadastroSala.temAbafadores();
     }
 
     public void atualizarSala(DadosAtualizacaoSala dadosAtualizacaoSala) {
@@ -45,8 +47,8 @@ public class Sala {
             this.nome = dadosAtualizacaoSala.nome();
         }
 
-        if (dadosAtualizacaoSala.tem_abafadores() != null) {
-            this.tem_abafadores = dadosAtualizacaoSala.tem_abafadores();
+        if (dadosAtualizacaoSala.temAbafadores() != null) {
+            this.temAbafadores = dadosAtualizacaoSala.temAbafadores();
         }
 
         if (dadosAtualizacaoSala.capacidade() > 0) {
@@ -59,4 +61,8 @@ public class Sala {
         reserva.setSala(null);
     }
 
+    public void removerInstrumento(Instrumento instrumento) {
+        instrumentos.remove(instrumento);
+        instrumento.setId(null);
+    }
 }

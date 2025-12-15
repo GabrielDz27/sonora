@@ -58,7 +58,7 @@ public class MembroService {
 
     private DadosDetalhamentoMembro montarDtoDetalhamento(Membro membro) {
 
-        Usuario usuario = usuarioRepository.findById(membro.getUsuario_id())
+        Usuario usuario = usuarioRepository.findById(membro.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário relacionado não encontrado."));
 
         return new DadosDetalhamentoMembro(
@@ -69,5 +69,12 @@ public class MembroService {
 
     public Page<DadosListagemMembro> listagemMembro(Pageable paginacao) {
         return membroRepository.findAllDetalhamentoListagem(paginacao);
+    }
+
+    @Transactional
+    public void excluirMembro(Long id) {
+        var membro = membroRepository.getReferenceById(id);
+
+        membro.excluir();
     }
 }

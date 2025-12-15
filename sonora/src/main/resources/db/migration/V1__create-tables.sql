@@ -51,16 +51,18 @@ CREATE TABLE instrumentos
 
 CREATE TABLE reservas
 (
-    id                 SERIAL PRIMARY KEY            NOT NULL,
-    membro_id          INTEGER                       NOT NULL REFERENCES membros (id),
-    instrumento_id     INTEGER REFERENCES instrumentos (id),
-    sala_id            INTEGER REFERENCES salas (id) NOT NULL,
-    data_hora_inicio   TIMESTAMP                     NOT NULL,
-    data_hora_fim      TIMESTAMP                     NOT NULL,
-    data_hora_registro TIMESTAMP                     NOT NULL,
-    tem_proximo        BOOLEAN,
-    tipo_uso           VARCHAR(50)                   NOT NULL,
-    observacoes        TEXT
+    id                  SERIAL PRIMARY KEY            NOT NULL,
+    membro_id           INTEGER                       NOT NULL REFERENCES membros (id),
+    instrumento_id      INTEGER REFERENCES instrumentos (id),
+    sala_id             INTEGER REFERENCES salas (id) NOT NULL,
+    data_hora_inicio    TIMESTAMP                     NOT NULL,
+    data_hora_fim       TIMESTAMP                     NOT NULL,
+    data_hora_registro  TIMESTAMP                     NOT NULL,
+    em_espera         BOOLEAN,
+    motivo_cancelamento VARCHAR(100),
+    tipo_uso            VARCHAR(50)                   NOT NULL,
+    observacoes         TEXT
+
 );
 
 

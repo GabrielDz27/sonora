@@ -8,10 +8,10 @@ public record DadosDetalhamentoInstrumento(
         TipoInstrumento tipoInstrumento,
         String nome,
         String modelo,
-        String numero_serie,
-        int ano_fabricacao,
-        String pais_origem,
-        String estado_conservacao,
+        String numeroSerie,
+        int anoFbricacao,
+        String paisOrigem,
+        String estadoConservacao,
         String caracteristica
 ) {
     public DadosDetalhamentoInstrumento(Instrumento instrumento) {
@@ -20,10 +20,10 @@ public record DadosDetalhamentoInstrumento(
                 instrumento.getTipoInstrumento(),
                 instrumento.getNome(),
                 instrumento.getModelo(),
-                instrumento.getNumero_serie(),
-                instrumento.getAno_fabricacao(),
-                instrumento.getPais_origem(),
-                instrumento.getEstado_conservacao(),
+                instrumento.getNumeroSerie(),
+                instrumento.getAnoFabricacao(),
+                instrumento.getPaisOrigem(),
+                instrumento.getEstadoConservacao(),
                 instrumento.getCaracteristica()
         );
     }

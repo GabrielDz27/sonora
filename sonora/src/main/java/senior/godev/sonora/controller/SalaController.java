@@ -12,12 +12,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.models.sala.Sala;
-import senior.godev.sonora.models.sala.formatacao.DadosAtualizacaoSala;
-import senior.godev.sonora.models.sala.formatacao.DadosCadastroSala;
-import senior.godev.sonora.models.sala.formatacao.DadosDetalhamentoCompletoSala;
-import senior.godev.sonora.models.sala.formatacao.DadosDetalhamentoSala;
+import senior.godev.sonora.models.sala.formatacao.*;
 import senior.godev.sonora.repository.SalaRepository;
 import senior.godev.sonora.repository.projections.SalaProjection;
 
@@ -77,6 +75,10 @@ class SalaController {
             for (Reserva reserva : salaRepository.findAllReservaById(sala.get().getId())) {
                 sala.get().removerReserva(reserva);
             }
+            for (Instrumento instrumento : salaRepository.findAllInstrumentoById(sala.get().getId())) {
+                sala.get().removerInstrumento(instrumento);
+            }
+
             salaRepository.deleteById(sala.get().getId());
 
             return ResponseEntity.noContent().build();
@@ -104,7 +106,7 @@ class SalaController {
         sala.setId(salaProjection.getId());
         sala.setNome(salaProjection.getNome());
         sala.setCapacidade(salaProjection.getCapacidade());
-        sala.setTem_abafadores(salaProjection.getTem_Abafadores());
+        sala.setTemAbafadores(salaProjection.getTem_Abafadores());
 
         return ResponseEntity.ok(new DadosDetalhamentoCompletoSala(
                 sala,
@@ -120,4 +122,15 @@ class SalaController {
         var page = salaRepository.findAll(paginacao).map(DadosDetalhamentoSala::new);
         return ResponseEntity.ok(page);
     }
+
+    /**
+     * @Salas
+     * @Reservas Quando for pesquisar a sala para reserva, precisa aparecer se estar reservado ou não, dando dado mais coeso, com true e false;
+     */
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhamentoSalaEReserva>> listarSalasEReservas(@RequestBody DadosListagemSalaReserva dados) {
+        var page = salaRepository.findAllAndReserva(dados.paginacao(), dados.dataHoraInicio(), dados.dataHoraFinal()).map(DadosDetalhamentoSalaEReserva::new);
+        return ResponseEntity.ok(page);
+    }
+
 }

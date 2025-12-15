@@ -62,4 +62,10 @@ class MembroController {
     public ResponseEntity<Page<DadosListagemMembro>> listar(@PageableDefault(size = 30, sort = {"nome"}) Pageable paginacao) {
         return ResponseEntity.ok(membroService.listagemMembro(paginacao));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluir(@PathVariable Long id) {
+        membroService.excluirMembro(id);
+        return ResponseEntity.noContent().build();
+    }
 }

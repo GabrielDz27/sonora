@@ -15,14 +15,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.models.sala.Sala;
-import senior.godev.sonora.models.sala.formatacao.*;
+import senior.godev.sonora.models.sala.dto.*;
 import senior.godev.sonora.repository.SalaRepository;
 import senior.godev.sonora.repository.projections.SalaProjection;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/sala")
+@RequestMapping("/salas")
 class SalaController {
 
     @Autowired
@@ -127,7 +127,7 @@ class SalaController {
      * @Salas
      * @Reservas Quando for pesquisar a sala para reserva, precisa aparecer se estar reservado ou não, dando dado mais coeso, com true e false;
      */
-    @GetMapping
+    @GetMapping("/reservas")
     public ResponseEntity<Page<DadosDetalhamentoSalaEReserva>> listarSalasEReservas(@RequestBody DadosListagemSalaReserva dados) {
         var page = salaRepository.findAllAndReserva(dados.paginacao(), dados.dataHoraInicio(), dados.dataHoraFinal()).map(DadosDetalhamentoSalaEReserva::new);
         return ResponseEntity.ok(page);

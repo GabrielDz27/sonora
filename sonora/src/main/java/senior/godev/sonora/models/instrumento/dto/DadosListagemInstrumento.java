@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.instrumento.formatacao;
+package senior.godev.sonora.models.instrumento.dto;
 
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.instrumento.TipoInstrumento;

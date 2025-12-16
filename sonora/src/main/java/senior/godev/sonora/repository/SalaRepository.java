@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SalaRepository extends JpaRepository<Sala, Long> {
+    //tras um tipo de detalhamento sobre sala e seus instrumentos que possuim dentro da sala
     @Query(value = """
             SELECT s.*,
             COUNT(i.id) AS quantidadeInstrumentos,
@@ -53,6 +54,7 @@ public interface SalaRepository extends JpaRepository<Sala, Long> {
 
     Sala findAllById(Long id);
 
+    //Confere se a sala esta em uso ou não, mas trazendo em detalhe geral! vai ser usado no frontend da reserva, quando selecionar a sala
     @Query(value = """
             SELECT
                 s.id AS id,

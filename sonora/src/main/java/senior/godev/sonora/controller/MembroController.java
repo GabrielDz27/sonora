@@ -16,7 +16,7 @@ import senior.godev.sonora.models.membro.formatacao.DadosListagemMembro;
 import senior.godev.sonora.service.MembroService;
 
 @RestController
-@RequestMapping("/administrador/membro")
+@RequestMapping("/membros")
 class MembroController {
 
     @Autowired
@@ -36,7 +36,6 @@ class MembroController {
 
         return ResponseEntity.created(uri).body(detalhamentoMembro);
     }
-
 
     /**
      * @Membros Atualizar o registro do membro

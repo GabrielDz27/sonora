@@ -2,19 +2,23 @@ package senior.godev.sonora.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import senior.godev.sonora.exceptions.ValidacaoException;
 import senior.godev.sonora.models.instrumento.Instrumento;
+import senior.godev.sonora.models.reserva.MotivoCancelamento;
 import senior.godev.sonora.models.reserva.Reserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosCadastroReserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosCancelamentoReserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosConfirmacaoReserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosDetalhamentoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCadastroReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCancelamentoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosConfirmacaoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosDetalhamentoReserva;
 import senior.godev.sonora.models.reserva.validacao.cancelamento.ValidadorCancelamento;
+import senior.godev.sonora.models.reserva.validacao.confirmacao.ValidadorConfirmacao;
 import senior.godev.sonora.models.reserva.validacao.reservamento.ValidadorReservamento;
 import senior.godev.sonora.repository.InstrumentoRepository;
 import senior.godev.sonora.repository.MembroRepository;
 import senior.godev.sonora.repository.ReservaRepository;
 import senior.godev.sonora.repository.SalaRepository;
+import senior.godev.sonora.utils.mail.EmailService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -39,7 +43,17 @@ public class ReservaService {
     private List<ValidadorReservamento> validadores;
 
     @Autowired
-    private List<ValidadorCancelamento> validadoresCancelamento;
+    private List<ValidadorConfirmacao> validadorConfirmacoes;
+
+    @Autowired
+    private List<ValidadorCancelamento> validadorCancelamentos;
+
+    private EmailService emailService;
+
+    @Autowired
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     public DadosDetalhamentoReserva reservar(DadosCadastroReserva dadosCadastroReserva) {
         if (!salaRepository.existsById(dadosCadastroReserva.idSala())) {
@@ -88,16 +102,51 @@ public class ReservaService {
 
     public void cancelar(DadosCancelamentoReserva dados) {
         if (!reservaRepository.existsById(dados.idReserva())) {
-            throw new ValidacaoException("Id da consulta informado não existe!");
+            throw new ValidacaoException("Id da reserva informado não existe!");
         }
 
-        validadoresCancelamento.forEach(v -> v.validar(dados));
+        validadorCancelamentos.forEach(v -> v.validar(dados));
 
         var reserva = reservaRepository.getReferenceById(dados.idReserva());
         reserva.cancelar(dados.motivo());
+        proximoPromocao(reserva);
+
     }
 
     public void confirmar(DadosConfirmacaoReserva dadosCadastroReserva) {
+        if (!reservaRepository.existsById(dadosCadastroReserva.id())) {
+            throw new ValidacaoException("Id da reserva informado não existe!");
+        }
+        validadorConfirmacoes.forEach(validadorConfirmacao -> validadorConfirmacao.validar(dadosCadastroReserva));
 
+        var reserva = reservaRepository.getReferenceById(dadosCadastroReserva.id());
+
+        reserva.confirmar();
+    }
+
+    @Transactional
+    public void preCancelamento(Reserva reserva, MotivoCancelamento esquecimentoConfirmacao) {
+        reserva.cancelar(esquecimentoConfirmacao);
+    }
+
+    @Transactional
+    public void cancelamentoFinalEPromocao(Reserva reserva, MotivoCancelamento motivo) {
+
+        reserva.cancelar(motivo);
+        reservaRepository.save(reserva);
+
+        // 2. Promove o próximo da fila (se houver)
+        proximoPromocao(reserva);
+    }
+
+    public void proximoPromocao(Reserva reserva) {
+        var proximoOptional = reservaRepository.findProximoEmEspera(reserva.getSala().getId(), reserva.getDataHoraInicio());
+
+        if (proximoOptional.isPresent()) {
+            proximoOptional.get().setMotivoCancelamento(MotivoCancelamento.PENDENTE_CONFIRMACAO);
+            reservaRepository.save(proximoOptional.get());
+
+            emailService.enviarEmailConfirmacaoPromocao(proximoOptional.get());
+        }
     }
 }

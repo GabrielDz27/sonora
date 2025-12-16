@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
-import senior.godev.sonora.models.sala.formatacao.DadosAtualizacaoSala;
-import senior.godev.sonora.models.sala.formatacao.DadosCadastroSala;
+import senior.godev.sonora.models.sala.dto.DadosAtualizacaoSala;
+import senior.godev.sonora.models.sala.dto.DadosCadastroSala;
 
 import java.util.List;
 

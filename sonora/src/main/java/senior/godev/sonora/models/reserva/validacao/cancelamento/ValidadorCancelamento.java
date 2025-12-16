@@ -1,7 +1,7 @@
 package senior.godev.sonora.models.reserva.validacao.cancelamento;
 
-import senior.godev.sonora.models.reserva.formatacao.DadosCancelamentoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCancelamentoReserva;
 
 public interface ValidadorCancelamento {
-    void validar(DadosCancelamentoReserva dados);
+    void validar(DadosCancelamentoReserva reserva);
 }

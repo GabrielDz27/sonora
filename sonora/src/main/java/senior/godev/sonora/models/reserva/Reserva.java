@@ -53,4 +53,8 @@ public class Reserva {
     public void cancelar(MotivoCancelamento motivoCancelamento) {
         this.motivoCancelamento = motivoCancelamento;
     }
+
+    public void confirmar() {
+        this.motivoCancelamento = null;
+    }
 }

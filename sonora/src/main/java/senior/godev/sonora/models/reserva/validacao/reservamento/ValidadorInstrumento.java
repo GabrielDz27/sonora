@@ -3,7 +3,7 @@ package senior.godev.sonora.models.reserva.validacao.reservamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senior.godev.sonora.exceptions.ValidacaoException;
-import senior.godev.sonora.models.reserva.formatacao.DadosCadastroReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCadastroReserva;
 import senior.godev.sonora.repository.InstrumentoRepository;
 
 @Component("ValidadorInstrumentoReservamento")

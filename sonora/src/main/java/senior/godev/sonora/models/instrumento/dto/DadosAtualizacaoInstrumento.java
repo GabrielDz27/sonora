@@ -1,11 +1,14 @@
-package senior.godev.sonora.models.instrumento.formatacao;
+package senior.godev.sonora.models.instrumento.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import senior.godev.sonora.models.instrumento.TipoInstrumento;
 
-public record DadosCadastroInstrumento(
+public record DadosAtualizacaoInstrumento(
+        @NotNull(message = "o id é obrigatório")
+        Long id,
 
         TipoInstrumento tipoInstrumento,
 
@@ -17,8 +20,8 @@ public record DadosCadastroInstrumento(
 
         String numeroSerie,
 
-        @Past(message = "O ano deve que ser antes da data atual")
-        @Positive(message = "Ano deve ser positivo")
+        @Past(message = "O ano tem que ser antes da data atual")
+        @Positive(message = "O ano tem que ser positivo")
         int anoFabricacao,
 
         @NotBlank(message = "O pais de origem é obrigatório")

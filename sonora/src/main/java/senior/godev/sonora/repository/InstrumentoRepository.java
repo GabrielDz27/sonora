@@ -20,6 +20,8 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
 
     Optional<Instrumento> findById(Long id);
 
+    //Vai ser usado pra pegar todas as reservas de instrumentos antes de fazer o DELETE do instrumento.
+    // Assim flegando o attributo instrumento da reserva com NULL;
     @Query(value = """
             SELECT
                 r.*
@@ -30,6 +32,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
             """, nativeQuery = true)
     List<Reserva> findAllReservaById(@Param("id") Long id);
 
+    //Buscar todos instrumentos, aqueles que estão sendo reservados e não, tratando isso no front para aparecer.
     @Query(value = """
             SELECT
                 i.id AS idInstrumento,
@@ -57,7 +60,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
             @Param("dataHoraFinal") LocalDateTime dataHoraFinal
     );
 
-
+    //E uma validação na reseva pra dizer se o instrmento selecionado está reservado ou não
     @Query(value = """
             SELECT
             CASE

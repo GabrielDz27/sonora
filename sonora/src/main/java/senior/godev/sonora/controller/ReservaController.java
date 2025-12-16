@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import senior.godev.sonora.models.reserva.formatacao.DadosCadastroReserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosCancelamentoReserva;
-import senior.godev.sonora.models.reserva.formatacao.DadosConfirmacaoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCadastroReserva;
+import senior.godev.sonora.models.reserva.dto.DadosCancelamentoReserva;
+import senior.godev.sonora.models.reserva.dto.DadosConfirmacaoReserva;
 import senior.godev.sonora.service.ReservaService;
 
 @RestController
@@ -17,6 +17,9 @@ class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
+    /**
+     * @reserva Vai criar uma reserva, ai utiliza o
+     */
     @PostMapping
     @Transactional
     public ResponseEntity reserva(@RequestBody @Valid DadosCadastroReserva dadosCadastroReserva) {

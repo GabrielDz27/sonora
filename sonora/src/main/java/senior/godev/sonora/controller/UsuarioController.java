@@ -22,6 +22,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     /**
+     * @Usuario
      * @Login Aqui vai estar a informações gerais do usuario, nome, login, email, senha (hash) e classificação
      */
     @GetMapping("/info")
@@ -30,6 +31,9 @@ public class UsuarioController {
         return userRepo.findByLogin(userName).get();
     }
 
+    /**
+     * @Usuario Possibilita o usuario atualizar a senha
+     */
     @PutMapping("/senha")
     public ResponseEntity atualizarSenha(@RequestBody DadosAtualizacaoSenhaUsuario dadosAtualizacao) {
         String loginUsuario = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

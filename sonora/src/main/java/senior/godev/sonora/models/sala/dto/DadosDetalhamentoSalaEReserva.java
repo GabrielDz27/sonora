@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.sala.formatacao;
+package senior.godev.sonora.models.sala.dto;
 
 import senior.godev.sonora.models.reserva.TipoUso;
 import senior.godev.sonora.repository.projections.SalaReservaProjection;

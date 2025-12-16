@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.reserva.formatacao;
+package senior.godev.sonora.models.reserva.dto;
 
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.models.reserva.TipoUso;

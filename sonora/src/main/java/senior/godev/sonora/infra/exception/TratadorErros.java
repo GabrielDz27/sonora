@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class TratardorErros {
+public class TratadorErros {
 
     /**
      * Erros de validação dos atributos @Valid

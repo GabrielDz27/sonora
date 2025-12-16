@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.reserva.formatacao;
+package senior.godev.sonora.models.reserva.dto;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

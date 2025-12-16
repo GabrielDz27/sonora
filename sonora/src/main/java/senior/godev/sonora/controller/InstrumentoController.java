@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import senior.godev.sonora.models.instrumento.Instrumento;
-import senior.godev.sonora.models.instrumento.formatacao.*;
+import senior.godev.sonora.models.instrumento.dto.*;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.repository.InstrumentoRepository;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/instrumento")
+@RequestMapping("/instrumentos")
 class InstrumentoController {
 
     @Autowired
@@ -106,7 +106,7 @@ class InstrumentoController {
      * @Instrumentos
      * @Reservas Quando for pesquisar o instrumento para reservar, precisa aparecer se estar reservado ou não, dando dado mais coeso, com true e false;
      */
-    @GetMapping
+    @GetMapping("/reservas")
     public ResponseEntity<Page<DadosDetalhamentoInstrumentoEReserva>> listarInstrumentoReserva(@RequestBody DadosListagemInstrumentoReserva dadosListagemInstrumentoReserva) {
         var page = instrumentoRepository.findAllAndReserva(
                 dadosListagemInstrumentoReserva.paginacao(),

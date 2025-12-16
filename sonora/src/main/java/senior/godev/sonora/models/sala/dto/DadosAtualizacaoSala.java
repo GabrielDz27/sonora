@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.sala.formatacao;
+package senior.godev.sonora.models.sala.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

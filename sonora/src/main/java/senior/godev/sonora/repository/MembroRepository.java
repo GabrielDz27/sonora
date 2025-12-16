@@ -22,4 +22,6 @@ public interface MembroRepository extends JpaRepository<Membro, Long> {
             WHERE m.ativo = true
             """)
     Page<DadosListagemMembro> findAllDetalhamentoListagem(Pageable paginacao);
+
+    boolean findAtivoById(Long id);
 }

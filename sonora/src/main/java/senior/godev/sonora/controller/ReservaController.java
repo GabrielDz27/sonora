@@ -36,6 +36,4 @@ class ReservaController {
         reservaService.confirmar(dadosConfirmacaoReserva);
         return ResponseEntity.noContent().build();
     }
-
-
 }

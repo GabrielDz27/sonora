@@ -12,13 +12,13 @@ public interface MembroRepository extends JpaRepository<Membro, Long> {
 
     @Query("""
             SELECT NEW senior.godev.sonora.models.membro.formatacao.DadosListagemMembro(
-                m.id, 
+                m.id,
                 u.login,
                 m.cpf,
-                m.nome, 
+                m.nome,
                 m.email)
-            FROM Membro m 
-            JOIN Usuario u ON u.id = m.usuario_id
+            FROM Membro m
+            JOIN Usuario u
             WHERE m.ativo = true
             """)
     Page<DadosListagemMembro> findAllDetalhamentoListagem(Pageable paginacao);

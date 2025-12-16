@@ -2,7 +2,9 @@ package senior.godev.sonora.models.usuario;
 
 import jakarta.persistence.*;
 import lombok.*;
+import senior.godev.sonora.models.membro.Membro;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +29,9 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private IdentificacaoUsuario role;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Membro> membros;
+
     public Usuario(DadosCadastroUsuario dados) {
         this.login = dados.login();
         this.senha = dados.senha();
@@ -40,5 +45,10 @@ public class Usuario {
 
     public void atualizarSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void removeMembro(Membro membro) {
+        membros.remove(membro);
+        membro.setUsuario(null);
     }
 }

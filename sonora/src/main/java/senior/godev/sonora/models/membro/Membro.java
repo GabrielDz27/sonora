@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import senior.godev.sonora.models.membro.endereco.Endereco;
 import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
 import senior.godev.sonora.models.membro.formatacao.DadosCadastroMembro;
+import senior.godev.sonora.models.usuario.Usuario;
 import senior.godev.sonora.utils.ValidadorCpf;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "membros")
@@ -25,7 +25,9 @@ public class Membro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private UUID usuarioId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     private String cpf;
     private LocalDate dataNascimento;
@@ -37,14 +39,14 @@ public class Membro {
 
     private Boolean ativo;
 
-    public Membro(DadosCadastroMembro dadosCadastroMembro, UUID usuarioId, String usuarioEmail) {
+    public Membro(DadosCadastroMembro dadosCadastroMembro, Usuario usuario, String usuarioEmail) {
         ValidadorCpf validadorCpf = new ValidadorCpf();
 
         if (!validadorCpf.validarCpf(dadosCadastroMembro.cpf())) {
             throw new RuntimeException("Cpf invalido");
         }
 
-        this.usuarioId = usuarioId;
+        this.usuario = usuario;
         this.email = usuarioEmail;
         this.cpf = dadosCadastroMembro.cpf();
         this.dataNascimento = dadosCadastroMembro.dataNascimento();

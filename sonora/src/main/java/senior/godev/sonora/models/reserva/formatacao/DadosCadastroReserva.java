@@ -1,5 +1,7 @@
 package senior.godev.sonora.models.reserva.formatacao;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import senior.godev.sonora.models.reserva.TipoUso;
@@ -23,6 +25,7 @@ public record DadosCadastroReserva(
         LocalDateTime dataHoraFim,
 
         @NotNull(message = "O tipo de uso deve ser informado")
+        @Enumerated(EnumType.STRING)
         TipoUso tipoUso,
 
         String observacoes

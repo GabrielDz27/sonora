@@ -58,11 +58,10 @@ CREATE TABLE reservas
     data_hora_inicio    TIMESTAMP                     NOT NULL,
     data_hora_fim       TIMESTAMP                     NOT NULL,
     data_hora_registro  TIMESTAMP                     NOT NULL,
-    em_espera         BOOLEAN,
+    em_espera           BOOLEAN,
     motivo_cancelamento VARCHAR(100),
     tipo_uso            VARCHAR(50)                   NOT NULL,
     observacoes         TEXT
-
 );
 
 

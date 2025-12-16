@@ -56,4 +56,22 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
             @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
             @Param("dataHoraFinal") LocalDateTime dataHoraFinal
     );
+
+
+    @Query(value = """
+            SELECT
+            CASE
+                WHEN r.data_hora_inicio <= :dataHoraFinal
+                    AND r.data_hora_fim >= :dataHoraInicio
+                THEN TRUE ELSE FALSE
+            END AS emUso
+            FROM reservas r
+            WHERE r.instrumento_id = :id
+            ORDER BY emUso
+            LIMIT 1
+            """,
+            nativeQuery = true)
+    boolean instrumentoReservado(@Param("id") Long id,
+                                 @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
+                                 @Param("dataHoraFinal") LocalDateTime dataHoraFinal);
 }

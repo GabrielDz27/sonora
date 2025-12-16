@@ -15,6 +15,4 @@ public interface InstrumentoReservaProjection {
     Boolean getEmUso();
 
     TipoUso getTipoUso();
-
-
 }

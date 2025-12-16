@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import senior.godev.sonora.exceptions.ValidacaoException;
 import senior.godev.sonora.models.membro.Membro;
 import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
 import senior.godev.sonora.models.membro.formatacao.DadosCadastroMembro;
@@ -30,7 +31,7 @@ public class MembroService {
 
         Membro novoMembro = new Membro(
                 dadosCadastroMembro,
-                usuario.getId(),
+                usuario,
                 usuario.getEmail()
         );
 
@@ -58,7 +59,7 @@ public class MembroService {
 
     private DadosDetalhamentoMembro montarDtoDetalhamento(Membro membro) {
 
-        Usuario usuario = usuarioRepository.findById(membro.getUsuarioId())
+        Usuario usuario = usuarioRepository.findById(membro.getUsuario().getId())
                 .orElseThrow(() -> new RuntimeException("Usuário relacionado não encontrado."));
 
         return new DadosDetalhamentoMembro(
@@ -73,8 +74,15 @@ public class MembroService {
 
     @Transactional
     public void excluirMembro(Long id) {
+        if (!membroRepository.existsById(id)) {
+            throw new ValidacaoException("Não foi encontrado o membro pra excluir.");
+        }
+        
         var membro = membroRepository.getReferenceById(id);
+        var usuario = usuarioRepository.findByLogin(membro.getUsuario().getLogin())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
+        usuario.removeMembro(membro);
         membro.excluir();
     }
 }

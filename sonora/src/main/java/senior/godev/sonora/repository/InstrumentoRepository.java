@@ -26,7 +26,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
             SELECT
                 r.*
             FROM reservas AS r
-            INNER JOIN Instrumento as i ON
+            INNER JOIN Instrumentos as i ON
             i.id = r.sala_id
             where i.id = :id
             """, nativeQuery = true)
@@ -38,16 +38,16 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
                 i.id AS idInstrumento,
                 i.nome AS nome,
                 i.modelo AS modelo,
-                r.sala_id AS idSala,
+                MAX(r.sala_id) AS idSala,
                 (CASE WHEN COUNT(r.id) > 0 THEN TRUE ELSE FALSE END) AS emUso,
                 MAX(r.tipo_uso) AS tipoUso
-            FROM instrumento i
+            FROM instrumentos i
             LEFT JOIN reservas r
                 ON r.instrumento_id = i.id
                 AND r.motivo_cancelamento IS NOT NULL
                 AND r.data_hora_inicio <= :dataHoraFinal
                 AND r.data_hora_fim    >= :dataHoraInicio
-            GROUP i.id, i.nome, i.modelo
+            GROUP BY i.id, i.nome, i.modelo
             """,
             countQuery = """
                         SELECT COUNT(*)
@@ -63,18 +63,18 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
     //E uma validação na reseva pra dizer se o instrmento selecionado está reservado ou não
     @Query(value = """
             SELECT
-            CASE
-                WHEN r.data_hora_inicio <= :dataHoraFinal
-                    AND r.data_hora_fim >= :dataHoraInicio
-                THEN TRUE ELSE FALSE
-            END AS emUso
+                CASE
+                    WHEN r.data_hora_inicio <= :dataHoraFinal
+                        AND r.data_hora_fim >= :dataHoraInicio
+                    THEN TRUE ELSE FALSE
+                END AS emUso
             FROM reservas r
             WHERE r.instrumento_id = :id
             ORDER BY emUso
             LIMIT 1
             """,
             nativeQuery = true)
-    boolean instrumentoReservado(@Param("id") Long id,
+    Boolean instrumentoReservado(@Param("id") Long id,
                                  @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
                                  @Param("dataHoraFinal") LocalDateTime dataHoraFinal);
 }

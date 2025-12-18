@@ -3,6 +3,7 @@ package senior.godev.sonora.models.reserva.validacao.reservamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senior.godev.sonora.exceptions.ValidacaoException;
+import senior.godev.sonora.models.membro.Membro;
 import senior.godev.sonora.models.reserva.dto.DadosCadastroReserva;
 import senior.godev.sonora.repository.MembroRepository;
 
@@ -15,9 +16,9 @@ public class ValidarMembroAtivo implements ValidadorReservamento {
     @Override
     public void validar(DadosCadastroReserva dadosCadastroReserva) {
 
+        Membro membro = membroRepository.findAllById(dadosCadastroReserva.idMembro());
 
-        var membroAtivo = membroRepository.findAtivoById(dadosCadastroReserva.idMembro());
-        if (!membroAtivo) {
+        if (!membro.getAtivo()) {
             throw new ValidacaoException("A reserva não pode ser realizada com um membro excluido");
         }
     }

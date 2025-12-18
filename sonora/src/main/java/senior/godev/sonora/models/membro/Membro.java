@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import senior.godev.sonora.models.membro.dto.DadosAtualizacaoMembro;
+import senior.godev.sonora.models.membro.dto.DadosCadastroMembro;
 import senior.godev.sonora.models.membro.endereco.Endereco;
-import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosCadastroMembro;
 import senior.godev.sonora.models.usuario.Usuario;
 import senior.godev.sonora.utils.ValidadorCpf;
 
@@ -39,11 +39,13 @@ public class Membro {
 
     private Boolean ativo;
 
+    private String telefone;
+
     public Membro(DadosCadastroMembro dadosCadastroMembro, Usuario usuario, String usuarioEmail) {
         ValidadorCpf validadorCpf = new ValidadorCpf();
 
         if (!validadorCpf.validarCpf(dadosCadastroMembro.cpf())) {
-            throw new RuntimeException("Cpf invalido");
+            throw new RuntimeException("Cpf inválido");
         }
 
         this.usuario = usuario;
@@ -52,13 +54,15 @@ public class Membro {
         this.dataNascimento = dadosCadastroMembro.dataNascimento();
         this.nome = dadosCadastroMembro.nome();
         this.ativo = true;
+        this.telefone = dadosCadastroMembro.telefone();
+        this.endereco = new Endereco(dadosCadastroMembro.endereco());
     }
 
     public void atualizarInformacoes(DadosAtualizacaoMembro dadosAtualizacaoMembro) {
         if (dadosAtualizacaoMembro.cpf() != null) {
             ValidadorCpf validadorCpf = new ValidadorCpf();
             if (!validadorCpf.validarCpf(dadosAtualizacaoMembro.cpf())) {
-                throw new RuntimeException("Novo CPF inválido.");
+                throw new RuntimeException("Novo cpf inválido.");
             }
             this.cpf = dadosAtualizacaoMembro.cpf();
         }
@@ -69,6 +73,14 @@ public class Membro {
 
         if (dadosAtualizacaoMembro.dataNascimento() != null) {
             this.dataNascimento = dadosAtualizacaoMembro.dataNascimento();
+        }
+
+        if (dadosAtualizacaoMembro.telefone() != null) {
+            this.telefone = dadosAtualizacaoMembro.telefone();
+        }
+
+        if (dadosAtualizacaoMembro.email() != null) {
+            this.email = dadosAtualizacaoMembro.email();
         }
 
         if (dadosAtualizacaoMembro.endereco() != null) {
@@ -82,5 +94,13 @@ public class Membro {
 
     public void excluir() {
         this.ativo = false;
+    }
+
+    public void reativar(DadosCadastroMembro dados, Usuario usuario) {
+        this.ativo = true;
+        this.nome = dados.nome();
+        this.dataNascimento = dados.dataNascimento();
+        this.usuario = usuario;
+        this.endereco = new Endereco(dados.endereco());
     }
 }

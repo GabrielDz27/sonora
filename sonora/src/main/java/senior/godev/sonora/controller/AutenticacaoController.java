@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,15 +57,10 @@ public class AutenticacaoController {
      */
     @PostMapping("/login")
     public Map<String, Object> loginHandler(@RequestBody @Valid LoginCredenciais usuario) {
-        try {
+        var authInputToken = new UsernamePasswordAuthenticationToken(usuario.login(), usuario.senha());
+        authenticationManager.authenticate(authInputToken);
 
-            var authInputToken = new UsernamePasswordAuthenticationToken(usuario.login(), usuario.senha());
-            authenticationManager.authenticate(authInputToken);
-
-            String token = jwtUtil.gerarToken(usuario.login());
-            return Collections.singletonMap("jwt-token", token);
-        } catch (AuthenticationException e) {
-            throw new RuntimeException("Erro ao autenticar usuario");
-        }
+        String token = jwtUtil.gerarToken(usuario.login());
+        return Collections.singletonMap("jwt-token", token);
     }
 }

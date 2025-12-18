@@ -21,7 +21,7 @@ CREATE TABLE membros
     cep             VARCHAR(9)         NOT NULL,
     complemento     VARCHAR(100),
     numero          VARCHAR(20),
-    ativo           SMALLINT,
+    ativo           BOOLEAN,
     uf              CHAR(2)            NOT NULL,
     cidade          VARCHAR(100)       NOT NULL,
     telefone        VARCHAR(20)        NOT NULL

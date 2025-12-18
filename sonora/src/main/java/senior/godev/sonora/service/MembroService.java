@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import senior.godev.sonora.exceptions.ValidacaoException;
 import senior.godev.sonora.models.membro.Membro;
-import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosCadastroMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosDetalhamentoMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosListagemMembro;
+import senior.godev.sonora.models.membro.dto.DadosAtualizacaoMembro;
+import senior.godev.sonora.models.membro.dto.DadosCadastroMembro;
+import senior.godev.sonora.models.membro.dto.DadosDetalhamentoMembro;
+import senior.godev.sonora.models.membro.dto.DadosListagemMembro;
 import senior.godev.sonora.models.usuario.Usuario;
 import senior.godev.sonora.repository.MembroRepository;
 import senior.godev.sonora.repository.UsuarioRepository;
@@ -29,6 +29,19 @@ public class MembroService {
         Usuario usuario = usuarioRepository.findByLogin(dadosCadastroMembro.login())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
+        var membroExistente = membroRepository.findByCpf(dadosCadastroMembro.cpf());
+
+        if (membroExistente.isPresent()) {
+            Membro membro = membroExistente.get();
+
+            if (membro.getAtivo()) {
+                throw new ValidacaoException("Este CPF já possui um cadastro ativo.");
+            }
+
+            membro.reativar(dadosCadastroMembro, usuario);
+            return montarDtoDetalhamento(membro);
+        }
+
         Membro novoMembro = new Membro(
                 dadosCadastroMembro,
                 usuario,
@@ -40,6 +53,10 @@ public class MembroService {
 
     @Transactional
     public DadosDetalhamentoMembro atualizarMembro(@Valid DadosAtualizacaoMembro dadosAtualizacaoMembro) {
+        if (!membroRepository.existsById(dadosAtualizacaoMembro.id())) {
+            throw new ValidacaoException("O id do membro não existe");
+        }
+
         var membro = membroRepository.getReferenceById(dadosAtualizacaoMembro.id());
 
         membro.atualizarInformacoes(dadosAtualizacaoMembro);
@@ -54,6 +71,9 @@ public class MembroService {
 
     @Transactional(readOnly = true)
     public DadosDetalhamentoMembro detalharMembro(Long id) {
+        if (!membroRepository.existsById(id)) {
+            throw new ValidacaoException("O id do membro não existe");
+        }
         return montarDtoDetalhamento(membroRepository.findAllById(id));
     }
 
@@ -77,7 +97,7 @@ public class MembroService {
         if (!membroRepository.existsById(id)) {
             throw new ValidacaoException("Não foi encontrado o membro pra excluir.");
         }
-        
+
         var membro = membroRepository.getReferenceById(id);
         var usuario = usuarioRepository.findByLogin(membro.getUsuario().getLogin())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));

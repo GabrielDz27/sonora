@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.membro.formatacao;
+package senior.godev.sonora.models.membro.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -15,12 +15,12 @@ public record DadosAtualizacaoMembro(
 
         @NotBlank(message = "Cpf é obrigatório")
         @Pattern(
-                regexp = "(\\d)\\1{10}",
+                regexp = "^\\d{11}$",
                 message = "CPF inválido"
         )
         String cpf,
 
-        @NotBlank(message = "A data de nascimento é obrigatório")
+        @NotNull(message = "A data de nascimento é obrigatório")
         @Past(message = "A data de nascimento tem que ser no passado")
         LocalDate dataNascimento,
 
@@ -30,8 +30,15 @@ public record DadosAtualizacaoMembro(
 
         @NotBlank
         @Email
+        @Size(min = 1, max = 250)
         String email,
 
+        @Pattern(
+                regexp = "^\\d{10,11}$",
+                message = "Telefone inválido"
+        )
+        String telefone,
+        
         @NotNull
         @Valid
         DadosEndereco endereco

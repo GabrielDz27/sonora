@@ -1,9 +1,6 @@
 package senior.godev.sonora.models.usuario;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 /**
  * Validando utilizando o @Valid
@@ -11,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
  */
 public record DadosCadastroUsuario(
         @NotBlank(message = "O username é obrigatório")
+        @Size(max = 60)
         String login,
         @NotBlank(message = "A senha é obrigatória")
         @Pattern.List({
@@ -23,6 +21,7 @@ public record DadosCadastroUsuario(
         String senha,
         @NotBlank(message = "O email é obrigatório")
         @Email(message = "Email inválido")
+        @Size(max = 250)
         String email,
         @NotNull(message = "A classificação do usuário é obrigatório")
         IdentificacaoUsuario role

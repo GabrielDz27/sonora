@@ -1,4 +1,4 @@
-package senior.godev.sonora.utils.mail;
+package senior.godev.sonora.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -6,11 +6,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import senior.godev.sonora.models.dtoMail.Email;
 import senior.godev.sonora.models.reserva.MotivoCancelamento;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.repository.MembroRepository;
 import senior.godev.sonora.repository.ReservaRepository;
-import senior.godev.sonora.service.ReservaService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -45,6 +45,9 @@ public class EmailService {
         mailSender.send(message);
     }
 
+    //Metodos agendados
+    // Todos os dias a 5 da manhã vai conferir no banco todas as reservas, e vai mandar um email dizendo que
+    // precisa confirmar a reserva do dia
     @Scheduled(cron = "0 0 5 * * *")
     public void enviarEmailDiarioAsCincoDaManha() {
         System.out.println("Iniciando o envio do e-mail agendado às 5h...");
@@ -85,7 +88,7 @@ public class EmailService {
         System.out.println("E-mail diário enviado com sucesso!");
     }
 
-    //Metodo vai conferir todas as reservas em cada 10 minutos pra avisar a perda da reserva e liberando pro proximo,
+    // Metodo vai conferir todas as reservas em cada 10 minutos pra avisar a perda da reserva e liberando pro proximo,
     // na tratativa vai estar liberado para o proximo confirma, sem precisar de 10 minutos.
     @Scheduled(cron = "0 0/10 * * * *")
     @Transactional
@@ -99,7 +102,7 @@ public class EmailService {
         for (Reserva reserva : reservasVencendo) {
             if (reserva.getDataHoraInicio().isBefore(LocalDateTime.now())) {
 
-                // 1. CANCELAMENTO DEFINITIVO (já passou dos 10 minutos)
+                // Cancelamento definitivo (já passou dos 10 minutos)
 
                 String corpo = String.format("""
                                 Prezado(a) Membro(a),
@@ -157,11 +160,13 @@ public class EmailService {
                 proximo.getSala().getId().toString(),
                 proximo.getDataHoraInicio().toLocalTime().toString()
         );
+
         Email email = new Email(
                 proximo.getMembro().getEmail(),
                 "SONORA: Confirmação e Disponibilidade da reserva",
                 corpo
         );
+
         send(email);
 
     }

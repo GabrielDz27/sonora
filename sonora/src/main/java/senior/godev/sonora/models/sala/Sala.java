@@ -65,4 +65,8 @@ public class Sala {
         instrumentos.remove(instrumento);
         instrumento.setId(null);
     }
+
+    public void atualizaInstrumento(Instrumento instrumento) {
+        instrumentos.remove(instrumento);
+    }
 }

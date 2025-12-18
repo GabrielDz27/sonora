@@ -1,5 +1,6 @@
 package senior.godev.sonora.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,7 +36,7 @@ public class UsuarioController {
      * @Usuario Possibilita o usuario atualizar a senha
      */
     @PutMapping("/senha")
-    public ResponseEntity atualizarSenha(@RequestBody DadosAtualizacaoSenhaUsuario dadosAtualizacao) {
+    public ResponseEntity atualizarSenha(@RequestBody @Valid DadosAtualizacaoSenhaUsuario dadosAtualizacao) {
         String loginUsuario = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         usuarioService.atualizarSenha(loginUsuario, dadosAtualizacao.senha());
 

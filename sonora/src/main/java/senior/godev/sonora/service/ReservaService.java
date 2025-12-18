@@ -1,16 +1,15 @@
 package senior.godev.sonora.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import senior.godev.sonora.exceptions.ValidacaoException;
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.MotivoCancelamento;
 import senior.godev.sonora.models.reserva.Reserva;
-import senior.godev.sonora.models.reserva.dto.DadosCadastroReserva;
-import senior.godev.sonora.models.reserva.dto.DadosCancelamentoReserva;
-import senior.godev.sonora.models.reserva.dto.DadosConfirmacaoReserva;
-import senior.godev.sonora.models.reserva.dto.DadosDetalhamentoReserva;
+import senior.godev.sonora.models.reserva.dto.*;
 import senior.godev.sonora.models.reserva.validacao.cancelamento.ValidadorCancelamento;
 import senior.godev.sonora.models.reserva.validacao.confirmacao.ValidadorConfirmacao;
 import senior.godev.sonora.models.reserva.validacao.reservamento.ValidadorReservamento;
@@ -18,7 +17,6 @@ import senior.godev.sonora.repository.InstrumentoRepository;
 import senior.godev.sonora.repository.MembroRepository;
 import senior.godev.sonora.repository.ReservaRepository;
 import senior.godev.sonora.repository.SalaRepository;
-import senior.godev.sonora.utils.mail.EmailService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -66,13 +64,13 @@ public class ReservaService {
             throw new ValidacaoException("Id da instrumento não existe");
         }
 
-        if (membroRepository.existsById(dadosCadastroReserva.idMembro())) {
+        if (!membroRepository.existsById(dadosCadastroReserva.idMembro())) {
             throw new ValidacaoException("Id do membro não existe");
         }
 
         validadores.forEach(v -> v.validar(dadosCadastroReserva));
 
-        boolean emEspera = reservaRepository.existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim());
+        boolean emEspera = Boolean.TRUE.equals(reservaRepository.existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim()));
 
         var instrumento = new Instrumento();
         if (dadosCadastroReserva.idInstrumento() != null) {
@@ -95,6 +93,7 @@ public class ReservaService {
                 dadosCadastroReserva.observacoes(),
                 null
         );
+        reservaRepository.save(reserva);
 
         return new DadosDetalhamentoReserva(reserva, (reserva.getEmEspera() == true ? "Na fila de espera" : "Reservado"));
     }
@@ -148,5 +147,9 @@ public class ReservaService {
 
             emailService.enviarEmailConfirmacaoPromocao(proximoOptional.get());
         }
+    }
+
+    public Page<DadosListagemReserva> listagem(Pageable paginacao) {
+        return reservaRepository.findAll(paginacao).map(r -> new DadosListagemReserva(r, (r.getEmEspera() == true ? "Na fila de espera" : "Reservado")));
     }
 }

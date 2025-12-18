@@ -15,7 +15,7 @@ public class ValidadorInstrumento implements ValidadorReservamento {
     @Override
     public void validar(DadosCadastroReserva dadosCadastroReserva) {
 
-        if (instrumentoRepository.instrumentoReservado(dadosCadastroReserva.idInstrumento(), dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim())) {
+        if (Boolean.TRUE.equals(instrumentoRepository.instrumentoReservado(dadosCadastroReserva.idInstrumento(), dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim()))) {
             throw new ValidacaoException("O instrumento selecionado está reservado");
         }
     }

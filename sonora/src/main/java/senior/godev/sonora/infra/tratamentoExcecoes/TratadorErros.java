@@ -1,4 +1,4 @@
-package senior.godev.sonora.infra.exception;
+package senior.godev.sonora.infra.tratamentoExcecoes;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -69,8 +69,14 @@ public class TratadorErros {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity dadosIntegridade(DataIntegrityViolationException ex) {
-        return ResponseEntity.status(409).body("Violação de integridade: há vínculos impedindo o delete");
+    public ResponseEntity tratarErroIntegridade(DataIntegrityViolationException ex) {
+        String mensagem = ex.getMostSpecificCause().getMessage();
+
+        if (mensagem.contains("membros_cpf_key")) {
+            return ResponseEntity.status(409).body("Erro: Este CPF já está cadastrado.");
+        }
+
+        return ResponseEntity.status(409).body("Violação de integridade no banco de dados.");
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)

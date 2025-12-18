@@ -49,17 +49,20 @@ public class Instrumento {
     @OneToMany(mappedBy = "instrumento", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Reserva> reservas;
 
-    public Instrumento(DadosCadastroInstrumento dados) {
+    public Instrumento(DadosCadastroInstrumento dados, Sala sala) {
         this.nome = dados.nome();
+        this.tipoInstrumento = dados.tipoInstrumento();
         this.modelo = dados.modelo();
         this.numeroSerie = dados.numeroSerie();
         this.anoFabricacao = dados.anoFabricacao();
         this.paisOrigem = dados.paisOrigem();
         this.estadoConservacao = dados.estadoConservacao();
         this.caracteristica = dados.caracteristica();
+        this.sala_fixa_id = sala;
+
     }
 
-    public void atualizarInstrumento(DadosAtualizacaoInstrumento dados) {
+    public void atualizarInstrumento(DadosAtualizacaoInstrumento dados, Sala sala) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
@@ -81,11 +84,16 @@ public class Instrumento {
         if (dados.caracteristica() != null) {
             this.caracteristica = dados.caracteristica();
         }
+        if (dados.tipoInstrumento() != null) {
+            this.tipoInstrumento = dados.tipoInstrumento();
+        }
+        if (sala != null) {
+            this.sala_fixa_id = sala;
+        }
     }
 
     public void removerReserva(Reserva reserva) {
         reservas.remove(reserva);
         reserva.setSala(null);
     }
-
 }

@@ -26,12 +26,12 @@ public class MyUserDetailService implements UserDetailsService {
         }
 
         Usuario user = usuario.get();
-        
+
         return new org.springframework.security.core.userdetails.User(
                 user.getLogin(),
                 user.getSenha(),
                 Collections.singletonList(
-                        new SimpleGrantedAuthority(user.getRole().name())
+                        new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
                 )
         );
     }

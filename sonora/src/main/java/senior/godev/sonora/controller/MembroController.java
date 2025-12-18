@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import senior.godev.sonora.models.membro.formatacao.DadosAtualizacaoMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosCadastroMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosDetalhamentoMembro;
-import senior.godev.sonora.models.membro.formatacao.DadosListagemMembro;
+import senior.godev.sonora.models.membro.dto.DadosAtualizacaoMembro;
+import senior.godev.sonora.models.membro.dto.DadosCadastroMembro;
+import senior.godev.sonora.models.membro.dto.DadosDetalhamentoMembro;
+import senior.godev.sonora.models.membro.dto.DadosListagemMembro;
 import senior.godev.sonora.service.MembroService;
 
 @RestController
@@ -62,6 +62,9 @@ class MembroController {
         return ResponseEntity.ok(membroService.listagemMembro(paginacao));
     }
 
+    /**
+     * @Membros Deletar o membro especifico do id
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity excluir(@PathVariable Long id) {
         membroService.excluirMembro(id);

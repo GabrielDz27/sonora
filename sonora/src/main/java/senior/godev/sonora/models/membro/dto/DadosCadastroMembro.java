@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.membro.formatacao;
+package senior.godev.sonora.models.membro.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -12,18 +12,24 @@ public record DadosCadastroMembro(
 
         @NotBlank(message = "Cpf é obrigatório")
         @Pattern(
-                regexp = "(\\d)\\1{10}",
+                regexp = "^\\d{11}$",
                 message = "CPF inválido"
         )
         String cpf,
 
-        @NotBlank(message = "A data de nascimento é obrigatório")
+        @NotNull(message = "A data de nascimento é obrigatório")
         @Past
         LocalDate dataNascimento,
 
         @NotBlank(message = "O nome é obrigatório")
         @Size(min = 1, max = 255)
         String nome,
+
+        @Pattern(
+                regexp = "^\\d{10,11}$",
+                message = "Telefone inválido"
+        )
+        String telefone,
 
         @NotNull
         @Valid

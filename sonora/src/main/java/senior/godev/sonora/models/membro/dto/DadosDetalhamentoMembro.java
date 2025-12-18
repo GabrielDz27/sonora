@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.membro.formatacao;
+package senior.godev.sonora.models.membro.dto;
 
 import senior.godev.sonora.models.membro.Membro;
 import senior.godev.sonora.models.membro.endereco.Endereco;

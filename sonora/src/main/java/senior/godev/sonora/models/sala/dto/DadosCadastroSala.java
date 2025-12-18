@@ -13,7 +13,7 @@ public record DadosCadastroSala(
 
         int capacidade,
 
-        @NotNull(message = "É obrigatório informar se tem abafadores na sala ou não")
+        @NotNull(message = "É obrigatório informar se tem abafadores na sala ou não tem abafadores")
         Boolean temAbafadores
 
 ) {

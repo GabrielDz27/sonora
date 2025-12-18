@@ -1,12 +1,16 @@
 package senior.godev.sonora.models.instrumento.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import senior.godev.sonora.models.instrumento.TipoInstrumento;
 
 public record DadosCadastroInstrumento(
 
+        @Enumerated(EnumType.STRING)
+        @NotNull
         TipoInstrumento tipoInstrumento,
 
         @NotBlank(message = "O nome é obrigatório")
@@ -17,7 +21,6 @@ public record DadosCadastroInstrumento(
 
         String numeroSerie,
 
-        @Past(message = "O ano deve que ser antes da data atual")
         @Positive(message = "Ano deve ser positivo")
         int anoFabricacao,
 
@@ -28,6 +31,9 @@ public record DadosCadastroInstrumento(
         String estadoConservacao,
 
         @NotBlank(message = "A caracteristica é obrigatória")
-        String caracteristica
+        String caracteristica,
+
+        @NotNull(message = "Id da sala é obrigatorio")
+        Long idSala
 ) {
 }

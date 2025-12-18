@@ -1,4 +1,4 @@
-package senior.godev.sonora.models.membro.formatacao;
+package senior.godev.sonora.models.membro.dto;
 
 public record DadosListagemMembro(
         Long id,

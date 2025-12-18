@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import senior.godev.sonora.exceptions.ValidacaoException;
 import senior.godev.sonora.models.instrumento.Instrumento;
 import senior.godev.sonora.models.reserva.Reserva;
 import senior.godev.sonora.models.sala.Sala;
@@ -21,6 +22,9 @@ import senior.godev.sonora.repository.projections.SalaProjection;
 
 import java.util.Optional;
 
+/**
+ * @Endpoints Alguns endpoints são feitos somente para administradores manipular, questão de regra de negocio
+ */
 @RestController
 @RequestMapping("/salas")
 class SalaController {
@@ -29,9 +33,7 @@ class SalaController {
     private SalaRepository salaRepository;
 
     /**
-     * @Salas
-     * @Endpoints Alguns endpoints são feitos somente para administradores manipular
-     * Cadastrar
+     * @Salas Cadastrar uma nova sala
      */
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping
@@ -52,6 +54,10 @@ class SalaController {
     @PutMapping
     @Transactional
     public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoSala dados) {
+        if (!salaRepository.existsById(dados.id())) {
+            throw new ValidacaoException("O id da sala não existe");
+        }
+
         var sala = salaRepository.getReferenceById(dados.id());
         sala.atualizarSala(dados);
 
@@ -94,6 +100,7 @@ class SalaController {
      */
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id) {
+
         Optional<SalaProjection> salaProjectionO = salaRepository.findAllAndInstrumentoById(id);
 
         if (salaProjectionO.isEmpty()) {
@@ -128,9 +135,8 @@ class SalaController {
      * @Reservas Quando for pesquisar a sala para reserva, precisa aparecer se estar reservado ou não, dando dado mais coeso, com true e false;
      */
     @GetMapping("/reservas")
-    public ResponseEntity<Page<DadosDetalhamentoSalaEReserva>> listarSalasEReservas(@RequestBody DadosListagemSalaReserva dados) {
-        var page = salaRepository.findAllAndReserva(dados.paginacao(), dados.dataHoraInicio(), dados.dataHoraFinal()).map(DadosDetalhamentoSalaEReserva::new);
+    public ResponseEntity<Page<DadosDetalhamentoSalaEReserva>> listarSalasEReservas(@RequestBody DadosListagemSalaReserva dados, @PageableDefault(size = 20, sort = {"id"}) Pageable paginacao) {
+        var page = salaRepository.findAllAndReserva(paginacao, dados.dataHoraInicio(), dados.dataHoraFinal()).map(DadosDetalhamentoSalaEReserva::new);
         return ResponseEntity.ok(page);
     }
-
 }

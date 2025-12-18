@@ -14,13 +14,13 @@ public class ValidarMembroComOutraReservaNoMesmoHorario implements ValidadorRese
     @Override
     public void validar(DadosCadastroReserva dadosCadastroReserva) {
         if (
-                reservaRepository.
+                Boolean.TRUE.equals(reservaRepository.
                         existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNullAndIdMembroAndIdSala(
                                 dadosCadastroReserva.dataHoraInicio(),
                                 dadosCadastroReserva.dataHoraFim(),
                                 dadosCadastroReserva.idMembro(),
                                 dadosCadastroReserva.idSala()
-                        )
+                        ))
         ) {
             throw new ValidacaoException("""
                     Já existe uma reserva do membro no mesmo horario,

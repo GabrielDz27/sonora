@@ -12,7 +12,8 @@ public record DadosDetalhamentoInstrumento(
         int anoFbricacao,
         String paisOrigem,
         String estadoConservacao,
-        String caracteristica
+        String caracteristica,
+        Long idSala
 ) {
     public DadosDetalhamentoInstrumento(Instrumento instrumento) {
         this(
@@ -24,7 +25,8 @@ public record DadosDetalhamentoInstrumento(
                 instrumento.getAnoFabricacao(),
                 instrumento.getPaisOrigem(),
                 instrumento.getEstadoConservacao(),
-                instrumento.getCaracteristica()
+                instrumento.getCaracteristica(),
+                instrumento.getSala_fixa_id().getId()
         );
     }
 }

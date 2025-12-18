@@ -29,7 +29,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private IdentificacaoUsuario role;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Membro> membros;
 
     public Usuario(DadosCadastroUsuario dados) {

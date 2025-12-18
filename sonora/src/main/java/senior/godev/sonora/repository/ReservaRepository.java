@@ -1,5 +1,7 @@
 package senior.godev.sonora.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,10 +13,13 @@ import java.util.Optional;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
+    Page<Reserva> findAll(Pageable pageable);
+
     //Sala: Vai dizer se esta em uso a sala,
     @Query(value = """
             SELECT
-                CASE (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFim
+                CASE 
+                    WHEN (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFim
                     AND r.data_hora_fim BETWEEN :dataHoraInicio AND :dataHoraFim
                     AND r.motivo_cancelamento IS NOT NULL
                     AND r.motivo_cancelamento NOT IN ('NAO_CONFIRMACAO_TEMPO')
@@ -26,17 +31,18 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             ORDER BY em_uso 
             LIMIT 1 
             """, nativeQuery = true)
-    boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(
+    Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(
             @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
             @Param("dataHoraFim") LocalDateTime dataHoraFim);
 
     //Membro: Vai validar se tem sala no mesmo horario e que membro ja possui na marcação, isso se a sala for diferente
     @Query(value = """
             SELECT
-                CASE (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFim
-                    AND r.data_hora_fim BETWEEN :dataHoraInicio AND :dataHoraFim
-                    AND r.motivo_cancelamento IS NOT NULL
-                    AND r.idSala IS NOT :idSala
+                CASE 
+                    WHEN (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFinal
+                        AND r.data_hora_fim BETWEEN :dataHoraInicio AND :dataHoraFinal
+                        AND r.motivo_cancelamento IS NOT NULL
+                        AND r.sala_id <> :idSala
                     ) THEN TRUE
                     ELSE FALSE
                 END AS em_uso
@@ -46,7 +52,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             ORDER BY em_uso
             LIMIT 1
             """, nativeQuery = true)
-    boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNullAndIdMembroAndIdSala(
+    Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNullAndIdMembroAndIdSala(
             @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
             @Param("dataHoraFinal") LocalDateTime dataHoraFinal,
             @Param("idMembro") Long idMembro,

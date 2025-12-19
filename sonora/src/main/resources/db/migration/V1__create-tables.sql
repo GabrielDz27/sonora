@@ -41,7 +41,7 @@ CREATE TABLE instrumentos
     tipo_instrumento   VARCHAR(50),
     nome               VARCHAR(100)       NOT NULL,
     modelo             VARCHAR(100)       NOT NULL,
-    numero_serie       VARCHAR(100) UNIQUE,
+    numero_serie       VARCHAR(100),
     ano_fabricacao     INTEGER            NOT NULL,
     pais_origem        VARCHAR(100)       NOT NULL,
     estado_conservacao VARCHAR(50)        NOT NULL,

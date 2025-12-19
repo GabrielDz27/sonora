@@ -70,7 +70,7 @@ public class ReservaService {
 
         validadores.forEach(v -> v.validar(dadosCadastroReserva));
 
-        boolean emEspera = Boolean.TRUE.equals(reservaRepository.existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim()));
+        boolean emEspera = Boolean.TRUE.equals(reservaRepository.existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(dadosCadastroReserva.idSala(), dadosCadastroReserva.dataHoraInicio(), dadosCadastroReserva.dataHoraFim()));
 
         var instrumento = new Instrumento();
         if (dadosCadastroReserva.idInstrumento() != null) {

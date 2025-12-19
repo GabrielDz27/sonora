@@ -19,19 +19,20 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(value = """
             SELECT
                 CASE 
-                    WHEN (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFim
-                    AND r.data_hora_fim BETWEEN :dataHoraInicio AND :dataHoraFim
-                    AND r.motivo_cancelamento IS NOT NULL
-                    AND r.motivo_cancelamento NOT IN ('NAO_CONFIRMACAO_TEMPO')
+                    WHEN ( r.data_hora_inicio < :dataHoraFim
+                    AND r.data_hora_fim > :dataHoraInicio
+                    AND (r.motivo_cancelamento = 'PENDENTE_CONFIRMACAO' OR r.motivo_cancelamento IS NULL)
                     AND r.tipo_uso NOT IN ('ENSAIO_BANDA', 'ENSAIO_ORQUESTRA', 'ESTUDO_GRUPO')
                     ) THEN TRUE
                     ELSE FALSE
                 END AS em_uso
             FROM reservas r
+            WHERE r.sala_id = :idSala
             ORDER BY em_uso 
             LIMIT 1 
             """, nativeQuery = true)
     Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(
+            @Param("idSala") Long idSala,
             @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
             @Param("dataHoraFim") LocalDateTime dataHoraFim);
 
@@ -39,9 +40,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(value = """
             SELECT
                 CASE 
-                    WHEN (r.data_hora_inicio BETWEEN :dataHoraInicio AND :dataHoraFinal
-                        AND r.data_hora_fim BETWEEN :dataHoraInicio AND :dataHoraFinal
-                        AND r.motivo_cancelamento IS NOT NULL
+                    WHEN (r.data_hora_inicio < :dataHoraFinal
+                        AND r.data_hora_fim > :dataHoraInicio
+                        AND r.motivo_cancelamento IS NULL
                         AND r.sala_id <> :idSala
                     ) THEN TRUE
                     ELSE FALSE

@@ -19,7 +19,6 @@ import java.util.List;
 public class EmailService {
     private final JavaMailSender mailSender;
 
-
     @Autowired
     private ReservaRepository reservaRepository;
 

@@ -27,7 +27,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
                 r.*
             FROM reservas AS r
             INNER JOIN Instrumentos as i ON
-            i.id = r.sala_id
+            i.id = r.instrumento_id
             where i.id = :id
             """, nativeQuery = true)
     List<Reserva> findAllReservaById(@Param("id") Long id);
@@ -44,7 +44,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
             FROM instrumentos i
             LEFT JOIN reservas r
                 ON r.instrumento_id = i.id
-                AND r.motivo_cancelamento IS NOT NULL
+                AND r.motivo_cancelamento IS NULL
                 AND r.data_hora_inicio <= :dataHoraFinal
                 AND r.data_hora_fim    >= :dataHoraInicio
             GROUP BY i.id, i.nome, i.modelo
@@ -66,6 +66,7 @@ public interface InstrumentoRepository extends JpaRepository<Instrumento, Long> 
                 CASE
                     WHEN r.data_hora_inicio <= :dataHoraFinal
                         AND r.data_hora_fim >= :dataHoraInicio
+                        AND r.motivo_cancelamento IS NULL
                     THEN TRUE ELSE FALSE
                 END AS emUso
             FROM reservas r

@@ -66,7 +66,7 @@ public interface SalaRepository extends JpaRepository<Sala, Long> {
             FROM salas s
             LEFT JOIN reservas r
                 ON r.sala_id = s.id
-                AND r.motivo_cancelamento IS NOT NULL
+                AND r.motivo_cancelamento IS NULL
                 AND r.data_hora_inicio <= :dataHoraFinal
                 AND r.data_hora_fim    >= :dataHoraInicio
             GROUP BY s.id, s.nome, s.capacidade, s.tem_abafadores

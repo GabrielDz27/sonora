@@ -46,7 +46,7 @@ public class Instrumento {
     @JoinColumn(name = "sala_fixa_id")
     private Sala sala_fixa_id;
 
-    @OneToMany(mappedBy = "instrumento", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "instrumento")
     private List<Reserva> reservas;
 
     public Instrumento(DadosCadastroInstrumento dados, Sala sala) {

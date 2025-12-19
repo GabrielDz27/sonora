@@ -81,7 +81,7 @@ public class EmailService {
                     corpo
             );
             send(email);
-            reservaService.preCancelamento(reserva, MotivoCancelamento.NAO_CONFIRMACAO_TEMPO);
+            reservaService.preCancelamento(reserva, MotivoCancelamento.PENDENTE_CONFIRMACAO);
         }
 
         System.out.println("E-mail diário enviado com sucesso!");

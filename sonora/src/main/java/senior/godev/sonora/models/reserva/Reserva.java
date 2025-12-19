@@ -27,8 +27,8 @@ public class Reserva {
     @JoinColumn(name = "sala_id")
     private Sala sala;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "instrumento_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "instrumento_id", nullable = true)
     private Instrumento instrumento;
 
     @ManyToOne(fetch = FetchType.LAZY)

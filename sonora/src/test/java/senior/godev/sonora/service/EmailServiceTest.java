@@ -106,7 +106,7 @@ class EmailServiceTest {
 
 
             verify(mailSender, times(1)).send(any(SimpleMailMessage.class));
-            verify(reservaService).preCancelamento(reservaExemplo, MotivoCancelamento.NAO_CONFIRMACAO_TEMPO);
+            verify(reservaService).preCancelamento(reservaExemplo, MotivoCancelamento.PENDENTE_CONFIRMACAO);
         }
 
         @Test

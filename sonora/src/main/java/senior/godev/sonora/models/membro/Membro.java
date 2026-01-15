@@ -82,7 +82,7 @@ public class Membro {
         if (dadosAtualizacaoMembro.email() != null) {
             this.email = dadosAtualizacaoMembro.email();
         }
-
+        
         if (dadosAtualizacaoMembro.endereco() != null) {
             if (this.endereco == null) {
                 this.endereco = new Endereco(dadosAtualizacaoMembro.endereco());

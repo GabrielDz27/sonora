@@ -1,6 +1,7 @@
 package senior.godev.sonora.models.usuario;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import senior.godev.sonora.models.membro.Membro;
 
@@ -36,7 +37,7 @@ public class Usuario {
         this.login = dados.login();
         this.senha = dados.senha();
         this.email = dados.email();
-        this.role = dados.role();
+        this.role = IdentificacaoUsuario.ALUNO;
     }
 
     public void atualizarEmail(String email) {
@@ -50,5 +51,9 @@ public class Usuario {
     public void removeMembro(Membro membro) {
         membros.remove(membro);
         membro.setUsuario(null);
+    }
+
+    public void atualizarRole(@NotNull(message = "A classificação do usuário é obrigatório") IdentificacaoUsuario role) {
+        this.role = role;
     }
 }

@@ -18,7 +18,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import senior.godev.sonora.infra.security.JWTUtil;
 import senior.godev.sonora.models.usuario.DadosCadastroUsuario;
-import senior.godev.sonora.models.usuario.IdentificacaoUsuario;
 import senior.godev.sonora.models.usuario.LoginCredenciais;
 import senior.godev.sonora.models.usuario.Usuario;
 import senior.godev.sonora.repository.UsuarioRepository;
@@ -60,8 +59,7 @@ class AutenticacaoControllerTest {
         var dadosCadastroUsuario = new DadosCadastroUsuario(
                 "Leticia",
                 "#Letic2",
-                "gabriel.df27@aluno.ifsc.edu.br",
-                IdentificacaoUsuario.ALUNO
+                "gabriel.df27@aluno.ifsc.edu.br"
         );
 
         String tokenFake = "token-fake-123";

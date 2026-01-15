@@ -21,6 +21,7 @@ import senior.godev.sonora.models.membro.dto.DadosCadastroMembro;
 import senior.godev.sonora.models.membro.dto.DadosDetalhamentoMembro;
 import senior.godev.sonora.models.membro.endereco.DadosEndereco;
 import senior.godev.sonora.models.membro.endereco.Endereco;
+import senior.godev.sonora.models.usuario.IdentificacaoUsuario;
 import senior.godev.sonora.repository.MembroRepository;
 import senior.godev.sonora.repository.UsuarioRepository;
 import senior.godev.sonora.service.MembroService;
@@ -83,6 +84,7 @@ class MembroControllerTest {
                 LocalDate.of(2023, 01, 01),
                 "Cleiton",
                 "1234567890",
+                IdentificacaoUsuario.ADMINISTRADOR,
                 dadosEndereco()
         );
 
@@ -145,6 +147,7 @@ class MembroControllerTest {
                 "Cleiton",
                 "novo.email@teste.com",
                 "1234567890",
+                IdentificacaoUsuario.ALUNO,
                 dadosEndereco()
         );
 

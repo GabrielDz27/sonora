@@ -48,6 +48,8 @@ public class MembroService {
                 usuario.getEmail()
         );
 
+        usuario.atualizarRole(dadosCadastroMembro.role());
+
         return montarDtoDetalhamento(membroRepository.save(novoMembro));
     }
 
@@ -65,6 +67,8 @@ public class MembroService {
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
         usuario.atualizarEmail(dadosAtualizacaoMembro.email());
+
+        usuario.atualizarRole(dadosAtualizacaoMembro.role());
 
         return montarDtoDetalhamento(membro);
     }

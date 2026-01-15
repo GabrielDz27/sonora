@@ -17,12 +17,14 @@ import java.util.List;
 
 @Service
 public class EmailService {
+
     private final JavaMailSender mailSender;
 
     @Autowired
     private ReservaRepository reservaRepository;
 
     private ReservaService reservaService;
+
     @Autowired
     private MembroRepository membroRepository;
 
@@ -131,7 +133,6 @@ public class EmailService {
                         corpo
                 );
                 send(email);
-
             }
         }
     }
@@ -167,6 +168,5 @@ public class EmailService {
         );
 
         send(email);
-
     }
 }

@@ -1,3 +1,8 @@
+# Angular
+node_modules/
+dist/
+.angular/
+
 README.md
 target/
 .mvn/wrapper/maven-wrapper.jar

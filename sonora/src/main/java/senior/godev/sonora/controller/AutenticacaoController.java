@@ -23,44 +23,46 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AutenticacaoController {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+  @Autowired
+  private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private JWTUtil jwtUtil;
+  @Autowired
+  private JWTUtil jwtUtil;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
-    /**
-     * @Endpoints
-     * @Login Aqui vai ser registrado o usuario
-     * vai devolver um token
-     */
-    @PostMapping("/register")
-    public ResponseEntity registerHandler(@RequestBody @Valid DadosCadastroUsuario dados) {
-        var usuario = new Usuario(dados);
-        String encodedPassword = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(encodedPassword);
-        usuario = usuarioRepository.save(usuario);
+  /**
+   * @Endpoints
+   * @Login Aqui vai ser registrado o usuario
+   * vai devolver um token
+   */
+  @PostMapping("/register")
+  public ResponseEntity registerHandler(@RequestBody @Valid DadosCadastroUsuario dados) {
+    var usuario = new Usuario(dados);
+    String encodedPassword = passwordEncoder.encode(usuario.getSenha());
+    usuario.setSenha(encodedPassword);
+    usuario = usuarioRepository.save(usuario);
 
-        String token = jwtUtil.gerarToken(usuario.getLogin());
-        return ResponseEntity.ok(Collections.singletonMap("jwt-token", token));
-    }
+    String token = jwtUtil.gerarToken(usuario);
+    return ResponseEntity.ok(Collections.singletonMap("jwt-token", token));
+  }
 
-    /**
-     * @Login Aqui vai ser efetuado o login
-     * vai devolver um token
-     */
-    @PostMapping("/login")
-    public Map<String, Object> loginHandler(@RequestBody @Valid LoginCredenciais usuario) {
-        var authInputToken = new UsernamePasswordAuthenticationToken(usuario.login(), usuario.senha());
-        authenticationManager.authenticate(authInputToken);
+  /**
+   * @Login Aqui vai ser efetuado o login
+   * vai devolver um token
+   */
+  @PostMapping("/login")
+  public Map<String, Object> loginHandler(@RequestBody @Valid LoginCredenciais usuario) {
+    var authInputToken = new UsernamePasswordAuthenticationToken(usuario.login(), usuario.senha());
+    authenticationManager.authenticate(authInputToken);
 
-        String token = jwtUtil.gerarToken(usuario.login());
-        return Collections.singletonMap("jwt-token", token);
-    }
+    var usuarioT = usuarioRepository.findByLogin(usuario.login());
+    
+    String token = jwtUtil.gerarToken(usuarioT.get());
+    return Collections.singletonMap("jwt-token", token);
+  }
 }

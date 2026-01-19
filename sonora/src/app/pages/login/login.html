@@ -1,0 +1,35 @@
+<section class="login-component">
+  <mat-card class="login">
+    <div class="form-container">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="loginForm">
+        <mat-card-content>
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="login" type="text" placeholder="Digite seu Usuario">
+            @if (loginForm.get('login')?.errors?.['required']) {
+              <mat-error>Usuario obrigatorio</mat-error>
+            }
+          </mat-form-field> 
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="senha" type="password" placeholder="Digite sua senha">
+            @if (loginForm.get('senha')?.errors?.['required']) {
+              <mat-error>Senha obrigatorio</mat-error>
+            }
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button [disabled]="loginForm.invalid" (click)="logar()" mat-flat-button color="primary">
+            ACESSAR MINHA CONTA
+          </button>
+        </mat-card-actions>
+        <p>Ainda não possui conta?
+          <a routerLink="/cadastro" ><strong><u>Clique aqui para se cadastrar!</u></strong></a>
+        </p>
+      </form>
+    </div>
+  </mat-card>
+</section>

@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import senior.godev.sonora.models.usuario.Usuario;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -16,39 +17,40 @@ import java.time.ZoneOffset;
 @Component
 public class JWTUtil {
 
-    @Value("${jwt_secret}")
-    private String jwtSecret;
+  @Value("${jwt_secret}")
+  private String jwtSecret;
 
-    public String gerarToken(String usuario) {
-        try {
-            var algoritmo = Algorithm.HMAC256(jwtSecret);
-            return JWT.create()
-                    .withIssuer("API sonora")
-                    .withSubject(usuario)
-                    .withClaim("login", usuario)
-                    .withExpiresAt(dataExpiracao())
-                    .sign(algoritmo);
-        } catch (JWTCreationException exception) {
-            throw new RuntimeException("erro ao gerar token jwt", exception);
-        }
+  public String gerarToken(Usuario usuario) {
+    try {
+      var algoritmo = Algorithm.HMAC256(jwtSecret);
+      return JWT.create()
+        .withIssuer("API sonora")
+        .withSubject(usuario.getLogin())
+        .withClaim("login", usuario.getLogin())
+        .withClaim("role", usuario.getRole().name())
+        .withExpiresAt(dataExpiracao())
+        .sign(algoritmo);
+    } catch (JWTCreationException exception) {
+      throw new RuntimeException("erro ao gerar token jwt", exception);
     }
+  }
 
-    public String validateTokenAndRetrieveSubject(String tokenJWT) {
-        try {
-            var algoritmo = Algorithm.HMAC256(jwtSecret);
-            JWTVerifier verifier = JWT.require(algoritmo)
-                    .withIssuer("API sonora")
-                    .build();
+  public String validateTokenAndRetrieveSubject(String tokenJWT) {
+    try {
+      var algoritmo = Algorithm.HMAC256(jwtSecret);
+      JWTVerifier verifier = JWT.require(algoritmo)
+        .withIssuer("API sonora")
+        .build();
 
-            DecodedJWT jwt = verifier.verify(tokenJWT);
+      DecodedJWT jwt = verifier.verify(tokenJWT);
 
-            return jwt.getClaim("login").asString();
-        } catch (JWTVerificationException exception) {
-            throw new RuntimeException("Token JWT inválido ou expirado!");
-        }
+      return jwt.getClaim("login").asString();
+    } catch (JWTVerificationException exception) {
+      throw new RuntimeException("Token JWT inválido ou expirado!");
     }
+  }
 
-    private Instant dataExpiracao() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
-    }
+  private Instant dataExpiracao() {
+    return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+  }
 }

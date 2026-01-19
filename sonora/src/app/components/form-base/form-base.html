@@ -1,0 +1,100 @@
+<app-container>
+  <mat-card>
+    <form [formGroup]="cadastroForm">
+      <mat-card-title>
+        {{ titulo }}
+      </mat-card-title>
+      <section>
+        @if (perfilComponent) {
+        <div class="acoesPerfil">
+          <h2>Dados pessoais</h2>
+          <button (click)="deslogar()" mat-stroked-button color="primary">
+            <mat-icon>logout</mat-icon>
+            DESLOGAR
+          </button>
+        </div>
+        }
+      </section>
+      <mat-card-content>
+        <div class="grid-container">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="login" placeholder="nome">
+            @if (cadastroForm.get('login')?.invalid && cadastroForm.get('login')?.dirty) {
+                <mat-error>Usuario é obrigatório</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      @if (perfilComponent) {
+        <mat-divider></mat-divider>
+        <div class="acessoPerfil">
+          <h2>Dados de acesso</h2>
+        </div>
+      }
+      <mat-card-content>
+        <div class="grid-container">
+          <div class="grid-item">
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Digite seu e-mail">
+              @if (cadastroForm.get('email')?.errors?.['required']) {
+                <mat-error>E-mail é obrigatório</mat-error>
+              }
+              @if (cadastroForm.get('email')?.errors?.['email']) {
+                <mat-error>E-mail inválido</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Senha</mat-label>
+              <input matInput formControlName="senha" type="password" placeholder="Digite sua senha">
+              @if (cadastroForm.get('senha')?.errors?.['required']) {
+                <mat-error>Senha é obrigatória</mat-error>
+              }
+              @if (cadastroForm.get('senha')?.errors?.['minlength']) {
+                <mat-error>Senha deve ter pelo menos 3 caracteres</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="grid-item">
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmar Login</mat-label>
+              <input matInput formControlName="confirmarLogin" placeholder="Digite seu login novamente">
+              @if (cadastroForm.get('confirmarLogin')?.errors?.['required']) {
+                <mat-error>Confirmação de Login é obrigatória</mat-error>
+              }
+              @if (cadastroForm.get('confirmarLogin')?.errors?.['equalTo']) {
+                <mat-error>Logins não coincidem</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmar Senha</mat-label>
+              <input matInput formControlName="confirmarSenha" type="password" placeholder="Repita sua senha">
+              @if (cadastroForm.get('confirmarSenha')?.errors?.['required']) {
+                <mat-error>Confirmação de Senha é obrigatória</mat-error>
+              }
+              @if (cadastroForm.get('confirmarSenha')?.errors?.['equalTo']) {
+                <mat-error>Senhas não coincidem</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        @if (!perfilComponent) {
+          <mat-checkbox formControlName="aceitarTermos" color="primary" class="full-width">Li e aceito os termos e condições deste cadastro *</mat-checkbox>
+        }
+        @if (cadastroForm.get('aceitarTermos')?.invalid && cadastroForm.get('aceitarTermos')?.dirty) {
+          <mat-error>Você precisa aceitar os termos e condições para efetuar o cadastro</mat-error>
+        }
+      </mat-card-content>
+      <mat-card-actions class="full-width">
+        <button mat-flat-button
+          [disabled]="cadastroForm.invalid"
+          (click)="executarAcao()"
+          [class.perfil-button]="perfilComponent"
+          color="primary"
+        >{{ textoBotao }}
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</app-container>

@@ -18,6 +18,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import senior.godev.sonora.infra.security.JWTUtil;
 import senior.godev.sonora.models.usuario.DadosCadastroUsuario;
+import senior.godev.sonora.models.usuario.IdentificacaoUsuario;
 import senior.godev.sonora.models.usuario.LoginCredenciais;
 import senior.godev.sonora.models.usuario.Usuario;
 import senior.godev.sonora.repository.UsuarioRepository;
@@ -34,101 +35,107 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureJsonTesters
 class AutenticacaoControllerTest {
 
-    @Autowired
-    private MockMvc mvc;
+  @Autowired
+  private MockMvc mvc;
 
-    @Autowired
-    private JacksonTester<DadosCadastroUsuario> dadosCadastroUsuarioJson;
+  @Autowired
+  private JacksonTester<DadosCadastroUsuario> dadosCadastroUsuarioJson;
 
-    @MockitoBean
-    private UsuarioRepository usuarioRepository;
+  @MockitoBean
+  private UsuarioRepository usuarioRepository;
 
-    @MockitoBean
-    private JWTUtil jwtUtil;
+  @MockitoBean
+  private JWTUtil jwtUtil;
 
-    @MockitoBean
-    private AuthenticationManager authenticationManager;
+  @MockitoBean
+  private AuthenticationManager authenticationManager;
 
-    @MockitoBean
-    private PasswordEncoder passwordEncoder;
+  @MockitoBean
+  private PasswordEncoder passwordEncoder;
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 200 quando as informacoes sao validas")
-    @WithMockUser
-    void registerHandler_Dar200() throws Exception {
-        var dadosCadastroUsuario = new DadosCadastroUsuario(
-                "Leticia",
-                "#Letic2",
-                "gabriel.df27@aluno.ifsc.edu.br"
-        );
+  @Test
+  @DisplayName("Deveria devolver codigo http 200 quando as informacoes sao validas")
+  @WithMockUser
+  void registerHandler_Dar200() throws Exception {
+    var dadosCadastroUsuario = new DadosCadastroUsuario(
+      "Leticia",
+      "#Letic2",
+      "gabriel.df27@aluno.ifsc.edu.br"
+    );
 
-        String tokenFake = "token-fake-123";
+    String tokenFake = "token-fake-123";
 
-        when(passwordEncoder.encode(anyString())).thenReturn("senha_criptografada");
-        when(usuarioRepository.save(any())).thenReturn(new Usuario(dadosCadastroUsuario));
-        when(jwtUtil.gerarToken(anyString())).thenReturn(tokenFake);
+    when(passwordEncoder.encode(anyString())).thenReturn("senha_criptografada");
+    when(usuarioRepository.save(any())).thenReturn(new Usuario(dadosCadastroUsuario));
+    when(jwtUtil.gerarToken(any())).thenReturn(tokenFake);
 
-        var response = mvc
-                .perform(post("/auth/register")
-                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .content(dadosCadastroUsuarioJson.write(dadosCadastroUsuario).getJson()))
-                .andReturn().getResponse();
+    var response = mvc
+      .perform(post("/auth/register")
+        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+        .content(dadosCadastroUsuarioJson.write(dadosCadastroUsuario).getJson()))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        String jsonEsperado = "{\"jwt-token\":\"" + tokenFake + "\"}";
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
-    }
+    String jsonEsperado = "{\"jwt-token\":\"" + tokenFake + "\"}";
+    assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
-    @WithMockUser
-    void registerHandler_Dar400() throws Exception {
-        var response = mvc
-                .perform(post("/auth/register"))
-                .andReturn().getResponse();
+  @Test
+  @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
+  @WithMockUser
+  void registerHandler_Dar400() throws Exception {
+    var response = mvc
+      .perform(post("/auth/register"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus())
-                .isEqualTo(HttpStatus.BAD_REQUEST.value());
-    }
+    assertThat(response.getStatus())
+      .isEqualTo(HttpStatus.BAD_REQUEST.value());
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 200 quando for fazer o login")
-    @WithMockUser
-    void loginHandler_Dar200() throws Exception {
-        var loginDados = new LoginCredenciais("usuario@email.com", "senha123");
-        String tokenFake = "token-fake-login";
+  @Test
+  @DisplayName("Deveria devolver codigo http 200 quando for fazer o login")
+  @WithMockUser
+  void loginHandler_Dar200() throws Exception {
+    var loginDados = new LoginCredenciais("usuario@email.com", "senha123");
+    String tokenFake = "token-fake-login";
 
-        var auth = new UsernamePasswordAuthenticationToken(loginDados.login(), null);
-        when(authenticationManager.authenticate(any())).thenReturn(auth);
+    var usuario = new Usuario();
+    usuario.setSenha(loginDados.senha());
+    usuario.setLogin(loginDados.login());
+    usuario.setEmail("usuario@email.com");
+    usuario.setRole(IdentificacaoUsuario.PROFESSOR);
+    
+    var auth = new UsernamePasswordAuthenticationToken(loginDados.login(), null);
+    when(authenticationManager.authenticate(any())).thenReturn(auth);
 
-        when(jwtUtil.gerarToken(loginDados.login())).thenReturn(tokenFake);
+    when(jwtUtil.gerarToken(usuario)).thenReturn(tokenFake);
 
-        var response = mvc
-                .perform(post("/auth/login")
-                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .content(new ObjectMapper().writeValueAsString(loginDados)))
-                .andReturn().getResponse();
+    var response = mvc
+      .perform(post("/auth/login")
+        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+        .content(new ObjectMapper().writeValueAsString(loginDados)))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.getContentAsString()).contains(tokenFake);
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+    assertThat(response.getContentAsString()).contains(tokenFake);
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 401 quando for fazer o login, credencias invalidas")
-    @WithMockUser
-    void loginHandler_Dar401() throws Exception {
-        var loginDados = new LoginCredenciais("errado@email.com", "senhaErrada");
+  @Test
+  @DisplayName("Deveria devolver codigo http 401 quando for fazer o login, credencias invalidas")
+  @WithMockUser
+  void loginHandler_Dar401() throws Exception {
+    var loginDados = new LoginCredenciais("errado@email.com", "senhaErrada");
 
-        when(authenticationManager.authenticate(any()))
-                .thenThrow(new BadCredentialsException("Invalido"));
+    when(authenticationManager.authenticate(any()))
+      .thenThrow(new BadCredentialsException("Invalido"));
 
-        var response = mvc
-                .perform(post("/auth/login")
-                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .content(new ObjectMapper().writeValueAsString(loginDados)))
-                .andReturn().getResponse();
+    var response = mvc
+      .perform(post("/auth/login")
+        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+        .content(new ObjectMapper().writeValueAsString(loginDados)))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+  }
 }

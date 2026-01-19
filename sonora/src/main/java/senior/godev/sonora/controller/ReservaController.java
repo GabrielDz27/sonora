@@ -23,44 +23,49 @@ import senior.godev.sonora.service.ReservaService;
 @RequestMapping("/reserva")
 class ReservaController {
 
-    @Autowired
-    private ReservaService reservaService;
+  @Autowired
+  private ReservaService reservaService;
 
-    /**
-     * @reserva Vai criar uma reserva
-     */
-    @PostMapping
-    @Transactional
-    public ResponseEntity reserva(@RequestBody @Valid DadosCadastroReserva dadosCadastroReserva) {
-        return ResponseEntity.ok(reservaService.reservar(dadosCadastroReserva));
-    }
+  /**
+   * @reserva Vai criar uma reserva
+   */
+  @PostMapping
+  @Transactional
+  public ResponseEntity reserva(@RequestBody @Valid DadosCadastroReserva dadosCadastroReserva) {
+    return ResponseEntity.ok(reservaService.reservar(dadosCadastroReserva));
+  }
 
-    /**
-     * @reserva Vai cancelar uma reserva,
-     */
-    @DeleteMapping
-    @Transactional
-    public ResponseEntity cancelar(@RequestBody @Valid DadosCancelamentoReserva dados) {
-        reservaService.cancelar(dados);
-        return ResponseEntity.noContent().build();
-    }
+  /**
+   * @reserva Vai cancelar uma reserva,
+   */
+  @DeleteMapping
+  @Transactional
+  public ResponseEntity cancelar(@RequestBody @Valid DadosCancelamentoReserva dados) {
+    reservaService.cancelar(dados);
+    return ResponseEntity.noContent().build();
+  }
 
-    /**
-     * @reserva Vai confirmar uma reserva,
-     */
-    @PostMapping("/confirmar")
-    @Transactional
-    public ResponseEntity confirmar(@RequestBody @Valid DadosConfirmacaoReserva dadosConfirmacaoReserva) {
-        reservaService.confirmar(dadosConfirmacaoReserva);
-        return ResponseEntity.noContent().build();
-    }
+  /**
+   * @reserva Vai confirmar uma reserva,
+   */
+  @PostMapping("/confirmar")
+  @Transactional
+  public ResponseEntity confirmar(@RequestBody @Valid DadosConfirmacaoReserva dadosConfirmacaoReserva) {
+    reservaService.confirmar(dadosConfirmacaoReserva);
+    return ResponseEntity.noContent().build();
+  }
 
-    /**
-     * @reserva Vai informar as reservas conforme o em aplitude maior para admistrador
-     */
-    @GetMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    public ResponseEntity<Page<DadosListagemReserva>> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
-        return ResponseEntity.ok(reservaService.listagem(paginacao));
-    }
+  /**
+   * @reserva Vai informar as reservas conforme o em aplitude maior para admistrador
+   */
+  @GetMapping("/geral")
+  @PreAuthorize("hasRole('ADMINISTRADOR')")
+  public ResponseEntity<Page<DadosListagemReserva>> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+    return ResponseEntity.ok(reservaService.listagem(paginacao));
+  }
+
+  @GetMapping
+  public ResponseEntity<Page<DadosListagemReserva>> listarMembro(Long idMembro, @PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+    return ResponseEntity.ok(reservaService.listagemMembro(idMembro, paginacao));
+  }
 }

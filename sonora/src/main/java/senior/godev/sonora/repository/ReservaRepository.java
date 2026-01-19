@@ -13,95 +13,97 @@ import java.util.Optional;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
-    Page<Reserva> findAll(Pageable pageable);
+  Page<Reserva> findAll(Pageable pageable);
 
-    //Sala: Vai dizer se esta em uso a sala,
-    @Query(value = """
-            SELECT
-                CASE 
-                    WHEN ( r.data_hora_inicio < :dataHoraFim
-                    AND r.data_hora_fim > :dataHoraInicio
-                    AND (r.motivo_cancelamento = 'PENDENTE_CONFIRMACAO' OR r.motivo_cancelamento IS NULL)
-                    AND r.tipo_uso NOT IN ('ENSAIO_BANDA', 'ENSAIO_ORQUESTRA', 'ESTUDO_GRUPO')
-                    ) THEN TRUE
-                    ELSE FALSE
-                END AS em_uso
-            FROM reservas r
-            WHERE r.sala_id = :idSala
-            ORDER BY em_uso 
-            LIMIT 1 
-            """, nativeQuery = true)
-    Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(
-            @Param("idSala") Long idSala,
-            @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
-            @Param("dataHoraFim") LocalDateTime dataHoraFim);
+  Page<Reserva> findAllByMembroId(Long membroId, Pageable pageable);
 
-    //Membro: Vai validar se tem sala no mesmo horario e que membro ja possui na marcação, isso se a sala for diferente
-    @Query(value = """
-            SELECT
-                CASE 
-                    WHEN (r.data_hora_inicio < :dataHoraFinal
-                        AND r.data_hora_fim > :dataHoraInicio
-                        AND r.motivo_cancelamento IS NULL
-                        AND r.sala_id <> :idSala
-                    ) THEN TRUE
-                    ELSE FALSE
-                END AS em_uso
-            FROM reservas r
-            INNER JOIN membros m ON m.id = r.membro_id
-            WHERE r.membro_id = :idMembro
-            ORDER BY em_uso
-            LIMIT 1
-            """, nativeQuery = true)
-    Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNullAndIdMembroAndIdSala(
-            @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
-            @Param("dataHoraFinal") LocalDateTime dataHoraFinal,
-            @Param("idMembro") Long idMembro,
-            @Param("idSala") Long idSala
-    );
+  //Sala: Vai dizer se esta em uso a sala,
+  @Query(value = """
+    SELECT
+        CASE
+            WHEN ( r.data_hora_inicio < :dataHoraFim
+            AND r.data_hora_fim > :dataHoraInicio
+            AND (r.motivo_cancelamento = 'PENDENTE_CONFIRMACAO' OR r.motivo_cancelamento IS NULL)
+            AND r.tipo_uso NOT IN ('ENSAIO_BANDA', 'ENSAIO_ORQUESTRA', 'ESTUDO_GRUPO')
+            ) THEN TRUE
+            ELSE FALSE
+        END AS em_uso
+    FROM reservas r
+    WHERE r.sala_id = :idSala
+    ORDER BY em_uso
+    LIMIT 1
+    """, nativeQuery = true)
+  Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNull(
+    @Param("idSala") Long idSala,
+    @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
+    @Param("dataHoraFim") LocalDateTime dataHoraFim);
 
-    Reserva findAllById(Long id);
+  //Membro: Vai validar se tem sala no mesmo horario e que membro ja possui na marcação, isso se a sala for diferente
+  @Query(value = """
+    SELECT
+        CASE
+            WHEN (r.data_hora_inicio < :dataHoraFinal
+                AND r.data_hora_fim > :dataHoraInicio
+                AND r.motivo_cancelamento IS NULL
+                AND r.sala_id <> :idSala
+            ) THEN TRUE
+            ELSE FALSE
+        END AS em_uso
+    FROM reservas r
+    INNER JOIN membros m ON m.id = r.membro_id
+    WHERE r.membro_id = :idMembro
+    ORDER BY em_uso
+    LIMIT 1
+    """, nativeQuery = true)
+  Boolean existsByDataHoraInicioAndDataHoraFimMotivoCancelamentoIsNullAndIdMembroAndIdSala(
+    @Param("dataHoraInicio") LocalDateTime dataHoraInicio,
+    @Param("dataHoraFinal") LocalDateTime dataHoraFinal,
+    @Param("idMembro") Long idMembro,
+    @Param("idSala") Long idSala
+  );
 
-    @Query(value = """
-            SELECT
-                r.id AS id,
-                r.membro_id,
-                r.instrumento_id,
-                r.sala_id,
-                r.data_hora_inicio AS dataHoraInicio,
-                r.data_hora_fim AS dataHoraFim,
-                r.data_hora_registro AS dataHoraRegistro,
-                r.em_espera AS emEspera,
-                r.motivo_cancelamento,
-                r.tipo_uso AS tipoUso,
-                r.observacoes
-            FROM reservas r
-            WHERE DATE r.data_hora_inicio = DATE :agora
-            """, nativeQuery = true)
-    List<Reserva> findAllbyDataHoraInicio(@Param("agora") LocalDateTime agora);
+  Reserva findAllById(Long id);
 
-    @Query(value = """
-            SELECT
-                r.*
-            FROM reservas r
-            WHERE r.data_hora_inicio <= :limiteSuperior
-              AND r.data_hora_inicio > NOW()
-              AND r.motivo_cancelamento = 'PENDENTE_CONFIRMACAO'
-            """, nativeQuery = true)
-    List<Reserva> findAllReservasPendentesVencendo(@Param("limiteSuperior") LocalDateTime limiteSuperior);
+  @Query(value = """
+    SELECT
+        r.id AS id,
+        r.membro_id,
+        r.instrumento_id,
+        r.sala_id,
+        r.data_hora_inicio AS dataHoraInicio,
+        r.data_hora_fim AS dataHoraFim,
+        r.data_hora_registro AS dataHoraRegistro,
+        r.em_espera AS emEspera,
+        r.motivo_cancelamento,
+        r.tipo_uso AS tipoUso,
+        r.observacoes
+    FROM reservas r
+    WHERE DATE r.data_hora_inicio = DATE :agora
+    """, nativeQuery = true)
+  List<Reserva> findAllbyDataHoraInicio(@Param("agora") LocalDateTime agora);
 
-    @Query(value = """
-            SELECT
-                r.*
-            FROM reservas r
-            WHERE r.sala_id = :salaId
-              AND r.data_hora_inicio = :dataHoraInicio
-              AND r.em_espera = TRUE
-            ORDER BY r.data_hora_registro ASC
-            LIMIT 1
-            """, nativeQuery = true)
-    Optional<Reserva> findProximoEmEspera(
-            @Param("salaId") Long salaId,
-            @Param("dataHoraInicio") LocalDateTime dataHoraInicio
-    );
+  @Query(value = """
+    SELECT
+        r.*
+    FROM reservas r
+    WHERE r.data_hora_inicio <= :limiteSuperior
+      AND r.data_hora_inicio > NOW()
+      AND r.motivo_cancelamento = 'PENDENTE_CONFIRMACAO'
+    """, nativeQuery = true)
+  List<Reserva> findAllReservasPendentesVencendo(@Param("limiteSuperior") LocalDateTime limiteSuperior);
+
+  @Query(value = """
+    SELECT
+        r.*
+    FROM reservas r
+    WHERE r.sala_id = :salaId
+      AND r.data_hora_inicio = :dataHoraInicio
+      AND r.em_espera = TRUE
+    ORDER BY r.data_hora_registro ASC
+    LIMIT 1
+    """, nativeQuery = true)
+  Optional<Reserva> findProximoEmEspera(
+    @Param("salaId") Long salaId,
+    @Param("dataHoraInicio") LocalDateTime dataHoraInicio
+  );
 }

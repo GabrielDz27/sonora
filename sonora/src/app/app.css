@@ -1,0 +1,18 @@
+.grid-container {
+  display: grid;
+  
+  grid-template-columns: 260px 1fr;
+  
+  grid-template-rows: 64px 1fr 40px;
+  
+  grid-template-areas: 
+    "nav header"
+    "nav main"
+    "nav main";
+}
+
+.area-nav { grid-area: nav; }
+.area-header { grid-area: header; }
+.area-main { grid-area: main; }
+
+.spacer { flex: 1 1 auto; }

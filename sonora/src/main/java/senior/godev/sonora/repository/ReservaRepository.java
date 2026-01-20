@@ -15,7 +15,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
   Page<Reserva> findAll(Pageable pageable);
 
-  Page<Reserva> findAllByMembroId(Long membroId, Pageable pageable);
+  Page<Reserva> findAllByMembroIdAndMotivoCancelamentoIsNull(Long membroId, Pageable pageable);
 
   //Sala: Vai dizer se esta em uso a sala,
   @Query(value = """

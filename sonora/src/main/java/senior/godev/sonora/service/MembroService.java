@@ -1,5 +1,6 @@
 package senior.godev.sonora.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,94 +20,104 @@ import senior.godev.sonora.repository.UsuarioRepository;
 @Service
 public class MembroService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+  @Autowired
+  private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private MembroRepository membroRepository;
+  @Autowired
+  private MembroRepository membroRepository;
 
-    public DadosDetalhamentoMembro cadastrar(@Valid DadosCadastroMembro dadosCadastroMembro) {
-        Usuario usuario = usuarioRepository.findByLogin(dadosCadastroMembro.login())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+  public DadosDetalhamentoMembro cadastrar(@Valid DadosCadastroMembro dadosCadastroMembro) {
+    Usuario usuario = usuarioRepository.findByLogin(dadosCadastroMembro.login())
+      .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
-        var membroExistente = membroRepository.findByCpf(dadosCadastroMembro.cpf());
+    var membroExistente = membroRepository.findByCpf(dadosCadastroMembro.cpf());
 
-        if (membroExistente.isPresent()) {
-            Membro membro = membroExistente.get();
+    if (membroExistente.isPresent()) {
+      Membro membro = membroExistente.get();
 
-            if (membro.getAtivo()) {
-                throw new ValidacaoException("Este CPF já possui um cadastro ativo.");
-            }
+      if (membro.getAtivo()) {
+        throw new ValidacaoException("Este CPF já possui um cadastro ativo.");
+      }
 
-            membro.reativar(dadosCadastroMembro, usuario);
-            return montarDtoDetalhamento(membro);
-        }
-
-        Membro novoMembro = new Membro(
-                dadosCadastroMembro,
-                usuario,
-                usuario.getEmail()
-        );
-
-        usuario.atualizarRole(dadosCadastroMembro.role());
-
-        return montarDtoDetalhamento(membroRepository.save(novoMembro));
+      membro.reativar(dadosCadastroMembro, usuario);
+      return montarDtoDetalhamento(membro);
     }
 
-    @Transactional
-    public DadosDetalhamentoMembro atualizarMembro(@Valid DadosAtualizacaoMembro dadosAtualizacaoMembro) {
-        if (!membroRepository.existsById(dadosAtualizacaoMembro.id())) {
-            throw new ValidacaoException("O id do membro não existe");
-        }
+    Membro novoMembro = new Membro(
+      dadosCadastroMembro,
+      usuario,
+      usuario.getEmail()
+    );
 
-        var membro = membroRepository.getReferenceById(dadosAtualizacaoMembro.id());
+    usuario.atualizarRole(dadosCadastroMembro.role());
 
-        membro.atualizarInformacoes(dadosAtualizacaoMembro);
+    return montarDtoDetalhamento(membroRepository.save(novoMembro));
+  }
 
-        Usuario usuario = usuarioRepository.findByLogin(dadosAtualizacaoMembro.login())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-
-        usuario.atualizarEmail(dadosAtualizacaoMembro.email());
-
-        usuario.atualizarRole(dadosAtualizacaoMembro.role());
-
-        return montarDtoDetalhamento(membro);
+  @Transactional
+  public DadosDetalhamentoMembro atualizarMembro(@Valid DadosAtualizacaoMembro dadosAtualizacaoMembro) {
+    if (!membroRepository.existsById(dadosAtualizacaoMembro.id())) {
+      throw new ValidacaoException("O id do membro não existe");
     }
 
-    @Transactional(readOnly = true)
-    public DadosDetalhamentoMembro detalharMembro(Long id) {
-        if (!membroRepository.existsById(id)) {
-            throw new ValidacaoException("O id do membro não existe");
-        }
-        return montarDtoDetalhamento(membroRepository.findAllById(id));
+    var membro = membroRepository.getReferenceById(dadosAtualizacaoMembro.id());
+
+    membro.atualizarInformacoes(dadosAtualizacaoMembro);
+
+    Usuario usuario = usuarioRepository.findByLogin(dadosAtualizacaoMembro.login())
+      .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+
+    usuario.atualizarEmail(dadosAtualizacaoMembro.email());
+
+    usuario.atualizarRole(dadosAtualizacaoMembro.role());
+
+    return montarDtoDetalhamento(membro);
+  }
+
+  @Transactional(readOnly = true)
+  public DadosDetalhamentoMembro detalharMembro(Long id) {
+    if (!membroRepository.existsById(id)) {
+      throw new ValidacaoException("O id do membro não existe");
+    }
+    return montarDtoDetalhamento(membroRepository.findAllById(id));
+  }
+
+  private DadosDetalhamentoMembro montarDtoDetalhamento(Membro membro) {
+
+    Usuario usuario = usuarioRepository.findById(membro.getUsuario().getId())
+      .orElseThrow(() -> new RuntimeException("Usuário relacionado não encontrado."));
+
+    return new DadosDetalhamentoMembro(
+      membro,
+      usuario.getLogin()
+    );
+  }
+
+  public Page<DadosListagemMembro> listagemMembro(Pageable paginacao) {
+    return membroRepository.findAllDetalhamentoListagem(paginacao);
+  }
+
+  @Transactional
+  public void excluirMembro(Long id) {
+    if (!membroRepository.existsById(id)) {
+      throw new ValidacaoException("Não foi encontrado o membro pra excluir.");
     }
 
-    private DadosDetalhamentoMembro montarDtoDetalhamento(Membro membro) {
+    var membro = membroRepository.getReferenceById(id);
+    var usuario = usuarioRepository.findByLogin(membro.getUsuario().getLogin())
+      .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
-        Usuario usuario = usuarioRepository.findById(membro.getUsuario().getId())
-                .orElseThrow(() -> new RuntimeException("Usuário relacionado não encontrado."));
+    usuario.removeMembro(membro);
+    membro.excluir();
+  }
 
-        return new DadosDetalhamentoMembro(
-                membro,
-                usuario.getLogin()
-        );
+  public DadosDetalhamentoMembro detalharMembroPorLogin(String login) {
+    var membro = membroRepository.findBylogin(login);
+
+    if (membro == null) {
+      throw new EntityNotFoundException("Membro não encontrado para o login: " + login);
     }
-
-    public Page<DadosListagemMembro> listagemMembro(Pageable paginacao) {
-        return membroRepository.findAllDetalhamentoListagem(paginacao);
-    }
-
-    @Transactional
-    public void excluirMembro(Long id) {
-        if (!membroRepository.existsById(id)) {
-            throw new ValidacaoException("Não foi encontrado o membro pra excluir.");
-        }
-
-        var membro = membroRepository.getReferenceById(id);
-        var usuario = usuarioRepository.findByLogin(membro.getUsuario().getLogin())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-
-        usuario.removeMembro(membro);
-        membro.excluir();
-    }
+    
+    return montarDtoDetalhamento(membro);
+  }
 }

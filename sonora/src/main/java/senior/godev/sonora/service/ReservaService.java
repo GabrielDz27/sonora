@@ -75,6 +75,8 @@ public class ReservaService {
     var instrumento = new Instrumento();
     if (dadosCadastroReserva.idInstrumento() != null) {
       instrumento = instrumentoRepository.findAllById(dadosCadastroReserva.idInstrumento());
+    } else {
+      instrumento = null;
     }
 
     var membro = membroRepository.findAllById(dadosCadastroReserva.idMembro());
@@ -154,6 +156,6 @@ public class ReservaService {
   }
 
   public Page<DadosListagemReserva> listagemMembro(Long idMembro, Pageable paginacao) {
-    return reservaRepository.findAllByMembroId(idMembro, paginacao).map(r -> new DadosListagemReserva(r, (r.getEmEspera() == true ? "Na fila de espera" : "Reservado")));
+    return reservaRepository.findAllByMembroIdAndMotivoCancelamentoIsNull(idMembro, paginacao).map(r -> new DadosListagemReserva(r, (r.getEmEspera() == true ? "Na fila de espera" : "Reservado")));
   }
 }

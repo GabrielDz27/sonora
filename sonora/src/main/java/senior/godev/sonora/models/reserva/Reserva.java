@@ -19,43 +19,43 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 public class Reserva {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sala_id")
-    private Sala sala;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "sala_id")
+  private Sala sala;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "instrumento_id")
-    private Instrumento instrumento;
+  @ManyToOne(fetch = FetchType.LAZY, optional = true)
+  @JoinColumn(name = "instrumento_id", nullable = true)
+  private Instrumento instrumento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "membro_id")
-    private Membro membro;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "membro_id")
+  private Membro membro;
 
-    private LocalDateTime dataHoraInicio;
+  private LocalDateTime dataHoraInicio;
 
-    private LocalDateTime dataHoraFim;
-    private LocalDateTime dataHoraRegistro;
-    private Boolean emEspera;
+  private LocalDateTime dataHoraFim;
+  private LocalDateTime dataHoraRegistro;
+  private Boolean emEspera;
 
-    @Column(name = "tipo_uso")
-    @Enumerated(EnumType.STRING)
-    private TipoUso tipoUso;
+  @Column(name = "tipo_uso")
+  @Enumerated(EnumType.STRING)
+  private TipoUso tipoUso;
 
-    private String observacoes;
+  private String observacoes;
 
-    @Column(name = "motivo_cancelamento")
-    @Enumerated(EnumType.STRING)
-    private MotivoCancelamento motivoCancelamento;
+  @Column(name = "motivo_cancelamento")
+  @Enumerated(EnumType.STRING)
+  private MotivoCancelamento motivoCancelamento;
 
-    public void cancelar(MotivoCancelamento motivoCancelamento) {
-        this.motivoCancelamento = motivoCancelamento;
-    }
+  public void cancelar(MotivoCancelamento motivoCancelamento) {
+    this.motivoCancelamento = motivoCancelamento;
+  }
 
-    public void confirmar() {
-        this.motivoCancelamento = null;
-    }
+  public void confirmar() {
+    this.motivoCancelamento = null;
+  }
 }

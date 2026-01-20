@@ -65,7 +65,7 @@ class ReservaController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<DadosListagemReserva>> listarMembro(Long idMembro, @PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+  public ResponseEntity<Page<DadosListagemReserva>> listarMembro(Long idMembro, @PageableDefault(size = 100, sort = {"id"}) Pageable paginacao) {
     return ResponseEntity.ok(reservaService.listagemMembro(idMembro, paginacao));
   }
 }

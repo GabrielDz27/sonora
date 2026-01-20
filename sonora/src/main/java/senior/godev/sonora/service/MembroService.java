@@ -89,7 +89,8 @@ public class MembroService {
 
     return new DadosDetalhamentoMembro(
       membro,
-      usuario.getLogin()
+      usuario.getLogin(),
+      usuario.getRole()
     );
   }
 
@@ -117,7 +118,7 @@ public class MembroService {
     if (membro == null) {
       throw new EntityNotFoundException("Membro não encontrado para o login: " + login);
     }
-    
+
     return montarDtoDetalhamento(membro);
   }
 }

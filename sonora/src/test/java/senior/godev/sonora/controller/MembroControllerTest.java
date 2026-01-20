@@ -40,189 +40,193 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureJsonTesters
 class MembroControllerTest {
 
-    @Autowired
-    private MockMvc mvc;
+  @Autowired
+  private MockMvc mvc;
 
-    @MockitoBean
-    private MembroRepository membroRepository;
+  @MockitoBean
+  private MembroRepository membroRepository;
 
-    @Autowired
-    private JacksonTester<DadosCadastroMembro> cadastroMembroJacksonTester;
+  @Autowired
+  private JacksonTester<DadosCadastroMembro> cadastroMembroJacksonTester;
 
-    @Autowired
-    private JacksonTester<DadosDetalhamentoMembro> detalhamentoMembroJacksonTester;
+  @Autowired
+  private JacksonTester<DadosDetalhamentoMembro> detalhamentoMembroJacksonTester;
 
-    @Autowired
-    private JacksonTester<DadosAtualizacaoMembro> atualizacaoMembroJacksonTester;
+  @Autowired
+  private JacksonTester<DadosAtualizacaoMembro> atualizacaoMembroJacksonTester;
 
-    @MockitoBean
-    private UsuarioRepository usuarioRepository;
+  @MockitoBean
+  private UsuarioRepository usuarioRepository;
 
-    @MockitoBean
-    private MembroService membroService;
+  @MockitoBean
+  private MembroService membroService;
 
-    private DadosEndereco dadosEndereco() {
-        return new DadosEndereco(
-                "rua xpto",
-                "bairro",
-                "00000000",
-                "Brasilia",
-                "DF",
-                null,
-                null
-        );
-    }
+  private DadosEndereco dadosEndereco() {
+    return new DadosEndereco(
+      "rua xpto",
+      "bairro",
+      "00000000",
+      "Brasilia",
+      "DF",
+      null,
+      null
+    );
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 200 quando informacoes estao validas")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void cadastrar_Dar200() throws Exception {
+  @Test
+  @DisplayName("Deveria devolver codigo http 200 quando informacoes estao validas")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void cadastrar_Dar200() throws Exception {
 
-        var dadosCadastroMembro = new DadosCadastroMembro(
-                "qualquer_c",
-                "12345678909",
-                LocalDate.of(2023, 01, 01),
-                "Cleiton",
-                "1234567890",
-                IdentificacaoUsuario.ADMINISTRADOR,
-                dadosEndereco()
-        );
+    var dadosCadastroMembro = new DadosCadastroMembro(
+      "qualquer_c",
+      "12345678909",
+      LocalDate.of(2023, 01, 01),
+      "Cleiton",
+      "1234567890",
+      IdentificacaoUsuario.ADMINISTRADOR,
+      dadosEndereco()
+    );
 
-        var dadosDetalhamento = new DadosDetalhamentoMembro(
-                null,
-                dadosCadastroMembro.login(),
-                dadosCadastroMembro.cpf(),
-                dadosCadastroMembro.dataNascimento(),
-                "email.antigo@teste.com",
-                dadosCadastroMembro.nome(),
-                new Endereco(dadosCadastroMembro.endereco())
-        );
+    var dadosDetalhamento = new DadosDetalhamentoMembro(
+      null,
+      dadosCadastroMembro.login(),
+      dadosCadastroMembro.cpf(),
+      dadosCadastroMembro.dataNascimento(),
+      dadosCadastroMembro.nome(),
+      "email.antigo@teste.com",
+      "",
+      IdentificacaoUsuario.ALUNO,
+      new Endereco(dadosCadastroMembro.endereco())
+    );
 
-        when(membroService.cadastrar(any())).thenReturn(dadosDetalhamento);
+    when(membroService.cadastrar(any())).thenReturn(dadosDetalhamento);
 
-        var response = mvc
-                .perform(post("/membros")
-                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .content(cadastroMembroJacksonTester.write(dadosCadastroMembro).getJson()))
-                .andReturn().getResponse();
+    var response = mvc
+      .perform(post("/membros")
+        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+        .content(cadastroMembroJacksonTester.write(dadosCadastroMembro).getJson()))
+      .andReturn().getResponse();
 
-        var jsonEsperado = detalhamentoMembroJacksonTester.write(dadosDetalhamento).getJson();
+    var jsonEsperado = detalhamentoMembroJacksonTester.write(dadosDetalhamento).getJson();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+    assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void cadastrar_DeveRetornar400() throws Exception {
-        var response = mvc
-                .perform(post("/membros"))
-                .andReturn().getResponse();
+  @Test
+  @DisplayName("Deveria devolver codigo http 400 quando informacoes estao invalidas")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void cadastrar_DeveRetornar400() throws Exception {
+    var response = mvc
+      .perform(post("/membros"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+  }
 
-    @Test
-    @DisplayName("Deveria devolver codigo http 403 quando o acesso foi negado")
-    @WithMockUser
-    void cadastrar_DeveRetornar403() throws Exception {
-        var response = mvc
-                .perform(post("/membros"))
-                .andReturn().getResponse();
+  @Test
+  @DisplayName("Deveria devolver codigo http 403 quando o acesso foi negado")
+  @WithMockUser
+  void cadastrar_DeveRetornar403() throws Exception {
+    var response = mvc
+      .perform(post("/membros"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.FORBIDDEN.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.FORBIDDEN.value());
+  }
 
-    @Test
-    @DisplayName("Deveria atualizar o email do usuário vinculado ao membro")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void atualizarMembro_cenarioSucesso() throws Exception {
+  @Test
+  @DisplayName("Deveria atualizar o email do usuário vinculado ao membro")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void atualizarMembro_cenarioSucesso() throws Exception {
 
-        var dadosAtualizacao = new DadosAtualizacaoMembro(
-                1L,
-                "qualquer_c",
-                "12345678909",
-                LocalDate.of(2023, 01, 01),
-                "Cleiton",
-                "novo.email@teste.com",
-                "1234567890",
-                IdentificacaoUsuario.ALUNO,
-                dadosEndereco()
-        );
+    var dadosAtualizacao = new DadosAtualizacaoMembro(
+      1L,
+      "qualquer_c",
+      "12345678909",
+      LocalDate.of(2023, 01, 01),
+      "Cleiton",
+      "novo.email@teste.com",
+      "1234567890",
+      IdentificacaoUsuario.ALUNO,
+      dadosEndereco()
+    );
 
-        var dadosDetalhamento = new DadosDetalhamentoMembro(
-                null,
-                dadosAtualizacao.login(),
-                dadosAtualizacao.cpf(),
-                dadosAtualizacao.dataNascimento(),
-                "novo.email@teste.com",
-                dadosAtualizacao.nome(),
-                new Endereco(dadosAtualizacao.endereco())
-        );
+    var dadosDetalhamento = new DadosDetalhamentoMembro(
+      null,
+      dadosAtualizacao.login(),
+      dadosAtualizacao.cpf(),
+      dadosAtualizacao.dataNascimento(),
+      dadosAtualizacao.nome(),
+      "novo.email@teste.com",
+      "",
+      IdentificacaoUsuario.ALUNO,
+      new Endereco(dadosAtualizacao.endereco())
+    );
 
-        when(membroService.atualizarMembro(dadosAtualizacao)).thenReturn(dadosDetalhamento);
+    when(membroService.atualizarMembro(dadosAtualizacao)).thenReturn(dadosDetalhamento);
 
-        var response = mvc.perform(put("/membros")
-                        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
-                        .content(atualizacaoMembroJacksonTester.write(dadosAtualizacao).getJson()))
-                .andReturn().getResponse();
+    var response = mvc.perform(put("/membros")
+        .contentType(String.valueOf(MediaType.APPLICATION_JSON))
+        .content(atualizacaoMembroJacksonTester.write(dadosAtualizacao).getJson()))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.getContentAsString()).contains("novo.email@teste.com");
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+    assertThat(response.getContentAsString()).contains("novo.email@teste.com");
+  }
 
-    @Test
-    @DisplayName("Deveria devolver 200 ao detalhar membro")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void detalhar_DeveRetornar200() throws Exception {
-        var membro = new Membro();
-        when(membroRepository.findAllById(1L)).thenReturn(membro);
+  @Test
+  @DisplayName("Deveria devolver 200 ao detalhar membro")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void detalhar_DeveRetornar200() throws Exception {
+    var membro = new Membro();
+    when(membroRepository.findAllById(1L)).thenReturn(membro);
 
-        var response = mvc.perform(get("/membros/1"))
-                .andReturn().getResponse();
+    var response = mvc.perform(get("/membros/1"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+  }
 
-    @Test
-    @DisplayName("Deveria devolver 200 ao listar membros")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void listar_DeveRetornar200() throws Exception {
-        when(membroRepository.findAll(any(Pageable.class))).thenReturn(Page.empty());
+  @Test
+  @DisplayName("Deveria devolver 200 ao listar membros")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void listar_DeveRetornar200() throws Exception {
+    when(membroRepository.findAll(any(Pageable.class))).thenReturn(Page.empty());
 
-        var response = mvc.perform(get("/membros"))
-                .andReturn().getResponse();
+    var response = mvc.perform(get("/membros"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+  }
 
-    @Test
-    @DisplayName("Deveria devolver 204 ao excluir com sucesso")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void excluir_DeveRetornar204() throws Exception {
-        var membro = new Membro();
-        when(membroRepository.findById(1L)).thenReturn(Optional.of(membro));
+  @Test
+  @DisplayName("Deveria devolver 204 ao excluir com sucesso")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void excluir_DeveRetornar204() throws Exception {
+    var membro = new Membro();
+    when(membroRepository.findById(1L)).thenReturn(Optional.of(membro));
 
-        var response = mvc.perform(delete("/membros/1"))
-                .andReturn().getResponse();
+    var response = mvc.perform(delete("/membros/1"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NO_CONTENT.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.NO_CONTENT.value());
+  }
 
-    @Test
-    @DisplayName("Deveria devolver 400 ao tentar excluir membro inexistente")
-    @WithMockUser(roles = "ADMINISTRADOR")
-    void excluir_DeveRetornar400() throws Exception {
+  @Test
+  @DisplayName("Deveria devolver 400 ao tentar excluir membro inexistente")
+  @WithMockUser(roles = "ADMINISTRADOR")
+  void excluir_DeveRetornar400() throws Exception {
 
-        doThrow(new ValidacaoException("Não foi encontrado o membro pra excluir."))
-                .when(membroService).excluirMembro(1L);
+    doThrow(new ValidacaoException("Não foi encontrado o membro pra excluir."))
+      .when(membroService).excluirMembro(1L);
 
-        var response = mvc.perform(delete("/membros/1"))
-                .andReturn().getResponse();
+    var response = mvc.perform(delete("/membros/1"))
+      .andReturn().getResponse();
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-    }
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+  }
 
 }

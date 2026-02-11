@@ -1,0 +1,156 @@
+domain my_domain
+
+service my_service {
+    endpoints {
+    // add actions, queries, events and signals here
+        public query helloWorld {
+            in {
+                who : string
+            }
+            out {
+                helloWorldMessage : string
+            }
+        }
+        "Cadastrar um novo eventos (ex: SeniorTec, Casamento, etc)"
+        action cadastrarEvento {
+            in {
+                nome : string(10)
+                "Caso  o valor nao seja informado, sera false"
+                apenasColaboradores : boolean? default:false
+                lotacaoMaxima : integer minValue: 1 maxValue:999
+                data : date
+                tipoEntradaEvento: tipoEntrada?*
+            }
+            out {
+                retorno : retornoCadastrarEvento
+            }
+        }
+
+        action cadastrarConvidado {
+            in {
+                nome : entradaCadastrarConvidado
+                quantidadeAcompanhantes : integer minValue: 0 maxValue: 9
+            }
+            out {
+                convidado : retornoCadastrarConvidado
+                resultado : tipoSituacao
+            }
+        }
+
+        //Quando o evento da 200, mas ainda não foi fnalizado, basicamente 202
+        signal cancelarEvento {
+            in {
+                codigoEvento: string
+            }
+        }
+
+        action comprarIngresso {
+            in {
+                nomeComprador: string
+            }
+            out {
+                codigoIngresso : string
+            }
+        }
+
+        event ingressoComprado {
+            payload {
+                codigoIngresso: string
+            }
+        }
+        // exercicio 3
+
+        event pagamentoEstornado {
+            payload {
+                codigoIngresso: string
+            }
+        }
+
+        signal estornarPagamentos {
+            in {
+                codigoIngresso: string*
+            }
+        }
+    }
+
+    types {
+    // define records and enumerations here
+        enumeration tipoEntrada {
+            LIVRE
+            NO_LOCAL
+            ANTECIPADO
+            LISTA
+        }
+
+        enumeration tipoSituacao {
+            CADASTRADO_NOVO
+            NAO_CADASTRADO_EXISTENTE
+            NAO_CADASTRADO_ERRO
+        }
+
+        record mensagemRetornoComCodigo {
+            mensagemretorno: string
+            codigoCadastrado : string
+            contemErro: boolean?
+        }
+
+        record retornoCadastrarEvento extends mensagemRetornoComCodigo{
+//            mensagem: mensagemRetornoComCodigo
+            nome : string
+            apenasColaboradores : boolean?
+            lotacaoMaxima : integer
+            data : date
+            tipoEntradaEvento : tipoEntrada
+        }
+
+        record retornoCadastrarConvidado {
+            nome : string
+            nomeSocial : string
+        }
+
+        record entradaCadastrarConvidado {
+            nome : string
+            nomeSocial : string?
+        }
+
+    }
+    entities {
+    // define any entities here
+        "Entidade que representa o convidado do envento"
+        entity convidado {
+            id: uuid?
+            nome: string
+            nomeSocial: string?
+            cpf: string
+            dataNascimento: date
+        }
+
+        entity evento {
+            id: uuid?
+            nome: string(30)
+
+            lotacaoMaxima: integer minValue: 1 maxValue: 99999
+            dataHora: dateTime
+            endereco: string(50)
+
+           tipoentradaevento: tipoEntrada?
+           ingressos: ingresso?*
+        }
+
+        entity ingresso {
+            id: uuid?
+            dataHora: dateTime?
+            convidado: convidado?
+            quantidadeAcompanhantes: integer minValue:0 maxValue:9
+            evento: evento?
+        }
+
+        entity atracao {
+            id: uuid?
+            nome: string(30)
+            dataHora: dateTime?
+            local: string(30)
+            evento: evento?
+        }
+    }
+} 

@@ -215,6 +215,221 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.comprarIngressoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método multiplicacao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public MultiplicacaoOutput multiplicacao(MultiplicacaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl impl = new br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.multiplicacao(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método multiplicacao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void multiplicacao(MultiplicacaoInput input) {
+		br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl impl = new br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.multiplicacao(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método multiplicacao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<MultiplicacaoOutput> multiplicacaoRequest(MultiplicacaoInput input) {
+		return this.multiplicacaoRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método multiplicacao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<MultiplicacaoOutput> multiplicacaoRequest(MultiplicacaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl impl = new br.com.senior.mydomain.myservice.impl.MultiplicacaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.multiplicacaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método adicao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public AdicaoOutput adicao(AdicaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.AdicaoImpl impl = new br.com.senior.mydomain.myservice.impl.AdicaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.adicao(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método adicao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void adicao(AdicaoInput input) {
+		br.com.senior.mydomain.myservice.impl.AdicaoImpl impl = new br.com.senior.mydomain.myservice.impl.AdicaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.adicao(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método adicao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<AdicaoOutput> adicaoRequest(AdicaoInput input) {
+		return this.adicaoRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método adicao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<AdicaoOutput> adicaoRequest(AdicaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.AdicaoImpl impl = new br.com.senior.mydomain.myservice.impl.AdicaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.adicaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método divisao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public DivisaoOutput divisao(DivisaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.DivisaoImpl impl = new br.com.senior.mydomain.myservice.impl.DivisaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.divisao(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método divisao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void divisao(DivisaoInput input) {
+		br.com.senior.mydomain.myservice.impl.DivisaoImpl impl = new br.com.senior.mydomain.myservice.impl.DivisaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.divisao(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método divisao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<DivisaoOutput> divisaoRequest(DivisaoInput input) {
+		return this.divisaoRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método divisao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<DivisaoOutput> divisaoRequest(DivisaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.DivisaoImpl impl = new br.com.senior.mydomain.myservice.impl.DivisaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.divisaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método subtracao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public SubtracaoOutput subtracao(SubtracaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.SubtracaoImpl impl = new br.com.senior.mydomain.myservice.impl.SubtracaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.subtracao(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método subtracao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void subtracao(SubtracaoInput input) {
+		br.com.senior.mydomain.myservice.impl.SubtracaoImpl impl = new br.com.senior.mydomain.myservice.impl.SubtracaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.subtracao(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método subtracao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<SubtracaoOutput> subtracaoRequest(SubtracaoInput input) {
+		return this.subtracaoRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método subtracao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<SubtracaoOutput> subtracaoRequest(SubtracaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.SubtracaoImpl impl = new br.com.senior.mydomain.myservice.impl.SubtracaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.subtracaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método findByNome
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public FindByNomeOutput findByNome(FindByNomeInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FindByNomeImpl impl = new br.com.senior.mydomain.myservice.impl.FindByNomeImpl(messengerSupplier, userId, messageSupplier);
+		return impl.findByNome(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findByNome
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void findByNome(FindByNomeInput input) {
+		br.com.senior.mydomain.myservice.impl.FindByNomeImpl impl = new br.com.senior.mydomain.myservice.impl.FindByNomeImpl(messengerSupplier, userId, messageSupplier);
+		impl.findByNome(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findByNome
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<FindByNomeOutput> findByNomeRequest(FindByNomeInput input) {
+		return this.findByNomeRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findByNome
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<FindByNomeOutput> findByNomeRequest(FindByNomeInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FindByNomeImpl impl = new br.com.senior.mydomain.myservice.impl.FindByNomeImpl(messengerSupplier, userId, messageSupplier);
+		return impl.findByNomeRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.

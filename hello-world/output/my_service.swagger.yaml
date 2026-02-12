@@ -94,6 +94,80 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
+  /my_service/queries/findByNome:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - nome
+            properties:
+              nome:
+                type: string
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                   - $ref: '#/definitions/convidado'
+                  minimum: 1
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: nome
+          description: ""
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                   - $ref: '#/definitions/convidado'
+                  minimum: 1
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/queries/getMetadata:
     post:
       description: "Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested."
@@ -466,6 +540,174 @@ paths:
               - codigoIngresso
             properties:
               codigoIngresso:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/actions/multiplicacao:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - numero1
+              - numero2
+            properties:
+              numero1:
+                type: number
+                format: double
+                description: ""
+              numero2:
+                type: number
+                format: double
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/actions/adicao:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - numero1
+              - numero2
+            properties:
+              numero1:
+                type: number
+                format: double
+                description: ""
+              numero2:
+                type: number
+                format: double
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/actions/divisao:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - numero1
+              - numero2
+            properties:
+              numero1:
+                type: number
+                format: double
+                description: ""
+              numero2:
+                type: number
+                format: double
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/actions/subtracao:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - numero1
+              - numero2
+            properties:
+              numero1:
+                type: number
+                format: double
+                description: ""
+              numero2:
+                type: number
+                format: double
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - resultado
+            properties:
+              resultado:
                 type: string
                 description: ""
         401:
@@ -2042,6 +2284,16 @@ definitions:
         type: boolean
         description: ""
       _discriminator:
+        type: string
+        description: ""
+  
+  resultadoString:
+    description: ""
+    type: object
+    required:
+      - resultado
+    properties:
+      resultado:
         type: string
         description: ""
   

@@ -18,6 +18,17 @@
         	"required" : ["mensagemretorno","codigoCadastrado"]
         }
         ,
+        "resultadoString" : {
+        	"type" : "object",
+        	"id" : "resultadoString",
+        	"properties" : {
+            	"resultado" : {
+            		"type": "string"
+            	}
+        	},
+        	"required" : ["resultado"]
+        }
+        ,
         "retornoCadastrarEvento" : {
         	"type" : "object",
         	"id" : "retornoCadastrarEvento",

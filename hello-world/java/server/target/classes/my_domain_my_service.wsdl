@@ -47,6 +47,12 @@
                     </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
+            <xsd:complexType name="resultadoString">
+                <xsd:sequence>
+                    <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:complexType name="retornoCadastrarEvento">
                 <xsd:complexContent>
                     <xsd:extension base="mensagemRetornoComCodigo">
@@ -733,6 +739,24 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="divisao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="divisaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="comprarIngresso">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -858,6 +882,24 @@
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="helloWorldMessage" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="subtracao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="subtracaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
                         </xsd:element>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -1024,13 +1066,71 @@
             <xsd:element name="odata">
                 <xsd:complexType/>
             </xsd:element>
+            <xsd:element name="adicao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="adicaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="createAtracao">
                 <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="findByNome">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="findByNomeOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for resultado -->
+                        <xsd:element name="resultado" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="convidado" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
             </xsd:element>
             <xsd:element name="updateMergeEvento">
                 <xsd:complexType/>
             </xsd:element>
             <xsd:element name="retrieveEvento_Ingressos" type="uuid"/>
+            <xsd:element name="multiplicacao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="multiplicacaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="exportConvidado">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -1279,6 +1379,12 @@
     <wsdl:message name="getMetadataResponse">
         <wsdl:part name="result" element="getMetadataOutput"/>
     </wsdl:message>
+    <wsdl:message name="divisaoRequest">
+        <wsdl:part name="parameters" element="divisao"/>
+    </wsdl:message>
+    <wsdl:message name="divisaoResponse">
+        <wsdl:part name="result" element="divisaoOutput"/>
+    </wsdl:message>
     <wsdl:message name="comprarIngressoRequest">
         <wsdl:part name="parameters" element="comprarIngresso"/>
     </wsdl:message>
@@ -1336,6 +1442,12 @@
     <wsdl:message name="helloWorldResponse">
         <wsdl:part name="result" element="helloWorldOutput"/>
     </wsdl:message>
+    <wsdl:message name="subtracaoRequest">
+        <wsdl:part name="parameters" element="subtracao"/>
+    </wsdl:message>
+    <wsdl:message name="subtracaoResponse">
+        <wsdl:part name="result" element="subtracaoOutput"/>
+    </wsdl:message>
     <wsdl:message name="cadastrarConvidadoRequest">
         <wsdl:part name="parameters" element="cadastrarConvidado"/>
     </wsdl:message>
@@ -1384,11 +1496,23 @@
     <wsdl:message name="odataResponse">
         <wsdl:part name="result" element="odataOutput"/>
     </wsdl:message>
+    <wsdl:message name="adicaoRequest">
+        <wsdl:part name="parameters" element="adicao"/>
+    </wsdl:message>
+    <wsdl:message name="adicaoResponse">
+        <wsdl:part name="result" element="adicaoOutput"/>
+    </wsdl:message>
     <wsdl:message name="createAtracaoRequest">
         <wsdl:part name="toCreate" element="createAtracao"/>
     </wsdl:message>
     <wsdl:message name="createAtracaoResponse">
         <wsdl:part name="created" element="createAtracaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="findByNomeRequest">
+        <wsdl:part name="parameters" element="findByNome"/>
+    </wsdl:message>
+    <wsdl:message name="findByNomeResponse">
+        <wsdl:part name="result" element="findByNomeOutput"/>
     </wsdl:message>
     <wsdl:message name="updateMergeEventoRequest">
         <wsdl:part name="parameters" element="updateMergeEvento"/>
@@ -1401,6 +1525,12 @@
     </wsdl:message>
     <wsdl:message name="retrieveEvento_IngressosResponse">
         <wsdl:part name="retrieved" element="retrieveEvento_IngressosOutput"/>
+    </wsdl:message>
+    <wsdl:message name="multiplicacaoRequest">
+        <wsdl:part name="parameters" element="multiplicacao"/>
+    </wsdl:message>
+    <wsdl:message name="multiplicacaoResponse">
+        <wsdl:part name="result" element="multiplicacaoOutput"/>
     </wsdl:message>
     <wsdl:message name="exportConvidadoRequest">
         <wsdl:part name="parameters" element="exportConvidado"/>
@@ -1630,6 +1760,13 @@
             <wsdl:input message="getMetadataRequest"/>
             <wsdl:output message="getMetadataResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="divisao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="divisaoRequest"/>
+            <wsdl:output message="divisaoResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="comprarIngresso">
             <wsdl:documentation>
             WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
@@ -1707,6 +1844,13 @@
             <wsdl:input message="helloWorldRequest"/>
             <wsdl:output message="helloWorldResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="subtracao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="subtracaoRequest"/>
+            <wsdl:output message="subtracaoResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="cadastrarConvidado">
             <wsdl:documentation>
             WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
@@ -1777,6 +1921,13 @@
             <wsdl:input message="odataRequest"/>
             <wsdl:output message="odataResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="adicao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="adicaoRequest"/>
+            <wsdl:output message="adicaoResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="createAtracao">
             <wsdl:documentation>
             THIS OPERATION IS PUBLIC. 
@@ -1784,6 +1935,13 @@
             </wsdl:documentation>
             <wsdl:input message="createAtracaoRequest"/>
             <wsdl:output message="createAtracaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="findByNome">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="findByNomeRequest"/>
+            <wsdl:output message="findByNomeResponse"/>
         </wsdl:operation>
         <wsdl:operation name="updateMergeEvento">
             <wsdl:documentation>
@@ -1800,6 +1958,13 @@
             </wsdl:documentation>
             <wsdl:input message="retrieveEvento_IngressosRequest"/>
             <wsdl:output message="retrieveEvento_IngressosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="multiplicacao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="multiplicacaoRequest"/>
+            <wsdl:output message="multiplicacaoResponse"/>
         </wsdl:operation>
         <wsdl:operation name="exportConvidado">
             <wsdl:documentation>
@@ -2075,6 +2240,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="divisao">
+            <soap:operation soapAction="divisao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="comprarIngresso">
             <soap:operation soapAction="comprarIngresso"/>
             <wsdl:input>
@@ -2165,6 +2339,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="subtracao">
+            <soap:operation soapAction="subtracao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="cadastrarConvidado">
             <soap:operation soapAction="cadastrarConvidado"/>
             <wsdl:input>
@@ -2246,8 +2429,26 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="adicao">
+            <soap:operation soapAction="adicao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="createAtracao">
             <soap:operation soapAction="createAtracao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findByNome">
+            <soap:operation soapAction="findByNome"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -2266,6 +2467,15 @@
         </wsdl:operation>
         <wsdl:operation name="retrieveEvento_Ingressos">
             <soap:operation soapAction="retrieveEvento_Ingressos"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="multiplicacao">
+            <soap:operation soapAction="multiplicacao"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

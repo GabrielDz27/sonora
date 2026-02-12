@@ -38,6 +38,50 @@
                 <slot name="codigoIngresso" type="string" optional="false" multivalued="false"/>
             </output>
         </action>
+        <action name="multiplicacao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="numero1" type="double" optional="false" multivalued="false"/>
+                <slot name="numero2" type="double" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="resultado" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <action name="adicao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="numero1" type="double" optional="false" multivalued="false"/>
+                <slot name="numero2" type="double" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="resultado" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <action name="divisao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="numero1" type="double" optional="false" multivalued="false"/>
+                <slot name="numero2" type="double" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="resultado" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <action name="subtracao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="numero1" type="double" optional="false" multivalued="false"/>
+                <slot name="numero2" type="double" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="resultado" type="string" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="findByNome" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="nome" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="resultado" type="convidado" optional="false" multivalued="true"/>
+            </output>
+        </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>
@@ -399,6 +443,9 @@
             <slot name="mensagemretorno" type="string" optional="false" multivalued="false"/>
             <slot name="codigoCadastrado" type="string" optional="false" multivalued="false"/>
             <slot name="contemErro" type="boolean" optional="true" multivalued="false"/>
+        </record>
+        <record name="resultadoString">
+            <slot name="resultado" type="string" optional="false" multivalued="false"/>
         </record>
         <record name="retornoCadastrarEvento">
             <slot name="mensagemretorno" type="string" optional="false" multivalued="false"/>

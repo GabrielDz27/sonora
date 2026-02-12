@@ -256,6 +256,16 @@ definitions:
         type: string
         description: ""
   
+  resultadoString:
+    description: ""
+    type: object
+    required:
+      - resultado
+    properties:
+      resultado:
+        type: string
+        description: ""
+  
   retornoCadastrarEvento:
     description: ""
     allOf:

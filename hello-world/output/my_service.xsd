@@ -35,6 +35,12 @@
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
+    <xsd:complexType name="resultadoString">
+        <xsd:sequence>
+            <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
     <xsd:complexType name="retornoCadastrarEvento">
         <xsd:complexContent>
             <xsd:extension base="mensagemRetornoComCodigo">
@@ -721,6 +727,24 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="divisao">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="divisaoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="comprarIngresso">
         <xsd:complexType>
             <xsd:sequence>
@@ -846,6 +870,24 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="helloWorldMessage" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="subtracao">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="subtracaoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
@@ -1012,13 +1054,71 @@
     <xsd:element name="odata">
         <xsd:complexType/>
     </xsd:element>
+    <xsd:element name="adicao">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="adicaoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="createAtracao">
         <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="findByNome">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="findByNomeOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for resultado -->
+                <xsd:element name="resultado" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="convidado" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
     </xsd:element>
     <xsd:element name="updateMergeEvento">
         <xsd:complexType/>
     </xsd:element>
     <xsd:element name="retrieveEvento_Ingressos" type="uuid"/>
+    <xsd:element name="multiplicacao">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="numero1" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="numero2" type="xsd:double" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="multiplicacaoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="resultado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="exportConvidado">
         <xsd:complexType>
             <xsd:sequence>

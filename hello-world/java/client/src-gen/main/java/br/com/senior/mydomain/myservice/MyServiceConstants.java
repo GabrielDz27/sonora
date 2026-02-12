@@ -78,6 +78,91 @@ public interface MyServiceConstants {
     	 */
     	String COMPRAR_INGRESSO_ERROR = "comprarIngressoError";
     	/**
+    	 * @see MultiplicacaoInput the request payload
+    	 */
+    	String MULTIPLICACAO = "multiplicacao";
+    	/**
+    	 * The success response primitive for multiplicacao.
+    	 *
+    	 * @see #MULTIPLICACAO the request primitive
+    	 * @see MultiplicacaoOutput the response payload
+    	 */
+    	String MULTIPLICACAO_RESPONSE = "multiplicacaoResponse";
+    	/**
+    	 * An error response primitive for multiplicacao.
+    	 *
+    	 * @see #MULTIPLICACAO the request primitive
+    	 */
+    	String MULTIPLICACAO_ERROR = "multiplicacaoError";
+    	/**
+    	 * @see AdicaoInput the request payload
+    	 */
+    	String ADICAO = "adicao";
+    	/**
+    	 * The success response primitive for adicao.
+    	 *
+    	 * @see #ADICAO the request primitive
+    	 * @see AdicaoOutput the response payload
+    	 */
+    	String ADICAO_RESPONSE = "adicaoResponse";
+    	/**
+    	 * An error response primitive for adicao.
+    	 *
+    	 * @see #ADICAO the request primitive
+    	 */
+    	String ADICAO_ERROR = "adicaoError";
+    	/**
+    	 * @see DivisaoInput the request payload
+    	 */
+    	String DIVISAO = "divisao";
+    	/**
+    	 * The success response primitive for divisao.
+    	 *
+    	 * @see #DIVISAO the request primitive
+    	 * @see DivisaoOutput the response payload
+    	 */
+    	String DIVISAO_RESPONSE = "divisaoResponse";
+    	/**
+    	 * An error response primitive for divisao.
+    	 *
+    	 * @see #DIVISAO the request primitive
+    	 */
+    	String DIVISAO_ERROR = "divisaoError";
+    	/**
+    	 * @see SubtracaoInput the request payload
+    	 */
+    	String SUBTRACAO = "subtracao";
+    	/**
+    	 * The success response primitive for subtracao.
+    	 *
+    	 * @see #SUBTRACAO the request primitive
+    	 * @see SubtracaoOutput the response payload
+    	 */
+    	String SUBTRACAO_RESPONSE = "subtracaoResponse";
+    	/**
+    	 * An error response primitive for subtracao.
+    	 *
+    	 * @see #SUBTRACAO the request primitive
+    	 */
+    	String SUBTRACAO_ERROR = "subtracaoError";
+    	/**
+    	 * @see FindByNomeInput the request payload
+    	 */
+    	String FIND_BY_NOME = "findByNome";
+    	/**
+    	 * The success response primitive for findByNome.
+    	 *
+    	 * @see #FIND_BY_NOME the request primitive
+    	 * @see FindByNomeOutput the response payload
+    	 */
+    	String FIND_BY_NOME_RESPONSE = "findByNomeResponse";
+    	/**
+    	 * An error response primitive for findByNome.
+    	 *
+    	 * @see #FIND_BY_NOME the request primitive
+    	 */
+    	String FIND_BY_NOME_ERROR = "findByNomeError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

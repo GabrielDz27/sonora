@@ -71,6 +71,55 @@ service my_service {
                 codigoIngresso: string*
             }
         }
+
+        // exercicio 5
+        action multiplicacao {
+            in {
+                numero1: double
+                numero2: double
+            }
+            out {
+                resultado: string
+            }
+        }
+
+        action adicao {
+            in {
+                numero1: double
+                numero2: double
+            }
+            out {
+                resultado: string
+            }
+        }
+        action divisao {
+            in {
+                numero1: double
+                numero2: double
+            }
+            out {
+                resultado: string
+            }
+        }
+        action subtracao {
+            in {
+                numero1: double
+                numero2: double
+            }
+            out {
+                resultado: string
+            }
+        }
+
+
+        query findByNome {
+            in {
+                nome: string
+            }
+            out {
+                resultado: convidado*
+            }
+        }
     }
 
     types {
@@ -92,6 +141,10 @@ service my_service {
             mensagemretorno: string
             codigoCadastrado : string
             contemErro: boolean?
+        }
+
+        record resultadoString {
+            resultado: string
         }
 
         record retornoCadastrarEvento extends mensagemRetornoComCodigo{

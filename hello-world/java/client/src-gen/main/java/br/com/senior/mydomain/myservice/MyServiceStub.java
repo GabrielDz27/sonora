@@ -256,6 +256,60 @@ public interface MyServiceStub {
 	CompletableFuture<FindByNomeOutput> findByNomeRequest(FindByNomeInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	FindIngressoByNomeConvidadoOutput findIngressoByNomeConvidado(FindIngressoByNomeConvidadoInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void findIngressoByNomeConvidado(FindIngressoByNomeConvidadoInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<FindIngressoByNomeConvidadoOutput> findIngressoByNomeConvidadoRequest(FindIngressoByNomeConvidadoInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<FindIngressoByNomeConvidadoOutput> findIngressoByNomeConvidadoRequest(FindIngressoByNomeConvidadoInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	UpdateConvidadoNomeByIdOutput updateConvidadoNomeById(UpdateConvidadoNomeByIdInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void updateConvidadoNomeById(UpdateConvidadoNomeByIdInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<UpdateConvidadoNomeByIdOutput> updateConvidadoNomeByIdRequest(UpdateConvidadoNomeByIdInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<UpdateConvidadoNomeByIdOutput> updateConvidadoNomeByIdRequest(UpdateConvidadoNomeByIdInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */

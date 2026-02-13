@@ -739,6 +739,26 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="updateConvidadoNomeById">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateConvidadoNomeByIdOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="divisao">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -1027,6 +1047,28 @@
                 <xsd:complexType/>
             </xsd:element>
             <xsd:element name="deleteEvento_Ingressos" type="uuid"/>
+            <xsd:element name="findIngressoByNomeConvidado">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="nomeConvidado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="findIngressoByNomeConvidadoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for resultado -->
+                        <xsd:element name="resultado" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="ingresso" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="listAtracao">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -1379,6 +1421,12 @@
     <wsdl:message name="getMetadataResponse">
         <wsdl:part name="result" element="getMetadataOutput"/>
     </wsdl:message>
+    <wsdl:message name="updateConvidadoNomeByIdRequest">
+        <wsdl:part name="parameters" element="updateConvidadoNomeById"/>
+    </wsdl:message>
+    <wsdl:message name="updateConvidadoNomeByIdResponse">
+        <wsdl:part name="result" element="updateConvidadoNomeByIdOutput"/>
+    </wsdl:message>
     <wsdl:message name="divisaoRequest">
         <wsdl:part name="parameters" element="divisao"/>
     </wsdl:message>
@@ -1483,6 +1531,12 @@
     </wsdl:message>
     <wsdl:message name="deleteEvento_IngressosRequest">
         <wsdl:part name="toDelete" element="deleteEvento_Ingressos"/>
+    </wsdl:message>
+    <wsdl:message name="findIngressoByNomeConvidadoRequest">
+        <wsdl:part name="parameters" element="findIngressoByNomeConvidado"/>
+    </wsdl:message>
+    <wsdl:message name="findIngressoByNomeConvidadoResponse">
+        <wsdl:part name="result" element="findIngressoByNomeConvidadoOutput"/>
     </wsdl:message>
     <wsdl:message name="listAtracaoRequest">
         <wsdl:part name="pageRequest" element="listAtracao"/>
@@ -1760,6 +1814,13 @@
             <wsdl:input message="getMetadataRequest"/>
             <wsdl:output message="getMetadataResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="updateConvidadoNomeById">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="updateConvidadoNomeByIdRequest"/>
+            <wsdl:output message="updateConvidadoNomeByIdResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="divisao">
             <wsdl:documentation>
             WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
@@ -1905,6 +1966,13 @@
             </wsdl:documentation>
             <wsdl:input message="deleteEvento_IngressosRequest"/>
             <wsdl:output message="deleteEvento_IngressosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="findIngressoByNomeConvidado">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="findIngressoByNomeConvidadoRequest"/>
+            <wsdl:output message="findIngressoByNomeConvidadoResponse"/>
         </wsdl:operation>
         <wsdl:operation name="listAtracao">
             <wsdl:documentation>
@@ -2240,6 +2308,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="updateConvidadoNomeById">
+            <soap:operation soapAction="updateConvidadoNomeById"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="divisao">
             <soap:operation soapAction="divisao"/>
             <wsdl:input>
@@ -2404,6 +2481,15 @@
         </wsdl:operation>
         <wsdl:operation name="deleteEvento_Ingressos">
             <soap:operation soapAction="deleteEvento_Ingressos"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findIngressoByNomeConvidado">
+            <soap:operation soapAction="findIngressoByNomeConvidado"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

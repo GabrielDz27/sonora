@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 public class FindByNomeHandlerImpl implements FindByNome {
 
     @Inject
-    private ConvidadoRepository repository;
+    private ConvidadoService service;
 
     @Override
     public FindByNomeOutput findByNome(FindByNomeInput request) {
-        final List<ConvidadoEntity> convidados = repository.findByNomeContainingIgnoreCase(request.nome);
+        final List<ConvidadoEntity> convidados = service.findByNomeContainingIgnoreCase(request.nome);
 
         final List<Convidado> convidadosDto = convidados
                 .stream()

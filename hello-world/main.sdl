@@ -120,6 +120,26 @@ service my_service {
                 resultado: convidado*
             }
         }
+
+        query findIngressoByNomeConvidado {
+            in {
+                nomeConvidado: string
+            }
+            out {
+                resultado: ingresso*
+            }
+        }
+
+        action updateConvidadoNomeById {
+            in {
+                id: string
+                nome: string
+            }
+            out {
+                id: string
+                nome: string
+            }
+        }
     }
 
     types {

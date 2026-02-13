@@ -727,6 +727,26 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="updateConvidadoNomeById">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="updateConvidadoNomeByIdOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="divisao">
         <xsd:complexType>
             <xsd:sequence>
@@ -1015,6 +1035,28 @@
         <xsd:complexType/>
     </xsd:element>
     <xsd:element name="deleteEvento_Ingressos" type="uuid"/>
+    <xsd:element name="findIngressoByNomeConvidado">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="nomeConvidado" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="findIngressoByNomeConvidadoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for resultado -->
+                <xsd:element name="resultado" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="ingresso" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="listAtracao">
         <xsd:complexType>
             <xsd:sequence>

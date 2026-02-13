@@ -163,6 +163,40 @@ public interface MyServiceConstants {
     	 */
     	String FIND_BY_NOME_ERROR = "findByNomeError";
     	/**
+    	 * @see FindIngressoByNomeConvidadoInput the request payload
+    	 */
+    	String FIND_INGRESSO_BY_NOME_CONVIDADO = "findIngressoByNomeConvidado";
+    	/**
+    	 * The success response primitive for findIngressoByNomeConvidado.
+    	 *
+    	 * @see #FIND_INGRESSO_BY_NOME_CONVIDADO the request primitive
+    	 * @see FindIngressoByNomeConvidadoOutput the response payload
+    	 */
+    	String FIND_INGRESSO_BY_NOME_CONVIDADO_RESPONSE = "findIngressoByNomeConvidadoResponse";
+    	/**
+    	 * An error response primitive for findIngressoByNomeConvidado.
+    	 *
+    	 * @see #FIND_INGRESSO_BY_NOME_CONVIDADO the request primitive
+    	 */
+    	String FIND_INGRESSO_BY_NOME_CONVIDADO_ERROR = "findIngressoByNomeConvidadoError";
+    	/**
+    	 * @see UpdateConvidadoNomeByIdInput the request payload
+    	 */
+    	String UPDATE_CONVIDADO_NOME_BY_ID = "updateConvidadoNomeById";
+    	/**
+    	 * The success response primitive for updateConvidadoNomeById.
+    	 *
+    	 * @see #UPDATE_CONVIDADO_NOME_BY_ID the request primitive
+    	 * @see UpdateConvidadoNomeByIdOutput the response payload
+    	 */
+    	String UPDATE_CONVIDADO_NOME_BY_ID_RESPONSE = "updateConvidadoNomeByIdResponse";
+    	/**
+    	 * An error response primitive for updateConvidadoNomeById.
+    	 *
+    	 * @see #UPDATE_CONVIDADO_NOME_BY_ID the request primitive
+    	 */
+    	String UPDATE_CONVIDADO_NOME_BY_ID_ERROR = "updateConvidadoNomeByIdError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ConvidadoRepository extends ConvidadoBaseRepository  {
+public interface ConvidadoRepository extends ConvidadoBaseRepository, ConvidadoRepositoryCustom  {
 
     List<ConvidadoEntity> findByNomeContainingIgnoreCase(String nome);
 

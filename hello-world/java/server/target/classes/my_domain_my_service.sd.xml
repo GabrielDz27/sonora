@@ -100,6 +100,14 @@
                 <slot name="nome" type="string" optional="false" multivalued="false"/>
             </output>
         </action>
+        <query name="findNomeById" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="nome" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>

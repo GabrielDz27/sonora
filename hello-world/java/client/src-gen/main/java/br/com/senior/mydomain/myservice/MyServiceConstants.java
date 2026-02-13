@@ -197,6 +197,23 @@ public interface MyServiceConstants {
     	 */
     	String UPDATE_CONVIDADO_NOME_BY_ID_ERROR = "updateConvidadoNomeByIdError";
     	/**
+    	 * @see FindNomeByIdInput the request payload
+    	 */
+    	String FIND_NOME_BY_ID = "findNomeById";
+    	/**
+    	 * The success response primitive for findNomeById.
+    	 *
+    	 * @see #FIND_NOME_BY_ID the request primitive
+    	 * @see FindNomeByIdOutput the response payload
+    	 */
+    	String FIND_NOME_BY_ID_RESPONSE = "findNomeByIdResponse";
+    	/**
+    	 * An error response primitive for findNomeById.
+    	 *
+    	 * @see #FIND_NOME_BY_ID the request primitive
+    	 */
+    	String FIND_NOME_BY_ID_ERROR = "findNomeByIdError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

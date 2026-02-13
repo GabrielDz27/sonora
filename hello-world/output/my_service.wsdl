@@ -667,6 +667,22 @@
             <xsd:element name="updateEvento">
                 <xsd:complexType/>
             </xsd:element>
+            <xsd:element name="findNomeById">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="findNomeByIdOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="updateIngresso">
                 <xsd:complexType/>
             </xsd:element>
@@ -1373,6 +1389,12 @@
     <wsdl:message name="updateEventoResponse">
         <wsdl:part name="updated" element="updateEventoOutput"/>
     </wsdl:message>
+    <wsdl:message name="findNomeByIdRequest">
+        <wsdl:part name="parameters" element="findNomeById"/>
+    </wsdl:message>
+    <wsdl:message name="findNomeByIdResponse">
+        <wsdl:part name="result" element="findNomeByIdOutput"/>
+    </wsdl:message>
     <wsdl:message name="updateIngressoRequest">
         <wsdl:part name="toUpdate" element="updateIngresso"/>
     </wsdl:message>
@@ -1750,6 +1772,13 @@
             </wsdl:documentation>
             <wsdl:input message="updateEventoRequest"/>
             <wsdl:output message="updateEventoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="findNomeById">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="findNomeByIdRequest"/>
+            <wsdl:output message="findNomeByIdResponse"/>
         </wsdl:operation>
         <wsdl:operation name="updateIngresso">
             <wsdl:documentation>
@@ -2229,6 +2258,15 @@
         </wsdl:operation>
         <wsdl:operation name="updateEvento">
             <soap:operation soapAction="updateEvento"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findNomeById">
+            <soap:operation soapAction="findNomeById"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

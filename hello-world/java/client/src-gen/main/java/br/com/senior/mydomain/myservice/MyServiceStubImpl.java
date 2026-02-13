@@ -516,6 +516,49 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.updateConvidadoNomeByIdRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método findNomeById
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public FindNomeByIdOutput findNomeById(FindNomeByIdInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl impl = new br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl(messengerSupplier, userId, messageSupplier);
+		return impl.findNomeById(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findNomeById
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void findNomeById(FindNomeByIdInput input) {
+		br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl impl = new br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl(messengerSupplier, userId, messageSupplier);
+		impl.findNomeById(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findNomeById
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<FindNomeByIdOutput> findNomeByIdRequest(FindNomeByIdInput input) {
+		return this.findNomeByIdRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método findNomeById
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<FindNomeByIdOutput> findNomeByIdRequest(FindNomeByIdInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl impl = new br.com.senior.mydomain.myservice.impl.FindNomeByIdImpl(messengerSupplier, userId, messageSupplier);
+		return impl.findNomeByIdRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.

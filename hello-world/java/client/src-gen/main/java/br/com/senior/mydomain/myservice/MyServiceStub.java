@@ -310,6 +310,33 @@ public interface MyServiceStub {
 	CompletableFuture<UpdateConvidadoNomeByIdOutput> updateConvidadoNomeByIdRequest(UpdateConvidadoNomeByIdInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	FindNomeByIdOutput findNomeById(FindNomeByIdInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void findNomeById(FindNomeByIdInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<FindNomeByIdOutput> findNomeByIdRequest(FindNomeByIdInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<FindNomeByIdOutput> findNomeByIdRequest(FindNomeByIdInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */

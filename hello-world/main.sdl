@@ -140,6 +140,15 @@ service my_service {
                 nome: string
             }
         }
+
+        query findNomeById {
+            in {
+                id: string
+            }
+            out {
+               nome: string
+            }
+        }
     }
 
     types {

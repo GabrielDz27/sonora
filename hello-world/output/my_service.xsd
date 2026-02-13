@@ -655,6 +655,22 @@
     <xsd:element name="updateEvento">
         <xsd:complexType/>
     </xsd:element>
+    <xsd:element name="findNomeById">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="findNomeByIdOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="updateIngresso">
         <xsd:complexType/>
     </xsd:element>

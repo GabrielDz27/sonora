@@ -291,6 +291,33 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "findNomeById": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "nome" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "updateIngresso": {
             "endpointType" : "command",
             "kind": "update",

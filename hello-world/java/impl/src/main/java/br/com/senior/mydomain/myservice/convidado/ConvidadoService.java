@@ -38,4 +38,8 @@ public class ConvidadoService {
             throw new ServiceException(ErrorCategory.BAD_REQUEST, "Id inválido");
         }
     }
+
+    public String findNomeById(String id) {
+        return convidadoRepository.findNomeByIdCustom(UUID.fromString(id)).toString();
+    }
 }

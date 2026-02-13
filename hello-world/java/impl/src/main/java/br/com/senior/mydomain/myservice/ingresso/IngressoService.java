@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class IngressoService {
@@ -12,8 +13,11 @@ public class IngressoService {
     @Inject
     private IngressoRepository ingressoRepository;
 
-
     public List<IngressoEntity> findByNomeConvidado(String nome) {
         return ingressoRepository.findByNomeConvidado(nome);
+    }
+
+    public List<UUID> getIdsByConvidadoNome(String nome) {
+        return ingressoRepository.getIdsByConvidadoNome(nome);
     }
 }

@@ -11,15 +11,13 @@ public class UpdateConvidadoNomeByIdHandlerImpl implements UpdateConvidadoNomeBy
     @Inject
     private ConvidadoService convidadoService;
 
+    @Inject
+    private ConvidadoConverter convidadoConverter;
+
     @Override
     public UpdateConvidadoNomeByIdOutput updateConvidadoNomeById(UpdateConvidadoNomeByIdInput request) {
         final ConvidadoEntity convidado = convidadoService.updateNomeById(request.nome, request.id);
 
-        final UpdateConvidadoNomeByIdOutput output = new UpdateConvidadoNomeByIdOutput();
-
-        output.id = String.valueOf(convidado.getId());
-        output.nome = convidado.getNome();
-
-        return output;
+        return convidadoConverter.toUpdateConvidadoNomeById(convidado);
     }
 }

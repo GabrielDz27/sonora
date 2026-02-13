@@ -214,6 +214,40 @@ public interface MyServiceConstants {
     	 */
     	String FIND_NOME_BY_ID_ERROR = "findNomeByIdError";
     	/**
+    	 * @see GetAllConvidadosInput the request payload
+    	 */
+    	String GET_ALL_CONVIDADOS = "getAllConvidados";
+    	/**
+    	 * The success response primitive for getAllConvidados.
+    	 *
+    	 * @see #GET_ALL_CONVIDADOS the request primitive
+    	 * @see GetAllConvidadosOutput the response payload
+    	 */
+    	String GET_ALL_CONVIDADOS_RESPONSE = "getAllConvidadosResponse";
+    	/**
+    	 * An error response primitive for getAllConvidados.
+    	 *
+    	 * @see #GET_ALL_CONVIDADOS the request primitive
+    	 */
+    	String GET_ALL_CONVIDADOS_ERROR = "getAllConvidadosError";
+    	/**
+    	 * @see GetIdsByNomeConvidadoInput the request payload
+    	 */
+    	String GET_IDS_BY_NOME_CONVIDADO = "getIdsByNomeConvidado";
+    	/**
+    	 * The success response primitive for getIdsByNomeConvidado.
+    	 *
+    	 * @see #GET_IDS_BY_NOME_CONVIDADO the request primitive
+    	 * @see GetIdsByNomeConvidadoOutput the response payload
+    	 */
+    	String GET_IDS_BY_NOME_CONVIDADO_RESPONSE = "getIdsByNomeConvidadoResponse";
+    	/**
+    	 * An error response primitive for getIdsByNomeConvidado.
+    	 *
+    	 * @see #GET_IDS_BY_NOME_CONVIDADO the request primitive
+    	 */
+    	String GET_IDS_BY_NOME_CONVIDADO_ERROR = "getIdsByNomeConvidadoError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

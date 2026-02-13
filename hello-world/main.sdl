@@ -149,6 +149,23 @@ service my_service {
                nome: string
             }
         }
+
+        query getAllConvidados {
+            in {
+            }
+            out {
+                id: string*
+            }
+        }
+
+        query getIdsByNomeConvidado {
+            in {
+                nomeConvidado: string
+            }
+            out {
+                ids: string*
+            }
+        }
     }
 
     types {

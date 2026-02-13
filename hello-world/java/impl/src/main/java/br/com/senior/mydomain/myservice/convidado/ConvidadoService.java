@@ -42,4 +42,8 @@ public class ConvidadoService {
     public String findNomeById(String id) {
         return convidadoRepository.findNomeByIdCustom(UUID.fromString(id)).toString();
     }
+
+    public List<ConvidadoEntity> getAll() {
+        return convidadoRepository.getAll();
+    }
 }

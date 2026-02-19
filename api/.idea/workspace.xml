@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aca17b90-a54d-4202-9f67-90b7ac00b5f7" name="Changes" comment="" />
+    <list default="true" id="aca17b90-a54d-4202-9f67-90b7ac00b5f7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/impl/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/impl/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.edl" beforeDir="false" afterPath="$PROJECT_DIR$/main.edl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.sdl" beforeDir="false" afterPath="$PROJECT_DIR$/main.sdl" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,24 +28,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ApiServer.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "projeto-seniorx",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ApiServer.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;projeto-seniorx&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ApiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="BROKER_HOST" value="teste446.interno.senior.com.br" />
+        <env name="BROKER_PASS" value="admin" />
+        <env name="BROKER_PORT" value="5674" />
+        <env name="BROKER_USER" value="admin" />
+        <env name="TENANT" value="gabriel-ferreiracombr" />
+        <env name="VIRTUAL_HOST" value="gabriel-ferreira" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="br.com.senior.ApiServer" />
       <module name="api-impl" />
+      <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev -Dservicemodel.logger.br.com.senior.messaging.security=DEBUG -Ddb.url=jdbc:postgresql://localhost:5432/api -Ddb.username=postgres -Ddb.password=SENIOR -Ddb.migration.ondemand=true" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="br.com.senior.*" />

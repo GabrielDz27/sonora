@@ -1,0 +1,5 @@
+<!-- GENERATED ENTITIES: 2026-02-19 11:18:59:558 -->
+<class>br.com.senior.mydomain.myservice.PecaEntity</class>
+<class>br.com.senior.mydomain.myservice.FuncionarioEntity</class>
+<class>br.com.senior.mydomain.myservice.MaquinaEntity</class>
+<class>br.com.senior.mydomain.myservice.Registro_producaoEntity</class>

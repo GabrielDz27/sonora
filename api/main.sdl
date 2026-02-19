@@ -2,7 +2,6 @@ domain my_domain
 
 service my_service {
     endpoints {
-    // add actions, queries, events and signals here
         query helloWorld {
             in {
                 who : string
@@ -11,14 +10,62 @@ service my_service {
                 helloWorldMessage : string
             }
         }
-
     }
+
     types {
-    // define records and enumerations here
 
+        //enum
+        enumeration statusPeca {
+            PENDENTE
+            PROCESSO
+            FINALIZADO
+            MORTA
+        }
+
+        enumeration statusMaquina {
+            ATIVO
+            MANUTENCAO
+            INATIVO
+        }
+
+        enumeration turnoFuncionario {
+            PRIMEIRO
+            SEGUNDO
+            TERCEIRO
+            DIURNO
+        }
     }
-    entities {
-    // define any entities here
 
+    entities {
+        entity peca {
+            id: uuid?
+            nome: string
+            codigoDesenho: string
+            tempoEstimadoMinutos: integer
+            status: statusPeca
+        }
+
+        entity funcionario {
+            id: uuid?
+            nome: string
+            matricula: string
+            cargo: string
+            turno: turnoFuncionario
+        }
+
+        entity maquina {
+            id: uuid?
+            nome: string
+            status: statusMaquina
+        }
+
+        entity registro_producao {
+            id: uuid?
+            peca: peca?
+            funcionario: funcionario?
+            maquina: maquina?
+            dataInicio: dateTime
+            dataFinal: dateTime
+        }
     }
 } 

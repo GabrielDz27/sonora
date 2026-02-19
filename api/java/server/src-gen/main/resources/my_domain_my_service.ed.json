@@ -6,9 +6,725 @@
 	"service": "my_service",
 	"enumType": "string",
 	"enumerations": {
+		"statusMaquina": {
+			"name": "statusMaquina",
+			"values": [
+				"ATIVO",
+				"MANUTENCAO",
+				"INATIVO"
+			]
+		}
+		,"statusPeca": {
+			"name": "statusPeca",
+			"values": [
+				"PENDENTE",
+				"PROCESSO",
+				"FINALIZADO",
+				"MORTA"
+			]
+		}
+		,"turnoFuncionario": {
+			"name": "turnoFuncionario",
+			"values": [
+				"PRIMEIRO",
+				"SEGUNDO",
+				"TERCEIRO",
+				"DIURNO"
+			]
+		}
 	},
 	"entities": {
+		"peca": {
+			"id": "id",
+			"name": "peca",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"codigoDesenho": {
+					"name": "codigoDesenho",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"tempoEstimadoMinutos": {
+					"name": "tempoEstimadoMinutos",
+					"type": "integer",
+					"thousandSeparator": ".",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"status": {
+					"name": "status",
+					"type": "statusPeca",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "codigoDesenho",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "tempoEstimadoMinutos",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "status",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"codigoDesenho",
+					"tempoEstimadoMinutos",
+					"status"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "codigoDesenho",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "tempoEstimadoMinutos",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "status",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"codigoDesenho",
+					"tempoEstimadoMinutos",
+					"status"
+				]
+			}
+		},
+		"funcionario": {
+			"id": "id",
+			"name": "funcionario",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"matricula": {
+					"name": "matricula",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"cargo": {
+					"name": "cargo",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"turno": {
+					"name": "turno",
+					"type": "turnoFuncionario",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "matricula",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "cargo",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "turno",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"matricula",
+					"cargo",
+					"turno"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "matricula",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "cargo",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "turno",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"matricula",
+					"cargo",
+					"turno"
+				]
+			}
+		},
+		"maquina": {
+			"id": "id",
+			"name": "maquina",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"nome": {
+					"name": "nome",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"status": {
+					"name": "status",
+					"type": "statusMaquina",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "status",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"status"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "nome",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "status",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"nome",
+					"status"
+				]
+			}
+		},
+		"registro_producao": {
+			"id": "id",
+			"name": "registro_producao",
+			"customizable": true,
+			"external": false,
+			"slots": {
+				"id": {
+					"name": "id",
+					"type": "string",
+					"format": "uuid",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": true
+				},
+				"peca": {
+					"name": "peca",
+					"type": "peca",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"funcionario": {
+					"name": "funcionario",
+					"type": "funcionario",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"maquina": {
+					"name": "maquina",
+					"type": "maquina",
+					"optional": true,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"dataInicio": {
+					"name": "dataInicio",
+					"type": "dateTime",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"dataFinal": {
+					"name": "dataFinal",
+					"type": "dateTime",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				}
+			},
+			"lookup": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "dataInicio",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "dataFinal",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"dataInicio",
+					"dataFinal"
+				]
+			},
+			"advancedSearch": {
+				"searchFields": [
+					{
+						"name": "id",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "dataInicio",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "dataFinal",
+						"optional": true,
+						"multiple": false
+					}
+				],
+				"displayFields": [
+					"id",
+					"dataInicio",
+					"dataFinal"
+				]
+			},
+			"relationships": {
+				"peca": [
+					{
+						"type": "aggregation",
+						"attribute": "peca",
+						"ownerEntity": "registro_producao",
+						"entityName": "peca",
+						"optional": true,
+						"filterDependent": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "codigoDesenho",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "tempoEstimadoMinutos",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "status",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"codigoDesenho",
+								"tempoEstimadoMinutos",
+								"status"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "codigoDesenho",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "tempoEstimadoMinutos",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "status",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"codigoDesenho",
+								"tempoEstimadoMinutos",
+								"status"
+							]
+						}
+					}
+				]
+				,"maquina": [
+					{
+						"type": "aggregation",
+						"attribute": "maquina",
+						"ownerEntity": "registro_producao",
+						"entityName": "maquina",
+						"optional": true,
+						"filterDependent": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "status",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"status"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "status",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"status"
+							]
+						}
+					}
+				]
+				,"funcionario": [
+					{
+						"type": "aggregation",
+						"attribute": "funcionario",
+						"ownerEntity": "registro_producao",
+						"entityName": "funcionario",
+						"optional": true,
+						"filterDependent": false,
+						"multivalued": false,
+						"lookup": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "matricula",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "cargo",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "turno",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"matricula",
+								"cargo",
+								"turno"
+							]
+						},
+						"advancedSearch": {
+							"searchFields": [
+								{
+									"name": "id",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "nome",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "matricula",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "cargo",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "turno",
+									"optional": true,
+									"multiple": false
+								}
+							],
+							"displayFields": [
+								"id",
+								"nome",
+								"matricula",
+								"cargo",
+								"turno"
+							]
+						}
+					}
+				]
+			}
+		}
 	},
 	"translations": {
+		"my_domain.my_service.funcionario": "",
+		"my_domain.my_service.funcionario_id": "",
+		"my_domain.my_service.funcionario_nome": "",
+		"my_domain.my_service.funcionario_matricula": "",
+		"my_domain.my_service.funcionario_cargo": "",
+		"my_domain.my_service.funcionario_turno": "",
+		"my_domain.my_service.maquina": "",
+		"my_domain.my_service.maquina_id": "",
+		"my_domain.my_service.maquina_nome": "",
+		"my_domain.my_service.maquina_status": "",
+		"my_domain.my_service.peca": "",
+		"my_domain.my_service.peca_id": "",
+		"my_domain.my_service.peca_nome": "",
+		"my_domain.my_service.peca_codigo_desenho": "",
+		"my_domain.my_service.peca_tempo_estimado_minutos": "",
+		"my_domain.my_service.peca_status": "",
+		"my_domain.my_service.registroproducao": "",
+		"my_domain.my_service.registroproducao_id": "",
+		"my_domain.my_service.registroproducao_peca": "",
+		"my_domain.my_service.registroproducao_funcionario": "",
+		"my_domain.my_service.registroproducao_maquina": "",
+		"my_domain.my_service.registroproducao_data_inicio": "",
+		"my_domain.my_service.registroproducao_data_final": "",
+		"my_domain.my_service.status_maquina_ativo": "",
+		"my_domain.my_service.status_maquina_manutencao": "",
+		"my_domain.my_service.status_maquina_inativo": "",
+		"my_domain.my_service.status_peca_pendente": "",
+		"my_domain.my_service.status_peca_processo": "",
+		"my_domain.my_service.status_peca_finalizado": "",
+		"my_domain.my_service.status_peca_morta": "",
+		"my_domain.my_service.turno_funcionario_primeiro": "",
+		"my_domain.my_service.turno_funcionario_segundo": "",
+		"my_domain.my_service.turno_funcionario_terceiro": "",
+		"my_domain.my_service.turno_funcionario_diurno": ""
 	}
 }

@@ -1,9 +1,35 @@
 domain my_domain
 
 entities {
-	//define global properties here
+    generateExtraResources : true
+    securityType : secure
+    enumType : string
 }
 
 service my_service {
-	//define entities properties here
+	entities {
+	   entity peca {
+	   }
+
+       entity funcionario {
+       }
+
+       entity maquina {
+       }
+
+       entity registro_producao {
+            relationships {
+                ManyToOne(peca) {
+                    type: aggregation
+                }
+                ManyToOne(funcionario) {
+                    type: aggregation
+                }
+                ManyToOne(maquina) {
+                    type: aggregation
+                }
+            }
+       }
+	}
+
 }

@@ -94,6 +94,172 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
+  /my_service/queries/getMaquinaAtiva:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties:
+              maquina:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/maquina'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            properties:
+              maquina:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/maquina'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/queries/getPecaPendente:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - peca
+            properties:
+              peca:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/peca'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - peca
+            properties:
+              peca:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/peca'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
+  /my_service/queries/relatorio:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - dataInicio
+              - dataFinal
+              - tipoRelatorio
+            properties:
+              dataInicio:
+                type: string
+                format: date-time
+                description: ""
+              dataFinal:
+                type: string
+                format: date-time
+                description: ""
+              tipoRelatorio:
+                type: string
+                allOf:
+                - $ref: '#/definitions/tipoRelatorio'
+                description: ""
+              turno:
+                type: string
+                allOf:
+                - $ref: '#/definitions/turnoFuncionario'
+                description: ""
+              funcionario:
+                type: array
+                items:
+                  type: string
+                description: ""
+              maquina:
+                type: array
+                items:
+                  type: string
+                description: ""
+              codigoDesenho:
+                type: array
+                items:
+                  type: string
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - retorno
+            properties:
+              retorno:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/retornoRelatorio'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/queries/getMetadata:
     post:
       description: "Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested."
@@ -269,7 +435,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/queries/exportRegistro_producao:
+  /my_service/queries/exportRegistroProducao:
     post:
       description: ""
       tags:
@@ -362,6 +528,50 @@ paths:
           description: Error response
           schema:
             $ref: '#/definitions/genericError'
+  /my_service/actions/mudarStatusPeca:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+              - status
+            properties:
+              id:
+                type: string
+                description: ""
+              status:
+                type: string
+                allOf:
+                - $ref: '#/definitions/statusPeca'
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - retorno
+            properties:
+              retorno:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/retornoAtualizarStatus'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/actions/odata:
     post:
       description: ""
@@ -492,7 +702,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/actions/importRegistro_producao:
+  /my_service/actions/importRegistroProducao:
     post:
       description: ""
       tags:
@@ -697,7 +907,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/events/importRegistro_producaoEvent:
+  /my_service/events/importRegistroProducaoEvent:
     post:
       description: ""
       x-senior-event: true
@@ -725,7 +935,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/events/exportRegistro_producaoEvent:
+  /my_service/events/exportRegistroProducaoEvent:
     post:
       description: ""
       x-senior-event: true
@@ -1328,7 +1538,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/entities/registro_producao:
+  /my_service/entities/registroProducao:
     post:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1341,12 +1551,12 @@ paths:
           schema:
             type: object
             allOf:
-             - $ref: '#/definitions/registro_producao'
+             - $ref: '#/definitions/registroProducao'
       responses:
         200:
           description: 'The created resource'
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1365,12 +1575,12 @@ paths:
           schema:
             type: object
             allOf:
-             - $ref: '#/definitions/registro_producao'
+             - $ref: '#/definitions/registroProducao'
       responses:
         200:
           description: 'The created resource'
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1395,7 +1605,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/registro_producao'
+              $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1403,7 +1613,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/entities/registro_producao/{id}:
+  /my_service/entities/registroProducao/{id}:
     put:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1418,12 +1628,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
       responses:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1444,12 +1654,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
       responses:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1470,7 +1680,7 @@ paths:
         200:
           description: Ok
           schema:
-            $ref: '#/definitions/registro_producao'
+            $ref: '#/definitions/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1497,7 +1707,7 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/entities/registro_producao/bulk:
+  /my_service/entities/registroProducao/bulk:
     post:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1509,7 +1719,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/registro_producao'
+              $ref: '#/definitions/registroProducao'
       responses:
         200:
           description: 'The bulk creation has created resources'
@@ -1522,6 +1732,15 @@ paths:
   
 
 definitions:
+  tipoRelatorio:
+    description: ""
+    type: string
+    enum:
+      - PERIODO
+      - MENSAL
+      - ANUAL
+  
+  
   statusPeca:
     description: ""
     type: string
@@ -1653,94 +1872,53 @@ definitions:
       - CONVERT_ERROR
       - SERVICE_ERROR
   
-  peca:
+  retornoRelatorio:
     description: ""
     type: object
     required:
-      - nome
-      - codigoDesenho
-      - tempoEstimadoMinutos
-      - status
+      - pecaMortas
     properties:
-      id:
-        type: string
-        format: uuid
+      maquinaTrabalhando:
+        type: array
+        items:
+          type: object
+          allOf:
+           - $ref: '#/definitions/maquinaTrabalhando'
         description: ""
-      nome:
-        type: string
-        description: ""
-      codigoDesenho:
-        type: string
-        description: ""
-      tempoEstimadoMinutos:
+      pecaMortas:
         type: integer
         format: int64
         description: ""
-      status:
-        type: string
-        allOf:
-        - $ref: '#/definitions/statusPeca'
+        minimum: 0
+      pecaFuncionario:
+        type: array
+        items:
+          type: object
+          allOf:
+           - $ref: '#/definitions/pecaFuncionario'
         description: ""
   
-  funcionario:
+  maquinaTrabalhando:
     description: ""
     type: object
     required:
-      - nome
-      - matricula
-      - cargo
-      - turno
+      - horas
     properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
-      nome:
-        type: string
-        description: ""
-      matricula:
-        type: string
-        description: ""
-      cargo:
-        type: string
-        description: ""
-      turno:
-        type: string
+      maquina:
+        type: object
         allOf:
-        - $ref: '#/definitions/turnoFuncionario'
+         - $ref: '#/definitions/maquina'
         description: ""
+      horas:
+        type: integer
+        format: int64
+        description: ""
+        minimum: 0
   
-  maquina:
+  pecaFuncionario:
     description: ""
     type: object
-    required:
-      - nome
-      - status
     properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
-      nome:
-        type: string
-        description: ""
-      status:
-        type: string
-        allOf:
-        - $ref: '#/definitions/statusMaquina'
-        description: ""
-  
-  registro_producao:
-    description: ""
-    type: object
-    required:
-      - dataInicio
-      - dataFinal
-    properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
       peca:
         type: object
         allOf:
@@ -1751,19 +1929,146 @@ definitions:
         allOf:
          - $ref: '#/definitions/funcionario'
         description: ""
+  
+  retornoAtualizarStatus:
+    description: ""
+    type: object
+    required:
+      - mensagemRetorno
+      - id
+    properties:
+      mensagemRetorno:
+        type: string
+        description: ""
+      id:
+        type: string
+        description: ""
+      contemErro:
+        type: boolean
+        description: ""
+  
+  peca:
+    description: "Entidade da peça com as informações"
+    type: object
+    required:
+      - nome
+      - codigoDesenho
+      - tempoEstimadoMinutos
+      - status
+      - valor
+      - motivoPerda
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        maxLength: 100
+        description: "Nome descritivo do item"
+      codigoDesenho:
+        type: string
+        maxLength: 50
+        description: "Referência técnica do projeto"
+      tempoEstimadoMinutos:
+        type: integer
+        format: int64
+        description: "Tempo previsto para fabricação"
+      status:
+        type: string
+        allOf:
+        - $ref: '#/definitions/statusPeca'
+        description: "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA"
+      valor:
+        type: string
+        description: "Valor da peça"
+      motivoPerda:
+        type: string
+        description: "Motivo pela perda peça quando o status da peça é morta"
+  
+  funcionario:
+    description: "Entidade do funcionário/operador"
+    type: object
+    required:
+      - nome
+      - matricula
+      - cargo
+      - turno
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        description: "Nome completo do colaborador"
+      matricula:
+        type: string
+        maxLength: 20
+        description: "Registro único na empresa"
+      cargo:
+        type: string
+        description: "Função técnica na metalurgia"
+      turno:
+        type: string
+        allOf:
+        - $ref: '#/definitions/turnoFuncionario'
+        description: "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
+  
+  maquina:
+    description: "Entidade da máquina/equipamento"
+    type: object
+    required:
+      - nome
+      - status
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        description: "Nome de identificação do ativo"
+      status:
+        type: string
+        allOf:
+        - $ref: '#/definitions/statusMaquina'
+        description: "Estado do ativo: ATIVO, MANUTENCAO, INATIVO"
+  
+  registroProducao:
+    description: "Entidade mestre de apontamento e histórico"
+    type: object
+    required:
+      - dataInicio
+      - dataFinal
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      peca:
+        type: object
+        allOf:
+         - $ref: '#/definitions/peca'
+        description: "Relacionamento com a peça processada"
+      funcionario:
+        type: object
+        allOf:
+         - $ref: '#/definitions/funcionario'
+        description: "Relacionamento com o operador responsável"
       maquina:
         type: object
         allOf:
          - $ref: '#/definitions/maquina'
-        description: ""
+        description: "Relacionamento com a máquina utilizada"
       dataInicio:
         type: string
         format: date-time
-        description: ""
+        description: "Data e hora do 'Play' na produção"
       dataFinal:
         type: string
         format: date-time
-        description: ""
+        description: "Data e hora do 'Stop' ou descarte"
   
   notifyUserEventPayload:
     description: "Represents a regular user event notification payload"

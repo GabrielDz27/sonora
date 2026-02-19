@@ -22,6 +22,167 @@
             <xsd:attribute name="i18n" type="xsd:boolean" default="false"/>
             
             <!-- Public types -->
+            <xsd:complexType name="retornoRelatorio">
+                <xsd:sequence>
+                    <!-- collection wrapper for maquinaTrabalhando -->
+                    <xsd:element name="maquinaTrabalhando" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="maquinaTrabalhando" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="pecaMortas"  minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:simpleType>
+                    	<xsd:restriction base="xsd:long">
+                    		<xsd:minInclusive value="0" />
+                    	</xsd:restriction>
+                    </xsd:simpleType>
+                    </xsd:element>
+                    <!-- collection wrapper for pecaFuncionario -->
+                    <xsd:element name="pecaFuncionario" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="pecaFuncionario" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="maquinaTrabalhando">
+                <xsd:sequence>
+                    <xsd:element name="maquina" type="maquina" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="horas"  minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:simpleType>
+                    	<xsd:restriction base="xsd:long">
+                    		<xsd:minInclusive value="0" />
+                    	</xsd:restriction>
+                    </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="pecaFuncionario">
+                <xsd:sequence>
+                    <xsd:element name="peca" type="peca" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="funcionario" type="funcionario" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="retornoAtualizarStatus">
+                <xsd:sequence>
+                    <xsd:element name="mensagemRetorno" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="contemErro" type="xsd:boolean" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:simpleType name="tipoRelatorio">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PERIODO"/>
+                    <xsd:enumeration value="MENSAL"/>
+                    <xsd:enumeration value="ANUAL"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="statusPeca">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PENDENTE"/>
+                    <xsd:enumeration value="PROCESSO"/>
+                    <xsd:enumeration value="FINALIZADO"/>
+                    <xsd:enumeration value="MORTA"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="statusMaquina">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="ATIVO"/>
+                    <xsd:enumeration value="MANUTENCAO"/>
+                    <xsd:enumeration value="INATIVO"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="turnoFuncionario">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PRIMEIRO"/>
+                    <xsd:enumeration value="SEGUNDO"/>
+                    <xsd:enumeration value="TERCEIRO"/>
+                    <xsd:enumeration value="DIURNO"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="peca">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="nome"  minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:simpleType>
+                    	<xsd:restriction base="xsd:string">
+                    		<xsd:maxLength value="100" />
+                    	</xsd:restriction>
+                    </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="codigoDesenho"  minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:simpleType>
+                    	<xsd:restriction base="xsd:string">
+                    		<xsd:maxLength value="50" />
+                    	</xsd:restriction>
+                    </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="tempoEstimadoMinutos" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="status" type="statusPeca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="valor" type="xsd:decimal" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="motivoPerda" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="funcionario">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="matricula"  minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:simpleType>
+                    	<xsd:restriction base="xsd:string">
+                    		<xsd:maxLength value="20" />
+                    	</xsd:restriction>
+                    </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="cargo" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="turno" type="turnoFuncionario" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="maquina">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="status" type="statusMaquina" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="registroProducao">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:uuid" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="peca" type="peca" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="funcionario" type="funcionario" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="maquina" type="maquina" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:simpleType name="userNotificationKind">
                 <xsd:restriction base="xsd:string">
                     <xsd:enumeration value="Operational"/>
@@ -116,6 +277,225 @@
                     </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
+            <xsd:simpleType name="fieldType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="BINARY"/>
+                    <xsd:enumeration value="BOOLEAN"/>
+                    <xsd:enumeration value="DATE"/>
+                    <xsd:enumeration value="DATETIME"/>
+                    <xsd:enumeration value="LOCALDATETIME"/>
+                    <xsd:enumeration value="DOUBLE"/>
+                    <xsd:enumeration value="ENUM"/>
+                    <xsd:enumeration value="INTEGER"/>
+                    <xsd:enumeration value="MONEY"/>
+                    <xsd:enumeration value="STRING"/>
+                    <xsd:enumeration value="TIME"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="fileFormat">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CSV"/>
+                    <xsd:enumeration value="FLAT"/>
+                    <xsd:enumeration value="JSON"/>
+                    <xsd:enumeration value="XML"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="hookFunction">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="BEFORE_PARSE"/>
+                    <xsd:enumeration value="BEFORE_CONVERSION"/>
+                    <xsd:enumeration value="ON_ERROR"/>
+                    <xsd:enumeration value="VALIDATE"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="eventType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CHUNK"/>
+                    <xsd:enumeration value="DOWNLOAD"/>
+                    <xsd:enumeration value="ERROR"/>
+                    <xsd:enumeration value="FINISH"/>
+                    <xsd:enumeration value="START"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="errorStrategy">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CALL_SCRIPT"/>
+                    <xsd:enumeration value="IGNORE"/>
+                    <xsd:enumeration value="STOP"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="status">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="DONE"/>
+                    <xsd:enumeration value="DONE_WITH_ERRORS"/>
+                    <xsd:enumeration value="DOWNLOADING"/>
+                    <xsd:enumeration value="ERROR"/>
+                    <xsd:enumeration value="NOT_STARTED"/>
+                    <xsd:enumeration value="RUNNING"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:simpleType name="errorType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="CONVERT_ERROR"/>
+                    <xsd:enumeration value="SERVICE_ERROR"/>
+                </xsd:restriction>
+             </xsd:simpleType>
+            <xsd:complexType name="importError">
+                <xsd:sequence>
+                    <xsd:element name="errorType" type="errorType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="lineNumber" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="bean" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="message" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="exceptionClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="fielddto">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="fieldType" type="fieldType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="start" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="size" type="xsd:long" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="maskPattern" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="hookdto">
+                <xsd:sequence>
+                    <xsd:element name="hookFunction" type="hookFunction" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="script" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="layoutdto">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="fileFormat" type="fileFormat" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="delimiter" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="skipLines" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for fields -->
+                    <xsd:element name="fields" minOccurs="1" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="fielddto" minOccurs="1" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <!-- collection wrapper for hooks -->
+                    <xsd:element name="hooks" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="hookdto" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importReport">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="startTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="endTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="beanClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="serviceClass" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="sucessCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorsCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="filteredCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="skippedCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <!-- collection wrapper for importErrors -->
+                    <xsd:element name="importErrors" minOccurs="0" maxOccurs="1">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="item" type="importError" minOccurs="0" maxOccurs="unbounded"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="exportEventStatus">
+                <xsd:sequence>
+                    <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importEventStatus">
+                <xsd:sequence>
+                    <xsd:element name="importerId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="eventType" type="eventType" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="status" type="status" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorMessage" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="recordCount" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="importReport" type="importReport" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="exportConfig">
+                <xsd:sequence>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="importConfig">
+                <xsd:sequence>
+                    <xsd:element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="layout" type="layoutdto" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="async" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="batchSize" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="errorStrategy" type="errorStrategy" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:complexType name="dependency">
                 <xsd:sequence>
                     <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
@@ -126,10 +506,363 @@
                     </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
+            <xsd:simpleType name="uuid">
+                <xsd:restriction base="xsd:string">
+                	<xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+                </xsd:restriction>
+             </xsd:simpleType>
             
             <!-- Message payload elements for signals -->
             
             <!-- Message input/output elements for commands -->
+            <xsd:element name="retrieveFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importMaquinaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateFuncionario">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="exportMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportMaquinaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importFuncionarioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mudarStatusPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="status" type="statusPeca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mudarStatusPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="retorno" type="retornoAtualizarStatus" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retrieveMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateRegistroProducao">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="exportFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportFuncionarioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateMaquina">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createMergeMaquina">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="updateMergeMaquina">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listFuncionarioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="funcionario" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportRegistroProducaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="exportConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="exportPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="exportJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="odata">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createBulkFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="funcionario" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkFuncionarioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="registroProducao" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkRegistroProducaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createMergeFuncionario">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="importRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importRegistroProducaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="relatorio">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="tipoRelatorio" type="tipoRelatorio" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="turno" type="turnoFuncionario" minOccurs="0" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for funcionario -->
+                        <xsd:element name="funcionario" minOccurs="0" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <!-- collection wrapper for maquina -->
+                        <xsd:element name="maquina" minOccurs="0" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <!-- collection wrapper for codigoDesenho -->
+                        <xsd:element name="codigoDesenho" minOccurs="0" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="relatorioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="retorno" type="retornoRelatorio" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="peca" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createFuncionario">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="peca" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="getMetadata">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -146,6 +879,45 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="listRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listRegistroProducaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="registroProducao" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updatePeca">
+                <xsd:complexType/>
+            </xsd:element>
             <xsd:element name="getDependencies">
                 <xsd:complexType/>
             </xsd:element>
@@ -159,6 +931,164 @@
                                     <xsd:element name="item" type="dependency" minOccurs="1" maxOccurs="unbounded"/>
                                 </xsd:sequence>
                             </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deleteFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateMergeRegistroProducao">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createMaquina">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createMergePeca">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="retrieveRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createMergeRegistroProducao">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="listMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="offset" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="size" type="xsd:long" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="orderBy" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="filter" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <!-- collection wrapper for displayFields -->
+                        <xsd:element name="displayFields" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="listMaquinaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for contents -->
+                        <xsd:element name="contents" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="maquina" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="updateMergePeca">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="importPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="config" type="importConfig" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="importPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="importJobId" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deletePeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createPeca">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="createRegistroProducao">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="updateMergeFuncionario">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="retrievePeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for entities -->
+                        <xsd:element name="entities" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="maquina" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createBulkMaquinaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getMaquinaAtiva">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="getMaquinaAtivaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="maquina" type="maquina" minOccurs="0" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deleteRegistroProducao">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getPecaPendente">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="getPecaPendenteOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="peca" type="peca" minOccurs="1" maxOccurs="1"  readOnly="false">
                         </xsd:element>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -179,20 +1109,145 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="deleteMaquina">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </wsdl:types>
     
+    <wsdl:message name="retrieveFuncionarioRequest">
+        <wsdl:part name="toRetrieve" element="retrieveFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveFuncionarioResponse">
+        <wsdl:part name="retrieved" element="retrieveFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateFuncionarioRequest">
+        <wsdl:part name="toUpdate" element="updateFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="updateFuncionarioResponse">
+        <wsdl:part name="updated" element="updateFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importFuncionarioRequest">
+        <wsdl:part name="parameters" element="importFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="importFuncionarioResponse">
+        <wsdl:part name="result" element="importFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportFuncionarioRequest">
+        <wsdl:part name="parameters" element="exportFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="exportFuncionarioResponse">
+        <wsdl:part name="result" element="exportFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeMaquinaRequest">
+        <wsdl:part name="parameters" element="createMergeMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeMaquinaResponse">
+        <wsdl:part name="result" element="createMergeMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeMaquinaRequest">
+        <wsdl:part name="parameters" element="updateMergeMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeMaquinaResponse">
+        <wsdl:part name="result" element="updateMergeMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="exportRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="exportRegistroProducaoResponse">
+        <wsdl:part name="result" element="exportRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportPecaRequest">
+        <wsdl:part name="parameters" element="exportPeca"/>
+    </wsdl:message>
+    <wsdl:message name="exportPecaResponse">
+        <wsdl:part name="result" element="exportPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkFuncionarioRequest">
+        <wsdl:part name="parameters" element="createBulkFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkFuncionarioResponse">
+        <wsdl:part name="result" element="createBulkFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="createBulkRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkRegistroProducaoResponse">
+        <wsdl:part name="result" element="createBulkRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeFuncionarioRequest">
+        <wsdl:part name="parameters" element="createMergeFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeFuncionarioResponse">
+        <wsdl:part name="result" element="createMergeFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="importRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="importRegistroProducaoResponse">
+        <wsdl:part name="result" element="importRegistroProducaoOutput"/>
+    </wsdl:message>
     <wsdl:message name="getMetadataRequest">
         <wsdl:part name="parameters" element="getMetadata"/>
     </wsdl:message>
     <wsdl:message name="getMetadataResponse">
         <wsdl:part name="result" element="getMetadataOutput"/>
     </wsdl:message>
-    <wsdl:message name="getDependenciesRequest">
-        <wsdl:part name="parameters" element="getDependencies"/>
+    <wsdl:message name="updatePecaRequest">
+        <wsdl:part name="toUpdate" element="updatePeca"/>
     </wsdl:message>
-    <wsdl:message name="getDependenciesResponse">
-        <wsdl:part name="result" element="getDependenciesOutput"/>
+    <wsdl:message name="updatePecaResponse">
+        <wsdl:part name="updated" element="updatePecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deleteFuncionarioRequest">
+        <wsdl:part name="toDelete" element="deleteFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="updateMergeRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeRegistroProducaoResponse">
+        <wsdl:part name="result" element="updateMergeRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveRegistroProducaoRequest">
+        <wsdl:part name="toRetrieve" element="retrieveRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveRegistroProducaoResponse">
+        <wsdl:part name="retrieved" element="retrieveRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="createMergeRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="createMergeRegistroProducaoResponse">
+        <wsdl:part name="result" element="createMergeRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listMaquinaRequest">
+        <wsdl:part name="pageRequest" element="listMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="listMaquinaResponse">
+        <wsdl:part name="pagedResults" element="listMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createPecaRequest">
+        <wsdl:part name="toCreate" element="createPeca"/>
+    </wsdl:message>
+    <wsdl:message name="createPecaResponse">
+        <wsdl:part name="created" element="createPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePecaRequest">
+        <wsdl:part name="toRetrieve" element="retrievePeca"/>
+    </wsdl:message>
+    <wsdl:message name="retrievePecaResponse">
+        <wsdl:part name="retrieved" element="retrievePecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getPecaPendenteRequest">
+        <wsdl:part name="parameters" element="getPecaPendente"/>
+    </wsdl:message>
+    <wsdl:message name="getPecaPendenteResponse">
+        <wsdl:part name="result" element="getPecaPendenteOutput"/>
     </wsdl:message>
     <wsdl:message name="helloWorldRequest">
         <wsdl:part name="parameters" element="helloWorld"/>
@@ -200,8 +1255,240 @@
     <wsdl:message name="helloWorldResponse">
         <wsdl:part name="result" element="helloWorldOutput"/>
     </wsdl:message>
+    <wsdl:message name="deleteMaquinaRequest">
+        <wsdl:part name="toDelete" element="deleteMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="importMaquinaRequest">
+        <wsdl:part name="parameters" element="importMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="importMaquinaResponse">
+        <wsdl:part name="result" element="importMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="exportMaquinaRequest">
+        <wsdl:part name="parameters" element="exportMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="exportMaquinaResponse">
+        <wsdl:part name="result" element="exportMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="mudarStatusPecaRequest">
+        <wsdl:part name="parameters" element="mudarStatusPeca"/>
+    </wsdl:message>
+    <wsdl:message name="mudarStatusPecaResponse">
+        <wsdl:part name="result" element="mudarStatusPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveMaquinaRequest">
+        <wsdl:part name="toRetrieve" element="retrieveMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="retrieveMaquinaResponse">
+        <wsdl:part name="retrieved" element="retrieveMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateRegistroProducaoRequest">
+        <wsdl:part name="toUpdate" element="updateRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="updateRegistroProducaoResponse">
+        <wsdl:part name="updated" element="updateRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMaquinaRequest">
+        <wsdl:part name="toUpdate" element="updateMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="updateMaquinaResponse">
+        <wsdl:part name="updated" element="updateMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listFuncionarioRequest">
+        <wsdl:part name="pageRequest" element="listFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="listFuncionarioResponse">
+        <wsdl:part name="pagedResults" element="listFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="odataRequest">
+        <wsdl:part name="parameters" element="odata"/>
+    </wsdl:message>
+    <wsdl:message name="odataResponse">
+        <wsdl:part name="result" element="odataOutput"/>
+    </wsdl:message>
+    <wsdl:message name="relatorioRequest">
+        <wsdl:part name="parameters" element="relatorio"/>
+    </wsdl:message>
+    <wsdl:message name="relatorioResponse">
+        <wsdl:part name="result" element="relatorioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPecaRequest">
+        <wsdl:part name="parameters" element="createBulkPeca"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkPecaResponse">
+        <wsdl:part name="result" element="createBulkPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createFuncionarioRequest">
+        <wsdl:part name="toCreate" element="createFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="createFuncionarioResponse">
+        <wsdl:part name="created" element="createFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listPecaRequest">
+        <wsdl:part name="pageRequest" element="listPeca"/>
+    </wsdl:message>
+    <wsdl:message name="listPecaResponse">
+        <wsdl:part name="pagedResults" element="listPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="listRegistroProducaoRequest">
+        <wsdl:part name="pageRequest" element="listRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="listRegistroProducaoResponse">
+        <wsdl:part name="pagedResults" element="listRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getDependenciesRequest">
+        <wsdl:part name="parameters" element="getDependencies"/>
+    </wsdl:message>
+    <wsdl:message name="getDependenciesResponse">
+        <wsdl:part name="result" element="getDependenciesOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMaquinaRequest">
+        <wsdl:part name="toCreate" element="createMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="createMaquinaResponse">
+        <wsdl:part name="created" element="createMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePecaRequest">
+        <wsdl:part name="parameters" element="createMergePeca"/>
+    </wsdl:message>
+    <wsdl:message name="createMergePecaResponse">
+        <wsdl:part name="result" element="createMergePecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergePecaRequest">
+        <wsdl:part name="parameters" element="updateMergePeca"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergePecaResponse">
+        <wsdl:part name="result" element="updateMergePecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="importPecaRequest">
+        <wsdl:part name="parameters" element="importPeca"/>
+    </wsdl:message>
+    <wsdl:message name="importPecaResponse">
+        <wsdl:part name="result" element="importPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deletePecaRequest">
+        <wsdl:part name="toDelete" element="deletePeca"/>
+    </wsdl:message>
+    <wsdl:message name="createRegistroProducaoRequest">
+        <wsdl:part name="toCreate" element="createRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="createRegistroProducaoResponse">
+        <wsdl:part name="created" element="createRegistroProducaoOutput"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeFuncionarioRequest">
+        <wsdl:part name="parameters" element="updateMergeFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="updateMergeFuncionarioResponse">
+        <wsdl:part name="result" element="updateMergeFuncionarioOutput"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkMaquinaRequest">
+        <wsdl:part name="parameters" element="createBulkMaquina"/>
+    </wsdl:message>
+    <wsdl:message name="createBulkMaquinaResponse">
+        <wsdl:part name="result" element="createBulkMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getMaquinaAtivaRequest">
+        <wsdl:part name="parameters" element="getMaquinaAtiva"/>
+    </wsdl:message>
+    <wsdl:message name="getMaquinaAtivaResponse">
+        <wsdl:part name="result" element="getMaquinaAtivaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="deleteRegistroProducaoRequest">
+        <wsdl:part name="toDelete" element="deleteRegistroProducao"/>
+    </wsdl:message>
     
     <wsdl:portType name="my_servicePortType">
+        <wsdl:operation name="retrieveFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrieveFuncionarioRequest"/>
+            <wsdl:output message="retrieveFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateFuncionarioRequest"/>
+            <wsdl:output message="updateFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importFuncionario">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importFuncionarioRequest"/>
+            <wsdl:output message="importFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportFuncionario">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportFuncionarioRequest"/>
+            <wsdl:output message="exportFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergeMaquinaRequest"/>
+            <wsdl:output message="createMergeMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergeMaquinaRequest"/>
+            <wsdl:output message="updateMergeMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportRegistroProducao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportRegistroProducaoRequest"/>
+            <wsdl:output message="exportRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportPeca">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportPecaRequest"/>
+            <wsdl:output message="exportPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkFuncionarioRequest"/>
+            <wsdl:output message="createBulkFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkRegistroProducaoRequest"/>
+            <wsdl:output message="createBulkRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergeFuncionarioRequest"/>
+            <wsdl:output message="createMergeFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importRegistroProducao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importRegistroProducaoRequest"/>
+            <wsdl:output message="importRegistroProducaoResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="getMetadata">
             <wsdl:documentation>
             WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
@@ -209,6 +1496,191 @@
             </wsdl:documentation>
             <wsdl:input message="getMetadataRequest"/>
             <wsdl:output message="getMetadataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updatePeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updatePecaRequest"/>
+            <wsdl:output message="updatePecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deleteFuncionarioRequest"/>
+            <wsdl:output message="deleteFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergeRegistroProducaoRequest"/>
+            <wsdl:output message="updateMergeRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrieveRegistroProducaoRequest"/>
+            <wsdl:output message="retrieveRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergeRegistroProducaoRequest"/>
+            <wsdl:output message="createMergeRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listMaquina">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listMaquinaRequest"/>
+            <wsdl:output message="listMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createPeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createPecaRequest"/>
+            <wsdl:output message="createPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrievePecaRequest"/>
+            <wsdl:output message="retrievePecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPecaPendente">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="getPecaPendenteRequest"/>
+            <wsdl:output message="getPecaPendenteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="helloWorld">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="helloWorldRequest"/>
+            <wsdl:output message="helloWorldResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deleteMaquinaRequest"/>
+            <wsdl:output message="deleteMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importMaquina">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="importMaquinaRequest"/>
+            <wsdl:output message="importMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="exportMaquina">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="exportMaquinaRequest"/>
+            <wsdl:output message="exportMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mudarStatusPeca">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="mudarStatusPecaRequest"/>
+            <wsdl:output message="mudarStatusPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'retrieve' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="retrieveMaquinaRequest"/>
+            <wsdl:output message="retrieveMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateRegistroProducaoRequest"/>
+            <wsdl:output message="updateRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'update' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMaquinaRequest"/>
+            <wsdl:output message="updateMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listFuncionario">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listFuncionarioRequest"/>
+            <wsdl:output message="listFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="odata">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="odataRequest"/>
+            <wsdl:output message="odataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="relatorio">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="relatorioRequest"/>
+            <wsdl:output message="relatorioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkPecaRequest"/>
+            <wsdl:output message="createBulkPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createFuncionarioRequest"/>
+            <wsdl:output message="createFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listPeca">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listPecaRequest"/>
+            <wsdl:output message="listPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="listRegistroProducao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            The 'list' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="listRegistroProducaoRequest"/>
+            <wsdl:output message="listRegistroProducaoResponse"/>
         </wsdl:operation>
         <wsdl:operation name="getDependencies">
             <wsdl:documentation>
@@ -218,19 +1690,414 @@
             <wsdl:input message="getDependenciesRequest"/>
             <wsdl:output message="getDependenciesResponse"/>
         </wsdl:operation>
-        <wsdl:operation name="helloWorld">
+        <wsdl:operation name="createMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMaquinaRequest"/>
+            <wsdl:output message="createMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createMerge' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createMergePecaRequest"/>
+            <wsdl:output message="createMergePecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergePeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergePecaRequest"/>
+            <wsdl:output message="updateMergePecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="importPeca">
             <wsdl:documentation>
             WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
             </wsdl:documentation>
-            <wsdl:input message="helloWorldRequest"/>
-            <wsdl:output message="helloWorldResponse"/>
+            <wsdl:input message="importPecaRequest"/>
+            <wsdl:output message="importPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deletePeca">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the Peca entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deletePecaRequest"/>
+            <wsdl:output message="deletePecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'create' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createRegistroProducaoRequest"/>
+            <wsdl:output message="createRegistroProducaoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeFuncionario">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'updateMerge' request primitive for the Funcionario entity. 
+            </wsdl:documentation>
+            <wsdl:input message="updateMergeFuncionarioRequest"/>
+            <wsdl:output message="updateMergeFuncionarioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkMaquina">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'createBulk' request primitive for the Maquina entity. 
+            </wsdl:documentation>
+            <wsdl:input message="createBulkMaquinaRequest"/>
+            <wsdl:output message="createBulkMaquinaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getMaquinaAtiva">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="getMaquinaAtivaRequest"/>
+            <wsdl:output message="getMaquinaAtivaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteRegistroProducao">
+            <wsdl:documentation>
+            THIS OPERATION IS PUBLIC. 
+            The 'delete' request primitive for the RegistroProducao entity. 
+            </wsdl:documentation>
+            <wsdl:input message="deleteRegistroProducaoRequest"/>
+            <wsdl:output message="deleteRegistroProducaoResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     
     <wsdl:binding name="my_serviceSoapBinding" type="my_servicePortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="retrieveFuncionario">
+            <soap:operation soapAction="retrieveFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateFuncionario">
+            <soap:operation soapAction="updateFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importFuncionario">
+            <soap:operation soapAction="importFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportFuncionario">
+            <soap:operation soapAction="exportFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeMaquina">
+            <soap:operation soapAction="createMergeMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeMaquina">
+            <soap:operation soapAction="updateMergeMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportRegistroProducao">
+            <soap:operation soapAction="exportRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportPeca">
+            <soap:operation soapAction="exportPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkFuncionario">
+            <soap:operation soapAction="createBulkFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkRegistroProducao">
+            <soap:operation soapAction="createBulkRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeFuncionario">
+            <soap:operation soapAction="createMergeFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importRegistroProducao">
+            <soap:operation soapAction="importRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="getMetadata">
             <soap:operation soapAction="getMetadata"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updatePeca">
+            <soap:operation soapAction="updatePeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteFuncionario">
+            <soap:operation soapAction="deleteFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeRegistroProducao">
+            <soap:operation soapAction="updateMergeRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveRegistroProducao">
+            <soap:operation soapAction="retrieveRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergeRegistroProducao">
+            <soap:operation soapAction="createMergeRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listMaquina">
+            <soap:operation soapAction="listMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createPeca">
+            <soap:operation soapAction="createPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrievePeca">
+            <soap:operation soapAction="retrievePeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPecaPendente">
+            <soap:operation soapAction="getPecaPendente"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="helloWorld">
+            <soap:operation soapAction="helloWorld"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteMaquina">
+            <soap:operation soapAction="deleteMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importMaquina">
+            <soap:operation soapAction="importMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exportMaquina">
+            <soap:operation soapAction="exportMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mudarStatusPeca">
+            <soap:operation soapAction="mudarStatusPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retrieveMaquina">
+            <soap:operation soapAction="retrieveMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateRegistroProducao">
+            <soap:operation soapAction="updateRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMaquina">
+            <soap:operation soapAction="updateMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listFuncionario">
+            <soap:operation soapAction="listFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="odata">
+            <soap:operation soapAction="odata"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="relatorio">
+            <soap:operation soapAction="relatorio"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkPeca">
+            <soap:operation soapAction="createBulkPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createFuncionario">
+            <soap:operation soapAction="createFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listPeca">
+            <soap:operation soapAction="listPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="listRegistroProducao">
+            <soap:operation soapAction="listRegistroProducao"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -247,8 +2114,89 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="helloWorld">
-            <soap:operation soapAction="helloWorld"/>
+        <wsdl:operation name="createMaquina">
+            <soap:operation soapAction="createMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createMergePeca">
+            <soap:operation soapAction="createMergePeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergePeca">
+            <soap:operation soapAction="updateMergePeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="importPeca">
+            <soap:operation soapAction="importPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deletePeca">
+            <soap:operation soapAction="deletePeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createRegistroProducao">
+            <soap:operation soapAction="createRegistroProducao"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateMergeFuncionario">
+            <soap:operation soapAction="updateMergeFuncionario"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createBulkMaquina">
+            <soap:operation soapAction="createBulkMaquina"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMaquinaAtiva">
+            <soap:operation soapAction="getMaquinaAtiva"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteRegistroProducao">
+            <soap:operation soapAction="deleteRegistroProducao"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

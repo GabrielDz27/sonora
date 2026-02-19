@@ -9,15 +9,18 @@ entities {
 service my_service {
 	entities {
 	   entity peca {
+	        generateCustomValidator: true
 	   }
 
        entity funcionario {
+            generateCustomValidator: true
        }
 
        entity maquina {
+            generateCustomValidator: true
        }
 
-       entity registro_producao {
+       entity registroProducao {
             relationships {
                 ManyToOne(peca) {
                     type: aggregation

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.senior.messaging.model.EntityDescription;
 import br.com.senior.messaging.model.EntityId;
 import br.com.senior.custom.CustomDTO;
 
+/**
+ * Entidade do funcionário/operador
+ */
 @EntityDescription
 public class Funcionario extends CustomDTO {
     
@@ -108,17 +112,33 @@ public class Funcionario extends CustomDTO {
     }
 
     @EntityId
+    /**
+     * Identificador único UUID
+     */
     public String id;
     
+    /**
+     * Nome completo do colaborador
+     */
     @NotNull(message = "nome is required")
     public String nome;
     
+    /**
+     * Registro único na empresa
+     */
     @NotNull(message = "matricula is required")
+    @Size(max = 20, message = "matricula max length is {max}")
     public String matricula;
     
+    /**
+     * Função técnica na metalurgia
+     */
     @NotNull(message = "cargo is required")
     public String cargo;
     
+    /**
+     * Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO
+     */
     @NotNull(message = "turno is required")
     public TurnoFuncionario turno;
     

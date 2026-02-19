@@ -79,9 +79,9 @@ public class MyServiceNormalizer {
     	}
     }
     /**
-     * Normalizes the Registro_producao payload.
+     * Normalizes the RegistroProducao payload.
      */
-    public static void normalize(Registro_producao toNormalize, Map<String, Object> headers) {
+    public static void normalize(RegistroProducao toNormalize, Map<String, Object> headers) {
     	if (headers != null) {
     		String entityId = headers.containsKey(Message.ENTITY_ID_HEADER) ? headers.get(Message.ENTITY_ID_HEADER).toString() : null;
     		if (entityId != null && toNormalize != null && toNormalize.id == null) {
@@ -90,9 +90,9 @@ public class MyServiceNormalizer {
     	}
     }
     /**
-     * Normalizes the Registro_producao.Id payload.
+     * Normalizes the RegistroProducao.Id payload.
      */
-    public static void normalize(Registro_producao.Id toNormalize, Map<String, Object> headers) {
+    public static void normalize(RegistroProducao.Id toNormalize, Map<String, Object> headers) {
     	if (headers != null) {
     		String entityId = headers.containsKey(Message.ENTITY_ID_HEADER) ? headers.get(Message.ENTITY_ID_HEADER).toString() : null;
     		if (entityId != null && toNormalize != null && toNormalize.id == null) {

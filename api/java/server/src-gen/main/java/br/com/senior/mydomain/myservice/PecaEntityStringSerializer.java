@@ -25,6 +25,10 @@ public class PecaEntityStringSerializer {
 		serializeTempoEstimadoMinutos(peca, sb);
 		sb.append(", ");
 		serializeStatus(peca, sb);
+		sb.append(", ");
+		serializeValor(peca, sb);
+		sb.append(", ");
+		serializeMotivoPerda(peca, sb);
 		sb.append(", ").append(", ");
 		sb.append(']');
 	}
@@ -47,5 +51,13 @@ public class PecaEntityStringSerializer {
 	
 	protected void serializeStatus(PecaEntity peca, StringBuilder sb) {
 		sb.append("status=").append(peca.getStatus() == null ? "null" : peca.getStatus());
+	}
+	
+	protected void serializeValor(PecaEntity peca, StringBuilder sb) {
+		sb.append("valor=").append(peca.getValor() == null ? "null" : peca.getValor());
+	}
+	
+	protected void serializeMotivoPerda(PecaEntity peca, StringBuilder sb) {
+		sb.append("motivoPerda=").append(peca.getMotivoPerda() == null ? "null" : peca.getMotivoPerda());
 	}
 }

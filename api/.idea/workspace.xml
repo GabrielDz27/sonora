@@ -5,16 +5,139 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aca17b90-a54d-4202-9f67-90b7ac00b5f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/java/impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/java/br/com/senior/mydomain/myservice/repositories/FuncionarioRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/java/br/com/senior/mydomain/myservice/repositories/MaquinaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/java/br/com/senior/mydomain/myservice/repositories/PecaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/java/br/com/senior/mydomain/myservice/repositories/RegistroProducaoRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/resources/db/migration/my_domain/my_service/PostgreSql/V20260219112233__first_version.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/resources/db/migration/my_domain/my_service/PostgreSql/V20260219162707__atualizando_tabela_peca.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/impl/src/main/resources/my_domain_my_service.resources.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/impl/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/impl/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producaoInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producaoInputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producaoOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producaoOutputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateMergeRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/CreateRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoEventPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoEventPayloadStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoInputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoOutputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Funcionario.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Funcionario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoEventPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoEventPayloadStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoInputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoOutputStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/ListRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Maquina.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Maquina.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceNormalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceNormalizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceStub.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceStub.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceStubImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/MyServiceStubImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Peca.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Peca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/PecaStringSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/PecaStringSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/RetrieveRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/UpdateMergeRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/UpdateRegistro_producaoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/CreateBulkRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/CreateMergeRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/CreateRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/DeleteRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/ExportRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/ImportRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/ListRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/RetrieveRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/UpdateMergeRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/java/br/com/senior/mydomain/myservice/impl/UpdateRegistro_producaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/src-gen/main/resources/my_domain_my_service.priorities.properties" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/src-gen/main/resources/my_domain_my_service.priorities.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceConstants$Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceConstants$Commands.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceConstants$Events.class" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceConstants$Events.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceStub.class" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceStub.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceStubImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/target/classes/br/com/senior/mydomain/myservice/MyServiceStubImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/client/target/classes/my_domain_my_service.priorities.properties" beforeDir="false" afterPath="$PROJECT_DIR$/java/client/target/classes/my_domain_my_service.priorities.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/impl/src/main/java/br/com/senior/mydomain/myservice/HelloWorldImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/impl/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/impl/target/classes/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/CreateBulkRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/CreateMergeRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/CreateRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/DeleteRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/ExportRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/FuncionarioCrudServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/FuncionarioCrudServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/FuncionarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/FuncionarioEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/ImportRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/ListRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/MaquinaCrudServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/MaquinaCrudServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/MaquinaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/MaquinaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaCrudServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaCrudServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaDTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaDTOConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaEntityStringSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/PecaEntityStringSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoBaseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoCrudService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoCrudServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoDTOConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoEntityStringSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/Registro_producaoImporterListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/RetrieveRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/UpdateMergeRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/java/br/com/senior/mydomain/myservice/UpdateRegistro_producao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/Oracle/VCHANGE_THIS_VERSION__Create_Entities.sql" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/Oracle/VCHANGE_THIS_VERSION__Create_Entities.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/PostgreSql/V20260219111859871__my_domain_my_service_create_flat_entities.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/PostgreSql/VCHANGE_THIS_VERSION__Create_Entities.sql" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/PostgreSql/VCHANGE_THIS_VERSION__Create_Entities.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/SqlServer/VCHANGE_THIS_VERSION__Create_Entities.sql" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/db_sample/migration_sample/my_domain/my_service/SqlServer/VCHANGE_THIS_VERSION__Create_Entities.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/jpa/my_domain/my_service/EntitiesForJPAPersistenceXML.txt" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/jpa/my_domain/my_service/EntitiesForJPAPersistenceXML.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/security/my_domain/my_service/EntitiesSecutityResources.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/security/my_domain/my_service/EntitiesSecutityResources.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/translation/my_domain_my_service.properties" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/entities_resources/translation/my_domain_my_service.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.ed.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.ed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.public.swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.public.swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.sd.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.sd.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.sd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.sd.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/src-gen/main/resources/my_domain_my_service.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.ed.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.ed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.public.swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.public.swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.sd.json" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.sd.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.sd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.sd.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/java/server/target/classes/my_domain_my_service.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.edl" beforeDir="false" afterPath="$PROJECT_DIR$/main.edl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.sdl" beforeDir="false" afterPath="$PROJECT_DIR$/main.sdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/my_domain_my_service.priorities.properties" beforeDir="false" afterPath="$PROJECT_DIR$/output/my_domain_my_service.priorities.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/my_service.swagger.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/output/my_service.swagger.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/my_service.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/output/my_service.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/my_service.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/output/my_service.xsd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -28,20 +151,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ApiServer.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;projeto-seniorx&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ApiServer.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "projeto-seniorx",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ApiServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
@@ -87,5 +211,16 @@
       <updated>1771446647045</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

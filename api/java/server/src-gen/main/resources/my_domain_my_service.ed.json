@@ -55,7 +55,8 @@
 					"optional": false,
 					"hidden": false,
 					"multivalued": false,
-					"readOnly": false
+					"readOnly": false,
+					"maxLength": 100
 				},
 				"codigoDesenho": {
 					"name": "codigoDesenho",
@@ -63,7 +64,8 @@
 					"optional": false,
 					"hidden": false,
 					"multivalued": false,
-					"readOnly": false
+					"readOnly": false,
+					"maxLength": 50
 				},
 				"tempoEstimadoMinutos": {
 					"name": "tempoEstimadoMinutos",
@@ -77,6 +79,22 @@
 				"status": {
 					"name": "status",
 					"type": "statusPeca",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"valor": {
+					"name": "valor",
+					"type": "money",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
+				},
+				"motivoPerda": {
+					"name": "motivoPerda",
+					"type": "string",
 					"optional": false,
 					"hidden": false,
 					"multivalued": false,
@@ -109,6 +127,16 @@
 						"name": "status",
 						"optional": true,
 						"multiple": false
+					},
+					{
+						"name": "valor",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "motivoPerda",
+						"optional": true,
+						"multiple": false
 					}
 				],
 				"displayFields": [
@@ -116,7 +144,9 @@
 					"nome",
 					"codigoDesenho",
 					"tempoEstimadoMinutos",
-					"status"
+					"status",
+					"valor",
+					"motivoPerda"
 				]
 			},
 			"advancedSearch": {
@@ -145,6 +175,16 @@
 						"name": "status",
 						"optional": true,
 						"multiple": false
+					},
+					{
+						"name": "valor",
+						"optional": true,
+						"multiple": false
+					},
+					{
+						"name": "motivoPerda",
+						"optional": true,
+						"multiple": false
 					}
 				],
 				"displayFields": [
@@ -152,7 +192,9 @@
 					"nome",
 					"codigoDesenho",
 					"tempoEstimadoMinutos",
-					"status"
+					"status",
+					"valor",
+					"motivoPerda"
 				]
 			}
 		},
@@ -185,7 +227,8 @@
 					"optional": false,
 					"hidden": false,
 					"multivalued": false,
-					"readOnly": false
+					"readOnly": false,
+					"maxLength": 20
 				},
 				"cargo": {
 					"name": "cargo",
@@ -358,9 +401,9 @@
 				]
 			}
 		},
-		"registro_producao": {
+		"registroProducao": {
 			"id": "id",
-			"name": "registro_producao",
+			"name": "registroProducao",
 			"customizable": true,
 			"external": false,
 			"slots": {
@@ -467,7 +510,7 @@
 					{
 						"type": "aggregation",
 						"attribute": "peca",
-						"ownerEntity": "registro_producao",
+						"ownerEntity": "registroProducao",
 						"entityName": "peca",
 						"optional": true,
 						"filterDependent": false,
@@ -498,6 +541,16 @@
 									"name": "status",
 									"optional": true,
 									"multiple": false
+								},
+								{
+									"name": "valor",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "motivoPerda",
+									"optional": true,
+									"multiple": false
 								}
 							],
 							"displayFields": [
@@ -505,7 +558,9 @@
 								"nome",
 								"codigoDesenho",
 								"tempoEstimadoMinutos",
-								"status"
+								"status",
+								"valor",
+								"motivoPerda"
 							]
 						},
 						"advancedSearch": {
@@ -534,6 +589,16 @@
 									"name": "status",
 									"optional": true,
 									"multiple": false
+								},
+								{
+									"name": "valor",
+									"optional": true,
+									"multiple": false
+								},
+								{
+									"name": "motivoPerda",
+									"optional": true,
+									"multiple": false
 								}
 							],
 							"displayFields": [
@@ -541,7 +606,9 @@
 								"nome",
 								"codigoDesenho",
 								"tempoEstimadoMinutos",
-								"status"
+								"status",
+								"valor",
+								"motivoPerda"
 							]
 						}
 					}
@@ -550,7 +617,7 @@
 					{
 						"type": "aggregation",
 						"attribute": "maquina",
-						"ownerEntity": "registro_producao",
+						"ownerEntity": "registroProducao",
 						"entityName": "maquina",
 						"optional": true,
 						"filterDependent": false,
@@ -609,7 +676,7 @@
 					{
 						"type": "aggregation",
 						"attribute": "funcionario",
-						"ownerEntity": "registro_producao",
+						"ownerEntity": "registroProducao",
 						"entityName": "funcionario",
 						"optional": true,
 						"filterDependent": false,
@@ -692,29 +759,31 @@
 		}
 	},
 	"translations": {
-		"my_domain.my_service.funcionario": "",
-		"my_domain.my_service.funcionario_id": "",
-		"my_domain.my_service.funcionario_nome": "",
-		"my_domain.my_service.funcionario_matricula": "",
-		"my_domain.my_service.funcionario_cargo": "",
-		"my_domain.my_service.funcionario_turno": "",
-		"my_domain.my_service.maquina": "",
-		"my_domain.my_service.maquina_id": "",
-		"my_domain.my_service.maquina_nome": "",
-		"my_domain.my_service.maquina_status": "",
-		"my_domain.my_service.peca": "",
-		"my_domain.my_service.peca_id": "",
-		"my_domain.my_service.peca_nome": "",
-		"my_domain.my_service.peca_codigo_desenho": "",
-		"my_domain.my_service.peca_tempo_estimado_minutos": "",
-		"my_domain.my_service.peca_status": "",
-		"my_domain.my_service.registroproducao": "",
-		"my_domain.my_service.registroproducao_id": "",
-		"my_domain.my_service.registroproducao_peca": "",
-		"my_domain.my_service.registroproducao_funcionario": "",
-		"my_domain.my_service.registroproducao_maquina": "",
-		"my_domain.my_service.registroproducao_data_inicio": "",
-		"my_domain.my_service.registroproducao_data_final": "",
+		"my_domain.my_service.funcionario": "Entidade do funcionário/operador",
+		"my_domain.my_service.funcionario_id": "Identificador único UUID",
+		"my_domain.my_service.funcionario_nome": "Nome completo do colaborador",
+		"my_domain.my_service.funcionario_matricula": "Registro único na empresa",
+		"my_domain.my_service.funcionario_cargo": "Função técnica na metalurgia",
+		"my_domain.my_service.funcionario_turno": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
+		"my_domain.my_service.maquina": "Entidade da máquina/equipamento",
+		"my_domain.my_service.maquina_id": "Identificador único UUID",
+		"my_domain.my_service.maquina_nome": "Nome de identificação do ativo",
+		"my_domain.my_service.maquina_status": "Estado do ativo: ATIVO, MANUTENCAO, INATIVO",
+		"my_domain.my_service.peca": "Entidade da peça com as informações",
+		"my_domain.my_service.peca_id": "Identificador único UUID",
+		"my_domain.my_service.peca_nome": "Nome descritivo do item",
+		"my_domain.my_service.peca_codigo_desenho": "Referência técnica do projeto",
+		"my_domain.my_service.peca_tempo_estimado_minutos": "Tempo previsto para fabricação",
+		"my_domain.my_service.peca_status": "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA",
+		"my_domain.my_service.peca_valor": "Valor da peça",
+		"my_domain.my_service.peca_motivo_perda": "Motivo pela perda peça quando o status da peça é morta",
+		"my_domain.my_service.registro_producao": "Entidade mestre de apontamento e histórico",
+		"my_domain.my_service.registro_producao_id": "Identificador único UUID",
+		"my_domain.my_service.registro_producao_peca": "Relacionamento com a peça processada",
+		"my_domain.my_service.registro_producao_funcionario": "Relacionamento com o operador responsável",
+		"my_domain.my_service.registro_producao_maquina": "Relacionamento com a máquina utilizada",
+		"my_domain.my_service.registro_producao_data_inicio": "Data e hora do 'Play' na produção",
+		"my_domain.my_service.registro_producao_data_final": "Data e hora do 'Stop' ou descarte",
 		"my_domain.my_service.status_maquina_ativo": "",
 		"my_domain.my_service.status_maquina_manutencao": "",
 		"my_domain.my_service.status_maquina_inativo": "",

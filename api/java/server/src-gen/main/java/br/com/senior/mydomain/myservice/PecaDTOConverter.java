@@ -69,6 +69,12 @@ public class PecaDTOConverter {
 		if (dto.status != null) {
 			entity.setStatus(dto.status);
 		}
+		if (dto.valor != null) {
+			entity.setValor(dto.valor);
+		}
+		if (dto.motivoPerda != null) {
+			entity.setMotivoPerda(dto.motivoPerda);
+		}
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -92,6 +98,8 @@ public class PecaDTOConverter {
 		entity.setCodigoDesenho(dto.codigoDesenho);
 		entity.setTempoEstimadoMinutos(dto.tempoEstimadoMinutos);
 		entity.setStatus(dto.status);
+		entity.setValor(dto.valor);
+		entity.setMotivoPerda(dto.motivoPerda);
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -130,6 +138,8 @@ public class PecaDTOConverter {
 		dto.codigoDesenho = entity.getCodigoDesenho();
 		dto.tempoEstimadoMinutos = entity.getTempoEstimadoMinutos();
 		dto.status = entity.getStatus();
+		dto.valor = entity.getValor();
+		dto.motivoPerda = entity.getMotivoPerda();
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -171,6 +181,14 @@ public class PecaDTOConverter {
 		if (displayFields.stream().anyMatch(displayField -> "status".equals(displayField) || "*".equals(displayField))) {
 			dto.status = entity.getStatus();
 		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "valor".equals(displayField) || "*".equals(displayField))) {
+			dto.valor = entity.getValor();
+		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "motivoPerda".equals(displayField) || "*".equals(displayField))) {
+			dto.motivoPerda = entity.getMotivoPerda();
+		}
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -207,6 +225,14 @@ public class PecaDTOConverter {
 		
 		if (displayFields.stream().anyMatch(displayField -> "status".equals(displayField) || "*".equals(displayField))) {
 			dto.status = entity.getStatus();
+		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "valor".equals(displayField) || "*".equals(displayField))) {
+			dto.valor = entity.getValor();
+		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "motivoPerda".equals(displayField) || "*".equals(displayField))) {
+			dto.motivoPerda = entity.getMotivoPerda();
 		}
         return dto;
     }
@@ -269,6 +295,12 @@ public class PecaDTOConverter {
 		}
 		if("status".equals(jsonPatch.getPath().replace("/", ""))) {
 			entity.setStatus(null);
+		}
+		if("valor".equals(jsonPatch.getPath().replace("/", ""))) {
+			entity.setValor(null);
+		}
+		if("motivoPerda".equals(jsonPatch.getPath().replace("/", ""))) {
+			entity.setMotivoPerda(null);
 		}
 	}
 }

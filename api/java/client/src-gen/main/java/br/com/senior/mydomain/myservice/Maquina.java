@@ -9,6 +9,9 @@ import br.com.senior.messaging.model.EntityDescription;
 import br.com.senior.messaging.model.EntityId;
 import br.com.senior.custom.CustomDTO;
 
+/**
+ * Entidade da máquina/equipamento
+ */
 @EntityDescription
 public class Maquina extends CustomDTO {
     
@@ -108,11 +111,20 @@ public class Maquina extends CustomDTO {
     }
 
     @EntityId
+    /**
+     * Identificador único UUID
+     */
     public String id;
     
+    /**
+     * Nome de identificação do ativo
+     */
     @NotNull(message = "nome is required")
     public String nome;
     
+    /**
+     * Estado do ativo: ATIVO, MANUTENCAO, INATIVO
+     */
     @NotNull(message = "status is required")
     public StatusMaquina status;
     

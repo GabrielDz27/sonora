@@ -8,6 +8,39 @@
                 <slot name="helloWorldMessage" type="string" optional="false" multivalued="false"/>
             </output>
         </query>
+        <action name="mudarStatusPeca" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+                <slot name="status" type="statusPeca" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="retorno" type="retornoAtualizarStatus" optional="false" multivalued="false"/>
+            </output>
+        </action>
+        <query name="getMaquinaAtiva" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <output>
+                <slot name="maquina" type="maquina" optional="true" multivalued="false"/>
+            </output>
+        </query>
+        <query name="getPecaPendente" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <output>
+                <slot name="peca" type="peca" optional="false" multivalued="false"/>
+            </output>
+        </query>
+        <query name="relatorio" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="dataInicio" type="dateTime" optional="false" multivalued="false"/>
+                <slot name="dataFinal" type="dateTime" optional="false" multivalued="false"/>
+                <slot name="tipoRelatorio" type="tipoRelatorio" optional="false" multivalued="false"/>
+                <slot name="turno" type="turnoFuncionario" optional="true" multivalued="false"/>
+                <slot name="funcionario" type="string" optional="true" multivalued="true"/>
+                <slot name="maquina" type="string" optional="true" multivalued="true"/>
+                <slot name="codigoDesenho" type="string" optional="true" multivalued="true"/>
+            </input>
+            <output>
+                <slot name="retorno" type="retornoRelatorio" optional="false" multivalued="false"/>
+            </output>
+        </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>
@@ -66,7 +99,7 @@
                 <slot name="exportJobId" type="string" optional="false" multivalued="false"/>
             </output>
         </query>
-        <action name="importRegistro_producao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+        <action name="importRegistroProducao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="config" type="importConfig" optional="false" multivalued="false"/>
             </input>
@@ -74,7 +107,7 @@
                 <slot name="importJobId" type="string" optional="false" multivalued="false"/>
             </output>
         </action>
-        <query name="exportRegistro_producao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+        <query name="exportRegistroProducao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="config" type="exportConfig" optional="false" multivalued="false"/>
             </input>
@@ -225,28 +258,28 @@
                 <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
             </input>
         </delete>
-        <create name="createRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
-            <input type="registro_producao"/>
-            <output type="registro_producao"/>
+        <create name="createRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="registroProducao"/>
+            <output type="registroProducao"/>
         </create>
-        <createBulk name="createBulkRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+        <createBulk name="createBulkRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
             <input>
-                <slot name="entities" type="registro_producao" optional="false" multivalued="true"/>
+                <slot name="entities" type="registroProducao" optional="false" multivalued="true"/>
             </input>
             <output>
             </output>
         </createBulk>
-        <createMerge name="createMergeRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
-            <input type="registro_producao"/>
-            <output type="registro_producao"/>
+        <createMerge name="createMergeRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="registroProducao"/>
+            <output type="registroProducao"/>
         </createMerge>
-        <retrieve name="retrieveRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+        <retrieve name="retrieveRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
             <input>
                 <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
             </input>
-            <output type="registro_producao"/>
+            <output type="registroProducao"/>
         </retrieve>
-        <list name="listRegistro_producao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+        <list name="listRegistroProducao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="offset" type="integer" optional="false" multivalued="false"/>
                 <slot name="size" type="integer" optional="false" multivalued="false"/>
@@ -255,18 +288,18 @@
                 <slot name="displayFields" type="string" optional="false" multivalued="true"/>
             </input>
             <output>
-                <slot name="contents" type="registro_producao" optional="false" multivalued="true"/>
+                <slot name="contents" type="registroProducao" optional="false" multivalued="true"/>
             </output>
         </list>
-        <update name="updateRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
-            <input type="registro_producao"/>
-            <output type="registro_producao"/>
+        <update name="updateRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="registroProducao"/>
+            <output type="registroProducao"/>
         </update>
-        <updateMerge name="updateMergeRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
-            <input type="registro_producao"/>
-            <output type="registro_producao"/>
+        <updateMerge name="updateMergeRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+            <input type="registroProducao"/>
+            <output type="registroProducao"/>
         </updateMerge>
-        <delete name="deleteRegistro_producao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
+        <delete name="deleteRegistroProducao" idempotent="false" extensionPoint="false" visibility="PUBLIC">
             <input>
                 <slot name="id" type="string" format="uuid" optional="false" multivalued="false"/>
             </input>
@@ -314,29 +347,49 @@
                 <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
             </payload>
         </event>
-        <event name="importRegistro_producaoEvent" extensionPoint="false" visibility="PRIVATE">
+        <event name="importRegistroProducaoEvent" extensionPoint="false" visibility="PRIVATE">
             <payload>
                 <slot name="eventpl" type="importEventStatus" optional="false" multivalued="false"/>
             </payload>
         </event>
-        <event name="exportRegistro_producaoEvent" extensionPoint="false" visibility="PRIVATE">
+        <event name="exportRegistroProducaoEvent" extensionPoint="false" visibility="PRIVATE">
             <payload>
                 <slot name="eventpl" type="exportEventStatus" optional="false" multivalued="false"/>
             </payload>
         </event>
     </events>
     <records>
+        <record name="retornoRelatorio">
+            <slot name="maquinaTrabalhando" type="maquinaTrabalhando" optional="true" multivalued="true"/>
+            <slot name="pecaMortas" type="integer" optional="false" multivalued="false" minValue="0"/>
+            <slot name="pecaFuncionario" type="pecaFuncionario" optional="true" multivalued="true"/>
+        </record>
+        <record name="maquinaTrabalhando">
+            <slot name="maquina" type="maquina" optional="true" multivalued="false"/>
+            <slot name="horas" type="integer" optional="false" multivalued="false" minValue="0"/>
+        </record>
+        <record name="pecaFuncionario">
+            <slot name="peca" type="peca" optional="true" multivalued="false"/>
+            <slot name="funcionario" type="funcionario" optional="true" multivalued="false"/>
+        </record>
+        <record name="retornoAtualizarStatus">
+            <slot name="mensagemRetorno" type="string" optional="false" multivalued="false"/>
+            <slot name="id" type="string" optional="false" multivalued="false"/>
+            <slot name="contemErro" type="boolean" optional="true" multivalued="false"/>
+        </record>
         <record name="peca">
             <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
-            <slot name="nome" type="string" optional="false" multivalued="false"/>
-            <slot name="codigoDesenho" type="string" optional="false" multivalued="false"/>
+            <slot name="nome" type="string" optional="false" multivalued="false" maxLength="100"/>
+            <slot name="codigoDesenho" type="string" optional="false" multivalued="false" maxLength="50"/>
             <slot name="tempoEstimadoMinutos" type="integer" optional="false" multivalued="false"/>
             <slot name="status" type="statusPeca" optional="false" multivalued="false"/>
+            <slot name="valor" type="money" optional="false" multivalued="false"/>
+            <slot name="motivoPerda" type="string" optional="false" multivalued="false"/>
         </record>
         <record name="funcionario">
             <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
             <slot name="nome" type="string" optional="false" multivalued="false"/>
-            <slot name="matricula" type="string" optional="false" multivalued="false"/>
+            <slot name="matricula" type="string" optional="false" multivalued="false" maxLength="20"/>
             <slot name="cargo" type="string" optional="false" multivalued="false"/>
             <slot name="turno" type="turnoFuncionario" optional="false" multivalued="false"/>
         </record>
@@ -345,7 +398,7 @@
             <slot name="nome" type="string" optional="false" multivalued="false"/>
             <slot name="status" type="statusMaquina" optional="false" multivalued="false"/>
         </record>
-        <record name="registro_producao">
+        <record name="registroProducao">
             <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>
             <slot name="peca" type="peca" optional="true" multivalued="false"/>
             <slot name="funcionario" type="funcionario" optional="true" multivalued="false"/>
@@ -479,6 +532,11 @@
         </record>
     </records>
     <enumerations>
+        <enumeration name="tipoRelatorio">
+            <value name="PERIODO"/>
+            <value name="MENSAL"/>
+            <value name="ANUAL"/>
+        </enumeration>
         <enumeration name="statusPeca">
             <value name="PENDENTE"/>
             <value name="PROCESSO"/>

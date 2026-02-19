@@ -1,6 +1,74 @@
 {
     "id": "my_domain.my_service",
     "properties": {
+        "retornoRelatorio" : {
+        	"type" : "object",
+        	"id" : "retornoRelatorio",
+        	"properties" : {
+            	"maquinaTrabalhando" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/maquinaTrabalhando"
+            		}
+            	},
+            	"pecaMortas" : {
+            		"type": "integer",
+            		"minimum": 0
+            	},
+            	"pecaFuncionario" : {
+            		"type": "array",
+            		"items": {
+            		  "$ref": "#/properties/pecaFuncionario"
+            		}
+            	}
+        	},
+        	"required" : ["pecaMortas"]
+        }
+        ,
+        "maquinaTrabalhando" : {
+        	"type" : "object",
+        	"id" : "maquinaTrabalhando",
+        	"properties" : {
+            	"maquina" : {
+            		"$ref": "#/properties/maquina"
+            	},
+            	"horas" : {
+            		"type": "integer",
+            		"minimum": 0
+            	}
+        	},
+        	"required" : ["horas"]
+        }
+        ,
+        "pecaFuncionario" : {
+        	"type" : "object",
+        	"id" : "pecaFuncionario",
+        	"properties" : {
+            	"peca" : {
+            		"$ref": "#/properties/peca"
+            	},
+            	"funcionario" : {
+            		"$ref": "#/properties/funcionario"
+            	}
+        	}}
+        ,
+        "retornoAtualizarStatus" : {
+        	"type" : "object",
+        	"id" : "retornoAtualizarStatus",
+        	"properties" : {
+            	"mensagemRetorno" : {
+            		"type": "string"
+            	},
+            	"id" : {
+            		"type": "string"
+            	},
+            	"contemErro" : {
+            		"type": "boolean"
+            	}
+        	},
+        	"required" : ["mensagemRetorno","id"]
+        }
+        ,
         "peca" : {
         	"type" : "object",
         	"id" : "peca",
@@ -10,10 +78,12 @@
             		"format": "uuid"
             	},
             	"nome" : {
-            		"type": "string"
+            		"type": "string",
+            		"maxLength": 100
             	},
             	"codigoDesenho" : {
-            		"type": "string"
+            		"type": "string",
+            		"maxLength": 50
             	},
             	"tempoEstimadoMinutos" : {
             		"type": "integer"
@@ -21,9 +91,15 @@
             	"status" : {
             		"type": "string",
             		"enum": ["PENDENTE","PROCESSO","FINALIZADO","MORTA"]
+            	},
+            	"valor" : {
+            		"type": "string"
+            	},
+            	"motivoPerda" : {
+            		"type": "string"
             	}
         	},
-        	"required" : ["nome","codigoDesenho","tempoEstimadoMinutos","status"]
+        	"required" : ["nome","codigoDesenho","tempoEstimadoMinutos","status","valor","motivoPerda"]
         }
         ,
         "funcionario" : {
@@ -38,7 +114,8 @@
             		"type": "string"
             	},
             	"matricula" : {
-            		"type": "string"
+            		"type": "string",
+            		"maxLength": 20
             	},
             	"cargo" : {
             		"type": "string"
@@ -70,9 +147,9 @@
         	"required" : ["nome","status"]
         }
         ,
-        "registro_producao" : {
+        "registroProducao" : {
         	"type" : "object",
-        	"id" : "registro_producao",
+        	"id" : "registroProducao",
         	"properties" : {
             	"id" : {
             		"type": "string",

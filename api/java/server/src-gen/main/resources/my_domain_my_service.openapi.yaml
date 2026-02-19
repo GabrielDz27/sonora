@@ -64,6 +64,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
+  /rest/my_domain/my_service/queries/exportRegistroProducao:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - config
+              properties:
+                config:
+                  type: object
+                  allOf:
+                    - $ref: '#/components/schemas/exportConfig'
+                  description: ""
+      parameters:
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - exportJobId
+                properties:
+                  exportJobId:
+                    type: string
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+  
   /rest/my_domain/my_service/queries/exportPeca:
     post:
       description: ""
@@ -189,6 +239,74 @@ paths:
                 properties:
                   metadata:
                     type: string
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+  
+  /rest/my_domain/my_service/queries/getPecaPendente:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - peca
+                properties:
+                  peca:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/peca'
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - peca
+                properties:
+                  peca:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/peca'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -337,6 +455,88 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
+  /rest/my_domain/my_service/queries/relatorio:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - dataInicio
+                - dataFinal
+                - tipoRelatorio
+              properties:
+                dataInicio:
+                  type: string
+                  format: date-time
+                  description: ""
+                dataFinal:
+                  type: string
+                  format: date-time
+                  description: ""
+                tipoRelatorio:
+                  type: string
+                  allOf:
+                  - $ref: '#/components/schemas/tipoRelatorio'
+                  description: ""
+                turno:
+                  type: string
+                  allOf:
+                  - $ref: '#/components/schemas/turnoFuncionario'
+                  description: ""
+                funcionario:
+                  type: array
+                  items:
+                    type: string
+                  description: ""
+                maquina:
+                  type: array
+                  items:
+                    type: string
+                  description: ""
+                codigoDesenho:
+                  type: array
+                  items:
+                    type: string
+                  description: ""
+      parameters:
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - retorno
+                properties:
+                  retorno:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/retornoRelatorio'
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+  
   /rest/my_domain/my_service/queries/getDependencies:
     post:
       description: "Returns a list with all dependencies from this service, along with their respective versions"
@@ -411,11 +611,74 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
-  /rest/my_domain/my_service/queries/exportRegistro_producao:
+  /rest/my_domain/my_service/queries/getMaquinaAtiva:
     post:
       description: ""
       tags:
         - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  maquina:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/maquina'
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  maquina:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/maquina'
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+  /rest/my_domain/my_service/actions/importFuncionario:
+    post:
+      description: ""
+      tags:
+        - Actions
       x-senior-visibility: PRIVATE
       security :
         - bearerAuth: []
@@ -431,7 +694,7 @@ paths:
                 config:
                   type: object
                   allOf:
-                    - $ref: '#/components/schemas/exportConfig'
+                    - $ref: '#/components/schemas/importConfig'
                   description: ""
       parameters:
         - in: header
@@ -447,9 +710,9 @@ paths:
               schema:
                 type: object
                 required:
-                  - exportJobId
+                  - importJobId
                 properties:
-                  exportJobId:
+                  importJobId:
                     type: string
                     description: ""
         401:
@@ -460,7 +723,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/genericError'
-  /rest/my_domain/my_service/actions/importFuncionario:
+  
+  /rest/my_domain/my_service/actions/importRegistroProducao:
     post:
       description: ""
       tags:
@@ -560,7 +824,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
-  /rest/my_domain/my_service/actions/importRegistro_producao:
+  /rest/my_domain/my_service/actions/mudarStatusPeca:
     post:
       description: ""
       tags:
@@ -575,12 +839,16 @@ paths:
             schema:
               type: object
               required:
-                - config
+                - id
+                - status
               properties:
-                config:
-                  type: object
+                id:
+                  type: string
+                  description: ""
+                status:
+                  type: string
                   allOf:
-                    - $ref: '#/components/schemas/importConfig'
+                  - $ref: '#/components/schemas/statusPeca'
                   description: ""
       parameters:
         - in: header
@@ -596,10 +864,12 @@ paths:
               schema:
                 type: object
                 required:
-                  - importJobId
+                  - retorno
                 properties:
-                  importJobId:
-                    type: string
+                  retorno:
+                    type: object
+                    allOf:
+                      - $ref: '#/components/schemas/retornoAtualizarStatus'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -1360,7 +1630,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
-  /my_service/entities/registro_producao:
+  /my_service/entities/registroProducao:
     post:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1373,14 +1643,14 @@ paths:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/registro_producao'
+                - $ref: '#/components/schemas/registroProducao'
       responses:
         200:
           description: 'The created resource'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/registro_producao'
+                $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1400,14 +1670,14 @@ paths:
             schema:
               type: object
               allOf:
-                - $ref: '#/components/schemas/registro_producao'
+                - $ref: '#/components/schemas/registroProducao'
       responses:
         200:
           description: 'The created resource'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/registro_producao'
+                $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1438,7 +1708,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/registro_producao'
+                  $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1448,7 +1718,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
-  /my_service/entities/registro_producao/{id}:
+  /my_service/entities/registroProducao/{id}:
     put:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1464,14 +1734,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/registro_producao'
+              $ref: '#/components/schemas/registroProducao'
       responses:
         200:
           description: Ok
           content:
             applicaton/json:
               schema:
-                $ref: '#/components/schemas/registro_producao'
+                $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1495,14 +1765,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/registro_producao'
+              $ref: '#/components/schemas/registroProducao'
       responses:
         200:
           description: Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/registro_producao'
+                $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1528,7 +1798,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/registro_producao'
+                $ref: '#/components/schemas/registroProducao'
         401:
           description: "Invalid Credentials"
         default:
@@ -1560,7 +1830,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
-  /my_service/entities/registro_producao/bulk:
+  /my_service/entities/registroProducao/bulk:
     post:
       description: "Esta entidade pode ser customizada."
       tags:
@@ -1572,7 +1842,7 @@ paths:
             schema:
               type: array
               items:
-                 $ref: '#/components/schemas/registro_producao'
+                 $ref: '#/components/schemas/registroProducao'
       responses:
         200:
           description: 'The bulk creation has created resources'
@@ -1593,6 +1863,15 @@ components:
       type: apiKey
       in: header
   schemas:
+    tipoRelatorio:
+      description: ""
+      type: string
+      enum:
+        - PERIODO
+        - MENSAL
+        - ANUAL
+      
+    
     statusPeca:
       description: ""
       type: string
@@ -1724,94 +2003,53 @@ components:
         - CONVERT_ERROR
         - SERVICE_ERROR
       
-    peca:
+    retornoRelatorio:
       description: ""
       type: object
       required:
-        - nome
-        - codigoDesenho
-        - tempoEstimadoMinutos
-        - status
+        - pecaMortas
       properties:
-        id:
-          type: string
-          format: uuid
+        maquinaTrabalhando:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: '#/components/schemas/maquinaTrabalhando'
           description: ""
-        nome:
-          type: string
-          description: ""
-        codigoDesenho:
-          type: string
-          description: ""
-        tempoEstimadoMinutos:
+        pecaMortas:
           type: integer
           format: int64
           description: ""
-        status:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/statusPeca'
+          minimum: 0
+        pecaFuncionario:
+          type: array
+          items:
+            type: object
+            allOf:
+              - $ref: '#/components/schemas/pecaFuncionario'
           description: ""
     
-    funcionario:
+    maquinaTrabalhando:
       description: ""
       type: object
       required:
-        - nome
-        - matricula
-        - cargo
-        - turno
+        - horas
       properties:
-        id:
-          type: string
-          format: uuid
-          description: ""
-        nome:
-          type: string
-          description: ""
-        matricula:
-          type: string
-          description: ""
-        cargo:
-          type: string
-          description: ""
-        turno:
-          type: string
+        maquina:
+          type: object
           allOf:
-          - $ref: '#/components/schemas/turnoFuncionario'
+            - $ref: '#/components/schemas/maquina'
           description: ""
+        horas:
+          type: integer
+          format: int64
+          description: ""
+          minimum: 0
     
-    maquina:
+    pecaFuncionario:
       description: ""
       type: object
-      required:
-        - nome
-        - status
       properties:
-        id:
-          type: string
-          format: uuid
-          description: ""
-        nome:
-          type: string
-          description: ""
-        status:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/statusMaquina'
-          description: ""
-    
-    registro_producao:
-      description: ""
-      type: object
-      required:
-        - dataInicio
-        - dataFinal
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ""
         peca:
           type: object
           allOf:
@@ -1822,19 +2060,146 @@ components:
           allOf:
             - $ref: '#/components/schemas/funcionario'
           description: ""
+    
+    retornoAtualizarStatus:
+      description: ""
+      type: object
+      required:
+        - mensagemRetorno
+        - id
+      properties:
+        mensagemRetorno:
+          type: string
+          description: ""
+        id:
+          type: string
+          description: ""
+        contemErro:
+          type: boolean
+          description: ""
+    
+    peca:
+      description: "Entidade da peça com as informações"
+      type: object
+      required:
+        - nome
+        - codigoDesenho
+        - tempoEstimadoMinutos
+        - status
+        - valor
+        - motivoPerda
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Identificador único UUID"
+        nome:
+          type: string
+          maxLength: 100
+          description: "Nome descritivo do item"
+        codigoDesenho:
+          type: string
+          maxLength: 50
+          description: "Referência técnica do projeto"
+        tempoEstimadoMinutos:
+          type: integer
+          format: int64
+          description: "Tempo previsto para fabricação"
+        status:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/statusPeca'
+          description: "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA"
+        valor:
+          type: string
+          description: "Valor da peça"
+        motivoPerda:
+          type: string
+          description: "Motivo pela perda peça quando o status da peça é morta"
+    
+    funcionario:
+      description: "Entidade do funcionário/operador"
+      type: object
+      required:
+        - nome
+        - matricula
+        - cargo
+        - turno
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Identificador único UUID"
+        nome:
+          type: string
+          description: "Nome completo do colaborador"
+        matricula:
+          type: string
+          maxLength: 20
+          description: "Registro único na empresa"
+        cargo:
+          type: string
+          description: "Função técnica na metalurgia"
+        turno:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/turnoFuncionario'
+          description: "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
+    
+    maquina:
+      description: "Entidade da máquina/equipamento"
+      type: object
+      required:
+        - nome
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Identificador único UUID"
+        nome:
+          type: string
+          description: "Nome de identificação do ativo"
+        status:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/statusMaquina'
+          description: "Estado do ativo: ATIVO, MANUTENCAO, INATIVO"
+    
+    registroProducao:
+      description: "Entidade mestre de apontamento e histórico"
+      type: object
+      required:
+        - dataInicio
+        - dataFinal
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Identificador único UUID"
+        peca:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/peca'
+          description: "Relacionamento com a peça processada"
+        funcionario:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/funcionario'
+          description: "Relacionamento com o operador responsável"
         maquina:
           type: object
           allOf:
             - $ref: '#/components/schemas/maquina'
-          description: ""
+          description: "Relacionamento com a máquina utilizada"
         dataInicio:
           type: string
           format: date-time
-          description: ""
+          description: "Data e hora do 'Play' na produção"
         dataFinal:
           type: string
           format: date-time
-          description: ""
+          description: "Data e hora do 'Stop' ou descarte"
     
     notifyUserEventPayload:
       description: "Represents a regular user event notification payload"

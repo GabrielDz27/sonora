@@ -40,6 +40,114 @@ public interface MyServiceStub {
 	CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	MudarStatusPecaOutput mudarStatusPeca(MudarStatusPecaInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void mudarStatusPeca(MudarStatusPecaInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	GetMaquinaAtivaOutput getMaquinaAtiva(long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void getMaquinaAtiva();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest(long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	GetPecaPendenteOutput getPecaPendente(long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void getPecaPendente();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	RelatorioOutput relatorio(RelatorioInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void relatorio(RelatorioInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RelatorioOutput> relatorioRequest(RelatorioInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RelatorioOutput> relatorioRequest(RelatorioInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
@@ -232,55 +340,55 @@ public interface MyServiceStub {
 	 * 
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	ImportRegistro_producaoOutput importRegistro_producao(ImportRegistro_producaoInput input, long timeout);
+	ImportRegistroProducaoOutput importRegistroProducao(ImportRegistroProducaoInput input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona
 	 */
-	void importRegistro_producao(ImportRegistro_producaoInput input);
+	void importRegistroProducao(ImportRegistroProducaoInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<ImportRegistro_producaoOutput> importRegistro_producaoRequest(ImportRegistro_producaoInput input);
+	CompletableFuture<ImportRegistroProducaoOutput> importRegistroProducaoRequest(ImportRegistroProducaoInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<ImportRegistro_producaoOutput> importRegistro_producaoRequest(ImportRegistro_producaoInput input, long timeout);
+	CompletableFuture<ImportRegistroProducaoOutput> importRegistroProducaoRequest(ImportRegistroProducaoInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	ExportRegistro_producaoOutput exportRegistro_producao(ExportRegistro_producaoInput input, long timeout);
+	ExportRegistroProducaoOutput exportRegistroProducao(ExportRegistroProducaoInput input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona
 	 */
-	void exportRegistro_producao(ExportRegistro_producaoInput input);
+	void exportRegistroProducao(ExportRegistroProducaoInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<ExportRegistro_producaoOutput> exportRegistro_producaoRequest(ExportRegistro_producaoInput input);
+	CompletableFuture<ExportRegistroProducaoOutput> exportRegistroProducaoRequest(ExportRegistroProducaoInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<ExportRegistro_producaoOutput> exportRegistro_producaoRequest(ExportRegistro_producaoInput input, long timeout);
+	CompletableFuture<ExportRegistroProducaoOutput> exportRegistroProducaoRequest(ExportRegistroProducaoInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Returns a list with all dependencies from this service, along with their respective versions
@@ -922,206 +1030,206 @@ public interface MyServiceStub {
 	
 	/**
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao createRegistro_producao(Registro_producao input, long timeout);
+	RegistroProducao createRegistroProducao(RegistroProducao input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void createRegistro_producao(Registro_producao input);
+	void createRegistroProducao(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> createRegistro_producaoRequest(Registro_producao input);
+	CompletableFuture<RegistroProducao> createRegistroProducaoRequest(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> createRegistro_producaoRequest(Registro_producao input, long timeout);
+	CompletableFuture<RegistroProducao> createRegistroProducaoRequest(RegistroProducao input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	CreateBulkRegistro_producaoOutput createBulkRegistro_producao(CreateBulkRegistro_producaoInput input, long timeout);
+	CreateBulkRegistroProducaoOutput createBulkRegistroProducao(CreateBulkRegistroProducaoInput input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void createBulkRegistro_producao(CreateBulkRegistro_producaoInput input);
+	void createBulkRegistroProducao(CreateBulkRegistroProducaoInput input);
 	
 	/**
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<CreateBulkRegistro_producaoOutput> createBulkRegistro_producaoRequest(CreateBulkRegistro_producaoInput input);
+	CompletableFuture<CreateBulkRegistroProducaoOutput> createBulkRegistroProducaoRequest(CreateBulkRegistroProducaoInput input);
 	
 	/**
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<CreateBulkRegistro_producaoOutput> createBulkRegistro_producaoRequest(CreateBulkRegistro_producaoInput input, long timeout);
+	CompletableFuture<CreateBulkRegistroProducaoOutput> createBulkRegistroProducaoRequest(CreateBulkRegistroProducaoInput input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao createMergeRegistro_producao(Registro_producao input, long timeout);
+	RegistroProducao createMergeRegistroProducao(RegistroProducao input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void createMergeRegistro_producao(Registro_producao input);
+	void createMergeRegistroProducao(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> createMergeRegistro_producaoRequest(Registro_producao input);
+	CompletableFuture<RegistroProducao> createMergeRegistroProducaoRequest(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> createMergeRegistro_producaoRequest(Registro_producao input, long timeout);
+	CompletableFuture<RegistroProducao> createMergeRegistroProducaoRequest(RegistroProducao input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao retrieveRegistro_producao(Registro_producao.GetRequest input, long timeout);
+	RegistroProducao retrieveRegistroProducao(RegistroProducao.GetRequest input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void retrieveRegistro_producao(Registro_producao.GetRequest input);
+	void retrieveRegistroProducao(RegistroProducao.GetRequest input);
 	
 	/**
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> retrieveRegistro_producaoRequest(Registro_producao.GetRequest input);
+	CompletableFuture<RegistroProducao> retrieveRegistroProducaoRequest(RegistroProducao.GetRequest input);
 	
 	/**
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> retrieveRegistro_producaoRequest(Registro_producao.GetRequest input, long timeout);
+	CompletableFuture<RegistroProducao> retrieveRegistroProducaoRequest(RegistroProducao.GetRequest input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao.PagedResults listRegistro_producao(Registro_producao.PageRequest input, long timeout);
-	
-	/**
-	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
-	 * Chamada assíncrona
-	 */
-	void listRegistro_producao(Registro_producao.PageRequest input);
+	RegistroProducao.PagedResults listRegistroProducao(RegistroProducao.PageRequest input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
-	 * Chamada assíncrona utilizando request
+	 * The 'list' request primitive for the RegistroProducao entity.
+	 * Chamada assíncrona
 	 */
-	CompletableFuture<Registro_producao.PagedResults> listRegistro_producaoRequest(Registro_producao.PageRequest input);
+	void listRegistroProducao(RegistroProducao.PageRequest input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao.PagedResults> listRegistro_producaoRequest(Registro_producao.PageRequest input, long timeout);
+	CompletableFuture<RegistroProducao.PagedResults> listRegistroProducaoRequest(RegistroProducao.PageRequest input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * The 'list' request primitive for the RegistroProducao entity.
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RegistroProducao.PagedResults> listRegistroProducaoRequest(RegistroProducao.PageRequest input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao updateRegistro_producao(Registro_producao input, long timeout);
+	RegistroProducao updateRegistroProducao(RegistroProducao input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void updateRegistro_producao(Registro_producao input);
+	void updateRegistroProducao(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> updateRegistro_producaoRequest(Registro_producao input);
+	CompletableFuture<RegistroProducao> updateRegistroProducaoRequest(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> updateRegistro_producaoRequest(Registro_producao input, long timeout);
+	CompletableFuture<RegistroProducao> updateRegistroProducaoRequest(RegistroProducao input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	Registro_producao updateMergeRegistro_producao(Registro_producao input, long timeout);
+	RegistroProducao updateMergeRegistroProducao(RegistroProducao input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void updateMergeRegistro_producao(Registro_producao input);
+	void updateMergeRegistroProducao(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> updateMergeRegistro_producaoRequest(Registro_producao input);
+	CompletableFuture<RegistroProducao> updateMergeRegistroProducaoRequest(RegistroProducao input);
 	
 	/**
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<Registro_producao> updateMergeRegistro_producaoRequest(Registro_producao input, long timeout);
+	CompletableFuture<RegistroProducao> updateMergeRegistroProducaoRequest(RegistroProducao input, long timeout);
 	/**
 	 * This is a public operation
-	 * The 'delete' request primitive for the Registro_producao entity.
+	 * The 'delete' request primitive for the RegistroProducao entity.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	void deleteRegistro_producao(Registro_producao.Id input, long timeout);
+	void deleteRegistroProducao(RegistroProducao.Id input, long timeout);
 	
 	/**
 	 * This is a public operation
-	 * The 'delete' request primitive for the Registro_producao entity.
+	 * The 'delete' request primitive for the RegistroProducao entity.
 	 * Chamada assíncrona
 	 */
-	void deleteRegistro_producao(Registro_producao.Id input);
+	void deleteRegistroProducao(RegistroProducao.Id input);
 	
 	
 
@@ -1183,17 +1291,17 @@ public interface MyServiceStub {
 			
 	
 	/**
-	 * Chamada assíncrona para o método publishImportRegistro_producaoEvent 
+	 * Chamada assíncrona para o método publishImportRegistroProducaoEvent 
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 */
-	void publishImportRegistro_producaoEvent( ImportRegistro_producaoEventPayload input );
+	void publishImportRegistroProducaoEvent( ImportRegistroProducaoEventPayload input );
 			
 	
 	/**
-	 * Chamada assíncrona para o método publishExportRegistro_producaoEvent 
+	 * Chamada assíncrona para o método publishExportRegistroProducaoEvent 
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 */
-	void publishExportRegistro_producaoEvent( ExportRegistro_producaoEventPayload input );
+	void publishExportRegistroProducaoEvent( ExportRegistroProducaoEventPayload input );
 			
 	
 

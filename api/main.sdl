@@ -10,11 +10,77 @@ service my_service {
                 helloWorldMessage : string
             }
         }
+
+        action mudarStatusPeca {
+            in {
+                id: string
+                status: statusPeca
+
+            }
+            out {
+                retorno : retornoAtualizarStatus
+            }
+        }
+
+        query getMaquinaAtiva {
+            out {
+               maquina: maquina?
+            }
+        }
+
+        query getPecaPendente {
+            out {
+                peca: peca
+            }
+        }
+
+        query relatorio {
+            in {
+                dataInicio: dateTime
+                dataFinal: dateTime
+                tipoRelatorio: tipoRelatorio
+                turno: turnoFuncionario?
+                funcionario: string?*
+                maquina: string?*
+                codigoDesenho: string?*
+            }
+            out {
+                retorno: retornoRelatorio
+            }
+        }
     }
 
     types {
+        //Record
+        record retornoRelatorio {
+            maquinaTrabalhando: maquinaTrabalhando?*
+            pecaMortas: integer minValue: 0
+            pecaFuncionario: pecaFuncionario?*
+        }
+
+        record maquinaTrabalhando {
+            maquina: maquina?
+            horas: integer minValue: 0
+        }
+
+        record pecaFuncionario {
+            peca: peca?
+            funcionario: funcionario?
+        }
+
+        record retornoAtualizarStatus {
+            mensagemRetorno: string
+            id : string
+            contemErro: boolean?
+        }
 
         //enum
+        enumeration tipoRelatorio {
+            PERIODO
+            MENSAL
+            ANUAL
+        }
+
         enumeration statusPeca {
             PENDENTE
             PROCESSO
@@ -37,34 +103,79 @@ service my_service {
     }
 
     entities {
+
+        "Entidade da peça com as informações"
         entity peca {
+            "Identificador único UUID"
             id: uuid?
-            nome: string
-            codigoDesenho: string
+
+            "Nome descritivo do item"
+            nome: string(100)
+
+            "Referência técnica do projeto"
+            codigoDesenho: string(50)
+
+            "Tempo previsto para fabricação"
             tempoEstimadoMinutos: integer
+
+            "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA"
             status: statusPeca
+
+            "Valor da peça"
+            valor: money
+
+            "Motivo pela perda peça quando o status da peça é morta"
+            motivoPerda: string
         }
 
+        "Entidade do funcionário/operador"
         entity funcionario {
+            "Identificador único UUID"
             id: uuid?
+
+            "Nome completo do colaborador"
             nome: string
-            matricula: string
+
+            "Registro único na empresa"
+            matricula: string(20)
+
+            "Função técnica na metalurgia"
             cargo: string
+
+            "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
             turno: turnoFuncionario
         }
 
+        "Entidade da máquina/equipamento"
         entity maquina {
+            "Identificador único UUID"
             id: uuid?
+
+            "Nome de identificação do ativo"
             nome: string
+
+            "Estado do ativo: ATIVO, MANUTENCAO, INATIVO"
             status: statusMaquina
         }
 
-        entity registro_producao {
+        "Entidade mestre de apontamento e histórico"
+        entity registroProducao {
+            "Identificador único UUID"
             id: uuid?
+
+            "Relacionamento com a peça processada"
             peca: peca?
+
+            "Relacionamento com o operador responsável"
             funcionario: funcionario?
+
+            "Relacionamento com a máquina utilizada"
             maquina: maquina?
+
+            "Data e hora do 'Play' na produção"
             dataInicio: dateTime
+
+            "Data e hora do 'Stop' ou descarte"
             dataFinal: dateTime
         }
     }

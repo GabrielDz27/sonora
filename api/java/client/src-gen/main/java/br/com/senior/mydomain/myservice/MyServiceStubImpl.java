@@ -86,6 +86,178 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.helloWorldRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método mudarStatusPeca
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public MudarStatusPecaOutput mudarStatusPeca(MudarStatusPecaInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl impl = new br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.mudarStatusPeca(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método mudarStatusPeca
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void mudarStatusPeca(MudarStatusPecaInput input) {
+		br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl impl = new br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl(messengerSupplier, userId, messageSupplier);
+		impl.mudarStatusPeca(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método mudarStatusPeca
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input) {
+		return this.mudarStatusPecaRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método mudarStatusPeca
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl impl = new br.com.senior.mydomain.myservice.impl.MudarStatusPecaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.mudarStatusPecaRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método getMaquinaAtiva
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public GetMaquinaAtivaOutput getMaquinaAtiva(long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl impl = new br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getMaquinaAtiva(timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getMaquinaAtiva
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void getMaquinaAtiva() {
+		br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl impl = new br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl(messengerSupplier, userId, messageSupplier);
+		impl.getMaquinaAtiva();
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getMaquinaAtiva
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest() {
+		return this.getMaquinaAtivaRequest(0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getMaquinaAtiva
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest(long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl impl = new br.com.senior.mydomain.myservice.impl.GetMaquinaAtivaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getMaquinaAtivaRequest(timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método getPecaPendente
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public GetPecaPendenteOutput getPecaPendente(long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getPecaPendente(timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getPecaPendente
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void getPecaPendente() {
+		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
+		impl.getPecaPendente();
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getPecaPendente
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest() {
+		return this.getPecaPendenteRequest(0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método getPecaPendente
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getPecaPendenteRequest(timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
+	 * Chamada síncrona para o método relatorio
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public RelatorioOutput relatorio(RelatorioInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RelatorioImpl impl = new br.com.senior.mydomain.myservice.impl.RelatorioImpl(messengerSupplier, userId, messageSupplier);
+		return impl.relatorio(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método relatorio
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void relatorio(RelatorioInput input) {
+		br.com.senior.mydomain.myservice.impl.RelatorioImpl impl = new br.com.senior.mydomain.myservice.impl.RelatorioImpl(messengerSupplier, userId, messageSupplier);
+		impl.relatorio(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método relatorio
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<RelatorioOutput> relatorioRequest(RelatorioInput input) {
+		return this.relatorioRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método relatorio
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<RelatorioOutput> relatorioRequest(RelatorioInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RelatorioImpl impl = new br.com.senior.mydomain.myservice.impl.RelatorioImpl(messengerSupplier, userId, messageSupplier);
+		return impl.relatorioRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
@@ -387,90 +559,90 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.exportMaquinaRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método importRegistro_producao
+	 * Chamada síncrona para o método importRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public ImportRegistro_producaoOutput importRegistro_producao(ImportRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.importRegistro_producao(input, timeout);
+	public ImportRegistroProducaoOutput importRegistroProducao(ImportRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.importRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método importRegistro_producao
+	 * Chamada assíncrona para o método importRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 */
 	@Override
-	public void importRegistro_producao(ImportRegistro_producaoInput input) {
-		br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.importRegistro_producao(input);
+	public void importRegistroProducao(ImportRegistroProducaoInput input) {
+		br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.importRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método importRegistro_producao
+	 * Chamada assíncrona para o método importRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 */
 	@Override
-	public CompletableFuture<ImportRegistro_producaoOutput> importRegistro_producaoRequest(ImportRegistro_producaoInput input) {
-		return this.importRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<ImportRegistroProducaoOutput> importRegistroProducaoRequest(ImportRegistroProducaoInput input) {
+		return this.importRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método importRegistro_producao
+	 * Chamada assíncrona para o método importRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	*/
 	@Override
-	public CompletableFuture<ImportRegistro_producaoOutput> importRegistro_producaoRequest(ImportRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.importRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<ImportRegistroProducaoOutput> importRegistroProducaoRequest(ImportRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ImportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.importRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método exportRegistro_producao
+	 * Chamada síncrona para o método exportRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public ExportRegistro_producaoOutput exportRegistro_producao(ExportRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.exportRegistro_producao(input, timeout);
+	public ExportRegistroProducaoOutput exportRegistroProducao(ExportRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.exportRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método exportRegistro_producao
+	 * Chamada assíncrona para o método exportRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 */
 	@Override
-	public void exportRegistro_producao(ExportRegistro_producaoInput input) {
-		br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.exportRegistro_producao(input);
+	public void exportRegistroProducao(ExportRegistroProducaoInput input) {
+		br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.exportRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método exportRegistro_producao
+	 * Chamada assíncrona para o método exportRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	 */
 	@Override
-	public CompletableFuture<ExportRegistro_producaoOutput> exportRegistro_producaoRequest(ExportRegistro_producaoInput input) {
-		return this.exportRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<ExportRegistroProducaoOutput> exportRegistroProducaoRequest(ExportRegistroProducaoInput input) {
+		return this.exportRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método exportRegistro_producao
+	 * Chamada assíncrona para o método exportRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 
 	*/
 	@Override
-	public CompletableFuture<ExportRegistro_producaoOutput> exportRegistro_producaoRequest(ExportRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.exportRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<ExportRegistroProducaoOutput> exportRegistroProducaoRequest(ExportRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ExportRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.exportRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
 	 * Chamada síncrona para o método getDependencies
@@ -1491,333 +1663,349 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	
 	
 	/**
-	 * Chamada síncrona para o método createRegistro_producao
+	 * Chamada síncrona para o método createRegistroProducao
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao createRegistro_producao(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createRegistro_producao(input, timeout);
+	public RegistroProducao createRegistroProducao(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createRegistro_producao
+	 * Chamada assíncrona para o método createRegistroProducao
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void createRegistro_producao(Registro_producao input) {
-		br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.createRegistro_producao(input);
+	public void createRegistroProducao(RegistroProducao input) {
+		br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.createRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createRegistro_producao
+	 * Chamada assíncrona para o método createRegistroProducao
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao> createRegistro_producaoRequest(Registro_producao input) {
-		return this.createRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao> createRegistroProducaoRequest(RegistroProducao input) {
+		return this.createRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createRegistro_producao
+	 * Chamada assíncrona para o método createRegistroProducao
 	 * This is a public operation
-	 * The 'create' request primitive for the Registro_producao entity.
+	 * The 'create' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao> createRegistro_producaoRequest(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao> createRegistroProducaoRequest(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método createBulkRegistro_producao
+	 * Chamada síncrona para o método createBulkRegistroProducao
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public CreateBulkRegistro_producaoOutput createBulkRegistro_producao(CreateBulkRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createBulkRegistro_producao(input, timeout);
+	public CreateBulkRegistroProducaoOutput createBulkRegistroProducao(CreateBulkRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createBulkRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createBulkRegistro_producao
+	 * Chamada assíncrona para o método createBulkRegistroProducao
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void createBulkRegistro_producao(CreateBulkRegistro_producaoInput input) {
-		br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.createBulkRegistro_producao(input);
+	public void createBulkRegistroProducao(CreateBulkRegistroProducaoInput input) {
+		br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.createBulkRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createBulkRegistro_producao
+	 * Chamada assíncrona para o método createBulkRegistroProducao
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<CreateBulkRegistro_producaoOutput> createBulkRegistro_producaoRequest(CreateBulkRegistro_producaoInput input) {
-		return this.createBulkRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<CreateBulkRegistroProducaoOutput> createBulkRegistroProducaoRequest(CreateBulkRegistroProducaoInput input) {
+		return this.createBulkRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createBulkRegistro_producao
+	 * Chamada assíncrona para o método createBulkRegistroProducao
 	 * This is a public operation
-	 * The 'createBulk' request primitive for the Registro_producao entity.
+	 * The 'createBulk' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<CreateBulkRegistro_producaoOutput> createBulkRegistro_producaoRequest(CreateBulkRegistro_producaoInput input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createBulkRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<CreateBulkRegistroProducaoOutput> createBulkRegistroProducaoRequest(CreateBulkRegistroProducaoInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateBulkRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createBulkRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método createMergeRegistro_producao
+	 * Chamada síncrona para o método createMergeRegistroProducao
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao createMergeRegistro_producao(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createMergeRegistro_producao(input, timeout);
+	public RegistroProducao createMergeRegistroProducao(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createMergeRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createMergeRegistro_producao
+	 * Chamada assíncrona para o método createMergeRegistroProducao
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void createMergeRegistro_producao(Registro_producao input) {
-		br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.createMergeRegistro_producao(input);
+	public void createMergeRegistroProducao(RegistroProducao input) {
+		br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.createMergeRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createMergeRegistro_producao
+	 * Chamada assíncrona para o método createMergeRegistroProducao
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao> createMergeRegistro_producaoRequest(Registro_producao input) {
-		return this.createMergeRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao> createMergeRegistroProducaoRequest(RegistroProducao input) {
+		return this.createMergeRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método createMergeRegistro_producao
+	 * Chamada assíncrona para o método createMergeRegistroProducao
 	 * This is a public operation
-	 * The 'createMerge' request primitive for the Registro_producao entity.
+	 * The 'createMerge' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao> createMergeRegistro_producaoRequest(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.createMergeRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao> createMergeRegistroProducaoRequest(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.CreateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.createMergeRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método retrieveRegistro_producao
+	 * Chamada síncrona para o método retrieveRegistroProducao
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao retrieveRegistro_producao(Registro_producao.GetRequest input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.retrieveRegistro_producao(input, timeout);
+	public RegistroProducao retrieveRegistroProducao(RegistroProducao.GetRequest input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retrieveRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método retrieveRegistro_producao
+	 * Chamada assíncrona para o método retrieveRegistroProducao
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void retrieveRegistro_producao(Registro_producao.GetRequest input) {
-		br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.retrieveRegistro_producao(input);
+	public void retrieveRegistroProducao(RegistroProducao.GetRequest input) {
+		br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.retrieveRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método retrieveRegistro_producao
+	 * Chamada assíncrona para o método retrieveRegistroProducao
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao> retrieveRegistro_producaoRequest(Registro_producao.GetRequest input) {
-		return this.retrieveRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao> retrieveRegistroProducaoRequest(RegistroProducao.GetRequest input) {
+		return this.retrieveRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método retrieveRegistro_producao
+	 * Chamada assíncrona para o método retrieveRegistroProducao
 	 * This is a public operation
-	 * The 'retrieve' request primitive for the Registro_producao entity.
+	 * The 'retrieve' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao> retrieveRegistro_producaoRequest(Registro_producao.GetRequest input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.retrieveRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao> retrieveRegistroProducaoRequest(RegistroProducao.GetRequest input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetrieveRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retrieveRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método listRegistro_producao
+	 * Chamada síncrona para o método listRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao.PagedResults listRegistro_producao(Registro_producao.PageRequest input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.listRegistro_producao(input, timeout);
+	public RegistroProducao.PagedResults listRegistroProducao(RegistroProducao.PageRequest input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.listRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método listRegistro_producao
+	 * Chamada assíncrona para o método listRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void listRegistro_producao(Registro_producao.PageRequest input) {
-		br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.listRegistro_producao(input);
+	public void listRegistroProducao(RegistroProducao.PageRequest input) {
+		br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.listRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método listRegistro_producao
+	 * Chamada assíncrona para o método listRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao.PagedResults> listRegistro_producaoRequest(Registro_producao.PageRequest input) {
-		return this.listRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao.PagedResults> listRegistroProducaoRequest(RegistroProducao.PageRequest input) {
+		return this.listRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método listRegistro_producao
+	 * Chamada assíncrona para o método listRegistroProducao
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * The 'list' request primitive for the Registro_producao entity.
+	 * The 'list' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao.PagedResults> listRegistro_producaoRequest(Registro_producao.PageRequest input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.listRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao.PagedResults> listRegistroProducaoRequest(RegistroProducao.PageRequest input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.ListRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.listRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método updateRegistro_producao
+	 * Chamada síncrona para o método updateRegistroProducao
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao updateRegistro_producao(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.updateRegistro_producao(input, timeout);
+	public RegistroProducao updateRegistroProducao(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.updateRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateRegistro_producao
+	 * Chamada assíncrona para o método updateRegistroProducao
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void updateRegistro_producao(Registro_producao input) {
-		br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.updateRegistro_producao(input);
+	public void updateRegistroProducao(RegistroProducao input) {
+		br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.updateRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateRegistro_producao
+	 * Chamada assíncrona para o método updateRegistroProducao
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao> updateRegistro_producaoRequest(Registro_producao input) {
-		return this.updateRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao> updateRegistroProducaoRequest(RegistroProducao input) {
+		return this.updateRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateRegistro_producao
+	 * Chamada assíncrona para o método updateRegistroProducao
 	 * This is a public operation
-	 * The 'update' request primitive for the Registro_producao entity.
+	 * The 'update' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao> updateRegistro_producaoRequest(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.updateRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao> updateRegistroProducaoRequest(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.updateRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método updateMergeRegistro_producao
+	 * Chamada síncrona para o método updateMergeRegistroProducao
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public Registro_producao updateMergeRegistro_producao(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.updateMergeRegistro_producao(input, timeout);
+	public RegistroProducao updateMergeRegistroProducao(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.updateMergeRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateMergeRegistro_producao
+	 * Chamada assíncrona para o método updateMergeRegistroProducao
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void updateMergeRegistro_producao(Registro_producao input) {
-		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.updateMergeRegistro_producao(input);
+	public void updateMergeRegistroProducao(RegistroProducao input) {
+		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.updateMergeRegistroProducao(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateMergeRegistro_producao
+	 * Chamada assíncrona para o método updateMergeRegistroProducao
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public CompletableFuture<Registro_producao> updateMergeRegistro_producaoRequest(Registro_producao input) {
-		return this.updateMergeRegistro_producaoRequest(input, 0l);
+	public CompletableFuture<RegistroProducao> updateMergeRegistroProducaoRequest(RegistroProducao input) {
+		return this.updateMergeRegistroProducaoRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método updateMergeRegistro_producao
+	 * Chamada assíncrona para o método updateMergeRegistroProducao
 	 * This is a public operation
-	 * The 'updateMerge' request primitive for the Registro_producao entity.
+	 * The 'updateMerge' request primitive for the RegistroProducao entity.
 	*/
 	@Override
-	public CompletableFuture<Registro_producao> updateMergeRegistro_producaoRequest(Registro_producao input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		return impl.updateMergeRegistro_producaoRequest(input, timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<RegistroProducao> updateMergeRegistroProducaoRequest(RegistroProducao input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.UpdateMergeRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.updateMergeRegistroProducaoRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método deleteRegistro_producao
+	 * Chamada síncrona para o método deleteRegistroProducao
 	 * This is a public operation
-	 * The 'delete' request primitive for the Registro_producao entity.
+	 * The 'delete' request primitive for the RegistroProducao entity.
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public void deleteRegistro_producao(Registro_producao.Id input, long timeout) {
-		br.com.senior.mydomain.myservice.impl.DeleteRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.DeleteRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.deleteRegistro_producao(input, timeout);
+	public void deleteRegistroProducao(RegistroProducao.Id input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.DeleteRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.DeleteRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.deleteRegistroProducao(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método deleteRegistro_producao
+	 * Chamada assíncrona para o método deleteRegistroProducao
 	 * This is a public operation
-	 * The 'delete' request primitive for the Registro_producao entity.
+	 * The 'delete' request primitive for the RegistroProducao entity.
 	 */
 	@Override
-	public void deleteRegistro_producao(Registro_producao.Id input) {
-		br.com.senior.mydomain.myservice.impl.DeleteRegistro_producaoImpl impl = new br.com.senior.mydomain.myservice.impl.DeleteRegistro_producaoImpl(messengerSupplier, userId, messageSupplier);
-		impl.deleteRegistro_producao(input);
+	public void deleteRegistroProducao(RegistroProducao.Id input) {
+		br.com.senior.mydomain.myservice.impl.DeleteRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.DeleteRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.deleteRegistroProducao(input);
 	}
 	
 	
 
 	
 	private Message createMessage(ImportFuncionarioEventPayload input, String requestName) {
+		if (messageSupplier != null && messageSupplier.get() != null) {
+			return messageSupplier.get().followUp( //
+				userId.getTenant(), //
+				MyServiceConstants.DOMAIN, //
+				MyServiceConstants.SERVICE, //
+				requestName, //
+				DtoJsonConverter.toJSON(input));
+		}
+		return  new Message(userId.getTenant(), // 
+			MyServiceConstants.DOMAIN, // 
+			MyServiceConstants.SERVICE, //
+			requestName, // 
+			DtoJsonConverter.toJSON(input));
+	}
+	
+	private Message createMessage(ImportRegistroProducaoEventPayload input, String requestName) {
 		if (messageSupplier != null && messageSupplier.get() != null) {
 			return messageSupplier.get().followUp( //
 				userId.getTenant(), //
@@ -1897,7 +2085,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 			DtoJsonConverter.toJSON(input));
 	}
 	
-	private Message createMessage(ImportRegistro_producaoEventPayload input, String requestName) {
+	private Message createMessage(ExportRegistroProducaoEventPayload input, String requestName) {
 		if (messageSupplier != null && messageSupplier.get() != null) {
 			return messageSupplier.get().followUp( //
 				userId.getTenant(), //
@@ -1946,22 +2134,6 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	}
 	
 	private Message createMessage(ExportPecaEventPayload input, String requestName) {
-		if (messageSupplier != null && messageSupplier.get() != null) {
-			return messageSupplier.get().followUp( //
-				userId.getTenant(), //
-				MyServiceConstants.DOMAIN, //
-				MyServiceConstants.SERVICE, //
-				requestName, //
-				DtoJsonConverter.toJSON(input));
-		}
-		return  new Message(userId.getTenant(), // 
-			MyServiceConstants.DOMAIN, // 
-			MyServiceConstants.SERVICE, //
-			requestName, // 
-			DtoJsonConverter.toJSON(input));
-	}
-	
-	private Message createMessage(ExportRegistro_producaoEventPayload input, String requestName) {
 		if (messageSupplier != null && messageSupplier.get() != null) {
 			return messageSupplier.get().followUp( //
 				userId.getTenant(), //
@@ -2091,11 +2263,11 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	}
 	
 	/**
-	 * Chamada assíncrona para o método publishImportRegistro_producaoEvent
+	 * Chamada assíncrona para o método publishImportRegistroProducaoEvent
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 */
-	public void publishImportRegistro_producaoEvent( ImportRegistro_producaoEventPayload input ) {
-		Message message = createMessage(input, MyServiceConstants.Events.IMPORT_REGISTROPRODUCAO_EVENT);
+	public void publishImportRegistroProducaoEvent( ImportRegistroProducaoEventPayload input ) {
+		Message message = createMessage(input, MyServiceConstants.Events.IMPORT_REGISTRO_PRODUCAO_EVENT);
 		try {
 			addMessageHeaders(message);
 			messengerSupplier.get().publish(message);
@@ -2105,11 +2277,11 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	}
 	
 	/**
-	 * Chamada assíncrona para o método publishExportRegistro_producaoEvent
+	 * Chamada assíncrona para o método publishExportRegistroProducaoEvent
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 */
-	public void publishExportRegistro_producaoEvent( ExportRegistro_producaoEventPayload input ) {
-		Message message = createMessage(input, MyServiceConstants.Events.EXPORT_REGISTROPRODUCAO_EVENT);
+	public void publishExportRegistroProducaoEvent( ExportRegistroProducaoEventPayload input ) {
+		Message message = createMessage(input, MyServiceConstants.Events.EXPORT_REGISTRO_PRODUCAO_EVENT);
 		try {
 			addMessageHeaders(message);
 			messengerSupplier.get().publish(message);

@@ -27,24 +27,51 @@ public class PecaEntity extends CustomEntity implements Persistable<java.util.UU
 	
 	public static final String SECURITY_RESOURCE = "res://senior.com.br/my_domain/my_service/entities/peca";
 
+	/**
+	 * Identificador único UUID
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "id", updatable = false)
 	private java.util.UUID id;
 	
-	@Column(name = "nome")
+	/**
+	 * Nome descritivo do item
+	 */
+	@Column(name = "nome", length = 100)
 	private String nome;
 	
-	@Column(name = "codigo_desenho")
+	/**
+	 * Referência técnica do projeto
+	 */
+	@Column(name = "codigo_desenho", length = 50)
 	private String codigoDesenho;
 	
+	/**
+	 * Tempo previsto para fabricação
+	 */
 	@Column(name = "tempo_estimado_minutos")
 	private Long tempoEstimadoMinutos;
 	
+	/**
+	 * Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA
+	 */
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private StatusPeca status;
+	
+	/**
+	 * Valor da peça
+	 */
+	@Column(name = "valor")
+	private java.math.BigDecimal valor;
+	
+	/**
+	 * Motivo pela perda peça quando o status da peça é morta
+	 */
+	@Column(name = "motivo_perda")
+	private String motivoPerda;
 	
 	@Transient
 	private boolean _newEntity;
@@ -79,6 +106,14 @@ public class PecaEntity extends CustomEntity implements Persistable<java.util.UU
 		return status;
 	}
 	
+	public java.math.BigDecimal getValor() {
+		return valor;
+	}
+	
+	public String getMotivoPerda() {
+		return motivoPerda;
+	}
+	
 	public void setId(java.util.UUID id) {
 		this.id = id;
 	}
@@ -97,6 +132,14 @@ public class PecaEntity extends CustomEntity implements Persistable<java.util.UU
 	
 	public void setStatus(StatusPeca status) {
 		this.status = status;
+	}
+	
+	public void setValor(java.math.BigDecimal valor) {
+		this.valor = valor;
+	}
+	
+	public void setMotivoPerda(String motivoPerda) {
+		this.motivoPerda = motivoPerda;
 	}
 	
 	@Override

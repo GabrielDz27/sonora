@@ -27,15 +27,24 @@ public class MaquinaEntity extends CustomEntity implements Persistable<java.util
 	
 	public static final String SECURITY_RESOURCE = "res://senior.com.br/my_domain/my_service/entities/maquina";
 
+	/**
+	 * Identificador único UUID
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "id", updatable = false)
 	private java.util.UUID id;
 	
+	/**
+	 * Nome de identificação do ativo
+	 */
 	@Column(name = "nome")
 	private String nome;
 	
+	/**
+	 * Estado do ativo: ATIVO, MANUTENCAO, INATIVO
+	 */
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private StatusMaquina status;

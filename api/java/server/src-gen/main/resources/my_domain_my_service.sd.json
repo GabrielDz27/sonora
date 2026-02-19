@@ -53,27 +53,6 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "createBulkRegistro_producao": {
-            "endpointType" : "command",
-            "kind": "createBulk",
-            "priority" : "NORMAL",
-            "documentation": "The 'createBulk' request primitive for the Registro_producao entity.",
-            "input" : {
-                "entities" : {
-                    "type": "registro_producao",
-                    "optional": false,
-                    "multivalued": true,
-                    "readOnly": false
-                }
-            },
-            "output" : {
-            },
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
         "updateFuncionario": {
             "endpointType" : "command",
             "kind": "update",
@@ -140,6 +119,38 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "mudarStatusPeca": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "status" : {
+                    "type": "statusPeca",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "retorno" : {
+                    "type": "retornoAtualizarStatus",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "retrieveMaquina": {
             "endpointType" : "command",
             "kind": "retrieve",
@@ -161,13 +172,13 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "updateRegistro_producao": {
+        "updateRegistroProducao": {
             "endpointType" : "command",
             "kind": "update",
             "priority" : "NORMAL",
-            "documentation": "The 'update' request primitive for the Registro_producao entity.",
-            "input" : "registro_producao",
-            "output" : "registro_producao",
+            "documentation": "The 'update' request primitive for the RegistroProducao entity.",
+            "input" : "registroProducao",
+            "output" : "registroProducao",
             "extensionPoint" : false,
             "responses" : {
             },
@@ -297,20 +308,21 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "importRegistro_producao": {
+        "exportRegistroProducao": {
             "endpointType" : "command",
-            "kind": "action",
+            "kind": "query",
             "priority" : "NORMAL",
+            "idempotent": true,
             "input" : {
                 "config" : {
-                    "type": "importConfig",
+                    "type": "exportConfig",
                     "optional": false,
                     "multivalued": false,
                     "readOnly": false
                 }
             },
             "output" : {
-                "importJobId" : {
+                "exportJobId" : {
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
@@ -381,6 +393,27 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "createBulkRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "createBulk",
+            "priority" : "NORMAL",
+            "documentation": "The 'createBulk' request primitive for the RegistroProducao entity.",
+            "input" : {
+                "entities" : {
+                    "type": "registroProducao",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "createMergeFuncionario": {
             "endpointType" : "command",
             "kind": "createMerge",
@@ -388,6 +421,95 @@
             "documentation": "The 'createMerge' request primitive for the Funcionario entity.",
             "input" : "funcionario",
             "output" : "funcionario",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "importRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "action",
+            "priority" : "NORMAL",
+            "input" : {
+                "config" : {
+                    "type": "importConfig",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "importJobId" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "relatorio": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "input" : {
+                "dataInicio" : {
+                    "type": "dateTime",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "dataFinal" : {
+                    "type": "dateTime",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "tipoRelatorio" : {
+                    "type": "tipoRelatorio",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "turno" : {
+                    "type": "turnoFuncionario",
+                    "optional": true,
+                    "multivalued": false,
+                    "readOnly": false
+                },
+                "funcionario" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": true,
+                    "readOnly": false
+                },
+                "maquina" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": true,
+                    "readOnly": false
+                },
+                "codigoDesenho" : {
+                    "type": "string",
+                    "optional": true,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "retorno" : {
+                    "type": "retornoRelatorio",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
             "extensionPoint" : false,
             "responses" : {
             },
@@ -422,26 +544,6 @@
             "documentation": "The 'create' request primitive for the Funcionario entity.",
             "input" : "funcionario",
             "output" : "funcionario",
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
-        "deleteRegistro_producao": {
-            "endpointType" : "command",
-            "kind": "delete",
-            "priority" : "NORMAL",
-            "documentation": "The 'delete' request primitive for the Registro_producao entity.",
-            "input" : {
-                "id" : {
-                    "type": "string",
-                    "format": "uuid",
-                    "optional": false,
-                    "multivalued": false,
-                	"readOnly": true
-                }
-            },
             "extensionPoint" : false,
             "responses" : {
             },
@@ -533,6 +635,63 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "listRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "list",
+            "priority" : "NORMAL",
+            "documentation": "The 'list' request primitive for the RegistroProducao entity.",
+            "input" : {
+                "offset" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Offset to first result entity",
+                    "readOnly": false
+                },
+                "size" : {
+                    "type": "integer",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected size of result list",
+                    "readOnly": false
+                },
+                "orderBy" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Expected result order",
+                    "readOnly": false
+                },
+                "filter" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Request filter",
+                    "readOnly": false
+                },
+                "displayFields" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Expected result fields",
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "contents" : {
+                    "type": "registroProducao",
+                    "optional": false,
+                    "multivalued": true,
+                    "documentation": "Result entities",
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "updatePeca": {
             "endpointType" : "command",
             "kind": "update",
@@ -567,27 +726,6 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "retrieveRegistro_producao": {
-            "endpointType" : "command",
-            "kind": "retrieve",
-            "priority" : "NORMAL",
-            "documentation": "The 'retrieve' request primitive for the Registro_producao entity.",
-            "input" : {
-                "id" : {
-                    "type": "string",
-                    "format": "uuid",
-                    "optional": false,
-                    "multivalued": false,
-                	"readOnly": true
-                }
-            },
-            "output" : "registro_producao",
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
         "deleteFuncionario": {
             "endpointType" : "command",
             "kind": "delete",
@@ -608,27 +746,13 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "exportRegistro_producao": {
+        "updateMergeRegistroProducao": {
             "endpointType" : "command",
-            "kind": "query",
+            "kind": "updateMerge",
             "priority" : "NORMAL",
-            "idempotent": true,
-            "input" : {
-                "config" : {
-                    "type": "exportConfig",
-                    "optional": false,
-                    "multivalued": false,
-                    "readOnly": false
-                }
-            },
-            "output" : {
-                "exportJobId" : {
-                    "type": "string",
-                    "optional": false,
-                    "multivalued": false,
-                    "readOnly": false
-                }
-            },
+            "documentation": "The 'updateMerge' request primitive for the RegistroProducao entity.",
+            "input" : "registroProducao",
+            "output" : "registroProducao",
             "extensionPoint" : false,
             "responses" : {
             },
@@ -655,6 +779,40 @@
             "documentation": "The 'createMerge' request primitive for the Peca entity.",
             "input" : "peca",
             "output" : "peca",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "retrieveRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "retrieve",
+            "priority" : "NORMAL",
+            "documentation": "The 'retrieve' request primitive for the RegistroProducao entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
+                    "optional": false,
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "output" : "registroProducao",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "createMergeRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "createMerge",
+            "priority" : "NORMAL",
+            "documentation": "The 'createMerge' request primitive for the RegistroProducao entity.",
+            "input" : "registroProducao",
+            "output" : "registroProducao",
             "extensionPoint" : false,
             "responses" : {
             },
@@ -757,19 +915,6 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "createMergeRegistro_producao": {
-            "endpointType" : "command",
-            "kind": "createMerge",
-            "priority" : "NORMAL",
-            "documentation": "The 'createMerge' request primitive for the Registro_producao entity.",
-            "input" : "registro_producao",
-            "output" : "registro_producao",
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
         "deletePeca": {
             "endpointType" : "command",
             "kind": "delete",
@@ -803,13 +948,13 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "updateMergeRegistro_producao": {
+        "createRegistroProducao": {
             "endpointType" : "command",
-            "kind": "updateMerge",
+            "kind": "create",
             "priority" : "NORMAL",
-            "documentation": "The 'updateMerge' request primitive for the Registro_producao entity.",
-            "input" : "registro_producao",
-            "output" : "registro_producao",
+            "documentation": "The 'create' request primitive for the RegistroProducao entity.",
+            "input" : "registroProducao",
+            "output" : "registroProducao",
             "extensionPoint" : false,
             "responses" : {
             },
@@ -850,19 +995,6 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "createRegistro_producao": {
-            "endpointType" : "command",
-            "kind": "create",
-            "priority" : "NORMAL",
-            "documentation": "The 'create' request primitive for the Registro_producao entity.",
-            "input" : "registro_producao",
-            "output" : "registro_producao",
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
         "createBulkMaquina": {
             "endpointType" : "command",
             "kind": "createBulk",
@@ -884,54 +1016,55 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "listRegistro_producao": {
+        "getMaquinaAtiva": {
             "endpointType" : "command",
-            "kind": "list",
+            "kind": "query",
             "priority" : "NORMAL",
-            "documentation": "The 'list' request primitive for the Registro_producao entity.",
-            "input" : {
-                "offset" : {
-                    "type": "integer",
-                    "optional": false,
+            "idempotent": true,
+            "output" : {
+                "maquina" : {
+                    "type": "maquina",
+                    "optional": true,
                     "multivalued": false,
-                    "documentation": "Offset to first result entity",
-                    "readOnly": false
-                },
-                "size" : {
-                    "type": "integer",
-                    "optional": false,
-                    "multivalued": false,
-                    "documentation": "Expected size of result list",
-                    "readOnly": false
-                },
-                "orderBy" : {
-                    "type": "string",
-                    "optional": false,
-                    "multivalued": false,
-                    "documentation": "Expected result order",
-                    "readOnly": false
-                },
-                "filter" : {
-                    "type": "string",
-                    "optional": false,
-                    "multivalued": false,
-                    "documentation": "Request filter",
-                    "readOnly": false
-                },
-                "displayFields" : {
-                    "type": "string",
-                    "optional": false,
-                    "multivalued": true,
-                    "documentation": "Expected result fields",
                     "readOnly": false
                 }
             },
-            "output" : {
-                "contents" : {
-                    "type": "registro_producao",
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "deleteRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "delete",
+            "priority" : "NORMAL",
+            "documentation": "The 'delete' request primitive for the RegistroProducao entity.",
+            "input" : {
+                "id" : {
+                    "type": "string",
+                    "format": "uuid",
                     "optional": false,
-                    "multivalued": true,
-                    "documentation": "Result entities",
+                    "multivalued": false,
+                	"readOnly": true
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
+        "getPecaPendente": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "output" : {
+                "peca" : {
+                    "type": "peca",
+                    "optional": false,
+                    "multivalued": false,
                     "readOnly": false
                 }
             },
@@ -1113,7 +1246,7 @@
             "extensionPoint" : false,
             "visibility" : "PRIVATE"
         },
-        "importRegistro_producaoEvent": {
+        "importRegistroProducaoEvent": {
             "endpointType" : "event",
             "payload" : {
                 "eventpl" : {
@@ -1128,7 +1261,7 @@
             "extensionPoint" : false,
             "visibility" : "PRIVATE"
         },
-        "exportRegistro_producaoEvent": {
+        "exportRegistroProducaoEvent": {
             "endpointType" : "event",
             "payload" : {
                 "eventpl" : {
@@ -1145,6 +1278,78 @@
         }
     },
     "records": {
+        "retornoRelatorio" : {
+            "maquinaTrabalhando" : {
+                "type": "maquinaTrabalhando",
+                "optional": true,
+                "multivalued": true,
+                "readOnly": false
+            },
+            "pecaMortas" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            ,
+            	"minValue": 0
+            },
+            "pecaFuncionario" : {
+                "type": "pecaFuncionario",
+                "optional": true,
+                "multivalued": true,
+                "readOnly": false
+            }
+        },
+        "maquinaTrabalhando" : {
+            "maquina" : {
+                "type": "maquina",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "horas" : {
+                "type": "integer",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            ,
+            	"minValue": 0
+            }
+        },
+        "pecaFuncionario" : {
+            "peca" : {
+                "type": "peca",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "funcionario" : {
+                "type": "funcionario",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
+        "retornoAtualizarStatus" : {
+            "mensagemRetorno" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "id" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "contemErro" : {
+                "type": "boolean",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
         "peca" : {
             "id" : {
                 "type": "string",
@@ -1157,24 +1362,46 @@
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Nome descritivo do item",
                 "readOnly": false
+            ,
+            	"maxLength": 100
             },
             "codigoDesenho" : {
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Refer\u00EAncia t\u00E9cnica do projeto",
                 "readOnly": false
+            ,
+            	"maxLength": 50
             },
             "tempoEstimadoMinutos" : {
                 "type": "integer",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Tempo previsto para fabrica\u00E7\u00E3o",
                 "readOnly": false
             },
             "status" : {
                 "type": "statusPeca",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA",
+                "readOnly": false
+            },
+            "valor" : {
+                "type": "money",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Valor da pe\u00E7a",
+                "readOnly": false
+            },
+            "motivoPerda" : {
+                "type": "string",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Motivo pela perda pe\u00E7a quando o status da pe\u00E7a \u00E9 morta",
                 "readOnly": false
             }
         },
@@ -1190,24 +1417,30 @@
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Nome completo do colaborador",
                 "readOnly": false
             },
             "matricula" : {
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Registro \u00FAnico na empresa",
                 "readOnly": false
+            ,
+            	"maxLength": 20
             },
             "cargo" : {
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Fun\u00E7\u00E3o t\u00E9cnica na metalurgia",
                 "readOnly": false
             },
             "turno" : {
                 "type": "turnoFuncionario",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
                 "readOnly": false
             }
         },
@@ -1223,16 +1456,18 @@
                 "type": "string",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Nome de identifica\u00E7\u00E3o do ativo",
                 "readOnly": false
             },
             "status" : {
                 "type": "statusMaquina",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Estado do ativo: ATIVO, MANUTENCAO, INATIVO",
                 "readOnly": false
             }
         },
-        "registro_producao" : {
+        "registroProducao" : {
             "id" : {
                 "type": "string",
                 "format": "uuid",
@@ -1244,30 +1479,35 @@
                 "type": "peca",
                 "optional": true,
                 "multivalued": false,
+                "documentation": "Relacionamento com a pe\u00E7a processada",
                 "readOnly": false
             },
             "funcionario" : {
                 "type": "funcionario",
                 "optional": true,
                 "multivalued": false,
+                "documentation": "Relacionamento com o operador respons\u00E1vel",
                 "readOnly": false
             },
             "maquina" : {
                 "type": "maquina",
                 "optional": true,
                 "multivalued": false,
+                "documentation": "Relacionamento com a m\u00E1quina utilizada",
                 "readOnly": false
             },
             "dataInicio" : {
                 "type": "dateTime",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Data e hora do 'Play' na produ\u00E7\u00E3o",
                 "readOnly": false
             },
             "dataFinal" : {
                 "type": "dateTime",
                 "optional": false,
                 "multivalued": false,
+                "documentation": "Data e hora do 'Stop' ou descarte",
                 "readOnly": false
             }
         },
@@ -1910,6 +2150,11 @@
         }
     },
     "enumerations": {
+        "tipoRelatorio" : [ 
+            "PERIODO",
+            "MENSAL",
+            "ANUAL"
+        ],
         "statusPeca" : [ 
             "PENDENTE",
             "PROCESSO",
@@ -1994,6 +2239,7 @@
     "entities" : {
         "peca" : {
             "id": "id",
+            "documentation": "Entidade da pe\u00E7a com as informa\u00E7\u00F5es",
             "customizable": true,
             "slots": { 
                 "id" : {
@@ -2007,30 +2253,53 @@
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Nome descritivo do item",
                     "readOnly": false
+                ,
+                	"maxLength": 100
                 },
                 "codigoDesenho" : {
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Refer\u00EAncia t\u00E9cnica do projeto",
                     "readOnly": false
+                ,
+                	"maxLength": 50
                 },
                 "tempoEstimadoMinutos" : {
                     "type": "integer",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Tempo previsto para fabrica\u00E7\u00E3o",
                     "readOnly": false
                 },
                 "status" : {
                     "type": "statusPeca",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA",
+                    "readOnly": false
+                },
+                "valor" : {
+                    "type": "money",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Valor da pe\u00E7a",
+                    "readOnly": false
+                },
+                "motivoPerda" : {
+                    "type": "string",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Motivo pela perda pe\u00E7a quando o status da pe\u00E7a \u00E9 morta",
                     "readOnly": false
                 }
             }    
         },
         "funcionario" : {
             "id": "id",
+            "documentation": "Entidade do funcion\u00E1rio/operador",
             "customizable": true,
             "slots": { 
                 "id" : {
@@ -2044,30 +2313,37 @@
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Nome completo do colaborador",
                     "readOnly": false
                 },
                 "matricula" : {
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Registro \u00FAnico na empresa",
                     "readOnly": false
+                ,
+                	"maxLength": 20
                 },
                 "cargo" : {
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Fun\u00E7\u00E3o t\u00E9cnica na metalurgia",
                     "readOnly": false
                 },
                 "turno" : {
                     "type": "turnoFuncionario",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
                     "readOnly": false
                 }
             }    
         },
         "maquina" : {
             "id": "id",
+            "documentation": "Entidade da m\u00E1quina/equipamento",
             "customizable": true,
             "slots": { 
                 "id" : {
@@ -2081,18 +2357,21 @@
                     "type": "string",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Nome de identifica\u00E7\u00E3o do ativo",
                     "readOnly": false
                 },
                 "status" : {
                     "type": "statusMaquina",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Estado do ativo: ATIVO, MANUTENCAO, INATIVO",
                     "readOnly": false
                 }
             }    
         },
-        "registro_producao" : {
+        "registroProducao" : {
             "id": "id",
+            "documentation": "Entidade mestre de apontamento e hist\u00F3rico",
             "customizable": true,
             "slots": { 
                 "id" : {
@@ -2106,30 +2385,35 @@
                     "type": "peca",
                     "optional": true,
                     "multivalued": false,
+                    "documentation": "Relacionamento com a pe\u00E7a processada",
                     "readOnly": false
                 },
                 "funcionario" : {
                     "type": "funcionario",
                     "optional": true,
                     "multivalued": false,
+                    "documentation": "Relacionamento com o operador respons\u00E1vel",
                     "readOnly": false
                 },
                 "maquina" : {
                     "type": "maquina",
                     "optional": true,
                     "multivalued": false,
+                    "documentation": "Relacionamento com a m\u00E1quina utilizada",
                     "readOnly": false
                 },
                 "dataInicio" : {
                     "type": "dateTime",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Data e hora do 'Play' na produ\u00E7\u00E3o",
                     "readOnly": false
                 },
                 "dataFinal" : {
                     "type": "dateTime",
                     "optional": false,
                     "multivalued": false,
+                    "documentation": "Data e hora do 'Stop' ou descarte",
                     "readOnly": false
                 }
             }    

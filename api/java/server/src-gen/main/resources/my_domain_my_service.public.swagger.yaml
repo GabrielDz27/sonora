@@ -29,6 +29,15 @@ consumes:
 paths:
   
 definitions:
+  tipoRelatorio:
+    description: ""
+    type: string
+    enum:
+      - PERIODO
+      - MENSAL
+      - ANUAL
+    
+  
   statusPeca:
     description: ""
     type: string
@@ -160,94 +169,53 @@ definitions:
       - CONVERT_ERROR
       - SERVICE_ERROR
     
-  peca:
+  retornoRelatorio:
     description: ""
     type: object
     required:
-      - nome
-      - codigoDesenho
-      - tempoEstimadoMinutos
-      - status
+      - pecaMortas
     properties:
-      id:
-        type: string
-        format: uuid
+      maquinaTrabalhando:
+        type: array
+        items:
+          type: object
+          allOf:
+           - $ref: '#/definitions/maquinaTrabalhando'
         description: ""
-      nome:
-        type: string
-        description: ""
-      codigoDesenho:
-        type: string
-        description: ""
-      tempoEstimadoMinutos:
+      pecaMortas:
         type: integer
         format: int64
         description: ""
-      status:
-        type: string
-        allOf:
-        - $ref: '#/definitions/statusPeca'
+        minimum: 0
+      pecaFuncionario:
+        type: array
+        items:
+          type: object
+          allOf:
+           - $ref: '#/definitions/pecaFuncionario'
         description: ""
   
-  funcionario:
+  maquinaTrabalhando:
     description: ""
     type: object
     required:
-      - nome
-      - matricula
-      - cargo
-      - turno
+      - horas
     properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
-      nome:
-        type: string
-        description: ""
-      matricula:
-        type: string
-        description: ""
-      cargo:
-        type: string
-        description: ""
-      turno:
-        type: string
+      maquina:
+        type: object
         allOf:
-        - $ref: '#/definitions/turnoFuncionario'
+         - $ref: '#/definitions/maquina'
         description: ""
+      horas:
+        type: integer
+        format: int64
+        description: ""
+        minimum: 0
   
-  maquina:
+  pecaFuncionario:
     description: ""
     type: object
-    required:
-      - nome
-      - status
     properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
-      nome:
-        type: string
-        description: ""
-      status:
-        type: string
-        allOf:
-        - $ref: '#/definitions/statusMaquina'
-        description: ""
-  
-  registro_producao:
-    description: ""
-    type: object
-    required:
-      - dataInicio
-      - dataFinal
-    properties:
-      id:
-        type: string
-        format: uuid
-        description: ""
       peca:
         type: object
         allOf:
@@ -258,19 +226,146 @@ definitions:
         allOf:
          - $ref: '#/definitions/funcionario'
         description: ""
+  
+  retornoAtualizarStatus:
+    description: ""
+    type: object
+    required:
+      - mensagemRetorno
+      - id
+    properties:
+      mensagemRetorno:
+        type: string
+        description: ""
+      id:
+        type: string
+        description: ""
+      contemErro:
+        type: boolean
+        description: ""
+  
+  peca:
+    description: "Entidade da peça com as informações"
+    type: object
+    required:
+      - nome
+      - codigoDesenho
+      - tempoEstimadoMinutos
+      - status
+      - valor
+      - motivoPerda
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        maxLength: 100
+        description: "Nome descritivo do item"
+      codigoDesenho:
+        type: string
+        maxLength: 50
+        description: "Referência técnica do projeto"
+      tempoEstimadoMinutos:
+        type: integer
+        format: int64
+        description: "Tempo previsto para fabricação"
+      status:
+        type: string
+        allOf:
+        - $ref: '#/definitions/statusPeca'
+        description: "Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA"
+      valor:
+        type: string
+        description: "Valor da peça"
+      motivoPerda:
+        type: string
+        description: "Motivo pela perda peça quando o status da peça é morta"
+  
+  funcionario:
+    description: "Entidade do funcionário/operador"
+    type: object
+    required:
+      - nome
+      - matricula
+      - cargo
+      - turno
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        description: "Nome completo do colaborador"
+      matricula:
+        type: string
+        maxLength: 20
+        description: "Registro único na empresa"
+      cargo:
+        type: string
+        description: "Função técnica na metalurgia"
+      turno:
+        type: string
+        allOf:
+        - $ref: '#/definitions/turnoFuncionario'
+        description: "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
+  
+  maquina:
+    description: "Entidade da máquina/equipamento"
+    type: object
+    required:
+      - nome
+      - status
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      nome:
+        type: string
+        description: "Nome de identificação do ativo"
+      status:
+        type: string
+        allOf:
+        - $ref: '#/definitions/statusMaquina'
+        description: "Estado do ativo: ATIVO, MANUTENCAO, INATIVO"
+  
+  registroProducao:
+    description: "Entidade mestre de apontamento e histórico"
+    type: object
+    required:
+      - dataInicio
+      - dataFinal
+    properties:
+      id:
+        type: string
+        format: uuid
+        description: "Identificador único UUID"
+      peca:
+        type: object
+        allOf:
+         - $ref: '#/definitions/peca'
+        description: "Relacionamento com a peça processada"
+      funcionario:
+        type: object
+        allOf:
+         - $ref: '#/definitions/funcionario'
+        description: "Relacionamento com o operador responsável"
       maquina:
         type: object
         allOf:
          - $ref: '#/definitions/maquina'
-        description: ""
+        description: "Relacionamento com a máquina utilizada"
       dataInicio:
         type: string
         format: date-time
-        description: ""
+        description: "Data e hora do 'Play' na produção"
       dataFinal:
         type: string
         format: date-time
-        description: ""
+        description: "Data e hora do 'Stop' ou descarte"
   
   notifyUserEventPayload:
     description: "Represents a regular user event notification payload"

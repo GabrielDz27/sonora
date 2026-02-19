@@ -23,6 +23,10 @@ public class PecaStringSerializer {
 		sb.append(", ");
 		serializeStatus(peca, sb);
 		sb.append(", ");
+		serializeValor(peca, sb);
+		sb.append(", ");
+		serializeMotivoPerda(peca, sb);
+		sb.append(", ");
 		sb.append(']');
 	}
 	
@@ -44,5 +48,13 @@ public class PecaStringSerializer {
 	
 	protected void serializeStatus(Peca peca, StringBuilder sb) {
 		sb.append("status=").append(peca.status == null ? "null" : peca.status);
+	}
+	
+	protected void serializeValor(Peca peca, StringBuilder sb) {
+		sb.append("valor=").append(peca.valor == null ? "null" : peca.valor);
+	}
+	
+	protected void serializeMotivoPerda(Peca peca, StringBuilder sb) {
+		sb.append("motivoPerda=").append(peca.motivoPerda == null ? "null" : peca.motivoPerda);
 	}
 }

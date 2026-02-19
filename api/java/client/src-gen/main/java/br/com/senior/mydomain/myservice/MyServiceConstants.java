@@ -26,6 +26,68 @@ public interface MyServiceConstants {
     	 */
     	String HELLO_WORLD_ERROR = "helloWorldError";
     	/**
+    	 * @see MudarStatusPecaInput the request payload
+    	 */
+    	String MUDAR_STATUS_PECA = "mudarStatusPeca";
+    	/**
+    	 * The success response primitive for mudarStatusPeca.
+    	 *
+    	 * @see #MUDAR_STATUS_PECA the request primitive
+    	 * @see MudarStatusPecaOutput the response payload
+    	 */
+    	String MUDAR_STATUS_PECA_RESPONSE = "mudarStatusPecaResponse";
+    	/**
+    	 * An error response primitive for mudarStatusPeca.
+    	 *
+    	 * @see #MUDAR_STATUS_PECA the request primitive
+    	 */
+    	String MUDAR_STATUS_PECA_ERROR = "mudarStatusPecaError";
+    	String GET_MAQUINA_ATIVA = "getMaquinaAtiva";
+    	/**
+    	 * The success response primitive for getMaquinaAtiva.
+    	 *
+    	 * @see #GET_MAQUINA_ATIVA the request primitive
+    	 * @see GetMaquinaAtivaOutput the response payload
+    	 */
+    	String GET_MAQUINA_ATIVA_RESPONSE = "getMaquinaAtivaResponse";
+    	/**
+    	 * An error response primitive for getMaquinaAtiva.
+    	 *
+    	 * @see #GET_MAQUINA_ATIVA the request primitive
+    	 */
+    	String GET_MAQUINA_ATIVA_ERROR = "getMaquinaAtivaError";
+    	String GET_PECA_PENDENTE = "getPecaPendente";
+    	/**
+    	 * The success response primitive for getPecaPendente.
+    	 *
+    	 * @see #GET_PECA_PENDENTE the request primitive
+    	 * @see GetPecaPendenteOutput the response payload
+    	 */
+    	String GET_PECA_PENDENTE_RESPONSE = "getPecaPendenteResponse";
+    	/**
+    	 * An error response primitive for getPecaPendente.
+    	 *
+    	 * @see #GET_PECA_PENDENTE the request primitive
+    	 */
+    	String GET_PECA_PENDENTE_ERROR = "getPecaPendenteError";
+    	/**
+    	 * @see RelatorioInput the request payload
+    	 */
+    	String RELATORIO = "relatorio";
+    	/**
+    	 * The success response primitive for relatorio.
+    	 *
+    	 * @see #RELATORIO the request primitive
+    	 * @see RelatorioOutput the response payload
+    	 */
+    	String RELATORIO_RESPONSE = "relatorioResponse";
+    	/**
+    	 * An error response primitive for relatorio.
+    	 *
+    	 * @see #RELATORIO the request primitive
+    	 */
+    	String RELATORIO_ERROR = "relatorioError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */
@@ -159,39 +221,39 @@ public interface MyServiceConstants {
     	 */
     	String EXPORT_MAQUINA_ERROR = "exportMaquinaError";
     	/**
-    	 * @see ImportRegistro_producaoInput the request payload
+    	 * @see ImportRegistroProducaoInput the request payload
     	 */
-    	String IMPORT_REGISTROPRODUCAO = "importRegistro_producao";
+    	String IMPORT_REGISTRO_PRODUCAO = "importRegistroProducao";
     	/**
-    	 * The success response primitive for importRegistro_producao.
+    	 * The success response primitive for importRegistroProducao.
     	 *
-    	 * @see #IMPORT_REGISTROPRODUCAO the request primitive
-    	 * @see ImportRegistro_producaoOutput the response payload
+    	 * @see #IMPORT_REGISTRO_PRODUCAO the request primitive
+    	 * @see ImportRegistroProducaoOutput the response payload
     	 */
-    	String IMPORT_REGISTROPRODUCAO_RESPONSE = "importRegistro_producaoResponse";
+    	String IMPORT_REGISTRO_PRODUCAO_RESPONSE = "importRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for importRegistro_producao.
+    	 * An error response primitive for importRegistroProducao.
     	 *
-    	 * @see #IMPORT_REGISTROPRODUCAO the request primitive
+    	 * @see #IMPORT_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String IMPORT_REGISTROPRODUCAO_ERROR = "importRegistro_producaoError";
+    	String IMPORT_REGISTRO_PRODUCAO_ERROR = "importRegistroProducaoError";
     	/**
-    	 * @see ExportRegistro_producaoInput the request payload
+    	 * @see ExportRegistroProducaoInput the request payload
     	 */
-    	String EXPORT_REGISTROPRODUCAO = "exportRegistro_producao";
+    	String EXPORT_REGISTRO_PRODUCAO = "exportRegistroProducao";
     	/**
-    	 * The success response primitive for exportRegistro_producao.
+    	 * The success response primitive for exportRegistroProducao.
     	 *
-    	 * @see #EXPORT_REGISTROPRODUCAO the request primitive
-    	 * @see ExportRegistro_producaoOutput the response payload
+    	 * @see #EXPORT_REGISTRO_PRODUCAO the request primitive
+    	 * @see ExportRegistroProducaoOutput the response payload
     	 */
-    	String EXPORT_REGISTROPRODUCAO_RESPONSE = "exportRegistro_producaoResponse";
+    	String EXPORT_REGISTRO_PRODUCAO_RESPONSE = "exportRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for exportRegistro_producao.
+    	 * An error response primitive for exportRegistroProducao.
     	 *
-    	 * @see #EXPORT_REGISTROPRODUCAO the request primitive
+    	 * @see #EXPORT_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String EXPORT_REGISTROPRODUCAO_ERROR = "exportRegistro_producaoError";
+    	String EXPORT_REGISTRO_PRODUCAO_ERROR = "exportRegistroProducaoError";
     	/**
     	 * Returns a list with all dependencies from this service, along with their respective versions
     	 */
@@ -624,143 +686,143 @@ public interface MyServiceConstants {
     	 */
     	String DELETE_MAQUINA_ERROR = "deleteMaquinaError";
     	/**
-    	 * The 'create' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao the request payload
+    	 * The 'create' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao the request payload
     	 */
-    	String CREATE_REGISTROPRODUCAO = "createRegistro_producao";
+    	String CREATE_REGISTRO_PRODUCAO = "createRegistroProducao";
     	/**
-    	 * The success response primitive for createRegistro_producao.
+    	 * The success response primitive for createRegistroProducao.
     	 *
-    	 * @see #CREATE_REGISTROPRODUCAO the request primitive
+    	 * @see #CREATE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String CREATE_REGISTROPRODUCAO_RESPONSE = "createRegistro_producaoResponse";
+    	String CREATE_REGISTRO_PRODUCAO_RESPONSE = "createRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for createRegistro_producao.
+    	 * An error response primitive for createRegistroProducao.
     	 *
-    	 * @see #CREATE_REGISTROPRODUCAO the request primitive
+    	 * @see #CREATE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String CREATE_REGISTROPRODUCAO_ERROR = "createRegistro_producaoError";
+    	String CREATE_REGISTRO_PRODUCAO_ERROR = "createRegistroProducaoError";
     	/**
-    	 * The 'createBulk' request primitive for the Registro_producao entity.
-    	 * @see CreateBulkRegistro_producaoInput the request payload
+    	 * The 'createBulk' request primitive for the RegistroProducao entity.
+    	 * @see CreateBulkRegistroProducaoInput the request payload
     	 */
-    	String CREATE_BULK_REGISTROPRODUCAO = "createBulkRegistro_producao";
+    	String CREATE_BULK_REGISTRO_PRODUCAO = "createBulkRegistroProducao";
     	/**
-    	 * The success response primitive for createBulkRegistro_producao.
+    	 * The success response primitive for createBulkRegistroProducao.
     	 *
-    	 * @see #CREATE_BULK_REGISTROPRODUCAO the request primitive
-    	 * @see CreateBulkRegistro_producaoOutput the response payload
+    	 * @see #CREATE_BULK_REGISTRO_PRODUCAO the request primitive
+    	 * @see CreateBulkRegistroProducaoOutput the response payload
     	 */
-    	String CREATE_BULK_REGISTROPRODUCAO_RESPONSE = "createBulkRegistro_producaoResponse";
+    	String CREATE_BULK_REGISTRO_PRODUCAO_RESPONSE = "createBulkRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for createBulkRegistro_producao.
+    	 * An error response primitive for createBulkRegistroProducao.
     	 *
-    	 * @see #CREATE_BULK_REGISTROPRODUCAO the request primitive
+    	 * @see #CREATE_BULK_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String CREATE_BULK_REGISTROPRODUCAO_ERROR = "createBulkRegistro_producaoError";
+    	String CREATE_BULK_REGISTRO_PRODUCAO_ERROR = "createBulkRegistroProducaoError";
     	/**
-    	 * The 'createMerge' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao the request payload
+    	 * The 'createMerge' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao the request payload
     	 */
-    	String CREATE_MERGE_REGISTROPRODUCAO = "createMergeRegistro_producao";
+    	String CREATE_MERGE_REGISTRO_PRODUCAO = "createMergeRegistroProducao";
     	/**
-    	 * The success response primitive for createMergeRegistro_producao.
+    	 * The success response primitive for createMergeRegistroProducao.
     	 *
-    	 * @see #CREATE_MERGE_REGISTROPRODUCAO the request primitive
+    	 * @see #CREATE_MERGE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String CREATE_MERGE_REGISTROPRODUCAO_RESPONSE = "createMergeRegistro_producaoResponse";
+    	String CREATE_MERGE_REGISTRO_PRODUCAO_RESPONSE = "createMergeRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for createMergeRegistro_producao.
+    	 * An error response primitive for createMergeRegistroProducao.
     	 *
-    	 * @see #CREATE_MERGE_REGISTROPRODUCAO the request primitive
+    	 * @see #CREATE_MERGE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String CREATE_MERGE_REGISTROPRODUCAO_ERROR = "createMergeRegistro_producaoError";
+    	String CREATE_MERGE_REGISTRO_PRODUCAO_ERROR = "createMergeRegistroProducaoError";
     	/**
-    	 * The 'retrieve' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao.GetRequest the request payload
+    	 * The 'retrieve' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao.GetRequest the request payload
     	 */
-    	String RETRIEVE_REGISTROPRODUCAO = "retrieveRegistro_producao";
+    	String RETRIEVE_REGISTRO_PRODUCAO = "retrieveRegistroProducao";
     	/**
-    	 * The success response primitive for retrieveRegistro_producao.
+    	 * The success response primitive for retrieveRegistroProducao.
     	 *
-    	 * @see #RETRIEVE_REGISTROPRODUCAO the request primitive
+    	 * @see #RETRIEVE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String RETRIEVE_REGISTROPRODUCAO_RESPONSE = "retrieveRegistro_producaoResponse";
+    	String RETRIEVE_REGISTRO_PRODUCAO_RESPONSE = "retrieveRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for retrieveRegistro_producao.
+    	 * An error response primitive for retrieveRegistroProducao.
     	 *
-    	 * @see #RETRIEVE_REGISTROPRODUCAO the request primitive
+    	 * @see #RETRIEVE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String RETRIEVE_REGISTROPRODUCAO_ERROR = "retrieveRegistro_producaoError";
+    	String RETRIEVE_REGISTRO_PRODUCAO_ERROR = "retrieveRegistroProducaoError";
     	/**
-    	 * The 'list' request primitive for the Registro_producao entity.
-    	 * @see registro_producao.pageRequest the request payload
+    	 * The 'list' request primitive for the RegistroProducao entity.
+    	 * @see registroProducao.pageRequest the request payload
     	 */
-    	String LIST_REGISTROPRODUCAO = "listRegistro_producao";
+    	String LIST_REGISTRO_PRODUCAO = "listRegistroProducao";
     	/**
-    	 * The success response primitive for listRegistro_producao.
+    	 * The success response primitive for listRegistroProducao.
     	 *
-    	 * @see #LIST_REGISTROPRODUCAO the request primitive
-    	 * @see Registro_producao.PagedResults the response payload
+    	 * @see #LIST_REGISTRO_PRODUCAO the request primitive
+    	 * @see RegistroProducao.PagedResults the response payload
     	 */
-    	String LIST_REGISTROPRODUCAO_RESPONSE = "listRegistro_producaoResponse";
+    	String LIST_REGISTRO_PRODUCAO_RESPONSE = "listRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for listRegistro_producao.
+    	 * An error response primitive for listRegistroProducao.
     	 *
-    	 * @see #LIST_REGISTROPRODUCAO the request primitive
+    	 * @see #LIST_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String LIST_REGISTROPRODUCAO_ERROR = "listRegistro_producaoError";
+    	String LIST_REGISTRO_PRODUCAO_ERROR = "listRegistroProducaoError";
     	/**
-    	 * The 'update' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao the request payload
+    	 * The 'update' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao the request payload
     	 */
-    	String UPDATE_REGISTROPRODUCAO = "updateRegistro_producao";
+    	String UPDATE_REGISTRO_PRODUCAO = "updateRegistroProducao";
     	/**
-    	 * The success response primitive for updateRegistro_producao.
+    	 * The success response primitive for updateRegistroProducao.
     	 *
-    	 * @see #UPDATE_REGISTROPRODUCAO the request primitive
+    	 * @see #UPDATE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String UPDATE_REGISTROPRODUCAO_RESPONSE = "updateRegistro_producaoResponse";
+    	String UPDATE_REGISTRO_PRODUCAO_RESPONSE = "updateRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for updateRegistro_producao.
+    	 * An error response primitive for updateRegistroProducao.
     	 *
-    	 * @see #UPDATE_REGISTROPRODUCAO the request primitive
+    	 * @see #UPDATE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String UPDATE_REGISTROPRODUCAO_ERROR = "updateRegistro_producaoError";
+    	String UPDATE_REGISTRO_PRODUCAO_ERROR = "updateRegistroProducaoError";
     	/**
-    	 * The 'updateMerge' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao the request payload
+    	 * The 'updateMerge' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao the request payload
     	 */
-    	String UPDATE_MERGE_REGISTROPRODUCAO = "updateMergeRegistro_producao";
+    	String UPDATE_MERGE_REGISTRO_PRODUCAO = "updateMergeRegistroProducao";
     	/**
-    	 * The success response primitive for updateMergeRegistro_producao.
+    	 * The success response primitive for updateMergeRegistroProducao.
     	 *
-    	 * @see #UPDATE_MERGE_REGISTROPRODUCAO the request primitive
+    	 * @see #UPDATE_MERGE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String UPDATE_MERGE_REGISTROPRODUCAO_RESPONSE = "updateMergeRegistro_producaoResponse";
+    	String UPDATE_MERGE_REGISTRO_PRODUCAO_RESPONSE = "updateMergeRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for updateMergeRegistro_producao.
+    	 * An error response primitive for updateMergeRegistroProducao.
     	 *
-    	 * @see #UPDATE_MERGE_REGISTROPRODUCAO the request primitive
+    	 * @see #UPDATE_MERGE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String UPDATE_MERGE_REGISTROPRODUCAO_ERROR = "updateMergeRegistro_producaoError";
+    	String UPDATE_MERGE_REGISTRO_PRODUCAO_ERROR = "updateMergeRegistroProducaoError";
     	/**
-    	 * The 'delete' request primitive for the Registro_producao entity.
-    	 * @see Registro_producao.Id the request payload
+    	 * The 'delete' request primitive for the RegistroProducao entity.
+    	 * @see RegistroProducao.Id the request payload
     	 */
-    	String DELETE_REGISTROPRODUCAO = "deleteRegistro_producao";
+    	String DELETE_REGISTRO_PRODUCAO = "deleteRegistroProducao";
     	/**
-    	 * The success response primitive for deleteRegistro_producao.
+    	 * The success response primitive for deleteRegistroProducao.
     	 *
-    	 * @see #DELETE_REGISTROPRODUCAO the request primitive
+    	 * @see #DELETE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String DELETE_REGISTROPRODUCAO_RESPONSE = "deleteRegistro_producaoResponse";
+    	String DELETE_REGISTRO_PRODUCAO_RESPONSE = "deleteRegistroProducaoResponse";
     	/**
-    	 * An error response primitive for deleteRegistro_producao.
+    	 * An error response primitive for deleteRegistroProducao.
     	 *
-    	 * @see #DELETE_REGISTROPRODUCAO the request primitive
+    	 * @see #DELETE_REGISTRO_PRODUCAO the request primitive
     	 */
-    	String DELETE_REGISTROPRODUCAO_ERROR = "deleteRegistro_producaoError";
+    	String DELETE_REGISTRO_PRODUCAO_ERROR = "deleteRegistroProducaoError";
     }
     
     interface Events {
@@ -778,8 +840,8 @@ public interface MyServiceConstants {
     	String EXPORT_FUNCIONARIO_EVENT = "exportFuncionarioEvent";
     	String IMPORT_MAQUINA_EVENT = "importMaquinaEvent";
     	String EXPORT_MAQUINA_EVENT = "exportMaquinaEvent";
-    	String IMPORT_REGISTROPRODUCAO_EVENT = "importRegistro_producaoEvent";
-    	String EXPORT_REGISTROPRODUCAO_EVENT = "exportRegistro_producaoEvent";
+    	String IMPORT_REGISTRO_PRODUCAO_EVENT = "importRegistroProducaoEvent";
+    	String EXPORT_REGISTRO_PRODUCAO_EVENT = "exportRegistroProducaoEvent";
     }
     
 }

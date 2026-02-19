@@ -26,6 +26,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import br.com.senior.mydomain.myservice.Funcionario.Id;
 import br.com.senior.messaging.ErrorCategory;
 import br.com.senior.messaging.customspringdata.CustomOrder;
@@ -56,11 +57,21 @@ public class FuncionarioCrudServiceImpl implements FuncionarioCrudService {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@Autowired(required = false)
+	private FuncionarioCrudValidator validator;
+	
+	private boolean hasValidator() {
+		return validator != null;
+	}
+	
 	@Override
 	@Transactional
 	public FuncionarioEntity create(FuncionarioEntity entity) {
 		prepareSession();
 		try {
+			if (hasValidator()) {
+				validator.beforeCreate(entity);
+			}
 			return this.repository.saveAndFlush(entity);
 		} catch (DataIntegrityViolationException | org.springframework.dao.InvalidDataAccessApiUsageException ex) {
 			if(ex.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
@@ -97,6 +108,9 @@ public class FuncionarioCrudServiceImpl implements FuncionarioCrudService {
 	public FuncionarioEntity updateFuncionario(FuncionarioEntity entity) {
 		prepareSession();
 		try {
+			if (hasValidator()) {
+				validator.beforeUpdate(entity);
+			}
 			return repository.saveAndFlush(entity);
 		} catch (DataIntegrityViolationException | org.springframework.dao.InvalidDataAccessApiUsageException ex) {
 			if (ex.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
@@ -127,6 +141,9 @@ public class FuncionarioCrudServiceImpl implements FuncionarioCrudService {
 	public void deleteFuncionario(Id id) {
 		prepareSession();
 		try {
+			if (hasValidator()) {
+				validator.beforeDelete(id);
+			}
 			repository.deleteById(java.util.UUID.fromString(id.id));
 			repository.flush();
 	    } catch  (EmptyResultDataAccessException ex) {

@@ -27,21 +27,36 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 	
 	public static final String SECURITY_RESOURCE = "res://senior.com.br/my_domain/my_service/entities/funcionario";
 
+	/**
+	 * Identificador único UUID
+	 */
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(name = "id", updatable = false)
 	private java.util.UUID id;
 	
+	/**
+	 * Nome completo do colaborador
+	 */
 	@Column(name = "nome")
 	private String nome;
 	
-	@Column(name = "matricula")
+	/**
+	 * Registro único na empresa
+	 */
+	@Column(name = "matricula", length = 20)
 	private String matricula;
 	
+	/**
+	 * Função técnica na metalurgia
+	 */
 	@Column(name = "cargo")
 	private String cargo;
 	
+	/**
+	 * Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO
+	 */
 	@Enumerated(EnumType.STRING)
 	@Column(name = "turno")
 	private TurnoFuncionario turno;

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import br.com.senior.messaging.model.EntityDescription;
 import br.com.senior.messaging.model.EntityId;
 import br.com.senior.custom.CustomDTO;
 
+/**
+ * Entidade da peça com as informações
+ */
 @EntityDescription
 public class Peca extends CustomDTO {
     
@@ -108,19 +112,48 @@ public class Peca extends CustomDTO {
     }
 
     @EntityId
+    /**
+     * Identificador único UUID
+     */
     public String id;
     
+    /**
+     * Nome descritivo do item
+     */
     @NotNull(message = "nome is required")
+    @Size(max = 100, message = "nome max length is {max}")
     public String nome;
     
+    /**
+     * Referência técnica do projeto
+     */
     @NotNull(message = "codigoDesenho is required")
+    @Size(max = 50, message = "codigoDesenho max length is {max}")
     public String codigoDesenho;
     
+    /**
+     * Tempo previsto para fabricação
+     */
     @NotNull(message = "tempoEstimadoMinutos is required")
     public Long tempoEstimadoMinutos;
     
+    /**
+     * Estado atual: PENDENTE, PROCESSO, FINALIZADO, MORTA
+     */
     @NotNull(message = "status is required")
     public StatusPeca status;
+    
+    /**
+     * Valor da peça
+     */
+    @NotNull(message = "valor is required")
+    public java.math.BigDecimal valor;
+    
+    /**
+     * Motivo pela perda peça quando o status da peça é morta
+     */
+    @NotNull(message = "motivoPerda is required")
+    public String motivoPerda;
     
     
 	private List<JsonPatch> jsonPatches;
@@ -131,22 +164,26 @@ public class Peca extends CustomDTO {
     /** 
      * This constructor allows initialization of all fields, required and optional.
      */
-    public Peca(String id, String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status, List<JsonPatch> jsonPatches) {
+    public Peca(String id, String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status, java.math.BigDecimal valor, String motivoPerda, List<JsonPatch> jsonPatches) {
         this.id = id;
         this.nome = nome;
         this.codigoDesenho = codigoDesenho;
         this.tempoEstimadoMinutos = tempoEstimadoMinutos;
         this.status = status;
+        this.valor = valor;
+        this.motivoPerda = motivoPerda;
         this.jsonPatches = jsonPatches;
     }
     /** 
      * This convenience constructor allows initialization of all required fields.
      */
-    public Peca(String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status) {
+    public Peca(String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status, java.math.BigDecimal valor, String motivoPerda) {
         this.nome = nome;
         this.codigoDesenho = codigoDesenho;
         this.tempoEstimadoMinutos = tempoEstimadoMinutos;
         this.status = status;
+        this.valor = valor;
+        this.motivoPerda = motivoPerda;
     }
     
     public void normalize(Map<String, Object> headers) {

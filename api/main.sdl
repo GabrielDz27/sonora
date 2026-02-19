@@ -1,0 +1,24 @@
+domain my_domain
+
+service my_service {
+    endpoints {
+    // add actions, queries, events and signals here
+        query helloWorld {
+            in {
+                who : string
+            }
+            out {
+                helloWorldMessage : string
+            }
+        }
+
+    }
+    types {
+    // define records and enumerations here
+
+    }
+    entities {
+    // define any entities here
+
+    }
+} 

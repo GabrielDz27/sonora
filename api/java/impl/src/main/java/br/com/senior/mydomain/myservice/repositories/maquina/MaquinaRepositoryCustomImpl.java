@@ -1,4 +1,4 @@
-package br.com.senior.mydomain.myservice.repositories;
+package br.com.senior.mydomain.myservice.repositories.maquina;
 
 import br.com.senior.mydomain.myservice.MaquinaEntity;
 import br.com.senior.mydomain.myservice.QMaquinaEntity;

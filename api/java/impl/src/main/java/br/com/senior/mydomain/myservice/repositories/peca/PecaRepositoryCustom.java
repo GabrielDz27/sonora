@@ -1,4 +1,4 @@
-package br.com.senior.mydomain.myservice.repositories;
+package br.com.senior.mydomain.myservice.repositories.peca;
 
 import br.com.senior.mydomain.myservice.PecaEntity;
 

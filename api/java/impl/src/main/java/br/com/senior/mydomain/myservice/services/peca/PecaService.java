@@ -5,13 +5,12 @@ import br.com.senior.messaging.model.ServiceException;
 import br.com.senior.mydomain.myservice.PecaEntity;
 import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;
 import br.com.senior.mydomain.myservice.StatusPeca;
-import br.com.senior.mydomain.myservice.repositories.PecaRepository;
+import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
 import br.com.senior.platform.translationhub.api.TranslationHubApi;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.validation.Valid;
 
 
+/**
+ * Retorno de quantidade de peca trabalhada por funcionario para retornoRelatorio
+ */
 public class PecaFuncionario {
     
     @Valid

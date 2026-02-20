@@ -5,6 +5,9 @@ package br.com.senior.mydomain.myservice;
 
 import br.com.senior.messaging.model.*;
 
+/**
+ * Endpoint para teste
+ */
 @CommandDescription(name="helloWorld", kind=CommandKind.Query, requestPrimitive="helloWorld", responsePrimitive="helloWorldResponse")
 public interface HelloWorld extends MessageHandler {
     

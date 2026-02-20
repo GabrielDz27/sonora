@@ -1,0 +1,6 @@
+br\com\senior\mydomain\myservice\services\registroproducao\RegistroProducaoService.class
+br\com\senior\mydomain\myservice\handler\maquina\GetMaquinaAtivaHandlerImpl.class
+br\com\senior\mydomain\myservice\services\funcionario\FuncionarioService.class
+br\com\senior\mydomain\myservice\services\maquina\MaquinaService.class
+br\com\senior\mydomain\myservice\services\maquina\MaquinaRepositoryCustomImpl.class
+br\com\senior\mydomain\myservice\repositories\MaquinaRepositoryCustom.class

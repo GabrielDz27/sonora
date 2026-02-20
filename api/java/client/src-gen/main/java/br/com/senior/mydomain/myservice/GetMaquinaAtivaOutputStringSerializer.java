@@ -23,7 +23,15 @@ public class GetMaquinaAtivaOutputStringSerializer {
 		if (getMaquinaAtivaOutput.maquina == null) {
 			sb.append("null");
 		} else {
-			getMaquinaAtivaOutput.maquina.toString(sb, appended);
+			sb.append('[');
+			int last = getMaquinaAtivaOutput.maquina.size() - 1;
+			for (int i = 0; i <= last; i++) {
+				getMaquinaAtivaOutput.maquina.get(i).toString(sb, appended);
+				if (i < last) {
+					sb.append(", ");
+				}
+			}
+			sb.append(']');
 		}
 		sb.append('>');
 	}

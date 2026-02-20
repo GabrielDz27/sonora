@@ -1,0 +1,2 @@
+ALTER TABLE funcionario ADD COLUMN
+    ativo BOOLEAN NOT NULL

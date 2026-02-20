@@ -69,6 +69,9 @@ public class FuncionarioDTOConverter {
 		if (dto.turno != null) {
 			entity.setTurno(dto.turno);
 		}
+		if (dto.ativo != null) {
+			entity.setAtivo(dto.ativo);
+		}
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -92,6 +95,7 @@ public class FuncionarioDTOConverter {
 		entity.setMatricula(dto.matricula);
 		entity.setCargo(dto.cargo);
 		entity.setTurno(dto.turno);
+		entity.setAtivo(dto.ativo);
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -130,6 +134,7 @@ public class FuncionarioDTOConverter {
 		dto.matricula = entity.getMatricula();
 		dto.cargo = entity.getCargo();
 		dto.turno = entity.getTurno();
+		dto.ativo = entity.getAtivo();
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -171,6 +176,10 @@ public class FuncionarioDTOConverter {
 		if (displayFields.stream().anyMatch(displayField -> "turno".equals(displayField) || "*".equals(displayField))) {
 			dto.turno = entity.getTurno();
 		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "ativo".equals(displayField) || "*".equals(displayField))) {
+			dto.ativo = entity.getAtivo();
+		}
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -207,6 +216,10 @@ public class FuncionarioDTOConverter {
 		
 		if (displayFields.stream().anyMatch(displayField -> "turno".equals(displayField) || "*".equals(displayField))) {
 			dto.turno = entity.getTurno();
+		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "ativo".equals(displayField) || "*".equals(displayField))) {
+			dto.ativo = entity.getAtivo();
 		}
         return dto;
     }
@@ -269,6 +282,9 @@ public class FuncionarioDTOConverter {
 		}
 		if("turno".equals(jsonPatch.getPath().replace("/", ""))) {
 			entity.setTurno(null);
+		}
+		if("ativo".equals(jsonPatch.getPath().replace("/", ""))) {
+			entity.setAtivo(null);
 		}
 	}
 }

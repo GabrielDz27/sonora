@@ -123,6 +123,7 @@
             "endpointType" : "command",
             "kind": "action",
             "priority" : "NORMAL",
+            "documentation": "Quando for feito alguma parte do processo, precisa informar o status",
             "input" : {
                 "id" : {
                     "type": "string",
@@ -1020,12 +1021,13 @@
             "endpointType" : "command",
             "kind": "query",
             "priority" : "NORMAL",
+            "documentation": "Diretamente ja trazendo as maquinas ativas",
             "idempotent": true,
             "output" : {
                 "maquina" : {
                     "type": "maquina",
                     "optional": true,
-                    "multivalued": false,
+                    "multivalued": true,
                     "readOnly": false
                 }
             },
@@ -1059,12 +1061,13 @@
             "endpointType" : "command",
             "kind": "query",
             "priority" : "NORMAL",
+            "documentation": "Trazendo todas pecas conforme o filtro",
             "idempotent": true,
             "output" : {
                 "peca" : {
                     "type": "peca",
-                    "optional": false,
-                    "multivalued": false,
+                    "optional": true,
+                    "multivalued": true,
                     "readOnly": false
                 }
             },
@@ -1078,6 +1081,7 @@
             "endpointType" : "command",
             "kind": "query",
             "priority" : "NORMAL",
+            "documentation": "Endpoint para teste",
             "idempotent": true,
             "input" : {
                 "who" : {
@@ -1441,6 +1445,13 @@
                 "optional": false,
                 "multivalued": false,
                 "documentation": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
+                "readOnly": false
+            },
+            "ativo" : {
+                "type": "boolean",
+                "optional": false,
+                "multivalued": false,
+                "documentation": "Ativo, se funcionario foi deseligado na empresa ou foi reativado",
                 "readOnly": false
             }
         },
@@ -2337,6 +2348,13 @@
                     "optional": false,
                     "multivalued": false,
                     "documentation": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
+                    "readOnly": false
+                },
+                "ativo" : {
+                    "type": "boolean",
+                    "optional": false,
+                    "multivalued": false,
+                    "documentation": "Ativo, se funcionario foi deseligado na empresa ou foi reativado",
                     "readOnly": false
                 }
             }    

@@ -2,6 +2,7 @@ domain my_domain
 
 service my_service {
     endpoints {
+        "Endpoint para teste"
         query helloWorld {
             in {
                 who : string
@@ -11,6 +12,7 @@ service my_service {
             }
         }
 
+        "Quando for feito alguma parte do processo, precisa informar o status"
         action mudarStatusPeca {
             in {
                 id: string
@@ -22,15 +24,17 @@ service my_service {
             }
         }
 
+        "Diretamente ja trazendo as maquinas ativas"
         query getMaquinaAtiva {
             out {
-               maquina: maquina?
+               maquina: maquina?*
             }
         }
 
+        "Trazendo todas pecas conforme o filtro"
         query getPecaPendente {
             out {
-                peca: peca
+                peca: peca?*
             }
         }
 
@@ -52,22 +56,26 @@ service my_service {
 
     types {
         //Record
+        "Retorno do endpoint do relatorio com seus records conforme os dados"
         record retornoRelatorio {
             maquinaTrabalhando: maquinaTrabalhando?*
             pecaMortas: integer minValue: 0
             pecaFuncionario: pecaFuncionario?*
         }
 
+        "Retorno das horas trabalhadas por maquina para retornoRelatorio"
         record maquinaTrabalhando {
             maquina: maquina?
             horas: integer minValue: 0
         }
 
+        "Retorno de quantidade de peca trabalhada por funcionario para retornoRelatorio"
         record pecaFuncionario {
             peca: peca?
             funcionario: funcionario?
         }
 
+        "Retorno Dos status atualizado, generico para quando usar em outros actions"
         record retornoAtualizarStatus {
             mensagemRetorno: string
             id : string
@@ -144,6 +152,9 @@ service my_service {
 
             "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
             turno: turnoFuncionario
+
+            "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
+            ativo: boolean
         }
 
         "Entidade da máquina/equipamento"

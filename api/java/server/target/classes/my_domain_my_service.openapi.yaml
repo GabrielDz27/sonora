@@ -251,7 +251,7 @@ paths:
   
   /rest/my_domain/my_service/queries/getPecaPendente:
     post:
-      description: ""
+      description: "Trazendo todas pecas conforme o filtro"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -270,13 +270,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - peca
                 properties:
                   peca:
-                    type: object
-                    allOf:
-                      - $ref: '#/components/schemas/peca'
+                    type: array
+                    items:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/peca'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -287,7 +287,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
     get:
-      description: ""
+      description: "Trazendo todas pecas conforme o filtro"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -300,13 +300,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - peca
                 properties:
                   peca:
-                    type: object
-                    allOf:
-                      - $ref: '#/components/schemas/peca'
+                    type: array
+                    items:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/peca'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -319,7 +319,7 @@ paths:
   
   /rest/my_domain/my_service/queries/helloWorld:
     post:
-      description: ""
+      description: "Endpoint para teste"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -365,7 +365,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
     get:
-      description: ""
+      description: "Endpoint para teste"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -613,7 +613,7 @@ paths:
   
   /rest/my_domain/my_service/queries/getMaquinaAtiva:
     post:
-      description: ""
+      description: "Diretamente ja trazendo as maquinas ativas"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -634,9 +634,11 @@ paths:
                 type: object
                 properties:
                   maquina:
-                    type: object
-                    allOf:
-                      - $ref: '#/components/schemas/maquina'
+                    type: array
+                    items:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/maquina'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -647,7 +649,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
     get:
-      description: ""
+      description: "Diretamente ja trazendo as maquinas ativas"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
@@ -662,9 +664,11 @@ paths:
                 type: object
                 properties:
                   maquina:
-                    type: object
-                    allOf:
-                      - $ref: '#/components/schemas/maquina'
+                    type: array
+                    items:
+                      type: object
+                      allOf:
+                        - $ref: '#/components/schemas/maquina'
                     description: ""
         401:
           description: "Invalid Credentials"
@@ -826,7 +830,7 @@ paths:
   
   /rest/my_domain/my_service/actions/mudarStatusPeca:
     post:
-      description: ""
+      description: "Quando for feito alguma parte do processo, precisa informar o status"
       tags:
         - Actions
       x-senior-visibility: PRIVATE
@@ -2004,7 +2008,7 @@ components:
         - SERVICE_ERROR
       
     retornoRelatorio:
-      description: ""
+      description: "Retorno do endpoint do relatorio com seus records conforme os dados"
       type: object
       required:
         - pecaMortas
@@ -2030,7 +2034,7 @@ components:
           description: ""
     
     maquinaTrabalhando:
-      description: ""
+      description: "Retorno das horas trabalhadas por maquina para retornoRelatorio"
       type: object
       required:
         - horas
@@ -2047,7 +2051,7 @@ components:
           minimum: 0
     
     pecaFuncionario:
-      description: ""
+      description: "Retorno de quantidade de peca trabalhada por funcionario para retornoRelatorio"
       type: object
       properties:
         peca:
@@ -2062,7 +2066,7 @@ components:
           description: ""
     
     retornoAtualizarStatus:
-      description: ""
+      description: "Retorno Dos status atualizado, generico para quando usar em outros actions"
       type: object
       required:
         - mensagemRetorno
@@ -2125,6 +2129,7 @@ components:
         - matricula
         - cargo
         - turno
+        - ativo
       properties:
         id:
           type: string
@@ -2145,6 +2150,9 @@ components:
           allOf:
           - $ref: '#/components/schemas/turnoFuncionario'
           description: "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
+        ativo:
+          type: boolean
+          description: "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
     
     maquina:
       description: "Entidade da máquina/equipamento"

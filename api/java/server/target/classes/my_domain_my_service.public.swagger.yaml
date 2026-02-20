@@ -170,7 +170,7 @@ definitions:
       - SERVICE_ERROR
     
   retornoRelatorio:
-    description: ""
+    description: "Retorno do endpoint do relatorio com seus records conforme os dados"
     type: object
     required:
       - pecaMortas
@@ -196,7 +196,7 @@ definitions:
         description: ""
   
   maquinaTrabalhando:
-    description: ""
+    description: "Retorno das horas trabalhadas por maquina para retornoRelatorio"
     type: object
     required:
       - horas
@@ -213,7 +213,7 @@ definitions:
         minimum: 0
   
   pecaFuncionario:
-    description: ""
+    description: "Retorno de quantidade de peca trabalhada por funcionario para retornoRelatorio"
     type: object
     properties:
       peca:
@@ -228,7 +228,7 @@ definitions:
         description: ""
   
   retornoAtualizarStatus:
-    description: ""
+    description: "Retorno Dos status atualizado, generico para quando usar em outros actions"
     type: object
     required:
       - mensagemRetorno
@@ -291,6 +291,7 @@ definitions:
       - matricula
       - cargo
       - turno
+      - ativo
     properties:
       id:
         type: string
@@ -311,6 +312,9 @@ definitions:
         allOf:
         - $ref: '#/definitions/turnoFuncionario'
         description: "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO"
+      ativo:
+        type: boolean
+        description: "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
   
   maquina:
     description: "Entidade da máquina/equipamento"

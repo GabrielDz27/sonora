@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
 
 
+/**
+ * Retorno do endpoint do relatorio com seus records conforme os dados
+ */
 public class RetornoRelatorio {
     
     @Valid

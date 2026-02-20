@@ -143,6 +143,8 @@
             </xsd:element>
             <xsd:element name="turno" type="turnoFuncionario" minOccurs="1" maxOccurs="1"  readOnly="false">
             </xsd:element>
+            <xsd:element name="ativo" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="maquina">
@@ -1057,7 +1059,13 @@
     <xsd:element name="getMaquinaAtivaOutput">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="maquina" type="maquina" minOccurs="0" maxOccurs="1"  readOnly="false">
+                <!-- collection wrapper for maquina -->
+                <xsd:element name="maquina" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="maquina" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
@@ -1076,7 +1084,13 @@
     <xsd:element name="getPecaPendenteOutput">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="peca" type="peca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                <!-- collection wrapper for peca -->
+                <xsd:element name="peca" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="peca" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>

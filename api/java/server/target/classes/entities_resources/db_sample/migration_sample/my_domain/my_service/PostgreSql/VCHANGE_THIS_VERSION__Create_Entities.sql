@@ -1,4 +1,4 @@
-/* Database: PostgreSql. Generation date: 2026-02-19 16:24:56:200 */
+/* Database: PostgreSql. Generation date: 2026-02-20 11:50:33:843 */
 /* Entity Peca */
 create table peca (
 	id UUID NOT NULL,
@@ -22,6 +22,7 @@ create table funcionario (
 	matricula VARCHAR(20) NOT NULL,
 	cargo VARCHAR(255) NOT NULL,
 	turno VARCHAR(255) NOT NULL,
+	ativo BOOLEAN NOT NULL,
 	ext JSONB
 );
 
@@ -65,9 +66,9 @@ alter table maquina add constraint pk_maquina_id primary key(id);
 alter table registro_producao add constraint pk_registro_producao_id primary key(id);
 
 /* Foreign Key Constraints */
-alter table registro_producao add constraint fkecefuaspjz0bhnygu0ubaogi3o8t foreign key (peca) references peca (id);
-alter table registro_producao add constraint fkb20qkuhq3xnqxszrqbwlo9isyra4 foreign key (funcionario) references funcionario (id);
-alter table registro_producao add constraint fkuu0vz7rdnzdrgvvqmt44pvwgfoxk foreign key (maquina) references maquina (id);
+alter table registro_producao add constraint fkv7fobtimjz6dehhdj87jqcusi04w foreign key (peca) references peca (id);
+alter table registro_producao add constraint fkwuuzadypblyd1owhzl42gp3qzkw9 foreign key (funcionario) references funcionario (id);
+alter table registro_producao add constraint fkotx9kymwkxklm6rrbgcvxjy16j3v foreign key (maquina) references maquina (id);
 
 /* Unique Key Constraints */
 

@@ -5,6 +5,9 @@ package br.com.senior.mydomain.myservice;
 
 import br.com.senior.messaging.model.*;
 
+/**
+ * Quando for feito alguma parte do processo, precisa informar o status
+ */
 @CommandDescription(name="mudarStatusPeca", kind=CommandKind.Action, requestPrimitive="mudarStatusPeca", responsePrimitive="mudarStatusPecaResponse")
 public interface MudarStatusPeca extends MessageHandler {
     

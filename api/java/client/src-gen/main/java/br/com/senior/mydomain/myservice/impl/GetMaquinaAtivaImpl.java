@@ -57,7 +57,7 @@ public class GetMaquinaAtivaImpl {
 	/**
 	* Chamada síncrona para o método getMaquinaAtiva
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	*  
+	* Diretamente ja trazendo as maquinas ativas 
 	* @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	*/
 	public GetMaquinaAtivaOutput getMaquinaAtiva(long timeout) {
@@ -89,7 +89,7 @@ public class GetMaquinaAtivaImpl {
 	/**
 	* Chamada assíncrona para o método getMaquinaAtiva
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Diretamente ja trazendo as maquinas ativas
 	*/
 	public void getMaquinaAtiva() {
 		Message message = createMessage();
@@ -104,7 +104,7 @@ public class GetMaquinaAtivaImpl {
 	/**
 	* Chamada assíncrona para o método getMaquinaAtiva
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Diretamente ja trazendo as maquinas ativas
 	*/
 	@Deprecated
 	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest() {
@@ -121,7 +121,7 @@ public class GetMaquinaAtivaImpl {
 	/**
 	* Chamada assíncrona para o método getMaquinaAtiva
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Diretamente ja trazendo as maquinas ativas
 	*/
 	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest(long timeout, TimeUnit unit) {
 	

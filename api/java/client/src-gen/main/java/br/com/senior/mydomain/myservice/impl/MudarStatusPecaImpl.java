@@ -59,7 +59,7 @@ public class MudarStatusPecaImpl {
 	/**
 	* Chamada síncrona para o método mudarStatusPeca
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	*  
+	* Quando for feito alguma parte do processo, precisa informar o status 
 	* @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	*/
 	public MudarStatusPecaOutput mudarStatusPeca(MudarStatusPecaInput input, long timeout) {
@@ -93,7 +93,7 @@ public class MudarStatusPecaImpl {
 	/**
 	* Chamada assíncrona para o método mudarStatusPeca
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Quando for feito alguma parte do processo, precisa informar o status
 	*/
 	public void mudarStatusPeca(MudarStatusPecaInput input) {
 		MyServiceValidator.validate(input);
@@ -110,7 +110,7 @@ public class MudarStatusPecaImpl {
 	/**
 	* Chamada assíncrona para o método mudarStatusPeca
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Quando for feito alguma parte do processo, precisa informar o status
 	*/
 	@Deprecated
 	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input) {
@@ -128,7 +128,7 @@ public class MudarStatusPecaImpl {
 	/**
 	* Chamada assíncrona para o método mudarStatusPeca
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Quando for feito alguma parte do processo, precisa informar o status
 	*/
 	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input, long timeout, TimeUnit unit) {
 		MyServiceValidator.validate(input);

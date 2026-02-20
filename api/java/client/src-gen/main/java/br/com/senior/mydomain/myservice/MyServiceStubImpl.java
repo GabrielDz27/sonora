@@ -45,7 +45,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada síncrona para o método helloWorld
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
@@ -57,7 +57,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método helloWorld
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 */
 	@Override
 	public void helloWorld(HelloWorldInput input) {
@@ -68,7 +68,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método helloWorld
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 */
 	@Override
 	public CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input) {
@@ -78,7 +78,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método helloWorld
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	*/
 	@Override
 	public CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input, long timeout) {
@@ -88,7 +88,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada síncrona para o método mudarStatusPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
@@ -100,7 +100,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método mudarStatusPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 */
 	@Override
 	public void mudarStatusPeca(MudarStatusPecaInput input) {
@@ -111,7 +111,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método mudarStatusPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 */
 	@Override
 	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input) {
@@ -121,7 +121,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método mudarStatusPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	*/
 	@Override
 	public CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input, long timeout) {
@@ -131,7 +131,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada síncrona para o método getMaquinaAtiva
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
@@ -143,7 +143,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getMaquinaAtiva
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 */
 	@Override
 	public void getMaquinaAtiva() {
@@ -154,7 +154,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getMaquinaAtiva
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 */
 	@Override
 	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest() {
@@ -164,7 +164,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getMaquinaAtiva
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	*/
 	@Override
 	public CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest(long timeout) {
@@ -174,7 +174,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada síncrona para o método getPecaPendente
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
@@ -186,7 +186,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getPecaPendente
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 */
 	@Override
 	public void getPecaPendente() {
@@ -197,7 +197,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getPecaPendente
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 */
 	@Override
 	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest() {
@@ -207,7 +207,7 @@ public class MyServiceStubImpl  implements MyServiceStub {
 	/**
 	 * Chamada assíncrona para o método getPecaPendente
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	*/
 	@Override
 	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout) {

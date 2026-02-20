@@ -1,4 +1,4 @@
-/* Database: Oracle. Generation date: 2026-02-19 16:24:56:223 */
+/* Database: Oracle. Generation date: 2026-02-20 11:50:33:863 */
 /* Entity Peca */
 create table peca (
 	id RAW(16) NOT NULL,
@@ -23,6 +23,7 @@ create table funcionario (
 	matricula VARCHAR(20) NOT NULL,
 	cargo VARCHAR(255) NOT NULL,
 	turno VARCHAR(255) NOT NULL,
+	ativo NUMBER(1) NOT NULL,
 	ext CLOB,
 	CONSTRAINT funcionario_JSON_ext CHECK (ext IS JSON)
 );
@@ -69,9 +70,9 @@ alter table maquina add constraint pk_maquina_id primary key(id);
 alter table registro_producao add constraint pk_registro_producao_id primary key(id);
 
 /* Foreign Key Constraints */
-alter table registro_producao add constraint fkb17bnqlqqshewjelzdrl6vpizt8k foreign key (peca) references peca (id);
-alter table registro_producao add constraint fkkh5gav28yquhpldsfnvfdcwvnjor foreign key (funcionario) references funcionario (id);
-alter table registro_producao add constraint fkakeh7hwjb5oocp7sduynfqrcuv23 foreign key (maquina) references maquina (id);
+alter table registro_producao add constraint fkvzpzb9fpvq4vbstsfeo2cpgfad82 foreign key (peca) references peca (id);
+alter table registro_producao add constraint fkxkbdmqtgavrqssbeaaueyifrhqk5 foreign key (funcionario) references funcionario (id);
+alter table registro_producao add constraint fkpwcbw06tyzsapsyet9uehb2p4ijf foreign key (maquina) references maquina (id);
 
 /* Unique Key Constraints */
 

@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
 
 
+/**
+ * Retorno das horas trabalhadas por maquina para retornoRelatorio
+ */
 public class MaquinaTrabalhando {
     
     @Valid

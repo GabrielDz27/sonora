@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.Valid;
 
 
 public class GetPecaPendenteOutput {
     
-    @NotNull(message = "peca is required")
     @Valid
-    public Peca peca;
+    public java.util.List<Peca> peca;
     
     
     public GetPecaPendenteOutput() {
@@ -21,7 +19,7 @@ public class GetPecaPendenteOutput {
     /** 
      * This constructor allows initialization of all fields, required and optional.
      */
-    public GetPecaPendenteOutput(Peca peca) {
+    public GetPecaPendenteOutput(java.util.List<Peca> peca) {
         this.peca = peca;
     }
     

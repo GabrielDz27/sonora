@@ -59,7 +59,7 @@ public class HelloWorldImpl {
 	/**
 	* Chamada síncrona para o método helloWorld
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	*  
+	* Endpoint para teste 
 	* @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	*/
 	public HelloWorldOutput helloWorld(HelloWorldInput input, long timeout) {
@@ -93,7 +93,7 @@ public class HelloWorldImpl {
 	/**
 	* Chamada assíncrona para o método helloWorld
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Endpoint para teste
 	*/
 	public void helloWorld(HelloWorldInput input) {
 		MyServiceValidator.validate(input);
@@ -110,7 +110,7 @@ public class HelloWorldImpl {
 	/**
 	* Chamada assíncrona para o método helloWorld
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Endpoint para teste
 	*/
 	@Deprecated
 	public CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input) {
@@ -128,7 +128,7 @@ public class HelloWorldImpl {
 	/**
 	* Chamada assíncrona para o método helloWorld
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Endpoint para teste
 	*/
 	public CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input, long timeout, TimeUnit unit) {
 		MyServiceValidator.validate(input);

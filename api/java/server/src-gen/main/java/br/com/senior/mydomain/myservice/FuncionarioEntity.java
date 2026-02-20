@@ -61,6 +61,12 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 	@Column(name = "turno")
 	private TurnoFuncionario turno;
 	
+	/**
+	 * Ativo, se funcionario foi deseligado na empresa ou foi reativado
+	 */
+	@Column(name = "ativo")
+	private Boolean ativo;
+	
 	@Transient
 	private boolean _newEntity;
 	
@@ -94,6 +100,10 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 		return turno;
 	}
 	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+	
 	public void setId(java.util.UUID id) {
 		this.id = id;
 	}
@@ -112,6 +122,10 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 	
 	public void setTurno(TurnoFuncionario turno) {
 		this.turno = turno;
+	}
+	
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	@Override

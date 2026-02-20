@@ -10,7 +10,7 @@ import javax.validation.Valid;
 public class GetMaquinaAtivaOutput {
     
     @Valid
-    public Maquina maquina;
+    public java.util.List<Maquina> maquina;
     
     
     public GetMaquinaAtivaOutput() {
@@ -19,7 +19,7 @@ public class GetMaquinaAtivaOutput {
     /** 
      * This constructor allows initialization of all fields, required and optional.
      */
-    public GetMaquinaAtivaOutput(Maquina maquina) {
+    public GetMaquinaAtivaOutput(java.util.List<Maquina> maquina) {
         this.maquina = maquina;
     }
     

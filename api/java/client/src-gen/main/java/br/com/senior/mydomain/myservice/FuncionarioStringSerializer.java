@@ -23,6 +23,8 @@ public class FuncionarioStringSerializer {
 		sb.append(", ");
 		serializeTurno(funcionario, sb);
 		sb.append(", ");
+		serializeAtivo(funcionario, sb);
+		sb.append(", ");
 		sb.append(']');
 	}
 	
@@ -44,5 +46,9 @@ public class FuncionarioStringSerializer {
 	
 	protected void serializeTurno(Funcionario funcionario, StringBuilder sb) {
 		sb.append("turno=").append(funcionario.turno == null ? "null" : funcionario.turno);
+	}
+	
+	protected void serializeAtivo(Funcionario funcionario, StringBuilder sb) {
+		sb.append("ativo=").append(funcionario.ativo == null ? "null" : funcionario.ativo);
 	}
 }

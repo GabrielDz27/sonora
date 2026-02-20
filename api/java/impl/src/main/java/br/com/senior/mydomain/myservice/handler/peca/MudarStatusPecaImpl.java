@@ -1,4 +1,4 @@
-package br.com.senior.mydomain.myservice.handler;
+package br.com.senior.mydomain.myservice.handler.peca;
 
 import br.com.senior.messaging.model.HandlerImpl;
 import br.com.senior.mydomain.myservice.MudarStatusPeca;
@@ -18,15 +18,7 @@ public class MudarStatusPecaImpl implements MudarStatusPeca {
     @Override
     public MudarStatusPecaOutput mudarStatusPeca(MudarStatusPecaInput request) {
 
-
-
         RetornoAtualizarStatus retornoAtualizarStatus = pecaService.atualizarStatus(request.id, request.status);
-
-        final MudarStatusPecaOutput mudarStatusPecaOutput = new MudarStatusPecaOutput();
-        mudarStatusPecaOutput.retorno.contemErro=null;
-        mudarStatusPecaOutput.retorno.id=null;
-
-        mudarStatusPecaOutput.retorno.mensagemRetorno="Sucesso";
-        return null;
+        return new MudarStatusPecaOutput(retornoAtualizarStatus);
     }
 }

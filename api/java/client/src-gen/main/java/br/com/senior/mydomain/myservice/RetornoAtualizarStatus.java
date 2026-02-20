@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.validation.constraints.NotNull;
 
 
+/**
+ * Retorno Dos status atualizado, generico para quando usar em outros actions
+ */
 public class RetornoAtualizarStatus {
     
     @NotNull(message = "mensagemRetorno is required")

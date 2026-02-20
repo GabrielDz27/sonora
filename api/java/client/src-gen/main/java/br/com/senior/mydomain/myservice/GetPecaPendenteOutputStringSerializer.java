@@ -23,7 +23,15 @@ public class GetPecaPendenteOutputStringSerializer {
 		if (getPecaPendenteOutput.peca == null) {
 			sb.append("null");
 		} else {
-			getPecaPendenteOutput.peca.toString(sb, appended);
+			sb.append('[');
+			int last = getPecaPendenteOutput.peca.size() - 1;
+			for (int i = 0; i <= last; i++) {
+				getPecaPendenteOutput.peca.get(i).toString(sb, appended);
+				if (i < last) {
+					sb.append(", ");
+				}
+			}
+			sb.append(']');
 		}
 		sb.append('>');
 	}

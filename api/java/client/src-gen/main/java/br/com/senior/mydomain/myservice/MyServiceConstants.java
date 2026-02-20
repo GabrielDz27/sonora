@@ -9,6 +9,7 @@ public interface MyServiceConstants {
     
     interface Commands {
     	/**
+    	 * Endpoint para teste
     	 * @see HelloWorldInput the request payload
     	 */
     	String HELLO_WORLD = "helloWorld";
@@ -26,6 +27,7 @@ public interface MyServiceConstants {
     	 */
     	String HELLO_WORLD_ERROR = "helloWorldError";
     	/**
+    	 * Quando for feito alguma parte do processo, precisa informar o status
     	 * @see MudarStatusPecaInput the request payload
     	 */
     	String MUDAR_STATUS_PECA = "mudarStatusPeca";
@@ -42,6 +44,9 @@ public interface MyServiceConstants {
     	 * @see #MUDAR_STATUS_PECA the request primitive
     	 */
     	String MUDAR_STATUS_PECA_ERROR = "mudarStatusPecaError";
+    	/**
+    	 * Diretamente ja trazendo as maquinas ativas
+    	 */
     	String GET_MAQUINA_ATIVA = "getMaquinaAtiva";
     	/**
     	 * The success response primitive for getMaquinaAtiva.
@@ -56,6 +61,9 @@ public interface MyServiceConstants {
     	 * @see #GET_MAQUINA_ATIVA the request primitive
     	 */
     	String GET_MAQUINA_ATIVA_ERROR = "getMaquinaAtivaError";
+    	/**
+    	 * Trazendo todas pecas conforme o filtro
+    	 */
     	String GET_PECA_PENDENTE = "getPecaPendente";
     	/**
     	 * The success response primitive for getPecaPendente.

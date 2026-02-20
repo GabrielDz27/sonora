@@ -57,7 +57,7 @@ public class GetPecaPendenteImpl {
 	/**
 	* Chamada síncrona para o método getPecaPendente
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	*  
+	* Trazendo todas pecas conforme o filtro 
 	* @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	*/
 	public GetPecaPendenteOutput getPecaPendente(long timeout) {
@@ -89,7 +89,7 @@ public class GetPecaPendenteImpl {
 	/**
 	* Chamada assíncrona para o método getPecaPendente
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Trazendo todas pecas conforme o filtro
 	*/
 	public void getPecaPendente() {
 		Message message = createMessage();
@@ -104,7 +104,7 @@ public class GetPecaPendenteImpl {
 	/**
 	* Chamada assíncrona para o método getPecaPendente
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Trazendo todas pecas conforme o filtro
 	*/
 	@Deprecated
 	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest() {
@@ -121,7 +121,7 @@ public class GetPecaPendenteImpl {
 	/**
 	* Chamada assíncrona para o método getPecaPendente
 	* Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	* 
+	* Trazendo todas pecas conforme o filtro
 	*/
 	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout, TimeUnit unit) {
 	

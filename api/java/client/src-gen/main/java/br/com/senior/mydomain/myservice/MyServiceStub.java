@@ -13,109 +13,109 @@ public interface MyServiceStub {
 
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
 	HelloWorldOutput helloWorld(HelloWorldInput input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 * Chamada assíncrona
 	 */
 	void helloWorld(HelloWorldInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Endpoint para teste
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<HelloWorldOutput> helloWorldRequest(HelloWorldInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
 	MudarStatusPecaOutput mudarStatusPeca(MudarStatusPecaInput input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 * Chamada assíncrona
 	 */
 	void mudarStatusPeca(MudarStatusPecaInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Quando for feito alguma parte do processo, precisa informar o status
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<MudarStatusPecaOutput> mudarStatusPecaRequest(MudarStatusPecaInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
 	GetMaquinaAtivaOutput getMaquinaAtiva(long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 * Chamada assíncrona
 	 */
 	void getMaquinaAtiva();
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest();
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Diretamente ja trazendo as maquinas ativas
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<GetMaquinaAtivaOutput> getMaquinaAtivaRequest(long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
 	GetPecaPendenteOutput getPecaPendente(long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona
 	 */
 	void getPecaPendente();
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest();
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
-	 * 
+	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona utilizando request
 	 */
 	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout);

@@ -144,36 +144,26 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
-  /my_service/queries/getPecaPendente:
+  /my_service/queries/getPeca:
     post:
       description: "Trazendo todas pecas conforme o filtro"
       tags:
         - Queries
       x-senior-visibility: PRIVATE
-      responses:
-        200:
-          description: Ok
+      parameters:
+        - name: input
+          in: body
+          required: true
           schema:
             type: object
+            required:
+              - status
             properties:
-              peca:
-                type: array
-                items:
-                  type: object
-                  allOf:
-                   - $ref: '#/definitions/peca'
+              status:
+                type: string
+                allOf:
+                - $ref: '#/definitions/statusPeca'
                 description: ""
-        401:
-          description: "Invalid Credentials"
-        default:
-          description: Error response
-          schema:
-            $ref: '#/definitions/genericError'
-    get:
-      description: "Trazendo todas pecas conforme o filtro"
-      tags:
-        - Queries
-      x-senior-visibility: PRIVATE
       responses:
         200:
           description: Ok
@@ -253,9 +243,12 @@ paths:
               - retorno
             properties:
               retorno:
-                type: object
-                allOf:
-                 - $ref: '#/definitions/retornoRelatorio'
+                type: array
+                items:
+                  type: object
+                  allOf:
+                   - $ref: '#/definitions/retornoRelatorio'
+                  minimum: 1
                 description: ""
         401:
           description: "Invalid Credentials"
@@ -2048,7 +2041,6 @@ definitions:
     type: object
     required:
       - dataInicio
-      - dataFinal
     properties:
       id:
         type: string

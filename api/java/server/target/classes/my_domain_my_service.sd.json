@@ -239,6 +239,34 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "getPeca": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "documentation": "Trazendo todas pecas conforme o filtro",
+            "idempotent": true,
+            "input" : {
+                "status" : {
+                    "type": "statusPeca",
+                    "optional": false,
+                    "multivalued": false,
+                    "readOnly": false
+                }
+            },
+            "output" : {
+                "peca" : {
+                    "type": "peca",
+                    "optional": true,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "updateMergeMaquina": {
             "endpointType" : "command",
             "kind": "updateMerge",
@@ -507,7 +535,7 @@
                 "retorno" : {
                     "type": "retornoRelatorio",
                     "optional": false,
-                    "multivalued": false,
+                    "multivalued": true,
                     "readOnly": false
                 }
             },
@@ -1057,26 +1085,6 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
-        "getPecaPendente": {
-            "endpointType" : "command",
-            "kind": "query",
-            "priority" : "NORMAL",
-            "documentation": "Trazendo todas pecas conforme o filtro",
-            "idempotent": true,
-            "output" : {
-                "peca" : {
-                    "type": "peca",
-                    "optional": true,
-                    "multivalued": true,
-                    "readOnly": false
-                }
-            },
-            "extensionPoint" : false,
-            "responses" : {
-            },
-            "visibility" : "PRIVATE",
-            "version": "0"
-        },
         "helloWorld": {
             "endpointType" : "command",
             "kind": "query",
@@ -1516,7 +1524,7 @@
             },
             "dataFinal" : {
                 "type": "dateTime",
-                "optional": false,
+                "optional": true,
                 "multivalued": false,
                 "documentation": "Data e hora do 'Stop' ou descarte",
                 "readOnly": false
@@ -2429,7 +2437,7 @@
                 },
                 "dataFinal" : {
                     "type": "dateTime",
-                    "optional": false,
+                    "optional": true,
                     "multivalued": false,
                     "documentation": "Data e hora do 'Stop' ou descarte",
                     "readOnly": false

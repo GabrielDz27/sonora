@@ -22,7 +22,10 @@
                 <slot name="maquina" type="maquina" optional="true" multivalued="true"/>
             </output>
         </query>
-        <query name="getPecaPendente" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+        <query name="getPeca" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="status" type="statusPeca" optional="false" multivalued="false"/>
+            </input>
             <output>
                 <slot name="peca" type="peca" optional="true" multivalued="true"/>
             </output>
@@ -38,7 +41,7 @@
                 <slot name="codigoDesenho" type="string" optional="true" multivalued="true"/>
             </input>
             <output>
-                <slot name="retorno" type="retornoRelatorio" optional="false" multivalued="false"/>
+                <slot name="retorno" type="retornoRelatorio" optional="false" multivalued="true"/>
             </output>
         </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
@@ -405,7 +408,7 @@
             <slot name="funcionario" type="funcionario" optional="true" multivalued="false"/>
             <slot name="maquina" type="maquina" optional="true" multivalued="false"/>
             <slot name="dataInicio" type="dateTime" optional="false" multivalued="false"/>
-            <slot name="dataFinal" type="dateTime" optional="false" multivalued="false"/>
+            <slot name="dataFinal" type="dateTime" optional="true" multivalued="false"/>
         </record>
         <record name="notifyUserEventPayload">
             <slot name="notificationClass" type="string" optional="true" multivalued="false"/>

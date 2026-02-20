@@ -169,7 +169,7 @@
             </xsd:element>
             <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
             </xsd:element>
-            <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+            <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="0" maxOccurs="1"  readOnly="false">
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
@@ -615,6 +615,28 @@
     <xsd:element name="createMergeMaquina">
         <xsd:complexType/>
     </xsd:element>
+    <xsd:element name="getPeca">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="status" type="statusPeca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="getPecaOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for peca -->
+                <xsd:element name="peca" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="peca" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="updateMergeMaquina">
         <xsd:complexType/>
     </xsd:element>
@@ -789,7 +811,13 @@
     <xsd:element name="relatorioOutput">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="retorno" type="retornoRelatorio" minOccurs="1" maxOccurs="1"  readOnly="false">
+                <!-- collection wrapper for retorno -->
+                <xsd:element name="retorno" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="retornoRelatorio" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
@@ -1074,23 +1102,6 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="id" type="xsd:uuid" minOccurs="1" maxOccurs="1"  readOnly="false">
-                </xsd:element>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="getPecaPendente">
-        <xsd:complexType/>
-    </xsd:element>
-    <xsd:element name="getPecaPendenteOutput">
-        <xsd:complexType>
-            <xsd:sequence>
-                <!-- collection wrapper for peca -->
-                <xsd:element name="peca" minOccurs="0" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="item" type="peca" minOccurs="0" maxOccurs="unbounded"/>
-                        </xsd:sequence>
-                    </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>

@@ -341,7 +341,6 @@ definitions:
     type: object
     required:
       - dataInicio
-      - dataFinal
     properties:
       id:
         type: string

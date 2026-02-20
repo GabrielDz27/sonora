@@ -32,7 +32,10 @@ service my_service {
         }
 
         "Trazendo todas pecas conforme o filtro"
-        query getPecaPendente {
+        query getPeca {
+            in {
+                status: statusPeca
+            }
             out {
                 peca: peca?*
             }
@@ -49,7 +52,7 @@ service my_service {
                 codigoDesenho: string?*
             }
             out {
-                retorno: retornoRelatorio
+                retorno: retornoRelatorio*
             }
         }
     }
@@ -187,7 +190,7 @@ service my_service {
             dataInicio: dateTime
 
             "Data e hora do 'Stop' ou descarte"
-            dataFinal: dateTime
+            dataFinal: dateTime?
         }
     }
 } 

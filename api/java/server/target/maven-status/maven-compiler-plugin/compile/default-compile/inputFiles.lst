@@ -40,6 +40,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\CreateMergeMaquina.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\CustomFieldPermissionImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\MaquinaEntity.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\RegistroProducaoCrudValidator.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\MaquinaEntityStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\FieldCustomizationDeleted.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\target\generated-sources\java\br\com\senior\mydomain\myservice\QRegistroProducaoEntity.java
@@ -71,6 +72,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\PecaCrudValidator.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\annotations\Coverage.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\LayoutDTOConverter.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\GetPeca.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\HelloWorld.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\GetMaquinaAtiva.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\CreateBulkMaquina.java
@@ -102,7 +104,6 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\FieldCustomizationCreated.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\ReportLogConverter.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\ImportMaquina.java
-C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaPendente.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\ImportFuncionario.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\src-gen\main\java\br\com\senior\mydomain\myservice\CreateMergeFuncionario.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\server\target\generated-sources\java\br\com\senior\mydomain\myservice\QPecaEntity.java

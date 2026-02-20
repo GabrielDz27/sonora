@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.Valid;
 
 
 public class RelatorioOutput {
     
-    @NotNull(message = "retorno is required")
+    @NotEmpty(message = "retorno is required, at least one value must be present")
     @Valid
-    public RetornoRelatorio retorno;
+    public java.util.List<RetornoRelatorio> retorno;
     
     
     public RelatorioOutput() {
@@ -21,7 +21,7 @@ public class RelatorioOutput {
     /** 
      * This constructor allows initialization of all fields, required and optional.
      */
-    public RelatorioOutput(RetornoRelatorio retorno) {
+    public RelatorioOutput(java.util.List<RetornoRelatorio> retorno) {
         this.retorno = retorno;
     }
     

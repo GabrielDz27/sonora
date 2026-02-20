@@ -23,7 +23,15 @@ public class RelatorioOutputStringSerializer {
 		if (relatorioOutput.retorno == null) {
 			sb.append("null");
 		} else {
-			relatorioOutput.retorno.toString(sb, appended);
+			sb.append('[');
+			int last = relatorioOutput.retorno.size() - 1;
+			for (int i = 0; i <= last; i++) {
+				relatorioOutput.retorno.get(i).toString(sb, appended);
+				if (i < last) {
+					sb.append(", ");
+				}
+			}
+			sb.append(']');
 		}
 		sb.append('>');
 	}

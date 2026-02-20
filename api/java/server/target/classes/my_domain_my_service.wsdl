@@ -181,7 +181,7 @@
                     </xsd:element>
                     <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
                     </xsd:element>
-                    <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="0" maxOccurs="1"  readOnly="false">
                     </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
@@ -627,6 +627,28 @@
             <xsd:element name="createMergeMaquina">
                 <xsd:complexType/>
             </xsd:element>
+            <xsd:element name="getPeca">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="statusPeca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getPecaOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for peca -->
+                        <xsd:element name="peca" minOccurs="0" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="peca" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="updateMergeMaquina">
                 <xsd:complexType/>
             </xsd:element>
@@ -801,7 +823,13 @@
             <xsd:element name="relatorioOutput">
                 <xsd:complexType>
                     <xsd:sequence>
-                        <xsd:element name="retorno" type="retornoRelatorio" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        <!-- collection wrapper for retorno -->
+                        <xsd:element name="retorno" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="retornoRelatorio" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
                         </xsd:element>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -1090,23 +1118,6 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
-            <xsd:element name="getPecaPendente">
-                <xsd:complexType/>
-            </xsd:element>
-            <xsd:element name="getPecaPendenteOutput">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <!-- collection wrapper for peca -->
-                        <xsd:element name="peca" minOccurs="0" maxOccurs="1">
-                            <xsd:complexType>
-                                <xsd:sequence>
-                                    <xsd:element name="item" type="peca" minOccurs="0" maxOccurs="unbounded"/>
-                                </xsd:sequence>
-                            </xsd:complexType>
-                        </xsd:element>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
             <xsd:element name="helloWorld">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -1163,6 +1174,12 @@
     </wsdl:message>
     <wsdl:message name="createMergeMaquinaResponse">
         <wsdl:part name="result" element="createMergeMaquinaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="getPecaRequest">
+        <wsdl:part name="parameters" element="getPeca"/>
+    </wsdl:message>
+    <wsdl:message name="getPecaResponse">
+        <wsdl:part name="result" element="getPecaOutput"/>
     </wsdl:message>
     <wsdl:message name="updateMergeMaquinaRequest">
         <wsdl:part name="parameters" element="updateMergeMaquina"/>
@@ -1256,12 +1273,6 @@
     </wsdl:message>
     <wsdl:message name="retrievePecaResponse">
         <wsdl:part name="retrieved" element="retrievePecaOutput"/>
-    </wsdl:message>
-    <wsdl:message name="getPecaPendenteRequest">
-        <wsdl:part name="parameters" element="getPecaPendente"/>
-    </wsdl:message>
-    <wsdl:message name="getPecaPendenteResponse">
-        <wsdl:part name="result" element="getPecaPendenteOutput"/>
     </wsdl:message>
     <wsdl:message name="helloWorldRequest">
         <wsdl:part name="parameters" element="helloWorld"/>
@@ -1450,6 +1461,14 @@
             <wsdl:input message="createMergeMaquinaRequest"/>
             <wsdl:output message="createMergeMaquinaResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="getPeca">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            Trazendo todas pecas conforme o filtro 
+            </wsdl:documentation>
+            <wsdl:input message="getPecaRequest"/>
+            <wsdl:output message="getPecaResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="updateMergeMaquina">
             <wsdl:documentation>
             THIS OPERATION IS PUBLIC. 
@@ -1574,14 +1593,6 @@
             </wsdl:documentation>
             <wsdl:input message="retrievePecaRequest"/>
             <wsdl:output message="retrievePecaResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="getPecaPendente">
-            <wsdl:documentation>
-            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
-            Trazendo todas pecas conforme o filtro 
-            </wsdl:documentation>
-            <wsdl:input message="getPecaPendenteRequest"/>
-            <wsdl:output message="getPecaPendenteResponse"/>
         </wsdl:operation>
         <wsdl:operation name="helloWorld">
             <wsdl:documentation>
@@ -1835,6 +1846,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="getPeca">
+            <soap:operation soapAction="getPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="updateMergeMaquina">
             <soap:operation soapAction="updateMergeMaquina"/>
             <wsdl:input>
@@ -1972,15 +1992,6 @@
         </wsdl:operation>
         <wsdl:operation name="retrievePeca">
             <soap:operation soapAction="retrievePeca"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="getPecaPendente">
-            <soap:operation soapAction="getPecaPendente"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

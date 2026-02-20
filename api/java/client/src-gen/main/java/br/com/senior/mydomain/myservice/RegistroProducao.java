@@ -143,7 +143,6 @@ public class RegistroProducao extends CustomDTO {
     /**
      * Data e hora do 'Stop' ou descarte
      */
-    @NotNull(message = "dataFinal is required")
     public java.time.Instant dataFinal;
     
     
@@ -167,9 +166,8 @@ public class RegistroProducao extends CustomDTO {
     /** 
      * This convenience constructor allows initialization of all required fields.
      */
-    public RegistroProducao(java.time.Instant dataInicio, java.time.Instant dataFinal) {
+    public RegistroProducao(java.time.Instant dataInicio) {
         this.dataInicio = dataInicio;
-        this.dataFinal = dataFinal;
     }
     
     public void normalize(Map<String, Object> headers) {

@@ -63,21 +63,22 @@ public interface MyServiceConstants {
     	String GET_MAQUINA_ATIVA_ERROR = "getMaquinaAtivaError";
     	/**
     	 * Trazendo todas pecas conforme o filtro
+    	 * @see GetPecaInput the request payload
     	 */
-    	String GET_PECA_PENDENTE = "getPecaPendente";
+    	String GET_PECA = "getPeca";
     	/**
-    	 * The success response primitive for getPecaPendente.
+    	 * The success response primitive for getPeca.
     	 *
-    	 * @see #GET_PECA_PENDENTE the request primitive
-    	 * @see GetPecaPendenteOutput the response payload
+    	 * @see #GET_PECA the request primitive
+    	 * @see GetPecaOutput the response payload
     	 */
-    	String GET_PECA_PENDENTE_RESPONSE = "getPecaPendenteResponse";
+    	String GET_PECA_RESPONSE = "getPecaResponse";
     	/**
-    	 * An error response primitive for getPecaPendente.
+    	 * An error response primitive for getPeca.
     	 *
-    	 * @see #GET_PECA_PENDENTE the request primitive
+    	 * @see #GET_PECA the request primitive
     	 */
-    	String GET_PECA_PENDENTE_ERROR = "getPecaPendenteError";
+    	String GET_PECA_ERROR = "getPecaError";
     	/**
     	 * @see RelatorioInput the request payload
     	 */

@@ -15,13 +15,13 @@ public class PecaRepositoryCustomImpl implements PecaRepositoryCustom {
     private EntityManager em;
 
     @Override
-    public List<PecaEntity> getPecasPendentes() {
+    public List<PecaEntity> getPecasPendentes(StatusPeca status) {
         QPecaEntity qPecaEntity = QPecaEntity.pecaEntity;
 
         return new JPAQuery<>(em)
                 .select(qPecaEntity)
                 .from(qPecaEntity)
-                .where(qPecaEntity.status.eq(StatusPeca.PENDENTE))
+                .where(qPecaEntity.status.eq(status))
                 .fetch();
     }
 }

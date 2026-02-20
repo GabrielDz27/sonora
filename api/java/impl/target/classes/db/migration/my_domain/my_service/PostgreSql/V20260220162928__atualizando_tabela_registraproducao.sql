@@ -1,0 +1,1 @@
+ALTER TABLE registro_producao ALTER COLUMN data_final DROP NOT NULL;

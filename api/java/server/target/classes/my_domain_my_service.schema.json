@@ -176,7 +176,7 @@
             		"format": "date-time"
             	}
         	},
-        	"required" : ["dataInicio","dataFinal"]
+        	"required" : ["dataInicio"]
         }
         ,
         "notifyUserEventPayload" : {

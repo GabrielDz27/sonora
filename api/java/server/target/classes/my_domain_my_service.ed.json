@@ -471,7 +471,7 @@
 				"dataFinal": {
 					"name": "dataFinal",
 					"type": "dateTime",
-					"optional": false,
+					"optional": true,
 					"hidden": false,
 					"multivalued": false,
 					"readOnly": false

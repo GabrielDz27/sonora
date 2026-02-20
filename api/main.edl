@@ -32,6 +32,7 @@ service my_service {
                     type: aggregation
                 }
             }
+            generateCustomValidator: true
        }
 	}
 

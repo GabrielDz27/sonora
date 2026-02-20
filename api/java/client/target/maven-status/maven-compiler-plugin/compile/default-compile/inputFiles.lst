@@ -12,7 +12,6 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\GetDependenciesImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportMaquinaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreateBulkFuncionarioImpl.java
-C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\GetPecaPendenteImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\HookFunction.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetDependenciesOutput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreateMergeRegistroProducaoImpl.java
@@ -115,6 +114,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportPecaEventPayload.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\PushNotifyUserEventPayload.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\Maquina.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaInputStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\HelloWorldOutput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportPecaEventPayloadStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\ImportRegistroProducaoImpl.java
@@ -124,7 +124,6 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportPecaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportPecaOutputStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ErrorStrategy.java
-C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaPendenteOutput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\ExportMaquinaImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportFuncionarioEventPayloadStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\ExportFuncionarioImpl.java
@@ -140,6 +139,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportFuncionarioEvent.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\NotifyUserEventPayloadStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\MyServiceNormalizer.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\GetPecaImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\RelatorioImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\MaquinaTrabalhando.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportRegistroProducaoEventPayloadStringSerializer.java
@@ -155,6 +155,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\BasicErrorPayload.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetMaquinaAtivaOutputStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportPecaResponse.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaOutput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportConfig.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\RegistroProducao.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\UpdateMergeMaquinaResponse.java
@@ -171,7 +172,6 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\UpdateMergePecaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ImportErrorStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\BlobReferenceStringSerializer.java
-C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaPendenteResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\HelloWorldResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\CreateBulkRegistroProducaoInput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportRegistroProducaoOutput.java
@@ -184,13 +184,14 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ListPecaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\RetrievePecaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreateMergeFuncionarioImpl.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreateMaquinaImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreateRegistroProducaoImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportPecaEventPayload.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportPecaOutput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\TurnoFuncionario.java
-C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaPendenteOutputStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\CreatePecaImpl.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaOutputStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\FileFormat.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\RelatorioInput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\RelatorioOutput.java
@@ -250,6 +251,7 @@ C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\m
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportEventStatusStringSerializer.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\impl\ExportPecaImpl.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\ExportRegistroProducaoInput.java
+C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\GetPecaInput.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\EmailNotifyUserEventPayload.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\CreateMergeRegistroProducaoResponse.java
 C:\Users\gabriel.ferreira\gabriel-ferreira-go-dev-2025\api\java\client\src-gen\main\java\br\com\senior\mydomain\myservice\RegistroProducaoStringSerializer.java

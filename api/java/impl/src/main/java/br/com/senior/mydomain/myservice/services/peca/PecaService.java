@@ -36,11 +36,11 @@ public class PecaService {
                     false
             );
         } else {
-            throw new ServiceException(ErrorCategory.BAD_REQUEST, "Id inválido");
+            throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.mensagemRetornoIdInvalido"));
         }
     }
 
-    public List<PecaEntity> getPecasPendentes() {
-        return pecaRepository.getPecasPendentes();
+    public List<PecaEntity> getPecasPendentes(StatusPeca status) {
+        return pecaRepository.getPecasPendentes(status);
     }
 }

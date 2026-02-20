@@ -97,28 +97,28 @@ public interface MyServiceStub {
 	 * Trazendo todas pecas conforme o filtro
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */
-	GetPecaPendenteOutput getPecaPendente(long timeout);
+	GetPecaOutput getPeca(GetPecaInput input, long timeout);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona
 	 */
-	void getPecaPendente();
+	void getPeca(GetPecaInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest();
+	CompletableFuture<GetPecaOutput> getPecaRequest(GetPecaInput input);
 	
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 * Chamada assíncrona utilizando request
 	 */
-	CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout);
+	CompletableFuture<GetPecaOutput> getPecaRequest(GetPecaInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * 

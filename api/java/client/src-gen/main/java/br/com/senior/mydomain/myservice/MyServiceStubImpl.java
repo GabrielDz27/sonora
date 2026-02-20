@@ -172,47 +172,47 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.getMaquinaAtivaRequest(timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
-	 * Chamada síncrona para o método getPecaPendente
+	 * Chamada síncrona para o método getPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
 	 */
 	@Override
-	public GetPecaPendenteOutput getPecaPendente(long timeout) {
-		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
-		return impl.getPecaPendente(timeout);
+	public GetPecaOutput getPeca(GetPecaInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetPecaImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getPeca(input, timeout);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método getPecaPendente
+	 * Chamada assíncrona para o método getPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 */
 	@Override
-	public void getPecaPendente() {
-		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
-		impl.getPecaPendente();
+	public void getPeca(GetPecaInput input) {
+		br.com.senior.mydomain.myservice.impl.GetPecaImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaImpl(messengerSupplier, userId, messageSupplier);
+		impl.getPeca(input);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método getPecaPendente
+	 * Chamada assíncrona para o método getPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	 */
 	@Override
-	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest() {
-		return this.getPecaPendenteRequest(0l);
+	public CompletableFuture<GetPecaOutput> getPecaRequest(GetPecaInput input) {
+		return this.getPecaRequest(input, 0l);
 	}
 	
 	/**
-	 * Chamada assíncrona para o método getPecaPendente
+	 * Chamada assíncrona para o método getPeca
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Trazendo todas pecas conforme o filtro
 	*/
 	@Override
-	public CompletableFuture<GetPecaPendenteOutput> getPecaPendenteRequest(long timeout) {
-		br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaPendenteImpl(messengerSupplier, userId, messageSupplier);
-		return impl.getPecaPendenteRequest(timeout, TimeUnit.MILLISECONDS);
+	public CompletableFuture<GetPecaOutput> getPecaRequest(GetPecaInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.GetPecaImpl impl = new br.com.senior.mydomain.myservice.impl.GetPecaImpl(messengerSupplier, userId, messageSupplier);
+		return impl.getPecaRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
 	 * Chamada síncrona para o método relatorio

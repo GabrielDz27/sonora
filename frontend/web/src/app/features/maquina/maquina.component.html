@@ -1,0 +1,33 @@
+<div class="space-y-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-industrial-blue">Parque de Máquinas</h1>
+    <button (click)="abrirModal()" class="btn-primary">+ Nova Máquina</button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @for (m of maquinas(); track m.id) {
+      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start mb-2">
+             <h3 class="font-bold text-lg text-gray-800">{{ m.nome }}</h3>
+             <span [class]="getStatusClass(m.status)" class="text-[10px] uppercase font-bold px-2 py-1 rounded">
+               {{ m.status }}
+             </span>
+          </div>
+          <p class="text-xs text-gray-500">ID: {{ m.id }}</p>
+        </div>
+        
+        <div class="mt-6 flex justify-end gap-4 border-t pt-4">
+          <button (click)="editar(m)" class="text-industrial-blue text-sm hover:underline">Editar</button>
+          <button (click)="deletar(m.id)" class="text-red-500 text-sm hover:underline">Remover</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="col-span-3 text-center text-gray-400 py-10">Nenhuma máquina cadastrada.</p>
+    }
+  </div>
+</div>
+
+<app-modal [exibir]="modalAberto()" [titulo]="'Gerenciar Equipamento'" (fechar)="modalAberto.set(false)">
+  <app-maquina-form (salvar)="onSalvar($event)" (cancelar)="modalAberto.set(false)" />
+</app-modal>

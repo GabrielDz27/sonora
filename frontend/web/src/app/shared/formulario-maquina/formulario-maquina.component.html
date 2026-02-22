@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Identificação / Nome da Máquina</label>
+        <input type="text" formControlName="nome" class="input-field" placeholder="Ex: Torno CNC Romi G280">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Status Operacional</label>
+        <select formControlName="status" class="input-field">
+          <option value="ATIVO"> Ativo (Disponível)</option>
+          <option value="MANUTENCAO"> Em Manutenção</option>
+          <option value="INATIVO"> Inativo / Desativado</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6 pt-4 border-t">
+        <button type="button" (click)="cancelar.emit()" class="btn-secondary">Cancelar</button>
+        <button type="submit" [disabled]="form.invalid" class="btn-primary">Salvar Máquina</button>
+      </div>
+    </form> 

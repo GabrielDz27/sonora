@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-gray-700">Nome Completo</label>
+          <input type="text" formControlName="nome" class="input-field" placeholder="Ex: João Silva">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Matrícula</label>
+          <input type="text" formControlName="matricula" class="input-field" placeholder="MT-1234">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Cargo</label>
+          <input type="text" formControlName="cargo" class="input-field" placeholder="Ex: Operador CNC">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Turno</label>
+          <select formControlName="turno" class="input-field">
+            <option value="MANHA">Manhã</option>
+            <option value="TARDE">Tarde</option>
+            <option value="NOITE">Noite</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-3 pt-6">
+          <input type="checkbox" formControlName="ativo" id="ativo" class="w-4 h-4 text-industrial-blue rounded">
+          <label for="ativo" class="text-sm font-medium text-gray-700">Colaborador Ativo</label>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 mt-6 pt-4 border-t">
+        <button type="button" (click)="cancelar.emit()" class="btn-secondary">Cancelar</button>
+        <button type="submit" [disabled]="form.invalid" class="btn-primary">Salvar Funcionário</button>
+      </div>
+    </form>

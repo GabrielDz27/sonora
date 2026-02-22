@@ -1,0 +1,49 @@
+<div class="space-y-6">
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold text-industrial-blue">Monitor de Produção</h1>
+      <p class="text-sm text-gray-500">Acompanhamento de processos em tempo real</p>
+    </div>
+    <button (click)="modalAberto.set(true)" class="btn-primary bg-green-600 hover:bg-green-700 font-bold">
+      + Novo Apontamento
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4">
+    @for (reg of registrosAtivos(); track reg.id) {
+      <div class="bg-white border-l-4 border-blue-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between">
+        <div class="flex gap-8 items-center">
+          <div class="text-center border-r pr-8">
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Início</p>
+            <p class="font-mono text-lg text-industrial-blue">{{ reg.dataInicio | date:'HH:mm' }}</p>
+          </div>
+          
+          <div>
+            <h3 class="font-bold text-gray-800">{{ reg.peca.nome }}</h3>
+            <div class="flex gap-4 mt-1">
+              <span class="text-xs text-gray-500"><strong>Máquina:</strong> {{ reg.maquina.nome }}</span>
+              <span class="text-xs text-gray-500"><strong>Operador:</strong> {{ reg.funcionario.nome }}</span>
+            </div>
+          </div>
+        </div>
+
+        <button (click)="finalizarProducao(reg)" class="px-6 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-bold hover:bg-red-600 hover:text-white transition-all">
+             Finalizar
+        </button>
+      </div>
+    } @empty {
+      <div class="text-center py-20 bg-gray-50 border-2 border-dashed rounded-xl">
+        <p class="text-gray-400 italic">Nenhuma produção ativa no momento.</p>
+      </div>
+    }
+  </div>
+</div>
+
+<app-modal [exibir]="modalAberto()" [titulo]="'Novo Apontamento'" (fechar)="modalAberto.set(false)">
+  <app-registro-form 
+    [pecas]="pecas()" 
+    [funcionarios]="funcionarios()" 
+    [maquinas]="maquinas()"
+    (salvar)="onSalvar($event)" 
+    (cancelar)="modalAberto.set(false)" />
+</app-modal>

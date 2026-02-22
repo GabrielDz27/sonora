@@ -1,0 +1,45 @@
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+    <h2 class="text-xl font-bold text-industrial-blue">Gerenciamento de Peças</h2>
+    <button (click)="abrirModalNovo()" class="btn-primary flex items-center gap-2">
+      <span>+</span> Nova Peça
+    </button>
+  </div>
+
+  <table class="w-full text-left">
+    <thead class="bg-industrial-white text-gray-600 uppercase text-xs">
+      <tr>
+        <th class="px-6 py-4">Desenho / Nome</th>
+        <th class="px-6 py-4 text-center">Tempo (min)</th>
+        <th class="px-6 py-4 text-center">Valor</th>
+        <th class="px-6 py-4">Status</th>
+        <th class="px-6 py-4 text-right">Ações</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      @for (item of pecas(); track item.id) {
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">
+            <div class="font-medium text-gray-900">{{ item.codigoDesenho }}</div>
+            <div class="text-sm text-gray-500">{{ item.nome }}</div>
+          </td>
+          <td class="px-6 py-4 text-center">{{ item.tempoEstimadoMinutos }}</td>
+          <td class="px-6 py-4 text-center">R$ {{ item.valor | number:'1.2-2' }}</td>
+          <td class="px-6 py-4">
+            <span [class]="'px-2 py-1 rounded-full text-xs font-semibold ' + getStatusColor(item.status)">
+              {{ item.status }}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-right space-x-3">
+            <button (click)="editar(item)" class="text-industrial-blue hover:underline">Editar</button>
+            <button (click)="excluir(item.id!)" class="text-red-500 hover:underline">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="p-10 text-center text-gray-400">Nenhuma peça cadastrada.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

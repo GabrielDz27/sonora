@@ -3,11 +3,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../services/auth/autenticacao.service';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
+import { LucideAngularModule } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, LucideAngularModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

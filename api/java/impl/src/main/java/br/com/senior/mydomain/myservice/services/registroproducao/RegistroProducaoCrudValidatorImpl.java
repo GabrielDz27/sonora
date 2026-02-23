@@ -2,7 +2,6 @@ package br.com.senior.mydomain.myservice.services.registroproducao;
 
 import br.com.senior.messaging.ErrorCategory;
 import br.com.senior.messaging.model.ServiceException;
-import br.com.senior.mydomain.myservice.Peca;
 import br.com.senior.mydomain.myservice.RegistroProducao;
 import br.com.senior.mydomain.myservice.RegistroProducaoCrudValidator;
 import br.com.senior.mydomain.myservice.RegistroProducaoEntity;

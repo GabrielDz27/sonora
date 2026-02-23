@@ -1,28 +1,54 @@
-import { Component, signal } from '@angular/core';
-import { Maquina } from '../../models/geral.models';
+import { Component, signal, inject, OnInit, computed } from '@angular/core';
+import { MaquinaService } from '../../services/maquina.service';
+import { MaquinaDto } from '../../models/maquina.models';
+import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { ModalComponent } from '../../shared/modal/modal.component';
+import { FormularioMaquinaComponent } from '../../shared/formulario-maquina/formulario-maquina.component';
 
 @Component({
   selector: 'app-maquina',
-  imports: [],
+  standalone: true,
+  imports: [LucideAngularModule, ModalComponent, FormularioMaquinaComponent],
   templateUrl: './maquina.component.html',
   styleUrl: './maquina.component.css'
 })
 export class MaquinaComponent {
-  maquinas = signal<Maquina[]>([]); // Vinculado à sua Interface
+  private service = inject(MaquinaService);
+
+  lista = signal<MaquinaDto[]>([]);
+  itemParaEdicao = signal<MaquinaDto | undefined>(undefined);
   modalAberto = signal(false);
 
-  getStatusClass(status: string) {
-    switch (status) {
-      case 'ATIVO': return 'bg-green-100 text-green-700';
-      case 'MANUTENCAO': return 'bg-yellow-100 text-yellow-700';
-      case 'INATIVO': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
-    }
+  // Estatísticas calculadas automaticamente
+  totalAtivas = computed(() => this.lista().filter(m => m.status === 'ATIVO').length);
+  totalManutencao = computed(() => this.lista().filter(m => m.status === 'MANUTENCAO').length);
+
+  ngOnInit() { this.carregar(); }
+
+  carregar() {
+    // this.service.listarTodos().subscribe(res => this.lista.set(res));
   }
 
-  onSalvar(dados: any) {
-    console.log('Enviando para o backend:', dados);
-    // Aqui você chamará o MaquinaService
-    this.modalAberto.set(false);
+  abrirNovo() {
+    this.itemParaEdicao.set(undefined);
+    this.modalAberto.set(true);
+  }
+
+  abrirEditar(item: MaquinaDto) {
+    this.itemParaEdicao.set(item);
+    this.modalAberto.set(true);
+  }
+
+  salvar(dados: MaquinaDto) {
+    this.service.salvar(dados).subscribe(() => {
+      this.carregar();
+      this.modalAberto.set(false);
+    });
+  }
+
+  excluir(id: string) {
+    if (confirm('Deseja realmente remover este ativo do inventário?')) {
+      // this.service.excluir(id).subscribe(() => this.carregar());
+    }
   }
 }

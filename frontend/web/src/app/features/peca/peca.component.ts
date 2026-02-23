@@ -1,29 +1,48 @@
-import { Component, signal } from '@angular/core';
-import { Peca } from '../../models/geral.models';
-
+import { Component, signal, inject, OnInit, computed } from '@angular/core';
+import { PecaService } from '../../services/peca.service';
+import { PecaDto } from '../../models/peca.models';
+import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { ModalComponent } from '../../shared/modal/modal.component';
+import { FormularioPecaComponent } from '../../shared/formulario-peca/formulario-peca.component';
+import { CurrencyPipe, CommonModule } from '@angular/common';
 @Component({
   selector: 'app-peca',
-  imports: [],
+  standalone: true,
+  imports: [LucideAngularModule, CurrencyPipe, CommonModule, ModalComponent, FormularioPecaComponent],
   templateUrl: './peca.component.html',
   styleUrl: './peca.component.css'
 })
 export class PecaComponent {
-  pecas = signal<Peca[]>([]);
-  
-  // Signal para abrir/fechar o modal
+  private service = inject(PecaService);
+
+  lista = signal<PecaDto[]>([]);
+  itemParaEdicao = signal<PecaDto | undefined>(undefined);
   modalAberto = signal(false);
 
-  getStatusColor(status: string): string {
-    const cores = {
-      'PENDENTE': 'bg-gray-100 text-gray-600',
-      'PROCESSO': 'bg-blue-100 text-blue-600',
-      'FINALIZADO': 'bg-green-100 text-green-600',
-      'MORTA': 'bg-red-100 text-red-600'
-    };
-    return cores[status as keyof typeof cores] || cores.PENDENTE;
+  totalPecas = computed(() => this.lista().length);
+  valorTotal = computed(() => this.lista().reduce((acc, p) => acc + (p.valor || 0), 0));
+  pecasMortas = computed(() => this.lista().filter(p => p.status === 'MORTA').length);
+
+  ngOnInit() { this.carregar(); }
+
+  carregar() {
+    // this.service.listarTodos().subscribe(res => this.lista.set(res));
   }
 
-  abrirModalNovo() {
+  abrirNovo() {
+    this.itemParaEdicao.set(undefined);
     this.modalAberto.set(true);
+  }
+
+  abrirEditar(item: PecaDto) {
+    this.itemParaEdicao.set(item);
+    this.modalAberto.set(true);
+  }
+
+  salvar(dados: PecaDto) {
+    // this.service.salvar(dados).subscribe(() => {
+    //   this.carregar();
+    //   this.modalAberto.set(false);
+    // });
   }
 }

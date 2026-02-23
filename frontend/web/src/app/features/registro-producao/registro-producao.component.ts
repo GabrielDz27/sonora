@@ -1,11 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, signal, inject, OnInit, computed } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { RegistroProducaoService } from '../../services/registro-producao.service';
+import { RegistroProducaoDto } from '../../models/registro-producao.models';
+import { ModalComponent } from '../../shared/modal/modal.component';
+import { FormularioRegistroProducaoComponent } from '../../shared/formulario-registro-producao/formulario-registro-producao.component';
+
 
 @Component({
-  selector: 'app-registro-producao',
-  imports: [],
-  templateUrl: './registro-producao.component.html',
-  styleUrl: './registro-producao.component.css'
+  selector: 'app-pagina-registro-producao',
+  standalone: true,
+  imports: [CommonModule, LucideAngularModule, ModalComponent, FormularioRegistroProducaoComponent, DatePipe],
+  templateUrl: './registro-producao.component.html'
 })
-export class RegistroProducaoComponent {
+export class RegistroProducaoComponent implements OnInit {
+  private service = inject(RegistroProducaoService);
 
+  registros = signal<RegistroProducaoDto[]>([]);
+  modalAberto = signal(false);
+  
+  producoesAtivas = computed(() => this.registros().filter(r => !r.dataFinal).length);
+
+  ngOnInit() { this.carregar(); }
+
+  carregar() {
+    // this.service.listarTodos().subscribe(res => this.registros.set(res));
+  }
+
+  iniciarNovoRegistro() {
+    this.modalAberto.set(true);
+  }
+
+  salvarNovo(dados: RegistroProducaoDto) {
+    // this.service.salvar(dados).subscribe(() => {
+    //   this.carregar();
+    //   this.modalAberto.set(false);
+    // });
+  }
+
+  finalizarRegistro(id: string) {
+    // Lógica para enviar a dataFim para o backend
+    // this.service.finalizar(id).subscribe(() => this.carregar());
+  }
 }

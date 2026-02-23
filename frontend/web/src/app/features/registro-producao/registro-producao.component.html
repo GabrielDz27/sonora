@@ -1,49 +1,102 @@
-<div class="space-y-6">
-  <div class="flex justify-between items-center">
-    <div>
-      <h1 class="text-2xl font-bold text-industrial-blue">Monitor de Produção</h1>
-      <p class="text-sm text-gray-500">Acompanhamento de processos em tempo real</p>
+<div class="p-8 space-y-8 bg-slate-50/50 min-h-screen">
+  
+  <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div class="flex items-center gap-4">
+      <div class="h-14 w-14 bg-slate-900 rounded-2xl grid place-items-center shadow-xl shadow-slate-900/20">
+        <lucide-icon name="activity" class="size-7 text-sky-400"></lucide-icon>
+      </div>
+      <div>
+        <h1 class="text-3xl font-black text-slate-900 uppercase tracking-tighter">Monitor de Produção</h1>
+        <div class="flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Live: {{ producoesAtivas() }} Máquinas Operando</p>
+        </div>
+      </div>
     </div>
-    <button (click)="modalAberto.set(true)" class="btn-primary bg-green-600 hover:bg-green-700 font-bold">
-      + Novo Apontamento
+
+    <button (click)="iniciarNovoRegistro()" 
+            class="bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-3 hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-900/20">
+      <lucide-icon name="play-circle" class="size-5"></lucide-icon>
+      INICIAR NOVA ORDEM
     </button>
   </div>
 
-  <div class="grid grid-cols-1 gap-4">
-    @for (reg of registrosAtivos(); track reg.id) {
-      <div class="bg-white border-l-4 border-blue-500 p-5 rounded-r-xl shadow-sm flex items-center justify-between">
-        <div class="flex gap-8 items-center">
-          <div class="text-center border-r pr-8">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Início</p>
-            <p class="font-mono text-lg text-industrial-blue">{{ reg.dataInicio | date:'HH:mm' }}</p>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    @for (reg of registros(); track reg.id) {
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:border-sky-500/50 transition-all">
+        
+        <div class="flex justify-between items-start mb-6">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 bg-slate-100 rounded-xl grid place-items-center text-slate-600 font-bold">
+               <lucide-icon name="cpu" class="size-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Equipamento</p>
+              <h3 class="font-bold text-slate-900 uppercase">{{ reg.maquina }}</h3>
+            </div>
           </div>
           
+          @if (!reg.dataFinal) {
+            <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-black rounded-lg uppercase tracking-tighter animate-pulse">
+              Em andamento
+            </span>
+          } @else {
+            <span class="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-black rounded-lg uppercase tracking-tighter">
+              Concluído
+            </span>
+          }
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 py-4 border-y border-slate-50">
           <div>
-            <h3 class="font-bold text-gray-800">{{ reg.peca.nome }}</h3>
-            <div class="flex gap-4 mt-1">
-              <span class="text-xs text-gray-500"><strong>Máquina:</strong> {{ reg.maquina.nome }}</span>
-              <span class="text-xs text-gray-500"><strong>Operador:</strong> {{ reg.funcionario.nome }}</span>
+            <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Operador</p>
+            <div class="flex items-center gap-2">
+              <div class="h-6 w-6 rounded-full bg-sky-100 text-sky-700 grid place-items-center text-[10px] font-bold uppercase">
+                {{ reg.funcionario?.substring(0,2) }}
+              </div>
+              <span class="text-sm font-bold text-slate-700">{{ reg.funcionario }}</span>
+            </div>
+          </div>
+          <div>
+            <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Peça / Desenho</p>
+            <div class="flex items-center gap-2">
+              <lucide-icon name="settings" class="size-4 text-slate-300"></lucide-icon>
+              <span class="text-sm font-bold text-slate-700 truncate">{{ reg.peca }}</span>
             </div>
           </div>
         </div>
 
-        <button (click)="finalizarProducao(reg)" class="px-6 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg font-bold hover:bg-red-600 hover:text-white transition-all">
-             Finalizar
-        </button>
-      </div>
-    } @empty {
-      <div class="text-center py-20 bg-gray-50 border-2 border-dashed rounded-xl">
-        <p class="text-gray-400 italic">Nenhuma produção ativa no momento.</p>
+        <div class="mt-6 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div>
+              <p class="text-[10px] font-black text-slate-400 uppercase">Início</p>
+              <p class="text-xs font-bold text-slate-600">{{ reg.dataInicio | date:'HH:mm' }}</p>
+            </div>
+            <lucide-icon name="arrow-right" class="size-4 text-slate-200"></lucide-icon>
+            <div>
+              <p class="text-[10px] font-black text-slate-400 uppercase">Fim</p>
+              <p class="text-xs font-bold text-slate-600 italic">
+                {{ reg.dataFinal ? (reg.dataFinal | date:'HH:mm') : '--:--' }}
+              </p>
+            </div>
+          </div>
+
+          @if (!reg.dataFinal) {
+            <button (click)="finalizarRegistro(reg.id!)"
+                    class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-red-600 transition-all flex items-center gap-2">
+              <lucide-icon name="square" class="size-3.5"></lucide-icon>
+              PARAR PRODUÇÃO
+            </button>
+          }
+        </div>
       </div>
     }
   </div>
-</div>
 
-<app-modal [exibir]="modalAberto()" [titulo]="'Novo Apontamento'" (fechar)="modalAberto.set(false)">
-  <app-registro-form 
-    [pecas]="pecas()" 
-    [funcionarios]="funcionarios()" 
-    [maquinas]="maquinas()"
-    (salvar)="onSalvar($event)" 
-    (cancelar)="modalAberto.set(false)" />
-</app-modal>
+  <app-modal [exibir]="modalAberto()" titulo="Nova Ordem de Produção" (fechar)="modalAberto.set(false)">
+    <app-formulario-registro-producao (salvar)="salvarNovo($event)" (cancelar)="modalAberto.set(false)"></app-formulario-registro-producao>
+  </app-modal>
+</div>

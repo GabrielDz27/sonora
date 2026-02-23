@@ -13,7 +13,7 @@ export class FormularioPecaComponent implements OnInit {
   private fb = inject(FormBuilder);
   
   @Input() dadosIniciais?: PecaDto;
-  salvarPeca = output<PecaDto>();
+  salvar = output<PecaDto>();
   cancelar = output<void>();
 
   pecaForm = this.fb.group({
@@ -34,7 +34,7 @@ export class FormularioPecaComponent implements OnInit {
 
   enviar() {
     if (this.pecaForm.valid) {
-      this.salvarPeca.emit(this.pecaForm.value as PecaDto);
+      this.salvar.emit(this.pecaForm.value as PecaDto);
     }
   }
 }

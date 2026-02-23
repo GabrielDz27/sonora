@@ -148,6 +148,33 @@ public interface MyServiceStub {
 	CompletableFuture<RelatorioOutput> relatorioRequest(RelatorioInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	RetornaIdFuncionarioOutput retornaIdFuncionario(RetornaIdFuncionarioInput input, long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void retornaIdFuncionario(RetornaIdFuncionarioInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RetornaIdFuncionarioOutput> retornaIdFuncionarioRequest(RetornaIdFuncionarioInput input);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RetornaIdFuncionarioOutput> retornaIdFuncionarioRequest(RetornaIdFuncionarioInput input, long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */

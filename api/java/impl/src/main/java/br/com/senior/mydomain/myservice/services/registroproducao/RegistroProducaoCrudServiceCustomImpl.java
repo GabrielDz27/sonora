@@ -21,4 +21,9 @@ public class RegistroProducaoCrudServiceCustomImpl extends RegistroProducaoCrudS
         pecaRepository.updateStatusById(StatusPeca.PROCESSO, entity.getPeca().getId());
         return super.create(entity);
     }
+
+    @Override
+    public RegistroProducaoEntity updateRegistroProducao(RegistroProducaoEntity entity) {
+        return super.updateRegistroProducao(entity);
+    }
 }

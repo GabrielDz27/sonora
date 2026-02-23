@@ -17,7 +17,6 @@ service my_service {
             in {
                 id: string
                 status: statusPeca
-
             }
             out {
                 retorno : retornoAtualizarStatus
@@ -53,6 +52,16 @@ service my_service {
             }
             out {
                 retorno: retornoRelatorio*
+            }
+        }
+
+        query retornaIdFuncionario {
+            in {
+                username: string
+            }
+            out {
+                nome: string
+                id: string
             }
         }
     }
@@ -158,6 +167,9 @@ service my_service {
 
             "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
             ativo: boolean
+
+            "Username do funcionario quando é feito o login"
+            username: string
         }
 
         "Entidade da máquina/equipamento"

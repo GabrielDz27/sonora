@@ -1,20 +1,66 @@
-<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Identificação / Nome da Máquina</label>
-        <input type="text" formControlName="nome" class="input-field" placeholder="Ex: Torno CNC Romi G280">
+<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-6">
+  
+  <div>
+    <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+      <lucide-icon name="cpu" class="size-3.5 text-sky-600"></lucide-icon>
+      Identificação do Ativo
+    </label>
+    <input 
+      type="text" 
+      formControlName="nome" 
+      placeholder="Ex: Torno CNC Romi G280" 
+      class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 placeholder:text-slate-400 
+             focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 bg-slate-50/50 focus:bg-white transition-all"
+      [class.border-red-500]="form.get('nome')?.touched && form.get('nome')?.invalid"
+    >
+    @if (form.get('nome')?.touched && form.get('nome')?.invalid) {
+      <div class="flex items-center gap-1 mt-1 text-red-600 italic">
+        <lucide-icon name="alert-circle" class="size-3"></lucide-icon>
+        <p class="text-[11px] font-medium">O nome da máquina é obrigatório para o registro.</p>
       </div>
+    }
+  </div>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Status Operacional</label>
-        <select formControlName="status" class="input-field">
-          <option value="ATIVO"> Ativo (Disponível)</option>
-          <option value="MANUTENCAO"> Em Manutenção</option>
-          <option value="INATIVO"> Inativo / Desativado</option>
-        </select>
+  <div>
+    <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+      <lucide-icon name="activity" class="size-3.5 text-sky-600"></lucide-icon>
+      Status Operacional
+    </label>
+    <div class="relative">
+      <select 
+        formControlName="status" 
+        class="w-full appearance-none rounded-xl border border-slate-200 px-4 py-3 text-slate-900 
+               focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 bg-white transition-all"
+      >
+        <option value="ATIVO">Disponível para Produção</option>
+        <option value="MANUTENCAO">Parada Técnica / Manutenção</option>
+        <option value="INATIVO">Ativo Desativado</option>
+      </select>
+      
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+        <lucide-icon name="chevron-down" class="size-4"></lucide-icon>
       </div>
+    </div>
+  </div>
 
-      <div class="flex justify-end gap-3 mt-6 pt-4 border-t">
-        <button type="button" (click)="cancelar.emit()" class="btn-secondary">Cancelar</button>
-        <button type="submit" [disabled]="form.invalid" class="btn-primary">Salvar Máquina</button>
-      </div>
-    </form> 
+  <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
+    <button 
+      type="button" 
+      (click)="cancelar.emit()"
+      class="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-colors"
+    >
+      <lucide-icon name="x" class="size-4"></lucide-icon>
+      Descartar
+    </button>
+
+    <button 
+      type="submit" 
+      [disabled]="form.invalid"
+      class="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-slate-900/20 
+             hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-2"
+    >
+      <lucide-icon name="check-circle" class="size-4 text-sky-400"></lucide-icon>
+      Confirmar Ativo
+    </button>
+  </div>
+</form>

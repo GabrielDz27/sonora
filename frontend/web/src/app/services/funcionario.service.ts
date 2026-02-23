@@ -6,4 +6,12 @@ import { Injectable } from '@angular/core';
 export class FuncionarioService {
 
   constructor() { }
+
+  listarTodos():any{ return []; }
+
+  buscarPorId(id:string){}
+
+  salvar(dados:any):any{}
+
+  excluir(id:string){}
 }

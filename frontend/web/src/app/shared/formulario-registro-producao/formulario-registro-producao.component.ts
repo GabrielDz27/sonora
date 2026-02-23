@@ -1,34 +1,49 @@
 import { Component, inject, input, output } from '@angular/core';
-import { Peca } from '../../services/peca';
-import { Funcionario, Maquina } from '../../models/models';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { PecaDto } from '../../models/peca.models';
+import { FuncionarioDto } from '../../models/funcionario.models';
+import { MaquinaDto } from '../../models/maquina.models';
+import { RegistroProducaoDto } from '../../models/registro-producao.models';
+import { LucideAngularModule, User, Cpu, Settings } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-formulario-registro-producao',
-  imports: [],
-  templateUrl: './formulario-registro-producao.component.html',
-  styleUrl: './formulario-registro-producao.component.css'
+  standalone: true,
+  imports: [ReactiveFormsModule, DatePipe, LucideAngularModule], 
+  templateUrl: './formulario-registro-producao.component.html'
 })
 export class FormularioRegistroProducaoComponent {
-  pecas = input<Peca[]>([]);
-  funcionarios = input<Funcionario[]>([]);
-  maquinas = input<Maquina[]>([]);
+  readonly iconUser = User;
+  readonly iconMachine = Cpu;
+  readonly iconPart = Settings;
 
-  form = inject(FormBuilder).group({
-    funcionario: [null, Validators.required],
-    maquina: [null, Validators.required],
-    peca: [null, Validators.required]
+  private fb = inject(FormBuilder);
+
+  pecas = input<PecaDto[]>([]);
+  funcionarios = input<FuncionarioDto[]>([]);
+  maquinas = input<MaquinaDto[]>([]);
+
+  salvar = output<RegistroProducaoDto>();
+  cancelar = output<void>();
+
+  form = this.fb.group({
+    funcionarioId: ['', Validators.required],
+    maquinaId: ['', Validators.required],
+    pecaId: ['', Validators.required]
   });
 
-  salvar = output<any>();
-  cancelar = output <void>();
+  dataAtual = new Date();
 
   enviar() {
     if (this.form.valid) {
-      this.salvar.emit({
-        ...this.form.value,
-        dataInicio: new Date() // Gerado no momento do clique
-      });
+      const payload: RegistroProducaoDto = {
+        funcionario: this.form.value.funcionarioId!,
+        maquina: this.form.value.maquinaId!,
+        peca: this.form.value.pecaId!,
+        dataInicio: new Date().toISOString()
+      };
+      this.salvar.emit(payload);
     }
   }
 }

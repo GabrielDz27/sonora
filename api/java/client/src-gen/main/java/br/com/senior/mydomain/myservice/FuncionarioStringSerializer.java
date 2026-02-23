@@ -25,6 +25,8 @@ public class FuncionarioStringSerializer {
 		sb.append(", ");
 		serializeAtivo(funcionario, sb);
 		sb.append(", ");
+		serializeUsername(funcionario, sb);
+		sb.append(", ");
 		sb.append(']');
 	}
 	
@@ -50,5 +52,9 @@ public class FuncionarioStringSerializer {
 	
 	protected void serializeAtivo(Funcionario funcionario, StringBuilder sb) {
 		sb.append("ativo=").append(funcionario.ativo == null ? "null" : funcionario.ativo);
+	}
+	
+	protected void serializeUsername(Funcionario funcionario, StringBuilder sb) {
+		sb.append("username=").append(funcionario.username == null ? "null" : funcionario.username);
 	}
 }

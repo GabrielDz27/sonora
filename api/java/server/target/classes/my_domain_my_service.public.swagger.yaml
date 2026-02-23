@@ -292,6 +292,7 @@ definitions:
       - cargo
       - turno
       - ativo
+      - username
     properties:
       id:
         type: string
@@ -315,6 +316,9 @@ definitions:
       ativo:
         type: boolean
         description: "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
+      username:
+        type: string
+        description: "Username do funcionario quando é feito o login"
   
   maquina:
     description: "Entidade da máquina/equipamento"

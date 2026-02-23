@@ -301,6 +301,102 @@ paths:
               schema:
                 $ref: '#/components/schemas/genericError'
   
+  /rest/my_domain/my_service/queries/retornaIdFuncionario:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+              properties:
+                username:
+                  type: string
+                  description: ""
+      parameters:
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - nome
+                  - id
+                properties:
+                  nome:
+                    type: string
+                    description: ""
+                  id:
+                    type: string
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      security :
+        - bearerAuth: []
+      parameters:
+        - in : query
+          name : username
+          description: ""
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: 'Content types and endpoint version for the request. Example: application/json;seniorx.version=2'
+          schema:
+            type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - nome
+                  - id
+                properties:
+                  nome:
+                    type: string
+                    description: ""
+                  id:
+                    type: string
+                    description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/genericError'
+  
   /rest/my_domain/my_service/queries/helloWorld:
     post:
       description: "Endpoint para teste"
@@ -2117,6 +2213,7 @@ components:
         - cargo
         - turno
         - ativo
+        - username
       properties:
         id:
           type: string
@@ -2140,6 +2237,9 @@ components:
         ativo:
           type: boolean
           description: "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
+        username:
+          type: string
+          description: "Username do funcionario quando é feito o login"
     
     maquina:
       description: "Entidade da máquina/equipamento"

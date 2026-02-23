@@ -1,24 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
+
+@theme {
+  --color-industrial-blue: #082f49; /* Coloque o código da sua cor aqui */
+  --color-industrial-white: #f8fafc; /* Coloque o código da sua cor aqui */
+}
 
 @layer components {
-  /* Botão Principal */
   .btn-primary {
     @apply bg-industrial-blue text-white px-4 py-2 rounded-md hover:opacity-90 transition-all font-medium disabled:bg-gray-400;
   }
 
-  /* Botão Secundário (Cancel/Voltar) */
   .btn-secondary {
     @apply border border-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-100 transition-all;
   }
 
-  /* Inputs Industriais */
   .input-field {
     @apply w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-industrial-blue focus:outline-none;
   }
 
-  /* Modal/Dialog Base */
   .modal-overlay {
     @apply fixed inset-0 bg-black/50 flex items-center justify-center z-50;
   }

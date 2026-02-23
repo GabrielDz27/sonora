@@ -1,37 +1,73 @@
-<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-4">
-      <div class="grid grid-cols-2 gap-4">
-        <div class="col-span-2">
-          <label class="block text-sm font-medium text-gray-700">Nome Completo</label>
-          <input type="text" formControlName="nome" class="input-field" placeholder="Ex: João Silva">
-        </div>
+<form [formGroup]="form" (ngSubmit)="enviar()" class="space-y-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    
+    <div class="md:col-span-2">
+      <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+        <lucide-icon name="user" class="size-3.5 text-sky-600"></lucide-icon>
+        Nome do Operador
+      </label>
+      <input type="text" formControlName="nome" placeholder="Ex: JOAO SILVA"
+             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+    </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Matrícula</label>
-          <input type="text" formControlName="matricula" class="input-field" placeholder="MT-1234">
-        </div>
+    <div>
+      <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+        <lucide-icon name="id-card" class="size-3.5 text-sky-600"></lucide-icon>
+        Matrícula Funcional
+      </label>
+      <input type="text" formControlName="matricula" placeholder="000000"
+             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all font-mono">
+    </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Cargo</label>
-          <input type="text" formControlName="cargo" class="input-field" placeholder="Ex: Operador CNC">
-        </div>
+    <div>
+      <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+        <lucide-icon name="briefcase" class="size-3.5 text-sky-600"></lucide-icon>
+        Cargo / Função
+      </label>
+      <input type="text" formControlName="cargo" placeholder="OPERADOR CNC"
+             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+    </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Turno</label>
-          <select formControlName="turno" class="input-field">
-            <option value="MANHA">Manhã</option>
-            <option value="TARDE">Tarde</option>
-            <option value="NOITE">Noite</option>
-          </select>
-        </div>
-
-        <div class="flex items-center gap-3 pt-6">
-          <input type="checkbox" formControlName="ativo" id="ativo" class="w-4 h-4 text-industrial-blue rounded">
-          <label for="ativo" class="text-sm font-medium text-gray-700">Colaborador Ativo</label>
+    <div class="md:col-span-2">
+      <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
+        <lucide-icon name="clock" class="size-3.5 text-sky-600"></lucide-icon>
+        Turno de Trabalho
+      </label>
+      <div class="relative">
+        <select formControlName="turno" 
+                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all appearance-none">
+          <option value="PRIMEIRO">Turno 01 - Matutino</option>
+          <option value="SEGUNDO">Turno 02 - Vespertino</option>
+          <option value="TERCEIRO">Turno 03 - Noturno</option>
+          <option value="DIURNO">Administrativo / Geral</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+          <lucide-icon name="chevron-down" class="size-4"></lucide-icon>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="flex justify-end gap-3 mt-6 pt-4 border-t">
-        <button type="button" (click)="cancelar.emit()" class="btn-secondary">Cancelar</button>
-        <button type="submit" [disabled]="form.invalid" class="btn-primary">Salvar Funcionário</button>
-      </div>
-    </form>
+  <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
+    <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-lg">
+       <lucide-icon name="database" class="size-3 text-slate-500"></lucide-icon>
+       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-tight">
+         Origem: {{ form.get('username')?.value }}
+       </span>
+    </div>
+
+    <div class="flex gap-3">
+      <button type="button" (click)="cancelar.emit()" 
+              class="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+        <lucide-icon name="x" class="size-4"></lucide-icon>
+        Descartar
+      </button>
+      
+      <button type="submit" [disabled]="form.invalid"
+              class="flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg hover:bg-slate-800 disabled:opacity-40 transition-all">
+        <lucide-icon name="check-circle" class="size-4 text-sky-400"></lucide-icon>
+        Confirmar Registro
+      </button>
+    </div>
+  </div>
+</form>

@@ -67,6 +67,12 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 	@Column(name = "ativo")
 	private Boolean ativo;
 	
+	/**
+	 * Username do funcionario quando é feito o login
+	 */
+	@Column(name = "username")
+	private String username;
+	
 	@Transient
 	private boolean _newEntity;
 	
@@ -104,6 +110,10 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 		return ativo;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
 	public void setId(java.util.UUID id) {
 		this.id = id;
 	}
@@ -126,6 +136,10 @@ public class FuncionarioEntity extends CustomEntity implements Persistable<java.
 	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	@Override

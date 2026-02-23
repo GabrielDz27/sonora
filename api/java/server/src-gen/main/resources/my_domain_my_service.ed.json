@@ -253,6 +253,14 @@
 					"hidden": false,
 					"multivalued": false,
 					"readOnly": false
+				},
+				"username": {
+					"name": "username",
+					"type": "string",
+					"optional": false,
+					"hidden": false,
+					"multivalued": false,
+					"readOnly": false
 				}
 			},
 			"lookup": {
@@ -286,6 +294,11 @@
 						"name": "ativo",
 						"optional": true,
 						"multiple": false
+					},
+					{
+						"name": "username",
+						"optional": true,
+						"multiple": false
 					}
 				],
 				"displayFields": [
@@ -294,7 +307,8 @@
 					"matricula",
 					"cargo",
 					"turno",
-					"ativo"
+					"ativo",
+					"username"
 				]
 			},
 			"advancedSearch": {
@@ -328,6 +342,11 @@
 						"name": "ativo",
 						"optional": true,
 						"multiple": false
+					},
+					{
+						"name": "username",
+						"optional": true,
+						"multiple": false
 					}
 				],
 				"displayFields": [
@@ -336,7 +355,8 @@
 					"matricula",
 					"cargo",
 					"turno",
-					"ativo"
+					"ativo",
+					"username"
 				]
 			}
 		},
@@ -732,6 +752,11 @@
 									"name": "ativo",
 									"optional": true,
 									"multiple": false
+								},
+								{
+									"name": "username",
+									"optional": true,
+									"multiple": false
 								}
 							],
 							"displayFields": [
@@ -740,7 +765,8 @@
 								"matricula",
 								"cargo",
 								"turno",
-								"ativo"
+								"ativo",
+								"username"
 							]
 						},
 						"advancedSearch": {
@@ -774,6 +800,11 @@
 									"name": "ativo",
 									"optional": true,
 									"multiple": false
+								},
+								{
+									"name": "username",
+									"optional": true,
+									"multiple": false
 								}
 							],
 							"displayFields": [
@@ -782,7 +813,8 @@
 								"matricula",
 								"cargo",
 								"turno",
-								"ativo"
+								"ativo",
+								"username"
 							]
 						}
 					}
@@ -798,6 +830,7 @@
 		"my_domain.my_service.funcionario_cargo": "Função técnica na metalurgia",
 		"my_domain.my_service.funcionario_turno": "Turno: PRIMEIRO, SEGUNDO, TERCEIRO e DIURNO",
 		"my_domain.my_service.funcionario_ativo": "Ativo, se funcionario foi deseligado na empresa ou foi reativado",
+		"my_domain.my_service.funcionario_username": "Username do funcionario quando é feito o login",
 		"my_domain.my_service.maquina": "Entidade da máquina/equipamento",
 		"my_domain.my_service.maquina_id": "Identificador único UUID",
 		"my_domain.my_service.maquina_nome": "Nome de identificação do ativo",

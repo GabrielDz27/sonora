@@ -145,6 +145,8 @@
             </xsd:element>
             <xsd:element name="ativo" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
             </xsd:element>
+            <xsd:element name="username" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
     <xsd:complexType name="maquina">
@@ -1046,6 +1048,24 @@
     </xsd:element>
     <xsd:element name="createPeca">
         <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="retornaIdFuncionario">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="username" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retornaIdFuncionarioOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+                <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
     </xsd:element>
     <xsd:element name="createRegistroProducao">
         <xsd:complexType/>

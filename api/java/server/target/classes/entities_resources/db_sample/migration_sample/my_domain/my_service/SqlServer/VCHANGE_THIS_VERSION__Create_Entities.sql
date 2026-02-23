@@ -1,4 +1,4 @@
-/* Database: SqlServer. Generation date: 2026-02-20 16:56:01:446 */
+/* Database: SqlServer. Generation date: 2026-02-23 10:42:38:764 */
 /* Entity Peca */
 create table peca (
 	id UNIQUEIDENTIFIER NOT NULL,
@@ -23,6 +23,7 @@ create table funcionario (
 	cargo VARCHAR(255) NOT NULL,
 	turno VARCHAR(255) NOT NULL,
 	ativo BIT NOT NULL,
+	username VARCHAR(255) NOT NULL,
 	ext VARCHAR(4000)
 );
 
@@ -66,9 +67,9 @@ alter table maquina add constraint pk_maquina_id primary key(id);
 alter table registro_producao add constraint pk_registro_producao_id primary key(id);
 
 /* Foreign Key Constraints */
-alter table registro_producao add constraint fk6sjntdsldeuyibgj4nzodbdbjwqz foreign key (peca) references peca (id);
-alter table registro_producao add constraint fkvzors6xfqrl4tqm5rcsu1qplqcja foreign key (funcionario) references funcionario (id);
-alter table registro_producao add constraint fkvvad7bvfer24cnxg0zawq9pjqrsa foreign key (maquina) references maquina (id);
+alter table registro_producao add constraint fkezcu23joxvny9cvcszpqqp2n1qzc foreign key (peca) references peca (id);
+alter table registro_producao add constraint fkrns59pojw8nrce6vkkk7vpcpejwr foreign key (funcionario) references funcionario (id);
+alter table registro_producao add constraint fktsr6pobr5ffa85bcxflenbkpz3pk foreign key (maquina) references maquina (id);
 
 /* Unique Key Constraints */
 

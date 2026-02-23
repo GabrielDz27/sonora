@@ -44,6 +44,15 @@
                 <slot name="retorno" type="retornoRelatorio" optional="false" multivalued="true"/>
             </output>
         </query>
+        <query name="retornaIdFuncionario" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="username" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="nome" type="string" optional="false" multivalued="false"/>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+            </output>
+        </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>
@@ -396,6 +405,7 @@
             <slot name="cargo" type="string" optional="false" multivalued="false"/>
             <slot name="turno" type="turnoFuncionario" optional="false" multivalued="false"/>
             <slot name="ativo" type="boolean" optional="false" multivalued="false"/>
+            <slot name="username" type="string" optional="false" multivalued="false"/>
         </record>
         <record name="maquina">
             <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>

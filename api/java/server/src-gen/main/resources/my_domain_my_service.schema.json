@@ -126,9 +126,12 @@
             	},
             	"ativo" : {
             		"type": "boolean"
+            	},
+            	"username" : {
+            		"type": "string"
             	}
         	},
-        	"required" : ["nome","matricula","cargo","turno","ativo"]
+        	"required" : ["nome","matricula","cargo","turno","ativo","username"]
         }
         ,
         "maquina" : {

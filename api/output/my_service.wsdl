@@ -157,6 +157,8 @@
                     </xsd:element>
                     <xsd:element name="ativo" type="xsd:boolean" minOccurs="1" maxOccurs="1"  readOnly="false">
                     </xsd:element>
+                    <xsd:element name="username" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="maquina">
@@ -1059,6 +1061,24 @@
             <xsd:element name="createPeca">
                 <xsd:complexType/>
             </xsd:element>
+            <xsd:element name="retornaIdFuncionario">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="username" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retornaIdFuncionarioOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="nome" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                        <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="createRegistroProducao">
                 <xsd:complexType/>
             </xsd:element>
@@ -1267,6 +1287,12 @@
     </wsdl:message>
     <wsdl:message name="createPecaResponse">
         <wsdl:part name="created" element="createPecaOutput"/>
+    </wsdl:message>
+    <wsdl:message name="retornaIdFuncionarioRequest">
+        <wsdl:part name="parameters" element="retornaIdFuncionario"/>
+    </wsdl:message>
+    <wsdl:message name="retornaIdFuncionarioResponse">
+        <wsdl:part name="result" element="retornaIdFuncionarioOutput"/>
     </wsdl:message>
     <wsdl:message name="retrievePecaRequest">
         <wsdl:part name="toRetrieve" element="retrievePeca"/>
@@ -1585,6 +1611,13 @@
             </wsdl:documentation>
             <wsdl:input message="createPecaRequest"/>
             <wsdl:output message="createPecaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retornaIdFuncionario">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="retornaIdFuncionarioRequest"/>
+            <wsdl:output message="retornaIdFuncionarioResponse"/>
         </wsdl:operation>
         <wsdl:operation name="retrievePeca">
             <wsdl:documentation>
@@ -1983,6 +2016,15 @@
         </wsdl:operation>
         <wsdl:operation name="createPeca">
             <soap:operation soapAction="createPeca"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retornaIdFuncionario">
+            <soap:operation soapAction="retornaIdFuncionario"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

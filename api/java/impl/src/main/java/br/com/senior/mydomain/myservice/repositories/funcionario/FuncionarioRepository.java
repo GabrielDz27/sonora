@@ -1,6 +1,7 @@
 package br.com.senior.mydomain.myservice.repositories.funcionario;
 
 import br.com.senior.mydomain.myservice.FuncionarioBaseRepository;
+import br.com.senior.mydomain.myservice.FuncionarioEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,5 @@ public interface FuncionarioRepository extends FuncionarioBaseRepository{
     @Modifying
     void desativar (UUID id);
 
+    FuncionarioEntity findFuncionarioByUsername(String username);
 }

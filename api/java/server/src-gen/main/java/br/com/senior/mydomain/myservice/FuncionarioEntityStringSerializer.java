@@ -27,6 +27,8 @@ public class FuncionarioEntityStringSerializer {
 		serializeTurno(funcionario, sb);
 		sb.append(", ");
 		serializeAtivo(funcionario, sb);
+		sb.append(", ");
+		serializeUsername(funcionario, sb);
 		sb.append(", ").append(", ");
 		sb.append(']');
 	}
@@ -53,5 +55,9 @@ public class FuncionarioEntityStringSerializer {
 	
 	protected void serializeAtivo(FuncionarioEntity funcionario, StringBuilder sb) {
 		sb.append("ativo=").append(funcionario.getAtivo() == null ? "null" : funcionario.getAtivo());
+	}
+	
+	protected void serializeUsername(FuncionarioEntity funcionario, StringBuilder sb) {
+		sb.append("username=").append(funcionario.getUsername() == null ? "null" : funcionario.getUsername());
 	}
 }

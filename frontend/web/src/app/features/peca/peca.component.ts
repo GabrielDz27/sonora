@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Peca } from '../../models/models';
+import { Peca } from '../../models/geral.models';
 
 @Component({
   selector: 'app-peca',

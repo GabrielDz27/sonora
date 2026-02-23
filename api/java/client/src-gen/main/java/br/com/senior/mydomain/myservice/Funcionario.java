@@ -148,6 +148,12 @@ public class Funcionario extends CustomDTO {
     @NotNull(message = "ativo is required")
     public Boolean ativo;
     
+    /**
+     * Username do funcionario quando é feito o login
+     */
+    @NotNull(message = "username is required")
+    public String username;
+    
     
 	private List<JsonPatch> jsonPatches;
 	
@@ -157,24 +163,26 @@ public class Funcionario extends CustomDTO {
     /** 
      * This constructor allows initialization of all fields, required and optional.
      */
-    public Funcionario(String id, String nome, String matricula, String cargo, TurnoFuncionario turno, Boolean ativo, List<JsonPatch> jsonPatches) {
+    public Funcionario(String id, String nome, String matricula, String cargo, TurnoFuncionario turno, Boolean ativo, String username, List<JsonPatch> jsonPatches) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.cargo = cargo;
         this.turno = turno;
         this.ativo = ativo;
+        this.username = username;
         this.jsonPatches = jsonPatches;
     }
     /** 
      * This convenience constructor allows initialization of all required fields.
      */
-    public Funcionario(String nome, String matricula, String cargo, TurnoFuncionario turno, Boolean ativo) {
+    public Funcionario(String nome, String matricula, String cargo, TurnoFuncionario turno, Boolean ativo, String username) {
         this.nome = nome;
         this.matricula = matricula;
         this.cargo = cargo;
         this.turno = turno;
         this.ativo = ativo;
+        this.username = username;
     }
     
     public void normalize(Map<String, Object> headers) {

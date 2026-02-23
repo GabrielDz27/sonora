@@ -51,7 +51,8 @@ public class RegistroProducaoCrudValidatorImpl implements RegistroProducaoCrudVa
 
     @Override
     public void beforeUpdate(RegistroProducaoEntity entity) {
-
+        validadorPeca(entity.getPeca().getId());
+        validadorMaquina(entity.getMaquina().getId());
     }
 
     @Override

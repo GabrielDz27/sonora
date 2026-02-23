@@ -97,6 +97,23 @@ public interface MyServiceConstants {
     	 */
     	String RELATORIO_ERROR = "relatorioError";
     	/**
+    	 * @see RetornaIdFuncionarioInput the request payload
+    	 */
+    	String RETORNA_ID_FUNCIONARIO = "retornaIdFuncionario";
+    	/**
+    	 * The success response primitive for retornaIdFuncionario.
+    	 *
+    	 * @see #RETORNA_ID_FUNCIONARIO the request primitive
+    	 * @see RetornaIdFuncionarioOutput the response payload
+    	 */
+    	String RETORNA_ID_FUNCIONARIO_RESPONSE = "retornaIdFuncionarioResponse";
+    	/**
+    	 * An error response primitive for retornaIdFuncionario.
+    	 *
+    	 * @see #RETORNA_ID_FUNCIONARIO the request primitive
+    	 */
+    	String RETORNA_ID_FUNCIONARIO_ERROR = "retornaIdFuncionarioError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

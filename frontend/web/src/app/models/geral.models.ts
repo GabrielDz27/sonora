@@ -1,38 +1,46 @@
-"Interface base para peças seguindo o schema do banco"
+// Interface base para peças seguindo o schema do banco
 export interface Peca {
-    id?: string; // UUID
+    id?: string;
     nome: string;
     codigoDesenho: string;
     tempoEstimadoMinutos: number;
     status: 'PENDENTE' | 'PROCESSO' | 'FINALIZADO' | 'MORTA';
     valor: number;
-    motivo_perda?: string;
-    ext?: any; // Para o campo JSONB
+    motivoPerda?: string;
+    ext?: any;
 }
 
-"Interface para os colaboradores"
+// Interface para os colaboradores
 export interface Funcionario {
     id?: string;
     nome: string;
     matricula: string;
     cargo: string;
-    turno: 'MANHA' | 'TARDE' | 'NOITE';
+    turno: 'PRIMEIRO' | 'SEGUNDO' | 'TERCEIRO' | 'DIURNO';
     ativo: boolean;
+    username: string;
 }
 
-"Interface para as máquinas do chão de fábrica"
+// Interface para as máquinas do chão de fábrica
 export interface Maquina {
     id?: string;
     nome: string;
     status: 'ATIVO' | 'MANUTENCAO' | 'INATIVO';
 }
 
-"Interface mestre de apontamento"
+// Interface mestre de apontamento
 export interface RegistroProducao {
     id?: string;
-    peca: string | Peca; // ID no envio, Objeto no retorno
+    peca: string | Peca;
     funcionario: string | Funcionario;
     maquina: string | Maquina;
     dataInicio: Date | string;
     dataFinal?: Date | string;
+}
+
+
+export type retornoAtualizarStatus = {
+    mensagemRetorno: string
+    id : string
+    contemErro?: boolean
 }

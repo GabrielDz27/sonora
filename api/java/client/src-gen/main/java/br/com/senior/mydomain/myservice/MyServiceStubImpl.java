@@ -258,6 +258,49 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.relatorioRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método retornaIdFuncionario
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public RetornaIdFuncionarioOutput retornaIdFuncionario(RetornaIdFuncionarioInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retornaIdFuncionario(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaIdFuncionario
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void retornaIdFuncionario(RetornaIdFuncionarioInput input) {
+		br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl(messengerSupplier, userId, messageSupplier);
+		impl.retornaIdFuncionario(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaIdFuncionario
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<RetornaIdFuncionarioOutput> retornaIdFuncionarioRequest(RetornaIdFuncionarioInput input) {
+		return this.retornaIdFuncionarioRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaIdFuncionario
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<RetornaIdFuncionarioOutput> retornaIdFuncionarioRequest(RetornaIdFuncionarioInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaIdFuncionarioImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retornaIdFuncionarioRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.

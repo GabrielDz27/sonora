@@ -1,27 +1,40 @@
-import { Component, signal } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, signal, output, Input, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PecaDto, statusPeca } from '../../models/peca.models';
+import { LucideAngularModule } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-formulario-peca',
-  imports: [],
-  templateUrl: './formulario-peca.component.html',
-  styleUrl: './formulario-peca.component.css'
+  standalone: true,
+  imports: [ReactiveFormsModule, LucideAngularModule],
+  templateUrl: './formulario-peca.component.html'
 })
-export class FormularioPecaComponent {
-  modalAberto = signal(false);
+export class FormularioPecaComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  
+  @Input() dadosIniciais?: PecaDto;
+  salvarPeca = output<PecaDto>();
+  cancelar = output<void>();
 
-  pecaForm = new FormGroup({
-    id: new FormControl(null), // UUID
-    nome: new FormControl('', Validators.required),
-    codigoDesenho: new FormControl('', Validators.required),
-    valor: new FormControl(0, Validators.required),
-    tempoEstimadoMinutos: new FormControl(0, Validators.required),
-    status: new FormControl('PENDENTE'),
-    motivo_perda: new FormControl('')
+  pecaForm = this.fb.group({
+    id: [null as string | null],
+    nome: ['', [Validators.required]],
+    codigoDesenho: ['', [Validators.required]],
+    valor: [0, [Validators.required, Validators.min(0)]],
+    tempoEstimadoMinutos: [0, [Validators.required, Validators.min(1)]],
+    status: ['PENDENTE' as statusPeca, Validators.required],
+    motivoPerda: ['']
   });
 
-  fecharModal() {
-    this.modalAberto.set(false);
-    this.pecaForm.reset({ status: 'PENDENTE' });
+  ngOnInit() {
+    if (this.dadosIniciais) {
+      this.pecaForm.patchValue(this.dadosIniciais);
+    }
+  }
+
+  enviar() {
+    if (this.pecaForm.valid) {
+      this.salvarPeca.emit(this.pecaForm.value as PecaDto);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Maquina } from '../../models/models';
+import { Maquina } from '../../models/geral.models';
 
 @Component({
   selector: 'app-maquina',

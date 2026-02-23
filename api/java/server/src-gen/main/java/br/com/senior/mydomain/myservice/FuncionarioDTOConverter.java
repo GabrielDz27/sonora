@@ -72,6 +72,9 @@ public class FuncionarioDTOConverter {
 		if (dto.ativo != null) {
 			entity.setAtivo(dto.ativo);
 		}
+		if (dto.username != null) {
+			entity.setUsername(dto.username);
+		}
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -96,6 +99,7 @@ public class FuncionarioDTOConverter {
 		entity.setCargo(dto.cargo);
 		entity.setTurno(dto.turno);
 		entity.setAtivo(dto.ativo);
+		entity.setUsername(dto.username);
 		for (Map.Entry<String, Object> entry : dto.getCustom().entrySet()) {
 			entity.setCustom(entry.getKey(), entry.getValue());
 		}
@@ -135,6 +139,7 @@ public class FuncionarioDTOConverter {
 		dto.cargo = entity.getCargo();
 		dto.turno = entity.getTurno();
 		dto.ativo = entity.getAtivo();
+		dto.username = entity.getUsername();
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -180,6 +185,10 @@ public class FuncionarioDTOConverter {
 		if (displayFields.stream().anyMatch(displayField -> "ativo".equals(displayField) || "*".equals(displayField))) {
 			dto.ativo = entity.getAtivo();
 		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "username".equals(displayField) || "*".equals(displayField))) {
+			dto.username = entity.getUsername();
+		}
 		for(String customField : entity.getCustomFields()) {
 			dto.setCustom(customField, entity.getCustom(customField));
 		}
@@ -220,6 +229,10 @@ public class FuncionarioDTOConverter {
 		
 		if (displayFields.stream().anyMatch(displayField -> "ativo".equals(displayField) || "*".equals(displayField))) {
 			dto.ativo = entity.getAtivo();
+		}
+		
+		if (displayFields.stream().anyMatch(displayField -> "username".equals(displayField) || "*".equals(displayField))) {
+			dto.username = entity.getUsername();
 		}
         return dto;
     }
@@ -285,6 +298,9 @@ public class FuncionarioDTOConverter {
 		}
 		if("ativo".equals(jsonPatch.getPath().replace("/", ""))) {
 			entity.setAtivo(null);
+		}
+		if("username".equals(jsonPatch.getPath().replace("/", ""))) {
+			entity.setUsername(null);
 		}
 	}
 }

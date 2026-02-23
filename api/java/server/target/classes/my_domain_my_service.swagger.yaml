@@ -257,6 +257,78 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
+  /my_service/queries/retornaIdFuncionario:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - username
+            properties:
+              username:
+                type: string
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - nome
+              - id
+            properties:
+              nome:
+                type: string
+                description: ""
+              id:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: username
+          description: ""
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - nome
+              - id
+            properties:
+              nome:
+                type: string
+                description: ""
+              id:
+                type: string
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/queries/getMetadata:
     post:
       description: "Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested."
@@ -1992,6 +2064,7 @@ definitions:
       - cargo
       - turno
       - ativo
+      - username
     properties:
       id:
         type: string
@@ -2015,6 +2088,9 @@ definitions:
       ativo:
         type: boolean
         description: "Ativo, se funcionario foi deseligado na empresa ou foi reativado"
+      username:
+        type: string
+        description: "Username do funcionario quando é feito o login"
   
   maquina:
     description: "Entidade da máquina/equipamento"

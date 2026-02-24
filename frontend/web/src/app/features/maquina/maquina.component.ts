@@ -1,7 +1,7 @@
 import { Component, signal, inject, OnInit, computed } from '@angular/core';
 import { MaquinaService } from '../../services/maquina.service';
 import { MaquinaDto } from '../../models/maquina.models';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, CheckCircle, Wrench, Plus, AlertTriangle, Cpu, Edit3, Trash2, Barcode } from 'lucide-angular/src/icons';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioMaquinaComponent } from '../../shared/formulario-maquina/formulario-maquina.component';
 
@@ -14,6 +14,15 @@ import { FormularioMaquinaComponent } from '../../shared/formulario-maquina/form
 })
 export class MaquinaComponent {
   private service = inject(MaquinaService);
+
+  readonly CheckCircle = CheckCircle;
+  readonly Wrench = Wrench;
+  readonly Plus = Plus;
+  readonly AlertTriangle = AlertTriangle;
+  readonly Cpu = Cpu;
+  readonly Edit3 = Edit3;
+  readonly Trash2 = Trash2;
+  readonly Barcode = Barcode;
 
   lista = signal<MaquinaDto[]>([]);
   itemParaEdicao = signal<MaquinaDto | undefined>(undefined);

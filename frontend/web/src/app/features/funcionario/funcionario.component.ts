@@ -1,7 +1,7 @@
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { FuncionarioService } from '../../services/funcionario.service';
 import { FuncionarioDto } from '../../models/funcionario.models';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, Plus, User, Edit3 } from 'lucide-angular/src/icons';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioFuncionarioComponent } from '../../shared/formulario-funcionario/formulario-funcionario.component';
 
@@ -13,6 +13,10 @@ import { FormularioFuncionarioComponent } from '../../shared/formulario-funciona
 })
 export class FuncionarioComponent implements OnInit {
   private service = inject(FuncionarioService);
+
+  readonly Plus = Plus;
+  readonly User = User;
+  readonly Edit3 = Edit3;
 
   lista = signal<FuncionarioDto[]>([]);
   itemParaEdicao = signal<FuncionarioDto | undefined>(undefined);

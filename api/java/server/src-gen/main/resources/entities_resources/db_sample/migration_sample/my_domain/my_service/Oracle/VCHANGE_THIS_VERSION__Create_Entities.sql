@@ -1,4 +1,4 @@
-/* Database: Oracle. Generation date: 2026-02-23 10:42:38:772 */
+/* Database: Oracle. Generation date: 2026-02-24 10:39:52:374 */
 /* Entity Peca */
 create table peca (
 	id RAW(16) NOT NULL,
@@ -71,9 +71,9 @@ alter table maquina add constraint pk_maquina_id primary key(id);
 alter table registro_producao add constraint pk_registro_producao_id primary key(id);
 
 /* Foreign Key Constraints */
-alter table registro_producao add constraint fkitluometuclhycjm4rajefknwpur foreign key (peca) references peca (id);
-alter table registro_producao add constraint fkt0tknnkykcmuqtndszfxr6w85ik9 foreign key (funcionario) references funcionario (id);
-alter table registro_producao add constraint fkimlp6p6nlhne6w6ogxd02ibhq8ct foreign key (maquina) references maquina (id);
+alter table registro_producao add constraint fk6xwpdmyxxi61ut9cbbt79ame10vf foreign key (peca) references peca (id);
+alter table registro_producao add constraint fkju6ngwoz5yclesorp5nqw47kucoj foreign key (funcionario) references funcionario (id);
+alter table registro_producao add constraint fkg3770eiyr2su7xxnoazelvjhfowp foreign key (maquina) references maquina (id);
 
 /* Unique Key Constraints */
 

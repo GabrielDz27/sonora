@@ -1,7 +1,7 @@
 import { Component, inject, output, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaquinaDto, statusMaquina } from '../../models/maquina.models';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, Cpu, AlertCircle, Activity, ChevronDown, X, CheckCircle } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-formulario-maquina',
@@ -11,6 +11,13 @@ import { LucideAngularModule } from 'lucide-angular/src/icons';
 })
 export class FormularioMaquinaComponent implements OnInit {
   private fb = inject(FormBuilder);
+
+  readonly Cpu = Cpu;
+  readonly AlertCircle = AlertCircle;
+  readonly Activity = Activity;
+  readonly ChevronDown = ChevronDown;
+  readonly X = X;
+  readonly CheckCircle = CheckCircle;
 
   @Input() dadosIniciais?: MaquinaDto;
   salvar = output<MaquinaDto>();

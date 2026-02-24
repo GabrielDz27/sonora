@@ -12,7 +12,7 @@
     <div class="flex flex-wrap gap-4">
       <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-4 min-w-[180px]">
         <div class="h-10 w-10 bg-indigo-50 text-indigo-600 rounded-xl grid place-items-center">
-          <lucide-icon name="dollar-sign" class="size-5"></lucide-icon>
+          <lucide-icon [img]="DollarSign" class="size-5"></lucide-icon>
         </div>
         <div>
           <p class="text-[10px] font-black text-slate-400 uppercase">Valor em Carteira</p>
@@ -22,7 +22,7 @@
 
       <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex items-center gap-4 min-w-[150px]">
         <div class="h-10 w-10 bg-red-50 text-red-600 rounded-xl grid place-items-center">
-          <lucide-icon name="skull" class="size-5"></lucide-icon>
+          <lucide-icon [img]="Skull" class="size-5"></lucide-icon>
         </div>
         <div>
           <p class="text-[10px] font-black text-slate-400 uppercase">Refugos (Morta)</p>
@@ -32,7 +32,7 @@
 
       <button (click)="abrirNovo()" 
               class="bg-slate-900 text-white px-8 rounded-2xl font-bold text-sm flex items-center gap-2 hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20">
-        <lucide-icon name="plus" class="size-5"></lucide-icon>
+        <lucide-icon [img]="Plus" class="size-5"></lucide-icon>
         REGISTRAR PEÇA
       </button>
     </div>
@@ -54,7 +54,7 @@
         <div class="p-6 pt-8">
           <div class="flex items-center gap-4 mb-6">
             <div class="h-14 w-14 rounded-2xl bg-slate-900 text-white grid place-items-center shadow-lg">
-              <lucide-icon name="package" class="size-7"></lucide-icon>
+              <lucide-icon [img]="Package" class="size-7"></lucide-icon>
             </div>
             <div>
               <p class="text-[10px] font-mono text-slate-400 font-bold uppercase tracking-widest">{{ peca.codigoDesenho }}</p>
@@ -66,14 +66,14 @@
             <div>
               <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Tempo Estimado</p>
               <div class="flex items-center gap-1 text-slate-700">
-                <lucide-icon name="timer" class="size-3.5"></lucide-icon>
+                <lucide-icon [img]="Timer" class="size-3.5"></lucide-icon>
                 <span class="font-bold text-sm">{{ peca.tempoEstimadoMinutos }} min</span>
               </div>
             </div>
             <div>
               <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Custo Unitário</p>
               <div class="flex items-center gap-1 text-slate-700">
-                <lucide-icon name="tag" class="size-3.5"></lucide-icon>
+                <lucide-icon [img]="DollarSign" class="size-3.5"></lucide-icon>
                 <span class="font-bold text-sm">{{ peca.valor | currency:'BRL' }}</span>
               </div>
             </div>
@@ -87,7 +87,7 @@
             <div class="flex gap-2">
               <button (click)="abrirEditar(peca)" 
                       class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 text-slate-600 text-xs font-bold hover:bg-slate-900 hover:text-white transition-all">
-                <lucide-icon name="edit-3" class="size-3.5"></lucide-icon>
+                <lucide-icon [img]="Edit3" class="size-3.5"></lucide-icon>
                 DETALHES
               </button>
             </div>

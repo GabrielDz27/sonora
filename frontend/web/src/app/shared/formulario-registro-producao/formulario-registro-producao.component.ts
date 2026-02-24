@@ -5,7 +5,7 @@ import { PecaDto } from '../../models/peca.models';
 import { FuncionarioDto } from '../../models/funcionario.models';
 import { MaquinaDto } from '../../models/maquina.models';
 import { RegistroProducaoDto } from '../../models/registro-producao.models';
-import { LucideAngularModule, User, Cpu, Settings } from 'lucide-angular/src/icons';
+import { LucideAngularModule, User, Cpu, Settings, Clock, PlayCircle } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-formulario-registro-producao',
@@ -17,6 +17,8 @@ export class FormularioRegistroProducaoComponent {
   readonly iconUser = User;
   readonly iconMachine = Cpu;
   readonly iconPart = Settings;
+  readonly Clock = Clock;
+  readonly PlayCircle = PlayCircle;
 
   private fb = inject(FormBuilder);
 

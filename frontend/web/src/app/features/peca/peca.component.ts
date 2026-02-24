@@ -1,7 +1,7 @@
 import { Component, signal, inject, OnInit, computed } from '@angular/core';
 import { PecaService } from '../../services/peca.service';
 import { PecaDto } from '../../models/peca.models';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, DollarSign, Skull, Plus, Package, Timer, Edit3 } from 'lucide-angular/src/icons';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioPecaComponent } from '../../shared/formulario-peca/formulario-peca.component';
 import { CurrencyPipe, CommonModule } from '@angular/common';
@@ -14,6 +14,13 @@ import { CurrencyPipe, CommonModule } from '@angular/common';
 })
 export class PecaComponent {
   private service = inject(PecaService);
+
+  readonly DollarSign = DollarSign;
+  readonly Skull = Skull;
+  readonly Plus = Plus;
+  readonly Package = Package;
+  readonly Timer = Timer;
+  readonly Edit3 = Edit3;
 
   lista = signal<PecaDto[]>([]);
   itemParaEdicao = signal<PecaDto | undefined>(undefined);

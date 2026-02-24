@@ -48,7 +48,7 @@
 
   <div class="flex items-center gap-4 p-4 bg-slate-900 rounded-2xl text-white shadow-lg">
     <div class="h-10 w-10 rounded-xl bg-sky-500/20 grid place-items-center text-sky-400">
-      <lucide-icon name="clock" class="size-5"></lucide-icon>
+      <lucide-icon [img]="Clock" class="size-5"></lucide-icon>
     </div>
     <div class="flex-1">
       <p class="text-[10px] font-bold uppercase tracking-tighter text-sky-400">Time Tracking</p>
@@ -63,7 +63,7 @@
     </button>
     <button type="submit" [disabled]="form.invalid"
             class="flex-[2] bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold text-sm shadow-xl shadow-emerald-900/20 hover:bg-emerald-700 disabled:opacity-50 transition-all flex items-center justify-center gap-2">
-      <lucide-icon name="play-circle" class="size-5"></lucide-icon>
+      <lucide-icon [img]="PlayCircle" class="size-5"></lucide-icon>
       INICIAR AGORA
     </button>
   </div>

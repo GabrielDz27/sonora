@@ -1,6 +1,6 @@
 import { Component, signal, inject, OnInit, computed } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, Activity, PlayCircle, Cpu, Settings, ArrowRight, Square } from 'lucide-angular/src/icons';
 import { RegistroProducaoService } from '../../services/registro-producao.service';
 import { RegistroProducaoDto } from '../../models/registro-producao.models';
 import { ModalComponent } from '../../shared/modal/modal.component';
@@ -15,6 +15,13 @@ import { FormularioRegistroProducaoComponent } from '../../shared/formulario-reg
 })
 export class RegistroProducaoComponent implements OnInit {
   private service = inject(RegistroProducaoService);
+
+  readonly Activity = Activity;
+  readonly PlayCircle = PlayCircle;
+  readonly Cpu = Cpu;
+  readonly Settings = Settings;
+  readonly ArrowRight = ArrowRight;
+  readonly Square = Square;
 
   registros = signal<RegistroProducaoDto[]>([]);
   modalAberto = signal(false);

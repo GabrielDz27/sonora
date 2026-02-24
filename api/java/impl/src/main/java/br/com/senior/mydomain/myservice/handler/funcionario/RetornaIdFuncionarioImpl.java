@@ -5,7 +5,6 @@ import br.com.senior.mydomain.myservice.FuncionarioEntity;
 import br.com.senior.mydomain.myservice.RetornaIdFuncionario;
 import br.com.senior.mydomain.myservice.RetornaIdFuncionarioInput;
 import br.com.senior.mydomain.myservice.RetornaIdFuncionarioOutput;
-import br.com.senior.mydomain.myservice.repositories.funcionario.FuncionarioRepository;
 import br.com.senior.mydomain.myservice.services.funcionario.FuncionarioService;
 
 import javax.inject.Inject;
@@ -24,6 +23,6 @@ public class RetornaIdFuncionarioImpl implements RetornaIdFuncionario {
         output.id = funcionario.getId().toString();
         output.nome = funcionario.getNome();
 
-        return null;
+        return output;
     }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, output, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FuncionarioDto, turno } from '../../models/funcionario.models';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, User, IdCard, Briefcase, Clock, ChevronDown, Database, X, CheckCircle } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-formulario-funcionario',
@@ -12,6 +12,15 @@ import { LucideAngularModule } from 'lucide-angular/src/icons';
 export class FormularioFuncionarioComponent implements OnInit {
   private fb = inject(FormBuilder);
   
+  readonly User = User;
+  readonly IdCard = IdCard;
+  readonly Briefcase = Briefcase;
+  readonly Clock = Clock;
+  readonly ChevronDown = ChevronDown;
+  readonly Database = Database;
+  readonly X = X;
+  readonly CheckCircle = CheckCircle;
+
   @Input() dadosIniciais?: FuncionarioDto;
   salvar = output<FuncionarioDto>();
   cancelar = output<void>();

@@ -1,23 +1,31 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators,FormGroup, FormsModule, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../services/auth/autenticacao.service';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, ShieldCheck, User, Key, ArrowRight, Loader2, AlertCircle } from 'lucide-angular/src/icons';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ButtonComponent, LucideAngularModule],
+  imports: [ButtonComponent, LucideAngularModule, ReactiveFormsModule, FormsModule,CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-   private fb = inject(FormBuilder);
+  private fb = inject(FormBuilder);
   private auth = inject(AutenticacaoService);
   private router = inject(Router);
 
-  loading = false;
+  readonly ShieldCheck = ShieldCheck;
+  readonly User = User;
+  readonly Key = Key;
+  readonly ArrowRight = ArrowRight;
+  readonly Loader2 = Loader2;
+  readonly AlertCircle = AlertCircle;
+
+  loading = false;  
   errorMsg = '';
 
   form = this.fb.group({
@@ -43,7 +51,7 @@ export class LoginComponent {
     this.auth.login(username, password).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/inicio');
       },
       error: () => {
         this.loading = false;

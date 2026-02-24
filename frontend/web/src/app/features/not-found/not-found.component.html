@@ -8,7 +8,7 @@
       <div class="px-8 py-8 border-b border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-4">
           <div class="h-14 w-14 rounded-2xl bg-slate-900 grid place-items-center shadow-lg border border-slate-700 text-sky-400">
-            <lucide-icon name="map-pin-off" class="size-7"></lucide-icon>
+            <lucide-icon [img]="MapPinOff" class="size-7"></lucide-icon>
           </div>
           <div>
             <div class="flex items-center">
@@ -23,7 +23,7 @@
 
       <div class="p-10 text-center">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-600 border border-amber-100 mb-6">
-          <lucide-icon name="alert-triangle" class="size-3.5"></lucide-icon>
+          <lucide-icon [img]="AlertTriangle" class="size-3.5"></lucide-icon>
           <span class="text-[10px] font-black uppercase tracking-widest">Acesso Não Mapeado</span>
         </div>
 
@@ -34,12 +34,12 @@
 
         <div class="space-y-3">
           <a routerLink="/home" class="flex items-center justify-center gap-2 w-full bg-slate-900 text-white px-6 py-4 rounded-2xl font-bold text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20">
-            <lucide-icon name="layout-dashboard" class="size-4 text-sky-400"></lucide-icon>
+            <lucide-icon [img]="LayoutDashboard" class="size-4 text-sky-400"></lucide-icon>
             Voltar ao Painel Principal
           </a>
           
           <a routerLink="/login" class="flex items-center justify-center gap-2 w-full bg-white text-slate-500 border border-slate-200 px-6 py-4 rounded-2xl font-bold text-sm hover:bg-slate-50 transition-all">
-            <lucide-icon name="log-in" class="size-4"></lucide-icon>
+            <lucide-icon [img]="LogIn" class="size-4"></lucide-icon>
             Reautenticar Terminal
           </a>
         </div>
@@ -47,7 +47,7 @@
 
       <div class="bg-slate-50 px-8 py-5 flex items-center justify-between border-t border-slate-100">
         <div class="flex items-center gap-2">
-          <lucide-icon name="terminal" class="size-3 text-slate-400"></lucide-icon>
+          <lucide-icon [img]="Terminal" class="size-3 text-slate-400"></lucide-icon>
           <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest">
             LOG_ID: 404_NOT_FOUND_X
           </p>

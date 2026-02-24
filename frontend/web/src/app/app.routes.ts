@@ -59,6 +59,16 @@ export const routes: Routes = [
                 import('./features/registro-producao/registro-producao.component').then(
                     (m) => m.RegistroProducaoComponent),
             },
+            
+            // Relatorio
+            {
+                path: 'relatorio',
+                canActivate: [authGuard],
+                loadComponent: () =>
+                import('./features/relatorio/relatorio.component').then(
+                    (m) => m.RelatorioComponent),
+            },
+            
         ]
     },
     {

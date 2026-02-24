@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { UsuarioService } from './usuario.service';
 import { environment } from '../../../environments/environment.development';
-import { UsuarioVM } from '../../models/funcionario.models';
+import { FuncionarioDto, UsuarioVM } from '../../models/funcionario.models';
+import { FuncionarioService } from '../funcionario.service';
 
 interface LoginApiResponse {
   jsonToken: string;
@@ -28,6 +29,8 @@ interface ParsedToken {
 })
 export class AutenticacaoService {
   private apiUrl = environment.apiUrl;
+
+  private funcionarioService = inject(FuncionarioService);
 
   constructor(private http: HttpClient, private usuarioService: UsuarioService) { }
   login(username: string, password: string): Observable<UsuarioVM> {
@@ -61,4 +64,12 @@ export class AutenticacaoService {
     return !!this.getAccessToken();
   }
 
+  usuarioLogado(): Observable<FuncionarioDto | null> {
+    let nome = localStorage.getItem('username')?.toString();
+    if ( nome) {
+      return this.funcionarioService.getFuncionario(nome);
+    }
+    return null as any;
+    
+  }
 }

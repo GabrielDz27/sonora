@@ -11,7 +11,4 @@ export class RelatorioService {
 
   buscarPorId(id:string){}
 
-  salvar(dados:any){}
-
-  excluir(id:string){}
 }

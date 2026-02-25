@@ -64,6 +64,15 @@ service my_service {
                 id: string
             }
         }
+
+        action finalizar {
+            in {
+                id: string
+            }
+            out {
+                retorno : retornoAtualizarStatus
+            }
+        }
     }
 
     types {

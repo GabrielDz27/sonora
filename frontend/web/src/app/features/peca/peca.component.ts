@@ -1,7 +1,7 @@
 import { Component, signal, inject, OnInit, computed } from '@angular/core';
 import { PecaService } from '../../services/peca.service';
 import { PecaDto } from '../../models/peca.models';
-import { LucideAngularModule, DollarSign, Skull, Plus, Package, Timer, Edit3 } from 'lucide-angular/src/icons';
+import { LucideAngularModule, DollarSign, Skull, Plus, Package, Timer, Edit3, Pencil, Trash2 } from 'lucide-angular/src/icons';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioPecaComponent } from '../../shared/formulario-peca/formulario-peca.component';
 import { CurrencyPipe, CommonModule } from '@angular/common';
@@ -21,6 +21,8 @@ export class PecaComponent {
   readonly Package = Package;
   readonly Timer = Timer;
   readonly Edit3 = Edit3;
+  readonly Pencil = Pencil;
+  readonly Trash2 = Trash2;
 
   lista = signal<PecaDto[]>([]);
   itemParaEdicao = signal<PecaDto | undefined>(undefined);
@@ -33,7 +35,7 @@ export class PecaComponent {
   ngOnInit() { this.carregar(); }
 
   carregar() {
-    // this.service.listarTodos().subscribe(res => this.lista.set(res));
+    this.service.listarTodos().subscribe(res => this.lista.set(res));
   }
 
   abrirNovo() {
@@ -42,14 +44,31 @@ export class PecaComponent {
   }
 
   abrirEditar(item: PecaDto) {
+    console.log('Editando peça:', item);
     this.itemParaEdicao.set(item);
     this.modalAberto.set(true);
   }
 
   salvar(dados: PecaDto) {
-    // this.service.salvar(dados).subscribe(() => {
-    //   this.carregar();
-    //   this.modalAberto.set(false);
-    // });
+    console.log('Salvando peça:', dados);
+    this.service.salvar(dados).subscribe(() => {
+      this.carregar();
+      this.modalAberto.set(false);
+    });
+  }
+
+  excluirPeca(id: string, nome: string) {
+    if (confirm(`DESEJA REMOVER A PEÇA: ${nome}? \nEsta ação não pode ser desfeita.`)) {
+      this.service.excluir(id).subscribe({
+        next: () => {
+          
+          this.carregar(); 
+          console.log('Registo removido do sistema.');
+        },
+        error: (err) => {
+          alert('Erro ao excluir: A peça pode estar vinculada a uma produção ativa.');
+        }
+      });
+    }
   }
 }

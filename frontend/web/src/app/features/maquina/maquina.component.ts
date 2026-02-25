@@ -35,7 +35,7 @@ export class MaquinaComponent {
   ngOnInit() { this.carregar(); }
 
   carregar() {
-    // this.service.listarTodos().subscribe(res => this.lista.set(res));
+    this.service.listarTodos().subscribe(res => this.lista.set(res));
   }
 
   abrirNovo() {
@@ -56,8 +56,8 @@ export class MaquinaComponent {
   }
 
   excluir(id: string) {
-    if (confirm('Deseja realmente remover este ativo do inventário?')) {
-      // this.service.excluir(id).subscribe(() => this.carregar());
+    if (confirm('Deseja realmente remover esta maquina do inventário?')) {
+      this.service.excluir(id).subscribe(() => this.carregar());
     }
   }
 }

@@ -1,4 +1,4 @@
-<!-- GENERATED ENTITIES: 2026-02-24 10:39:51:898 -->
+<!-- GENERATED ENTITIES: 2026-02-24 20:05:27:986 -->
 <class>br.com.senior.mydomain.myservice.PecaEntity</class>
 <class>br.com.senior.mydomain.myservice.FuncionarioEntity</class>
 <class>br.com.senior.mydomain.myservice.MaquinaEntity</class>

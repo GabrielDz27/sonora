@@ -641,6 +641,44 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
+  /my_service/actions/finalizar:
+    post:
+      description: ""
+      tags:
+        - Actions
+      x-senior-visibility: PRIVATE
+      parameters:
+        - name: input
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: string
+                description: ""
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - retorno
+            properties:
+              retorno:
+                type: object
+                allOf:
+                 - $ref: '#/definitions/retornoAtualizarStatus'
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/actions/odata:
     post:
       description: ""

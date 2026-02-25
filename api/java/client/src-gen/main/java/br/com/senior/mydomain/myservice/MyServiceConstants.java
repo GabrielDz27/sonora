@@ -114,6 +114,23 @@ public interface MyServiceConstants {
     	 */
     	String RETORNA_ID_FUNCIONARIO_ERROR = "retornaIdFuncionarioError";
     	/**
+    	 * @see FinalizarInput the request payload
+    	 */
+    	String FINALIZAR = "finalizar";
+    	/**
+    	 * The success response primitive for finalizar.
+    	 *
+    	 * @see #FINALIZAR the request primitive
+    	 * @see FinalizarOutput the response payload
+    	 */
+    	String FINALIZAR_RESPONSE = "finalizarResponse";
+    	/**
+    	 * An error response primitive for finalizar.
+    	 *
+    	 * @see #FINALIZAR the request primitive
+    	 */
+    	String FINALIZAR_ERROR = "finalizarError";
+    	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload
     	 */

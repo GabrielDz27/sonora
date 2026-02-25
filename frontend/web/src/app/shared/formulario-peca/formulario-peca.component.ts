@@ -19,7 +19,7 @@ export class FormularioPecaComponent implements OnInit {
   readonly Layers = Layers;
   readonly ChevronDown = ChevronDown;
   readonly AlertTriangle = AlertTriangle;
-  readonly X = X;
+  readonly Xicon = X;
   readonly CheckCircle = CheckCircle;
 
   @Input() dadosIniciais?: PecaDto;
@@ -43,7 +43,21 @@ export class FormularioPecaComponent implements OnInit {
   }
 
   enviar() {
+
+    const payload = this.pecaForm?.value ?? {}; // ajuste conforme seu form/model
+    console.log('[PECAS] salvar -> payload antes de enviar:', payload);
+    console.log('[PECAS] salvar -> payload.id:', payload?.id);
+
+    if (payload?.id) {
+      console.log('[PECAS] salvar -> chamando update para id:', payload.id);
+     
+    } else {
+      console.log('[PECAS] salvar -> sem id, chamando create (POST)');
+     
+    }
+
     if (this.pecaForm.valid) {
+      console.log('Formulário válido, emitindo dados:', this.pecaForm.value);
       this.salvar.emit(this.pecaForm.value as PecaDto);
     }
   }

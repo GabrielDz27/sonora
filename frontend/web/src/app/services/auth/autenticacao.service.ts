@@ -5,6 +5,7 @@ import { UsuarioService } from './usuario.service';
 import { environment } from '../../../environments/environment.development';
 import { FuncionarioDto, UsuarioVM } from '../../models/funcionario.models';
 import { FuncionarioService } from '../funcionario.service';
+import { Route } from 'lucide-angular';
 
 interface LoginApiResponse {
   jsonToken: string;
@@ -54,6 +55,7 @@ export class AutenticacaoService {
 
   logout() {
     localStorage.clear();
+    
   }
 
   getAccessToken(): string | null {
@@ -70,6 +72,5 @@ export class AutenticacaoService {
       return this.funcionarioService.getFuncionario(nome);
     }
     return null as any;
-    
   }
 }

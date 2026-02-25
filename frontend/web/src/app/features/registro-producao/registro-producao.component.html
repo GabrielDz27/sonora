@@ -55,9 +55,9 @@
             <p class="text-[10px] font-black text-slate-400 uppercase mb-2">Operador</p>
             <div class="flex items-center gap-2">
               <div class="h-6 w-6 rounded-full bg-sky-100 text-sky-700 grid place-items-center text-[10px] font-bold uppercase">
-                {{ reg.funcionario?.substring(0,2) }}
+                {{ (reg.funcionarioNome || '').substring(0,2) }}
               </div>
-              <span class="text-sm font-bold text-slate-700">{{ reg.funcionario }}</span>
+              <span class="text-sm font-bold text-slate-700">{{ reg.funcionarioNome }}</span>
             </div>
           </div>
           <div>

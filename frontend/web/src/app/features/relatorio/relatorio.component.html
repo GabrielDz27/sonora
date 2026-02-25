@@ -1,1 +1,44 @@
-<p>relatorio works!</p>
+<div class="filtros">
+  <input type="datetime-local" [(ngModel)]="filtros.dataInicio">
+  <input type="datetime-local" [(ngModel)]="filtros.dataFinal">
+  
+  <input type="text" [(ngModel)]="filtros.funcionario" placeholder="Filtro Funcionario (ex: 1, 2)">
+  <input type="text" [(ngModel)]="filtros.maquina" placeholder="Filtro Máquina (ex: CNC01)">
+  
+  <button (click)="gerarRelatorio()">Consultar Bridge</button>
+</div>
+
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>Máquina</th>
+      <th>Horas</th>
+      <th>Peças Mortas</th>
+      <th>Funcionário</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of dados(); track $index) {
+      <tr>
+        <td>{{ item.maquinaTrabalhando?.maquina || 'N/A' }}</td>
+        <td>{{ item.maquinaTrabalhando?.horas ?? 0 }}h</td>
+        
+        <td>{{ item.pecaMortas }}</td>
+        
+        <td>
+          @if (item.pecaFuncionario) {
+            {{ item.pecaFuncionario.funcionario }} ({{ item.pecaFuncionario.peca }})
+          } @else {
+            - 
+          }
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4" style="text-align: center;">Nenhum registro retornado da Bridge.</td>
+      </tr>
+    }
+  </tbody>
+</table>

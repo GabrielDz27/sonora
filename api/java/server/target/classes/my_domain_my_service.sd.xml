@@ -53,6 +53,14 @@
                 <slot name="id" type="string" optional="false" multivalued="false"/>
             </output>
         </query>
+        <action name="finalizar" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <input>
+                <slot name="id" type="string" optional="false" multivalued="false"/>
+            </input>
+            <output>
+                <slot name="retorno" type="retornoAtualizarStatus" optional="false" multivalued="false"/>
+            </output>
+        </action>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>

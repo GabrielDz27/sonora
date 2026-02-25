@@ -1,13 +1,13 @@
 <form [formGroup]="pecaForm" (ngSubmit)="enviar()" class="space-y-6">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-    
+
     <div class="md:col-span-2">
       <label class="flex items-center gap-2 text-[11px] font-black text-slate-500 mb-1.5 uppercase tracking-widest">
         <lucide-icon [img]="Package" class="size-3.5 text-sky-600"></lucide-icon>
         Identificação da Peça
       </label>
       <input type="text" formControlName="nome" placeholder="Ex: Eixo Traseiro Reforçado"
-             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
     </div>
 
     <div>
@@ -16,7 +16,7 @@
         Cód. Desenho Técnico
       </label>
       <input type="text" formControlName="codigoDesenho" placeholder="DES-102"
-             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all font-mono">
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all font-mono">
     </div>
 
     <div>
@@ -26,7 +26,7 @@
       </label>
       <div class="relative">
         <input type="number" formControlName="tempoEstimadoMinutos"
-               class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
         <span class="absolute right-4 top-3.5 text-slate-400 text-[10px] font-black tracking-tighter">MIN</span>
       </div>
     </div>
@@ -37,7 +37,7 @@
         Custo Unitário (R$)
       </label>
       <input type="number" formControlName="valor" placeholder="0.00"
-             class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+        class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
     </div>
 
     <div>
@@ -46,8 +46,8 @@
         Fluxo de Produção
       </label>
       <div class="relative">
-        <select formControlName="status" 
-                class="w-full appearance-none rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
+        <select formControlName="status"
+          class="w-full appearance-none rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all">
           <option value="PENDENTE">Aguardando Início</option>
           <option value="PROCESSO">Em Produção Ativa</option>
           <option value="FINALIZADO">Processo Concluído</option>
@@ -60,26 +60,26 @@
     </div>
 
     @if (pecaForm.get('status')?.value === 'MORTA') {
-      <div class="md:col-span-2 p-5 bg-red-50/50 rounded-2xl border border-red-100 animate-in fade-in slide-in-from-top-2 duration-300">
-        <label class="flex items-center gap-2 text-[11px] font-black text-red-700 mb-2 uppercase tracking-widest">
-          <lucide-icon [img]="AlertTriangle" class="size-3.5"></lucide-icon>
-          Relatório de Não-Conformidade
-        </label>
-        <textarea formControlName="motivoPerda" rows="2"
-                  placeholder="Detalhe a falha ou motivo do descarte..."
-                  class="w-full rounded-xl border border-red-200 px-4 py-3 text-sm text-red-900 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"></textarea>
-      </div>
+    <div
+      class="md:col-span-2 p-5 bg-red-50/50 rounded-2xl border border-red-100 animate-in fade-in slide-in-from-top-2 duration-300">
+      <label class="flex items-center gap-2 text-[11px] font-black text-red-700 mb-2 uppercase tracking-widest">
+        <lucide-icon [img]="AlertTriangle" class="size-3.5"></lucide-icon>
+        Relatório de Não-Conformidade
+      </label>
+      <textarea formControlName="motivoPerda" rows="2" placeholder="Detalhe a falha ou motivo do descarte..."
+        class="w-full rounded-xl border border-red-200 px-4 py-3 text-sm text-red-900 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"></textarea>
+    </div>
     }
   </div>
 
   <div class="flex justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
-    <button type="button" (click)="cancelar.emit()" 
-            class="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-colors">
-      <lucide-icon [img]="X" class="size-4"></lucide-icon>
+    <button type="button" (click)="cancelar.emit()"
+      class="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-slate-500 hover:bg-slate-50 transition-colors">
+      <lucide-icon [img]="Xicon" class="size-4"></lucide-icon>
       Descartar
     </button>
     <button type="submit" [disabled]="pecaForm.invalid"
-            class="flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-xl shadow-slate-900/30 hover:bg-slate-800 disabled:opacity-40 transition-all">
+      class="flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-xl shadow-slate-900/30 hover:bg-slate-800 disabled:opacity-40 transition-all">
       <lucide-icon [img]="CheckCircle" class="size-4 text-sky-400"></lucide-icon>
       Registrar Peça
     </button>

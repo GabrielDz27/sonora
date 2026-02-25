@@ -301,6 +301,49 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.retornaIdFuncionarioRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método finalizar
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public FinalizarOutput finalizar(FinalizarInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FinalizarImpl impl = new br.com.senior.mydomain.myservice.impl.FinalizarImpl(messengerSupplier, userId, messageSupplier);
+		return impl.finalizar(input, timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método finalizar
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void finalizar(FinalizarInput input) {
+		br.com.senior.mydomain.myservice.impl.FinalizarImpl impl = new br.com.senior.mydomain.myservice.impl.FinalizarImpl(messengerSupplier, userId, messageSupplier);
+		impl.finalizar(input);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método finalizar
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<FinalizarOutput> finalizarRequest(FinalizarInput input) {
+		return this.finalizarRequest(input, 0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método finalizar
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<FinalizarOutput> finalizarRequest(FinalizarInput input, long timeout) {
+		br.com.senior.mydomain.myservice.impl.FinalizarImpl impl = new br.com.senior.mydomain.myservice.impl.FinalizarImpl(messengerSupplier, userId, messageSupplier);
+		return impl.finalizarRequest(input, timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.

@@ -31,7 +31,7 @@ export class RegistroProducaoComponent implements OnInit {
   ngOnInit() { this.carregar(); }
 
   carregar() {
-    // this.service.listarTodos().subscribe(res => this.registros.set(res));
+    this.service.listarTodos().subscribe(res => this.registros.set(res));
   }
 
   iniciarNovoRegistro() {
@@ -39,10 +39,10 @@ export class RegistroProducaoComponent implements OnInit {
   }
 
   salvarNovo(dados: RegistroProducaoDto) {
-    // this.service.salvar(dados).subscribe(() => {
-    //   this.carregar();
-    //   this.modalAberto.set(false);
-    // });
+    this.service.salvar(dados).subscribe(() => {
+      this.carregar();
+      this.modalAberto.set(false);
+    });
   }
 
   finalizarRegistro(id: string) {

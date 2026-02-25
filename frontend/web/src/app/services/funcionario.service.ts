@@ -12,20 +12,35 @@ export class FuncionarioService {
   private apiEntityUrl = `${environment.apiUrl}my_domain/my_service/entities/funcionario`;
 
   constructor(
-    private http: HttpClient  
+    private http: HttpClient
   ) {
   }
 
   getFuncionario(username: string): Observable<FuncionarioDto> {
     return this.http.get<any>(this.apiEntityUrl, { params: { username } }).pipe(map(res => res.contents[0] as FuncionarioDto));
   }
-  
-  
-  listarTodos():any{ return []; }
 
-  buscarPorId(id:string){}
+  getFuncionarioByNome(nome: string): Observable<FuncionarioDto[]> {
+    return this.http.get<any>(this.apiEntityUrl + `?filter=containing(nome, '${nome}')`).pipe(map(res => res.contents as FuncionarioDto[]));
+  }
 
-  salvar(dados:any):any{}
+  listarTodos(): Observable<FuncionarioDto[]> {
+    return this.http.get<any>(this.apiEntityUrl).pipe(map(res => res.contents as FuncionarioDto[]));
+  }
 
-  excluir(id:string){}
+  buscarPorId(id: string) {
+    return this.http.get<any>(this.apiEntityUrl + `?filter=id eq ${id}`).pipe(map(res => res.contents[0] as FuncionarioDto));
+  }
+
+  salvar(dados: any) {
+    if (dados.id) {
+      return this.http.put(this.apiEntityUrl, dados);
+    } else {
+      return this.http.post(this.apiEntityUrl, dados);
+    }
+  }
+
+  excluir(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiEntityUrl}/${id}`);
+  }
 }

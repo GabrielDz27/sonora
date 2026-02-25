@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.services.registroproducao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.messaging.model.ServiceException;
 import br.com.senior.mydomain.myservice.RegistroProducaoEntity;
 import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;

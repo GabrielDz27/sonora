@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.repositories.registroproducao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.Test;
 
 import java.time.LocalDateTime;

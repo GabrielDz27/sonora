@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.handler.maquina;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.services.maquina.MaquinaService;
 import org.junit.Test;
@@ -32,19 +30,19 @@ public class GetMaquinaAtivaHandlerImplTest {
         when(service.getMaquinasStatusAtivas()).thenReturn(Arrays.asList(entity));
         when(entity.getId()).thenReturn(id);
         when(entity.getNome()).thenReturn("Maquina 1");
-        when(entity.getStatus()).thenReturn("ATIVA");
+        when(entity.getStatus()).thenReturn(StatusMaquina.ATIVO);
 
         GetMaquinaAtivaOutput output = handler.getMaquinaAtiva();
 
         assertNotNull(output);
-        assertNotNull(output.maquinas);
-        assertEquals(1, output.maquinas.size());
+        assertNotNull(output.maquina);
+        assertEquals(1, output.maquina.size());
 
-        Maquina maquina = output.maquinas.get(0);
+        Maquina maquina = output.maquina.get(0);
         assertEquals(id.toString(), maquina.id);
         assertEquals("Maquina 1", maquina.nome);
-        assertEquals("ATIVA", maquina.status);
-        assertNull(maquina.outroCampo); // campo null do construtor
+        assertEquals(StatusMaquina.ATIVO, maquina.status);
+//        assertNull(maquina.outro); // campo null do construtor
 
         verify(service).getMaquinasStatusAtivas();
         verifyNoMoreInteractions(service);

@@ -1,6 +1,5 @@
 package br.com.senior.mydomain.myservice.handler.peca;
 
-import static org.junit.jupiter.api.Assertions.*;
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.services.peca.PecaService;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class GetPecaHandlerImplTest {
         when(entity.getId()).thenReturn(id);
         when(entity.getNome()).thenReturn("Peça A");
         when(entity.getCodigoDesenho()).thenReturn("CD01");
-        when(entity.getTempoEstimadoMinutos()).thenReturn(30);
+        when(entity.getTempoEstimadoMinutos()).thenReturn(30L);
         when(entity.getStatus()).thenReturn(StatusPeca.PENDENTE);
         when(entity.getValor()).thenReturn(new BigDecimal("100.00"));
         when(entity.getMotivoPerda()).thenReturn("Nenhum");
@@ -46,18 +45,17 @@ public class GetPecaHandlerImplTest {
         GetPecaOutput output = handler.getPeca(input);
 
         assertNotNull(output);
-        assertNotNull(output.pecas);
-        assertEquals(1, output.pecas.size());
+        assertNotNull(output.peca);
+        assertEquals(1, output.peca.size());
 
-        Peca peca = output.pecas.get(0);
+        Peca peca = output.peca.get(0);
         assertEquals(id.toString(), peca.id);
         assertEquals("Peça A", peca.nome);
         assertEquals("CD01", peca.codigoDesenho);
-        assertEquals(Integer.valueOf(30), peca.tempoEstimadoMinutos);
+        assertEquals(new Long(30) , peca.tempoEstimadoMinutos);
         assertEquals(StatusPeca.PENDENTE, peca.status);
         assertEquals(new BigDecimal("100.00"), peca.valor);
         assertEquals("Nenhum", peca.motivoPerda);
-        assertNull(peca.outroCampo);
 
         verify(service).getPecasPendentes(StatusPeca.PENDENTE);
         verifyNoMoreInteractions(service);

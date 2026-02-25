@@ -1,6 +1,5 @@
 package br.com.senior.mydomain.myservice.repositories.maquina;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Test;
 
 import java.util.UUID;

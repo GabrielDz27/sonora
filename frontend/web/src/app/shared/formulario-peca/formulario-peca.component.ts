@@ -1,4 +1,4 @@
-import { Component, inject, signal, output, Input, OnInit } from '@angular/core';
+import { Component, inject, signal, output, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PecaDto, statusPeca } from '../../models/peca.models';
 import { LucideAngularModule, Package, FileText, Timer, DollarSign, Layers, ChevronDown, AlertTriangle, X, CheckCircle } from 'lucide-angular/src/icons';
@@ -9,7 +9,7 @@ import { LucideAngularModule, Package, FileText, Timer, DollarSign, Layers, Chev
   imports: [ReactiveFormsModule, LucideAngularModule],
   templateUrl: './formulario-peca.component.html'
 })
-export class FormularioPecaComponent implements OnInit {
+export class FormularioPecaComponent {
   private fb = inject(FormBuilder);
   
   readonly Package = Package;
@@ -22,7 +22,15 @@ export class FormularioPecaComponent implements OnInit {
   readonly Xicon = X;
   readonly CheckCircle = CheckCircle;
 
-  @Input() dadosIniciais?: PecaDto;
+  private _dadosIniciais?: PecaDto;
+  @Input() set dadosIniciais(value: PecaDto | undefined) {
+    this._dadosIniciais = value;
+    if (value) {
+      this.pecaForm.patchValue(value);
+    } else {
+      this.pecaForm.reset();
+    }
+  }
   salvar = output<PecaDto>();
   cancelar = output<void>();
 
@@ -36,26 +44,7 @@ export class FormularioPecaComponent implements OnInit {
     motivoPerda: ['']
   });
 
-  ngOnInit() {
-    if (this.dadosIniciais) {
-      this.pecaForm.patchValue(this.dadosIniciais);
-    }
-  }
-
   enviar() {
-
-    const payload = this.pecaForm?.value ?? {}; // ajuste conforme seu form/model
-    console.log('[PECAS] salvar -> payload antes de enviar:', payload);
-    console.log('[PECAS] salvar -> payload.id:', payload?.id);
-
-    if (payload?.id) {
-      console.log('[PECAS] salvar -> chamando update para id:', payload.id);
-     
-    } else {
-      console.log('[PECAS] salvar -> sem id, chamando create (POST)');
-     
-    }
-
     if (this.pecaForm.valid) {
       console.log('Formulário válido, emitindo dados:', this.pecaForm.value);
       this.salvar.emit(this.pecaForm.value as PecaDto);

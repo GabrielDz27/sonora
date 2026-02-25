@@ -1,4 +1,4 @@
-import { Component, inject, output, Input, OnInit } from '@angular/core';
+import { Component, inject, output, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FuncionarioDto, turno } from '../../models/funcionario.models';
 import { LucideAngularModule, User, IdCard, Briefcase, Clock, ChevronDown, Database, X, CheckCircle } from 'lucide-angular/src/icons';
@@ -9,7 +9,7 @@ import { LucideAngularModule, User, IdCard, Briefcase, Clock, ChevronDown, Datab
   imports: [ReactiveFormsModule, LucideAngularModule],
   templateUrl: './formulario-funcionario.component.html'
 })
-export class FormularioFuncionarioComponent implements OnInit {
+export class FormularioFuncionarioComponent {
   private fb = inject(FormBuilder);
   
   readonly User = User;
@@ -21,7 +21,19 @@ export class FormularioFuncionarioComponent implements OnInit {
   readonly X = X;
   readonly CheckCircle = CheckCircle;
 
-  @Input() dadosIniciais?: FuncionarioDto;
+  private _dadosIniciais?: FuncionarioDto;
+  @Input() set dadosIniciais(value: FuncionarioDto | undefined) {
+    this._dadosIniciais = value;
+    if (value) {
+      const patched = { ...value } as any;
+      if (patched.ativo === undefined || patched.ativo === null) patched.ativo = true;
+      if (!patched.username) patched.username = localStorage.getItem('username') ?? '';
+      this.form.patchValue(patched);
+    } else {
+      const storedUsername = localStorage.getItem('username') ?? '';
+      this.form.reset({ ativo: true, turno: 'PRIMEIRO', username: storedUsername });
+    }
+  }
   salvar = output<FuncionarioDto>();
   cancelar = output<void>();
 
@@ -35,17 +47,18 @@ export class FormularioFuncionarioComponent implements OnInit {
     username: [''] 
   });
 
-  ngOnInit() {
-    if (this.dadosIniciais) {
-      this.form.patchValue(this.dadosIniciais);
-    }
-
+  // Apply stored username on component creation
+  private _initUsername() {
     if (!this.form.get('username')?.value) {
       const storedUsername = localStorage.getItem('username');
       if (storedUsername) {
         this.form.get('username')?.setValue(storedUsername);
       }
     }
+  }
+
+  constructor() {
+    this._initUsername();
   }
 
   enviar() {

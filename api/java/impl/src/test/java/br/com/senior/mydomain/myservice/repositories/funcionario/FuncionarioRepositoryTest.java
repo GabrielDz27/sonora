@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.repositories.funcionario;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.FuncionarioEntity;
 import org.junit.Test;
 

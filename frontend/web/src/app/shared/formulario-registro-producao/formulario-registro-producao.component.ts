@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 import { PecaDto } from '../../models/peca.models';
 import { FuncionarioDto } from '../../models/funcionario.models';
 import { MaquinaDto } from '../../models/maquina.models';
-import { RegistroProducaoDto } from '../../models/registro-producao.models';
+import { FuncionarioId, MaquinaId, PecaId, RegistroProducaoDto } from '../../models/registro-producao.models';
 import { LucideAngularModule, User, Cpu, Settings, Clock, PlayCircle } from 'lucide-angular/src/icons';
 import { MaquinaService } from '../../services/maquina.service';
 import { FuncionarioService } from '../../services/funcionario.service';
@@ -62,14 +62,15 @@ export class FormularioRegistroProducaoComponent {
 
   enviar() {
     if (this.form.valid) {
+      const maquinaId: MaquinaId = { id: this.form.value.maquinaId! };
+      const funcionarioId: FuncionarioId = { id: this.form.value.funcionarioId! };
+      const pecaId: PecaId = { id: this.form.value.pecaId! };
       const payload: RegistroProducaoDto = {
-        funcionario: this.form.value.funcionarioId!,
-        maquina: this.form.value.maquinaId!,
-        peca: this.form.value.pecaId!,
+        funcionario: funcionarioId,
+        maquina: maquinaId,
+        peca: pecaId,
         dataInicio: new Date().toISOString()
       };
-      
-      console.log('Emitting payload:', payload);
       this.salvar.emit(payload);
     }
   }

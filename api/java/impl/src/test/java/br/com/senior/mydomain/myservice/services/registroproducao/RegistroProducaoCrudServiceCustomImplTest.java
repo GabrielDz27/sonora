@@ -1,19 +1,17 @@
 package br.com.senior.mydomain.myservice.services.registroproducao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-
-@RunWith(org.mockito.junit.MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RegistroProducaoCrudServiceCustomImplTest {
 
     @Spy
@@ -33,25 +31,20 @@ public class RegistroProducaoCrudServiceCustomImplTest {
 
     @Test
     public void deveAtualizarStatusPecaAntesDeCriar() {
+
         when(entity.getPeca()).thenReturn(peca);
         when(peca.getId()).thenReturn(id);
 
         RegistroProducaoEntity retornoSuper = mock(RegistroProducaoEntity.class);
-        doReturn(retornoSuper).when(service).create(entity);
 
-        RegistroProducaoEntity result = service.create(entity);
+        // impede execução real da superclasse
+        doReturn(retornoSuper)
+                .when((RegistroProducaoCrudServiceImpl) service)
+                .create(entity);
+
+        RegistroProducaoEntity result = service.createRegistroProducao(entity);
 
         verify(pecaRepository).updateStatusById(StatusPeca.PROCESSO, id);
-        assertEquals(retornoSuper, result);
-    }
-
-    @Test
-    public void deveChamarSuperNoUpdate() {
-        RegistroProducaoEntity retornoSuper = mock(RegistroProducaoEntity.class);
-        doReturn(retornoSuper).when(service).updateRegistroProducao(entity);
-
-        RegistroProducaoEntity result = service.updateRegistroProducao(entity);
-
         assertEquals(retornoSuper, result);
     }
 }

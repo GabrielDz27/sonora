@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { LucideAngularModule } from 'lucide-angular/src/icons';
+import { LucideAngularModule, Layers, X } from 'lucide-angular/src/icons';
 
 @Component({
   selector: 'app-modal',
@@ -8,6 +8,9 @@ import { LucideAngularModule } from 'lucide-angular/src/icons';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
+  readonly Layers = Layers;
+  readonly X = X;
+
   exibir = input<boolean>(false);
   titulo = input<string>('Cadastro');
   fechar = output<void>();

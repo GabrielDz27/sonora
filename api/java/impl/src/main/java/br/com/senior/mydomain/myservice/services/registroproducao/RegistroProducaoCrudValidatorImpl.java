@@ -8,6 +8,7 @@ import br.com.senior.mydomain.myservice.RegistroProducaoEntity;
 import br.com.senior.mydomain.myservice.repositories.maquina.MaquinaRepository;
 import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
 import br.com.senior.mydomain.myservice.repositories.registroproducao.RegistroProducaoRepository;
+import br.com.senior.platform.translationhub.api.TranslationHubApi;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -18,27 +19,31 @@ import java.util.UUID;
 public class RegistroProducaoCrudValidatorImpl implements RegistroProducaoCrudValidator {
 
     @Inject
-    private static MaquinaRepository maquinaRepository;
+    private MaquinaRepository maquinaRepository;
 
     @Inject
-    private static PecaRepository pecaRepository;
+    private PecaRepository pecaRepository;
 
     @Inject
-    private static RegistroProducaoRepository registroProducaoRepository;
+    private RegistroProducaoRepository registroProducaoRepository;
 
-    private static void validadorPeca(UUID idPeca) {
-        if (pecaRepository.isPecaStatusNotPendente(idPeca)) {
-            throw new ServiceException(ErrorCategory.BAD_REQUEST, "A peça não está disponivel para trabalhar");
+    @Inject
+    private TranslationHubApi translationHubApi;
+
+    private void validadorPeca(UUID idPeca) {
+
+        if (!pecaRepository.isPecaStatusNotPendente(idPeca)) {
+            throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.erroPecaJaUsada"));
         }
     }
 
-    private static void validadorMaquina(UUID idMaquina) {
-        if (maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)) {
-            throw new ServiceException(ErrorCategory.BAD_REQUEST, "A maquina não está ativa");
+    private void validadorMaquina(UUID idMaquina) {
+        if (!maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)) {
+            throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.maquinaNaoAtiva"));
         }
 
-        if (registroProducaoRepository.isMaquinaUsada(LocalDateTime.now(), idMaquina)) {
-            throw new ServiceException(ErrorCategory.BAD_REQUEST, "A maquina já esta sendo usada");
+        if (!registroProducaoRepository.isMaquinaUsada(LocalDateTime.now(), idMaquina)) {
+            throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.maquinaJaUsada"));
         }
     }
 

@@ -5,6 +5,7 @@ import { LucideAngularModule, DollarSign, Skull, Plus, Package, Timer, Edit3, Pe
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioPecaComponent } from '../../shared/formulario-peca/formulario-peca.component';
 import { CurrencyPipe, CommonModule } from '@angular/common';
+import { AlertService } from '../../shared/ui/alert/alert.service';
 @Component({
   selector: 'app-peca',
   standalone: true,
@@ -14,6 +15,7 @@ import { CurrencyPipe, CommonModule } from '@angular/common';
 })
 export class PecaComponent {
   private service = inject(PecaService);
+  private alertService = inject(AlertService);
 
   readonly DollarSign = DollarSign;
   readonly Skull = Skull;
@@ -51,24 +53,33 @@ export class PecaComponent {
 
   salvar(dados: PecaDto) {
     console.log('Salvando peça:', dados);
-    this.service.salvar(dados).subscribe(() => {
-      this.carregar();
-      this.modalAberto.set(false);
+    this.service.salvar(dados).subscribe({
+      next: () => {
+        const titulo = dados.id ? 'Peça atualizada!' : 'Peça cadastrada!';
+        this.alertService.toast('success', titulo);
+        this.carregar();
+        this.modalAberto.set(false);
+      },
+      error: (err) => {
+        this.alertService.toast('error', 'Erro ao salvar', err.error?.message || 'Verifique os dados e tente novamente');
+        console.error('Erro ao salvar peça:', err);
+      }
     });
   }
 
   excluirPeca(id: string, nome: string) {
-    if (confirm(`DESEJA REMOVER A PEÇA: ${nome}? \nEsta ação não pode ser desfeita.`)) {
-      this.service.excluir(id).subscribe({
-        next: () => {
-          
-          this.carregar(); 
-          console.log('Registo removido do sistema.');
-        },
-        error: (err) => {
-          alert('Erro ao excluir: A peça pode estar vinculada a uma produção ativa.');
-        }
-      });
-    }
+    this.alertService.modal('warning', 'Remover peça?', `DESEJA REMOVER A PEÇA: ${nome}?\nEsta ação não pode ser desfeita.`).then((result) => {
+      if (result.isConfirmed) {
+        this.service.excluir(id).subscribe({
+          next: () => {
+            this.alertService.toast('success', 'Peça removida!');
+            this.carregar();
+          },
+          error: (err) => {
+            this.alertService.toast('error', 'Erro ao excluir', err.error?.message || 'A peça pode estar vinculada a uma produção ativa.');
+          }
+        });
+      }
+    });
   }
 }

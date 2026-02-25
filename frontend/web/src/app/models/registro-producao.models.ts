@@ -1,20 +1,29 @@
 export interface RegistroProducaoDto {
     id?: string;
-    peca: pecaId;
-    funcionario: funcionarioId;
-    maquina: maquinaId;
+    peca: PecaId;
+    funcionario: FuncionarioId;
+    maquina: MaquinaId;
     dataInicio: Date | string;
     dataFinal?: Date | string;
 }
 
-export interface funcionarioId {
+export interface FuncionarioId {
     id: string;
 }
 
-export interface maquinaId {
+export interface MaquinaId {
     id: string;
 }
 
-export interface pecaId {
+export interface PecaId {
     id: string;
+}
+
+export interface RegistroProducaoPaginaDto {
+    id?: string;
+    peca: string;
+    funcionario: string;
+    maquina: string;
+    dataInicio: Date | string;
+    dataFinal?: Date | string;
 }

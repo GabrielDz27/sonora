@@ -12,7 +12,7 @@
     <div
       class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-2xl shadow-sm text-xs font-bold text-slate-600">
       <lucide-icon [img]="Clock" class="size-4 text-sky-500"></lucide-icon>
-      Atualizado agora: {{ '14:20' }}
+      Atualizado agora: {{ ultimaAtualizacao() }}
     </div>
   </div>
 
@@ -25,7 +25,7 @@
           class="p-3 bg-sky-50 text-sky-600 rounded-2xl group-hover:bg-sky-600 group-hover:text-white transition-colors">
           <lucide-icon [img]="Package" class="size-6"></lucide-icon>
         </div>
-        <span class="text-[10px] font-black text-sky-600 uppercase">WIP</span>
+        <span class="text-[10px] font-black text-sky-600 uppercase">Ganho</span>
       </div>
       <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Em Processo</p>
       <div class="flex items-baseline gap-2">
@@ -41,7 +41,7 @@
           class="p-3 bg-emerald-50 text-emerald-600 rounded-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
           <lucide-icon [img]="Cpu" class="size-6"></lucide-icon>
         </div>
-        <span class="text-[10px] font-black text-emerald-600 uppercase">Live</span>
+        <span class="text-[10px] font-black text-emerald-600 uppercase">Ativa</span>
       </div>
       <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Máquinas Ativas</p>
       <div class="flex items-baseline gap-2">

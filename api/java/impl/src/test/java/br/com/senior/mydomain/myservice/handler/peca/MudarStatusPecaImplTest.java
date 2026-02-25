@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.handler.peca;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.services.peca.PecaService;
 import org.junit.Test;
@@ -34,7 +32,7 @@ public class MudarStatusPecaImplTest {
         MudarStatusPecaOutput output = handler.mudarStatusPeca(input);
 
         assertNotNull(output);
-        assertEquals(retorno, output.retornoAtualizarStatus);
+        assertEquals(retorno, output.retorno);
 
         verify(service).atualizarStatus("123", StatusPeca.PROCESSO);
         verifyNoMoreInteractions(service);

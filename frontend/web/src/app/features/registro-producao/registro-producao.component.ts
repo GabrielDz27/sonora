@@ -2,9 +2,14 @@ import { Component, signal, inject, OnInit, computed } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { LucideAngularModule, Activity, PlayCircle, Cpu, Settings, ArrowRight, Square } from 'lucide-angular/src/icons';
 import { RegistroProducaoService } from '../../services/registro-producao.service';
-import { RegistroProducaoDto } from '../../models/registro-producao.models';
+import { RegistroProducaoDto, RegistroProducaoPaginaDto } from '../../models/registro-producao.models';
+import { FuncionarioService } from '../../services/funcionario.service';
+import { MaquinaService } from '../../services/maquina.service';
+import { PecaService } from '../../services/peca.service';
+import { forkJoin, map, switchMap, of } from 'rxjs';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioRegistroProducaoComponent } from '../../shared/formulario-registro-producao/formulario-registro-producao.component';
+import { AlertService } from '../../shared/ui/alert/alert.service';
 
 
 @Component({
@@ -15,6 +20,10 @@ import { FormularioRegistroProducaoComponent } from '../../shared/formulario-reg
 })
 export class RegistroProducaoComponent implements OnInit {
   private service = inject(RegistroProducaoService);
+  private funcionarioService = inject(FuncionarioService);
+  private maquinaService = inject(MaquinaService);
+  private pecaService = inject(PecaService);
+  private alertService = inject(AlertService);
 
   readonly Activity = Activity;
   readonly PlayCircle = PlayCircle;
@@ -23,7 +32,7 @@ export class RegistroProducaoComponent implements OnInit {
   readonly ArrowRight = ArrowRight;
   readonly Square = Square;
 
-  registros = signal<RegistroProducaoDto[]>([]);
+  registros = signal<RegistroProducaoPaginaDto[]>([]);
   modalAberto = signal(false);
   
   producoesAtivas = computed(() => this.registros().filter(r => !r.dataFinal).length);
@@ -31,7 +40,30 @@ export class RegistroProducaoComponent implements OnInit {
   ngOnInit() { this.carregar(); }
 
   carregar() {
-    this.service.listarTodos().subscribe(res => this.registros.set(res));
+    this.service.listarTodos().pipe(
+      switchMap(items => {
+        const observables = items.map(item => {
+          const func$ = this.funcionarioService.buscarPorId(item.funcionario.id);
+          const maq$ = this.maquinaService.buscarPorId(item.maquina.id);
+          const peca$ = this.pecaService.buscarPorId(item.peca.id);
+          return forkJoin({ funcionario: func$, maquina: maq$, peca: peca$ }).pipe(
+            map(({ funcionario, maquina, peca }) => {
+              const pagina: RegistroProducaoPaginaDto = {
+                id: item.id,
+                funcionario: funcionario?.nome ?? item.funcionario.id,
+                maquina: maquina?.nome ?? item.maquina.id,
+                peca: peca?.nome ?? item.peca.id,
+                dataInicio: item.dataInicio,
+                dataFinal: item.dataFinal
+              };
+              return pagina;
+            })
+          );
+        });
+        if (observables.length === 0) return of([] as RegistroProducaoPaginaDto[]);
+        return forkJoin(observables);
+      })
+    ).subscribe(res => this.registros.set(res));
   }
 
   iniciarNovoRegistro() {
@@ -39,14 +71,29 @@ export class RegistroProducaoComponent implements OnInit {
   }
 
   salvarNovo(dados: RegistroProducaoDto) {
-    this.service.salvar(dados).subscribe(() => {
-      this.carregar();
-      this.modalAberto.set(false);
+    this.service.salvar(dados).subscribe({
+      next: () => {
+        this.alertService.toast('success', 'Registro de produção iniciado!');
+        this.carregar();
+        this.modalAberto.set(false);
+      },
+      error: (err) => {
+        this.alertService.toast('error', 'Erro ao salvar', err.error?.message || 'Verifique os dados e tente novamente');
+        console.error('Erro ao salvar registro:', err);
+      }
     });
   }
 
   finalizarRegistro(id: string) {
-    // Lógica para enviar a dataFim para o backend
-    // this.service.finalizar(id).subscribe(() => this.carregar());
+    this.service.finalizar(id).subscribe({
+      next: () => {
+        this.alertService.toast('success', 'Registro finalizado!');
+        this.carregar();
+      },
+      error: (err) => {
+        this.alertService.toast('error', 'Erro ao finalizar', err.message || 'Tente novamente mais tarde');
+        console.error('Erro ao finalizar registro:', err);
+      }
+    });
   }
 }

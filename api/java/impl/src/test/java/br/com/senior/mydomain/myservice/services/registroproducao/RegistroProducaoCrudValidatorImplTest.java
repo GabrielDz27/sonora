@@ -1,15 +1,18 @@
 package br.com.senior.mydomain.myservice.services.registroproducao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.messaging.model.ServiceException;
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.repositories.maquina.MaquinaRepository;
 import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
 import br.com.senior.mydomain.myservice.repositories.registroproducao.RegistroProducaoRepository;
+import br.com.senior.platform.translationhub.api.TranslationHubApi;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -17,51 +20,53 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RegistroProducaoCrudValidatorImplTest {
 
+    @InjectMocks
     private RegistroProducaoCrudValidatorImpl validator;
 
-    private MaquinaRepository maquinaRepo;
-    private PecaRepository pecaRepo;
-    private RegistroProducaoRepository registroRepo;
+    @Mock
+    private MaquinaRepository maquinaRepository;
 
+    @Mock
+    private PecaRepository pecaRepository;
+
+    @Mock
+    private RegistroProducaoRepository registroProducaoRepository;
+
+    @Mock
+    private TranslationHubApi translationHubApi;
+
+    @Mock
     private RegistroProducaoEntity entity;
+
+    @Mock
     private PecaEntity peca;
+
+    @Mock
     private MaquinaEntity maquina;
 
-    private UUID idPeca = UUID.randomUUID();
-    private UUID idMaquina = UUID.randomUUID();
+    private UUID idPeca;
+    private UUID idMaquina;
 
     @Before
-    public void setup() throws Exception {
-        validator = new RegistroProducaoCrudValidatorImpl();
+    public void setup() {
 
-        maquinaRepo = mock(MaquinaRepository.class);
-        pecaRepo = mock(PecaRepository.class);
-        registroRepo = mock(RegistroProducaoRepository.class);
-
-        setStatic("maquinaRepository", maquinaRepo);
-        setStatic("pecaRepository", pecaRepo);
-        setStatic("registroProducaoRepository", registroRepo);
-
-        entity = mock(RegistroProducaoEntity.class);
-        peca = mock(PecaEntity.class);
-        maquina = mock(MaquinaEntity.class);
+        idPeca = UUID.randomUUID();
+        idMaquina = UUID.randomUUID();
 
         when(entity.getPeca()).thenReturn(peca);
         when(entity.getMaquina()).thenReturn(maquina);
         when(peca.getId()).thenReturn(idPeca);
         when(maquina.getId()).thenReturn(idMaquina);
 
-        when(pecaRepo.isPecaStatusNotPendente(idPeca)).thenReturn(false);
-        when(maquinaRepo.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(false);
-        when(registroRepo.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina))).thenReturn(false);
-    }
+        when(translationHubApi.getMessage(anyString())).thenReturn("erro");
 
-    private void setStatic(String fieldName, Object value) throws Exception {
-        Field field = RegistroProducaoCrudValidatorImpl.class.getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(null, value);
+        when(pecaRepository.isPecaStatusNotPendente(idPeca)).thenReturn(false);
+        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(false);
+        when(registroProducaoRepository.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina)))
+                .thenReturn(false);
     }
 
     @Test
@@ -76,19 +81,21 @@ public class RegistroProducaoCrudValidatorImplTest {
 
     @Test(expected = ServiceException.class)
     public void deveFalharQuandoPecaNaoDisponivel() {
-        when(pecaRepo.isPecaStatusNotPendente(idPeca)).thenReturn(true);
+        when(pecaRepository.isPecaStatusNotPendente(idPeca)).thenReturn(true);
         validator.beforeCreate(entity);
     }
 
     @Test(expected = ServiceException.class)
     public void deveFalharQuandoMaquinaInativa() {
-        when(maquinaRepo.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(true);
+        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(true);
         validator.beforeCreate(entity);
     }
 
     @Test(expected = ServiceException.class)
     public void deveFalharQuandoMaquinaEmUso() {
-        when(registroRepo.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina))).thenReturn(true);
+        when(registroProducaoRepository.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina)))
+                .thenReturn(true);
+
         validator.beforeCreate(entity);
     }
 
@@ -96,5 +103,11 @@ public class RegistroProducaoCrudValidatorImplTest {
     public void beforeDeleteNaoDeveFazerNada() {
         RegistroProducao.Id id = mock(RegistroProducao.Id.class);
         validator.beforeDelete(id);
+
+        verifyNoInteractions(
+                maquinaRepository,
+                pecaRepository,
+                registroProducaoRepository
+        );
     }
 }

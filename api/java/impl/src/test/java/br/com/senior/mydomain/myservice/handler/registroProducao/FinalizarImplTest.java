@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.handler.registroProducao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.*;
 import br.com.senior.mydomain.myservice.services.registroproducao.RegistroProducaoService;
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class FinalizarImplTest {
         FinalizarOutput output = handler.finalizar(input);
 
         assertNotNull(output);
-        assertEquals(retorno, output.retornoAtualizarStatus);
+        assertEquals(retorno, output.retorno);
 
         verify(service).finalizar("abc123");
         verifyNoMoreInteractions(service);

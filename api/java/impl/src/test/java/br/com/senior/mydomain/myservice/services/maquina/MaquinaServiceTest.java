@@ -5,8 +5,6 @@ import br.com.senior.mydomain.myservice.repositories.maquina.MaquinaRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 import java.util.List;
 

@@ -5,13 +5,13 @@
 
     <div class="bg-slate-900 px-6 py-4 flex justify-between items-center text-white">
       <div class="flex items-center gap-3">
-        <lucide-icon name="layers" class="size-5 text-sky-400"></lucide-icon>
+        <lucide-icon [img]="Layers" class="size-5 text-sky-400"></lucide-icon>
         <h3 class="text-sm font-black uppercase tracking-widest">{{ titulo() }}</h3>
       </div>
 
       <button (click)="fechar.emit()"
         class="hover:bg-white/10 rounded-lg p-1.5 transition-all text-slate-400 hover:text-white">
-        <lucide-icon name="x" class="size-5"></lucide-icon>
+        <lucide-icon [img]="X" class="size-5"></lucide-icon>
       </button>
     </div>
 

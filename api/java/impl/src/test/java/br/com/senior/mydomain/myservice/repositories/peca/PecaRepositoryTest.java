@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.repositories.peca;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.StatusPeca;
 import org.junit.Test;
 

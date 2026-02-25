@@ -1,9 +1,10 @@
 package br.com.senior.mydomain.myservice.repositories.peca;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.mydomain.myservice.PecaEntity;
 import br.com.senior.mydomain.myservice.StatusPeca;
+import com.querydsl.core.types.EntityPath;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.junit.Test;
 import org.mockito.MockedConstruction;
@@ -32,9 +33,9 @@ public class PecaRepositoryCustomImplTest {
 
         try (MockedConstruction<JPAQuery> mocked = mockConstruction(JPAQuery.class,
                 (mock, context) -> {
-                    when(mock.select(any())).thenReturn(mock);
-                    when(mock.from(any())).thenReturn(mock);
-                    when(mock.where(any())).thenReturn(mock);
+                    when(mock.select((Expression) any())).thenReturn(mock);
+                    when(mock.from((EntityPath<?>) any())).thenReturn(mock);
+                    when(mock.where((Predicate) any())).thenReturn(mock);
                     when(mock.fetch()).thenReturn(lista);
                 })) {
 
@@ -43,9 +44,9 @@ public class PecaRepositoryCustomImplTest {
             assertEquals(lista, result);
 
             JPAQuery constructed = mocked.constructed().get(0);
-            verify(constructed).select(any());
-            verify(constructed).from(any());
-            verify(constructed).where(any());
+            verify(constructed).select((Expression) any());
+            verify(constructed).from((EntityPath<?>) any());
+            verify(constructed).where((Predicate) any());
             verify(constructed).fetch();
         }
     }

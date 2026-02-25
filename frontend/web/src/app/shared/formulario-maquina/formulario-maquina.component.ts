@@ -1,4 +1,4 @@
-import { Component, inject, output, Input, OnInit } from '@angular/core';
+import { Component, inject, output, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaquinaDto, statusMaquina } from '../../models/maquina.models';
 import { LucideAngularModule, Cpu, AlertCircle, Activity, ChevronDown, X, CheckCircle } from 'lucide-angular/src/icons';
@@ -9,7 +9,7 @@ import { LucideAngularModule, Cpu, AlertCircle, Activity, ChevronDown, X, CheckC
   imports: [ReactiveFormsModule, LucideAngularModule],
   templateUrl: './formulario-maquina.component.html'
 })
-export class FormularioMaquinaComponent implements OnInit {
+export class FormularioMaquinaComponent {
   private fb = inject(FormBuilder);
 
   readonly Cpu = Cpu;
@@ -19,7 +19,15 @@ export class FormularioMaquinaComponent implements OnInit {
   readonly X = X;
   readonly CheckCircle = CheckCircle;
 
-  @Input() dadosIniciais?: MaquinaDto;
+  private _dadosIniciais?: MaquinaDto;
+  @Input() set dadosIniciais(value: MaquinaDto | undefined) {
+    this._dadosIniciais = value;
+    if (value) {
+      this.form.patchValue(value);
+    } else {
+      this.form.reset();
+    }
+  }
   salvar = output<MaquinaDto>();
   cancelar = output<void>();
 
@@ -29,11 +37,7 @@ export class FormularioMaquinaComponent implements OnInit {
     status: ['ATIVO' as statusMaquina, Validators.required]
   });
 
-  ngOnInit() {
-    if (this.dadosIniciais) {
-      this.form.patchValue(this.dadosIniciais);
-    }
-  }
+  // Values are applied via the `dadosIniciais` input setter
 
   enviar() {
     if (this.form.valid) {

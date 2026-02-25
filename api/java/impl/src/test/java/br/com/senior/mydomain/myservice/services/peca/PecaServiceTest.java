@@ -1,7 +1,5 @@
 package br.com.senior.mydomain.myservice.services.peca;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import br.com.senior.messaging.model.ServiceException;
 import br.com.senior.mydomain.myservice.PecaEntity;
 import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;
@@ -41,11 +39,11 @@ public class PecaServiceTest {
         when(translation.getMessage(anyString())).thenReturn("sucesso");
 
         RetornoAtualizarStatus retorno =
-                service.atualizarStatus(uuid.toString(), StatusPeca.ATIVA);
+                service.atualizarStatus(uuid.toString(), StatusPeca.PROCESSO);
 
         assertNotNull(retorno);
 
-        verify(repository).updateStatusById(StatusPeca.ATIVA, uuid);
+        verify(repository).updateStatusById(StatusPeca.PROCESSO, uuid);
         verify(repository).findById(uuid);
         verify(translation).getMessage("br.com.senior.my_domain.my_service.mensagemRetornoSucesso");
         verifyNoMoreInteractions(repository, translation);
@@ -57,13 +55,13 @@ public class PecaServiceTest {
         when(translation.getMessage(anyString())).thenReturn("erro");
 
         try {
-            service.atualizarStatus(uuid.toString(), StatusPeca.ATIVA);
+            service.atualizarStatus(uuid.toString(), StatusPeca.PROCESSO);
             fail("Deveria lançar ServiceException");
         } catch (ServiceException e) {
             assertEquals("erro", e.getMessage());
         }
 
-        verify(repository).updateStatusById(StatusPeca.ATIVA, uuid);
+        verify(repository).updateStatusById(StatusPeca.PROCESSO, uuid);
         verify(repository).findById(uuid);
         verify(translation).getMessage("br.com.senior.my_domain.my_service.mensagemRetornoIdInvalido");
         verifyNoMoreInteractions(repository, translation);

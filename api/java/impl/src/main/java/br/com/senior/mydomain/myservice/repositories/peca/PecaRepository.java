@@ -15,7 +15,6 @@ public interface PecaRepository extends PecaBaseRepository, PecaRepositoryCustom
     @Modifying
     void updateStatusById(StatusPeca status, UUID id);
 
-    @Query("SELECT COUNT(p) > 0" +
-            " FROM my_domain.my_service.PecaEntity p WHERE status <> 'PENDENTE' and id = ?1")
+    @Query("SELECT COUNT(p) > 0 FROM my_domain.my_service.PecaEntity p WHERE status <> 'PENDENTE' and id = ?1")
     boolean isPecaStatusNotPendente(UUID id);
 }

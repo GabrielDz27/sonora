@@ -4,6 +4,7 @@ import { MaquinaDto } from '../../models/maquina.models';
 import { LucideAngularModule, CheckCircle, Wrench, Plus, AlertTriangle, Cpu, Edit3, Trash2, Barcode } from 'lucide-angular/src/icons';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormularioMaquinaComponent } from '../../shared/formulario-maquina/formulario-maquina.component';
+import { AlertService } from '../../shared/ui/alert/alert.service';
 
 @Component({
   selector: 'app-maquina',
@@ -14,6 +15,7 @@ import { FormularioMaquinaComponent } from '../../shared/formulario-maquina/form
 })
 export class MaquinaComponent {
   private service = inject(MaquinaService);
+  private alertService = inject(AlertService);
 
   readonly CheckCircle = CheckCircle;
   readonly Wrench = Wrench;
@@ -49,15 +51,33 @@ export class MaquinaComponent {
   }
 
   salvar(dados: MaquinaDto) {
-    this.service.salvar(dados).subscribe(() => {
-      this.carregar();
-      this.modalAberto.set(false);
+    this.service.salvar(dados).subscribe({
+      next: () => {
+        const titulo = dados.id ? 'Máquina atualizada!' : 'Máquina cadastrada!';
+        this.alertService.toast('success', titulo);
+        this.carregar();
+        this.modalAberto.set(false);
+      },
+      error: (err) => {
+        this.alertService.toast('error', 'Erro ao salvar', err.error?.message || 'Verifique os dados e tente novamente');
+        console.error('Erro ao salvar máquina:', err);
+      }
     });
   }
 
   excluir(id: string) {
-    if (confirm('Deseja realmente remover esta maquina do inventário?')) {
-      this.service.excluir(id).subscribe(() => this.carregar());
-    }
+    this.alertService.modal('warning', 'Remover máquina?', 'Deseja realmente remover esta máquina do inventário?').then((result) => {
+      if (result.isConfirmed) {
+        this.service.excluir(id).subscribe({
+          next: () => {
+            this.alertService.toast('success', 'Máquina removida!');
+            this.carregar();
+          },
+          error: (err) => {
+            this.alertService.toast('error', 'Erro ao excluir', err.error?.message || 'A máquina pode estar vinculada a uma produção ativa.');
+          }
+        });
+      }
+    });
   }
 }

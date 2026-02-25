@@ -25,16 +25,27 @@ export class FuncionarioService {
   }
 
   listarTodos(): Observable<FuncionarioDto[]> {
-    return this.http.get<any>(this.apiEntityUrl).pipe(map(res => res.contents as FuncionarioDto[]));
+    return this.http.get<any>(this.apiEntityUrl).pipe(map(res => {
+      if (!res) return [] as FuncionarioDto[];
+      if (Array.isArray(res)) return res as FuncionarioDto[];
+      if (res.contents && Array.isArray(res.contents)) return res.contents as FuncionarioDto[];
+      console.warn('FuncionarioService.listarTodos: resposta inesperada', res);
+      return [] as FuncionarioDto[];
+    }));
   }
 
   buscarPorId(id: string) {
-    return this.http.get<any>(this.apiEntityUrl + `?filter=id eq ${id}`).pipe(map(res => res.contents[0] as FuncionarioDto));
+    return this.http.get<any>(this.apiEntityUrl + `?filter=id eq '${id}'`).pipe(map(res => {
+      if (!res) return undefined as any;
+      if (res.contents && res.contents.length) return res.contents[0] as FuncionarioDto;
+      if (Array.isArray(res) && res.length) return res[0] as FuncionarioDto;
+      return undefined as any;
+    }));
   }
 
   salvar(dados: any) {
     if (dados.id) {
-      return this.http.put(this.apiEntityUrl, dados);
+      return this.http.put(`${this.apiEntityUrl}/${dados.id}`, dados);
     } else {
       return this.http.post(this.apiEntityUrl, dados);
     }

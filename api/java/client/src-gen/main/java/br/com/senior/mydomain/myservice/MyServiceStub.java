@@ -202,6 +202,33 @@ public interface MyServiceStub {
 	CompletableFuture<FinalizarOutput> finalizarRequest(FinalizarInput input, long timeout);
 	/**
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
+	 */
+	RetornaRegistroProducaoOutput retornaRegistroProducao(long timeout);
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona
+	 */
+	void retornaRegistroProducao();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RetornaRegistroProducaoOutput> retornaRegistroProducaoRequest();
+	
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * Chamada assíncrona utilizando request
+	 */
+	CompletableFuture<RetornaRegistroProducaoOutput> retornaRegistroProducaoRequest(long timeout);
+	/**
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
 	 * Chamada síncrona, o valor de timeout deve ser informado em ms 
 	 */

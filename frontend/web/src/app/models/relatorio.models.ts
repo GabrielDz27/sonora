@@ -1,5 +1,4 @@
 export interface RelatorioQuery {
-  in: {
     dataInicio: string; // ISO DateTime
     dataFinal: string;
     tipoRelatorio: 'PERIODO' | 'MENSAL' | 'ANALITICO'; // Ajuste conforme seu Enum
@@ -7,7 +6,6 @@ export interface RelatorioQuery {
     funcionario?: string[]; // O "*" do Java vira Array
     maquina?: string[];
     codigoDesenho?: string[];
-  };
 }
 
 export interface RetornoRelatorio {

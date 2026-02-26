@@ -329,6 +329,62 @@ paths:
           schema:
             $ref: '#/definitions/genericError'
   
+  /my_service/queries/retornaRegistroProducao:
+    post:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - retorno
+            properties:
+              retorno:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                   - $ref: '#/definitions/recordRegistroProducao'
+                  minimum: 1
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+    get:
+      description: ""
+      tags:
+        - Queries
+      x-senior-visibility: PRIVATE
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: object
+            required:
+              - retorno
+            properties:
+              retorno:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                   - $ref: '#/definitions/recordRegistroProducao'
+                  minimum: 1
+                description: ""
+        401:
+          description: "Invalid Credentials"
+        default:
+          description: Error response
+          schema:
+            $ref: '#/definitions/genericError'
+  
   /my_service/queries/getMetadata:
     post:
       description: "Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested."
@@ -1979,6 +2035,42 @@ definitions:
       - CONVERT_ERROR
       - SERVICE_ERROR
   
+  recordRegistroProducao:
+    description: "Record para retorna uma lista de registroProducao"
+    type: object
+    required:
+      - peca
+      - funcionario
+      - maquina
+      - dataInicio
+    properties:
+      id:
+        type: string
+        description: ""
+      peca:
+        type: object
+        allOf:
+         - $ref: '#/definitions/peca'
+        description: ""
+      funcionario:
+        type: object
+        allOf:
+         - $ref: '#/definitions/funcionario'
+        description: ""
+      maquina:
+        type: object
+        allOf:
+         - $ref: '#/definitions/maquina'
+        description: ""
+      dataInicio:
+        type: string
+        format: date-time
+        description: ""
+      dataFinal:
+        type: string
+        format: date-time
+        description: ""
+  
   retornoRelatorio:
     description: "Retorno do endpoint do relatorio com seus records conforme os dados"
     type: object
@@ -2063,7 +2155,6 @@ definitions:
       - tempoEstimadoMinutos
       - status
       - valor
-      - motivoPerda
     properties:
       id:
         type: string

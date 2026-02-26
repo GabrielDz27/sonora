@@ -10,6 +10,22 @@
     <xsd:attribute name="i18n" type="xsd:boolean" default="false"/>
     
     <!-- Public types -->
+    <xsd:complexType name="recordRegistroProducao">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="peca" type="peca" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="funcionario" type="funcionario" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="maquina" type="maquina" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+            <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="0" maxOccurs="1"  readOnly="false">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
     <xsd:complexType name="retornoRelatorio">
         <xsd:sequence>
             <!-- collection wrapper for maquinaTrabalhando -->
@@ -122,7 +138,7 @@
             </xsd:element>
             <xsd:element name="valor" type="xsd:decimal" minOccurs="1" maxOccurs="1"  readOnly="false">
             </xsd:element>
-            <xsd:element name="motivoPerda" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+            <xsd:element name="motivoPerda" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
             </xsd:element>
         </xsd:sequence>
     </xsd:complexType>
@@ -681,6 +697,23 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="metadata" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="retornaRegistroProducao">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="retornaRegistroProducaoOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <!-- collection wrapper for retorno -->
+                <xsd:element name="retorno" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="item" type="recordRegistroProducao" minOccurs="1" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
         </xsd:complexType>

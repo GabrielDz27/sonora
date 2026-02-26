@@ -95,7 +95,7 @@
 				"motivoPerda": {
 					"name": "motivoPerda",
 					"type": "string",
-					"optional": false,
+					"optional": true,
 					"hidden": false,
 					"multivalued": false,
 					"readOnly": false

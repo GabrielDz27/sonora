@@ -22,6 +22,22 @@
             <xsd:attribute name="i18n" type="xsd:boolean" default="false"/>
             
             <!-- Public types -->
+            <xsd:complexType name="recordRegistroProducao">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="peca" type="peca" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="funcionario" type="funcionario" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="maquina" type="maquina" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="dataInicio" type="xsd:dateTime" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                    <xsd:element name="dataFinal" type="xsd:dateTime" minOccurs="0" maxOccurs="1"  readOnly="false">
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:complexType name="retornoRelatorio">
                 <xsd:sequence>
                     <!-- collection wrapper for maquinaTrabalhando -->
@@ -134,7 +150,7 @@
                     </xsd:element>
                     <xsd:element name="valor" type="xsd:decimal" minOccurs="1" maxOccurs="1"  readOnly="false">
                     </xsd:element>
-                    <xsd:element name="motivoPerda" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                    <xsd:element name="motivoPerda" type="xsd:string" minOccurs="0" maxOccurs="1"  readOnly="false">
                     </xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
@@ -693,6 +709,23 @@
                 <xsd:complexType>
                     <xsd:sequence>
                         <xsd:element name="metadata" type="xsd:string" minOccurs="1" maxOccurs="1"  readOnly="false">
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="retornaRegistroProducao">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="retornaRegistroProducaoOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <!-- collection wrapper for retorno -->
+                        <xsd:element name="retorno" minOccurs="1" maxOccurs="1">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="item" type="recordRegistroProducao" minOccurs="1" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
                         </xsd:element>
                     </xsd:sequence>
                 </xsd:complexType>
@@ -1265,6 +1298,12 @@
     <wsdl:message name="getMetadataResponse">
         <wsdl:part name="result" element="getMetadataOutput"/>
     </wsdl:message>
+    <wsdl:message name="retornaRegistroProducaoRequest">
+        <wsdl:part name="parameters" element="retornaRegistroProducao"/>
+    </wsdl:message>
+    <wsdl:message name="retornaRegistroProducaoResponse">
+        <wsdl:part name="result" element="retornaRegistroProducaoOutput"/>
+    </wsdl:message>
     <wsdl:message name="updatePecaRequest">
         <wsdl:part name="toUpdate" element="updatePeca"/>
     </wsdl:message>
@@ -1577,6 +1616,13 @@
             </wsdl:documentation>
             <wsdl:input message="getMetadataRequest"/>
             <wsdl:output message="getMetadataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="retornaRegistroProducao">
+            <wsdl:documentation>
+            WARNING: THIS OPERATION IS PRIVATE AND MAY HAVE ITS BEHAVIOR CHANGED AT ANY TIME WITHOUT NOTICE. 
+            </wsdl:documentation>
+            <wsdl:input message="retornaRegistroProducaoRequest"/>
+            <wsdl:output message="retornaRegistroProducaoResponse"/>
         </wsdl:operation>
         <wsdl:operation name="updatePeca">
             <wsdl:documentation>
@@ -1982,6 +2028,15 @@
         </wsdl:operation>
         <wsdl:operation name="getMetadata">
             <soap:operation soapAction="getMetadata"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="retornaRegistroProducao">
+            <soap:operation soapAction="retornaRegistroProducao"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

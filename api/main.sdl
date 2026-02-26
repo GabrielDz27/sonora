@@ -73,10 +73,26 @@ service my_service {
                 retorno : retornoAtualizarStatus
             }
         }
+
+        query retornaRegistroProducao {
+            out {
+                retorno : recordRegistroProducao*
+            }
+        }
     }
 
     types {
         //Record
+        "Record para retorna uma lista de registroProducao"
+        record recordRegistroProducao {
+            id: string?
+            peca: peca
+            funcionario: funcionario
+            maquina: maquina
+            dataInicio: dateTime
+            dataFinal: dateTime?
+        }
+
         "Retorno do endpoint do relatorio com seus records conforme os dados"
         record retornoRelatorio {
             maquinaTrabalhando: maquinaTrabalhando?*
@@ -154,7 +170,7 @@ service my_service {
             valor: money
 
             "Motivo pela perda peça quando o status da peça é morta"
-            motivoPerda: string
+            motivoPerda: string?
         }
 
         "Entidade do funcionário/operador"

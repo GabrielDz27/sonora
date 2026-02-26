@@ -130,6 +130,20 @@ public interface MyServiceConstants {
     	 * @see #FINALIZAR the request primitive
     	 */
     	String FINALIZAR_ERROR = "finalizarError";
+    	String RETORNA_REGISTRO_PRODUCAO = "retornaRegistroProducao";
+    	/**
+    	 * The success response primitive for retornaRegistroProducao.
+    	 *
+    	 * @see #RETORNA_REGISTRO_PRODUCAO the request primitive
+    	 * @see RetornaRegistroProducaoOutput the response payload
+    	 */
+    	String RETORNA_REGISTRO_PRODUCAO_RESPONSE = "retornaRegistroProducaoResponse";
+    	/**
+    	 * An error response primitive for retornaRegistroProducao.
+    	 *
+    	 * @see #RETORNA_REGISTRO_PRODUCAO the request primitive
+    	 */
+    	String RETORNA_REGISTRO_PRODUCAO_ERROR = "retornaRegistroProducaoError";
     	/**
     	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.
     	 * @see GetMetadataInput the request payload

@@ -7,6 +7,7 @@ import br.com.senior.mydomain.myservice.RelatorioOutput;
 import br.com.senior.mydomain.myservice.repositories.funcionario.FuncionarioRepository;
 import br.com.senior.mydomain.myservice.repositories.maquina.MaquinaRepository;
 import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
+import br.com.senior.mydomain.myservice.services.relatorio.RelatorioService;
 
 import javax.inject.Inject;
 
@@ -14,18 +15,13 @@ import javax.inject.Inject;
 public class RelatorioImpl implements Relatorio {
 
     @Inject
-    private PecaRepository pecaRepository;
-
-    @Inject
-    private FuncionarioRepository funcionarioRepository;
-
-    @Inject
-    private MaquinaRepository maquinaRepository;
+    private RelatorioService relatorioService;
 
     @Override
     public RelatorioOutput relatorio(RelatorioInput request) {
 
         RelatorioOutput output = new RelatorioOutput();
+        output.retorno = relatorioService.retornaDados(request);
         return output;
     }
 }

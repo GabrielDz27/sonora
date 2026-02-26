@@ -55,7 +55,6 @@ export class AutenticacaoService {
 
   logout() {
     localStorage.clear();
-    
   }
 
   getAccessToken(): string | null {

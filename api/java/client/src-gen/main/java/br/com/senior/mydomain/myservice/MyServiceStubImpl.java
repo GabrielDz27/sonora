@@ -344,6 +344,49 @@ public class MyServiceStubImpl  implements MyServiceStub {
 		return impl.finalizarRequest(input, timeout, TimeUnit.MILLISECONDS);
 	}
 	/**
+	 * Chamada síncrona para o método retornaRegistroProducao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 * @throws MyServiceMessageException quando um erro com payload for retornado pela mensageria
+	 */
+	@Override
+	public RetornaRegistroProducaoOutput retornaRegistroProducao(long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retornaRegistroProducao(timeout);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaRegistroProducao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public void retornaRegistroProducao() {
+		br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		impl.retornaRegistroProducao();
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaRegistroProducao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	 */
+	@Override
+	public CompletableFuture<RetornaRegistroProducaoOutput> retornaRegistroProducaoRequest() {
+		return this.retornaRegistroProducaoRequest(0l);
+	}
+	
+	/**
+	 * Chamada assíncrona para o método retornaRegistroProducao
+	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
+	 * 
+	*/
+	@Override
+	public CompletableFuture<RetornaRegistroProducaoOutput> retornaRegistroProducaoRequest(long timeout) {
+		br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl impl = new br.com.senior.mydomain.myservice.impl.RetornaRegistroProducaoImpl(messengerSupplier, userId, messageSupplier);
+		return impl.retornaRegistroProducaoRequest(timeout, TimeUnit.MILLISECONDS);
+	}
+	/**
 	 * Chamada síncrona para o método getMetadata
 	 * Warning: this operation is PRIVATE and may have its behavior changed at any time without notice
 	 * Default 'getMetadata' query. Every service must handle this command and return metadata in the format requested.

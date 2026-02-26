@@ -169,6 +169,42 @@ definitions:
       - CONVERT_ERROR
       - SERVICE_ERROR
     
+  recordRegistroProducao:
+    description: "Record para retorna uma lista de registroProducao"
+    type: object
+    required:
+      - peca
+      - funcionario
+      - maquina
+      - dataInicio
+    properties:
+      id:
+        type: string
+        description: ""
+      peca:
+        type: object
+        allOf:
+         - $ref: '#/definitions/peca'
+        description: ""
+      funcionario:
+        type: object
+        allOf:
+         - $ref: '#/definitions/funcionario'
+        description: ""
+      maquina:
+        type: object
+        allOf:
+         - $ref: '#/definitions/maquina'
+        description: ""
+      dataInicio:
+        type: string
+        format: date-time
+        description: ""
+      dataFinal:
+        type: string
+        format: date-time
+        description: ""
+  
   retornoRelatorio:
     description: "Retorno do endpoint do relatorio com seus records conforme os dados"
     type: object
@@ -253,7 +289,6 @@ definitions:
       - tempoEstimadoMinutos
       - status
       - valor
-      - motivoPerda
     properties:
       id:
         type: string

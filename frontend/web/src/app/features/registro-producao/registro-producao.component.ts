@@ -40,31 +40,21 @@ export class RegistroProducaoComponent implements OnInit {
   ngOnInit() { this.carregar(); }
 
   carregar() {
-    this.service.listarTodos().pipe(
-      switchMap(items => {
-        const observables = items.map(item => {
-          const func$ = this.funcionarioService.buscarPorId(item.funcionario.id);
-          const maq$ = this.maquinaService.buscarPorId(item.maquina.id);
-          const peca$ = this.pecaService.buscarPorId(item.peca.id);
-          return forkJoin({ funcionario: func$, maquina: maq$, peca: peca$ }).pipe(
-            map(({ funcionario, maquina, peca }) => {
-              const pagina: RegistroProducaoPaginaDto = {
-                id: item.id,
-                funcionario: funcionario?.nome ?? item.funcionario.id,
-                maquina: maquina?.nome ?? item.maquina.id,
-                peca: peca?.nome ?? item.peca.id,
-                dataInicio: item.dataInicio,
-                dataFinal: item.dataFinal
-              };
-              return pagina;
-            })
-          );
-        });
-        if (observables.length === 0) return of([] as RegistroProducaoPaginaDto[]);
-        return forkJoin(observables);
-      })
-    ).subscribe(res => this.registros.set(res));
-  }
+  this.service.listarTodosCompleta()
+    .pipe(
+      map(items =>
+        items.map(item => ({
+          id: item.id,
+          funcionario: item.funcionario?.nome ?? '---',
+          maquina: item.maquina?.nome ?? '---',
+          peca: item.peca?.nome ?? '---',
+          dataInicio: item.dataInicio,
+          dataFinal: item.dataFinal
+        }))
+      )
+    )
+    .subscribe(res => this.registros.set(res));
+}
 
   iniciarNovoRegistro() {
     this.modalAberto.set(true);
@@ -91,7 +81,7 @@ export class RegistroProducaoComponent implements OnInit {
         this.carregar();
       },
       error: (err) => {
-        this.alertService.toast('error', 'Erro ao finalizar', err.message || 'Tente novamente mais tarde');
+        this.alertService.toast('error', 'Erro ao finalizar', err.error?.message || 'Tente novamente mais tarde');
         console.error('Erro ao finalizar registro:', err);
       }
     });

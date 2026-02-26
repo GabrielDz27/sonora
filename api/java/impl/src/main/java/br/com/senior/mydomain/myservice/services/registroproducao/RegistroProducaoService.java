@@ -3,6 +3,7 @@ package br.com.senior.mydomain.myservice.services.registroproducao;
 import br.com.senior.messaging.ErrorCategory;
 import br.com.senior.messaging.model.ServiceException;
 import br.com.senior.mydomain.myservice.PecaEntity;
+import br.com.senior.mydomain.myservice.RecordRegistroProducao;
 import br.com.senior.mydomain.myservice.RegistroProducaoEntity;
 import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;
 import br.com.senior.mydomain.myservice.repositories.registroproducao.RegistroProducaoRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,5 +39,9 @@ public class RegistroProducaoService {
         } else {
             throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.mensagemRetornoIdInvalido"));
         }
+    }
+
+    public List<RecordRegistroProducao> listagemRegistroProducao() {
+        return registroProducaoRepository.findAllCompleto();
     }
 }

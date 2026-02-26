@@ -310,6 +310,25 @@
             "visibility" : "PRIVATE",
             "version": "0"
         },
+        "retornaRegistroProducao": {
+            "endpointType" : "command",
+            "kind": "query",
+            "priority" : "NORMAL",
+            "idempotent": true,
+            "output" : {
+                "retorno" : {
+                    "type": "recordRegistroProducao",
+                    "optional": false,
+                    "multivalued": true,
+                    "readOnly": false
+                }
+            },
+            "extensionPoint" : false,
+            "responses" : {
+            },
+            "visibility" : "PRIVATE",
+            "version": "0"
+        },
         "updatePeca": {
             "endpointType" : "command",
             "kind": "update",
@@ -1349,6 +1368,44 @@
         }
     },
     "records": {
+        "recordRegistroProducao" : {
+            "id" : {
+                "type": "string",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "peca" : {
+                "type": "peca",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "funcionario" : {
+                "type": "funcionario",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "maquina" : {
+                "type": "maquina",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "dataInicio" : {
+                "type": "dateTime",
+                "optional": false,
+                "multivalued": false,
+                "readOnly": false
+            },
+            "dataFinal" : {
+                "type": "dateTime",
+                "optional": true,
+                "multivalued": false,
+                "readOnly": false
+            }
+        },
         "retornoRelatorio" : {
             "maquinaTrabalhando" : {
                 "type": "maquinaTrabalhando",
@@ -1470,7 +1527,7 @@
             },
             "motivoPerda" : {
                 "type": "string",
-                "optional": false,
+                "optional": true,
                 "multivalued": false,
                 "documentation": "Motivo pela perda pe\u00E7a quando o status da pe\u00E7a \u00E9 morta",
                 "readOnly": false
@@ -2375,7 +2432,7 @@
                 },
                 "motivoPerda" : {
                     "type": "string",
-                    "optional": false,
+                    "optional": true,
                     "multivalued": false,
                     "documentation": "Motivo pela perda pe\u00E7a quando o status da pe\u00E7a \u00E9 morta",
                     "readOnly": false

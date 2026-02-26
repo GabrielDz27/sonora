@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { RegistroProducaoDto } from '../models/registro-producao.models';
+import { RegistroProducaoDetalhadoDto, RegistroProducaoDto } from '../models/registro-producao.models';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class RegistroProducaoService {
   private apiEntityUrl = `${environment.apiUrl}my_domain/my_service/entities/registroProducao`;
   private apiActionUrl = `${environment.apiUrl}my_domain/my_service/actions/registroProducao`;
+  private apiQueryUrl = `${environment.apiUrl}my_domain/my_service/queries/retornaRegistroProducao`;
 
   constructor(
     private http: HttpClient
@@ -19,6 +20,12 @@ export class RegistroProducaoService {
   listarTodos(): Observable<RegistroProducaoDto[]> {
     return this.http.get<{ contents: RegistroProducaoDto[] }>(this.apiEntityUrl).pipe(
       map(res => res.contents)
+    );
+  }
+
+  listarTodosCompleta(): Observable<RegistroProducaoDetalhadoDto[]> {
+    return this.http.get<{ retorno: RegistroProducaoDetalhadoDto[] }>(this.apiQueryUrl).pipe(
+      map(res => res.retorno)
     );
   }
   

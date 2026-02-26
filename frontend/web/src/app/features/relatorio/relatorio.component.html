@@ -1,44 +1,28 @@
-<div class="filtros">
-  <input type="datetime-local" [(ngModel)]="filtros.dataInicio">
-  <input type="datetime-local" [(ngModel)]="filtros.dataFinal">
-  
-  <input type="text" [(ngModel)]="filtros.funcionario" placeholder="Filtro Funcionario (ex: 1, 2)">
-  <input type="text" [(ngModel)]="filtros.maquina" placeholder="Filtro Máquina (ex: CNC01)">
-  
-  <button (click)="gerarRelatorio()">Consultar Bridge</button>
+<div class="bg-white p-6 rounded-2xl border flex gap-4 flex-wrap">
+
+  <input type="date"
+    (change)="atualizarFiltro('dataInicio',$any($event.target).value)" />
+
+  <input type="date"
+    (change)="atualizarFiltro('dataFinal',$any($event.target).value)" />
+
+  <select (change)="atualizarFiltro('funcionario',[$any($event.target).value])">
+    <option value="">Funcionário</option>
+    <option *ngFor="let f of funcionarios()" [value]="f.id">
+      {{f.nome}}
+    </option>
+  </select>
+
+  <select (change)="atualizarFiltro('maquina',[$any($event.target).value])">
+    <option value="">Máquina</option>
+    <option *ngFor="let m of maquinas()" [value]="m.id">
+      {{m.nome}}
+    </option>
+  </select>
+
+  <button (click)="gerarRelatorio()"
+    class="bg-sky-600 text-white px-6 py-2 rounded-xl font-bold">
+    Gerar
+  </button>
+
 </div>
-
-<hr>
-
-<table>
-  <thead>
-    <tr>
-      <th>Máquina</th>
-      <th>Horas</th>
-      <th>Peças Mortas</th>
-      <th>Funcionário</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (item of dados(); track $index) {
-      <tr>
-        <td>{{ item.maquinaTrabalhando?.maquina || 'N/A' }}</td>
-        <td>{{ item.maquinaTrabalhando?.horas ?? 0 }}h</td>
-        
-        <td>{{ item.pecaMortas }}</td>
-        
-        <td>
-          @if (item.pecaFuncionario) {
-            {{ item.pecaFuncionario.funcionario }} ({{ item.pecaFuncionario.peca }})
-          } @else {
-            - 
-          }
-        </td>
-      </tr>
-    } @empty {
-      <tr>
-        <td colspan="4" style="text-align: center;">Nenhum registro retornado da Bridge.</td>
-      </tr>
-    }
-  </tbody>
-</table>

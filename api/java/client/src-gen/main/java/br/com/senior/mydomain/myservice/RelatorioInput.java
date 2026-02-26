@@ -1,5 +1,6 @@
 package br.com.senior.mydomain.myservice;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,7 @@ import javax.validation.constraints.NotNull;
 
 
 public class RelatorioInput {
-    
-    @NotNull(message = "dataInicio is required")
+
     public java.time.Instant dataInicio;
     
     @NotNull(message = "dataFinal is required")
@@ -157,5 +157,5 @@ public class RelatorioInput {
     public void toString(StringBuilder sb, List<Object> appended) {
     	RelatorioInputStringSerializer.INSTANCE.serialize(this, sb, appended);
     }
-    
+
 }

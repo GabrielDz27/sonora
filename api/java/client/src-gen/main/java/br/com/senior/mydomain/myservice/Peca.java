@@ -152,7 +152,6 @@ public class Peca extends CustomDTO {
     /**
      * Motivo pela perda peça quando o status da peça é morta
      */
-    @NotNull(message = "motivoPerda is required")
     public String motivoPerda;
     
     
@@ -177,13 +176,12 @@ public class Peca extends CustomDTO {
     /** 
      * This convenience constructor allows initialization of all required fields.
      */
-    public Peca(String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status, java.math.BigDecimal valor, String motivoPerda) {
+    public Peca(String nome, String codigoDesenho, Long tempoEstimadoMinutos, StatusPeca status, java.math.BigDecimal valor) {
         this.nome = nome;
         this.codigoDesenho = codigoDesenho;
         this.tempoEstimadoMinutos = tempoEstimadoMinutos;
         this.status = status;
         this.valor = valor;
-        this.motivoPerda = motivoPerda;
     }
     
     public void normalize(Map<String, Object> headers) {

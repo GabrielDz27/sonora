@@ -61,6 +61,11 @@
                 <slot name="retorno" type="retornoAtualizarStatus" optional="false" multivalued="false"/>
             </output>
         </action>
+        <query name="retornaRegistroProducao" idempotent="false" extensionPoint="false" visibility="PRIVATE">
+            <output>
+                <slot name="retorno" type="recordRegistroProducao" optional="false" multivalued="true"/>
+            </output>
+        </query>
         <query name="getMetadata" idempotent="false" extensionPoint="false" visibility="PRIVATE">
             <input>
                 <slot name="metadataFormat" type="string" optional="true" multivalued="false"/>
@@ -379,6 +384,14 @@
         </event>
     </events>
     <records>
+        <record name="recordRegistroProducao">
+            <slot name="id" type="string" optional="true" multivalued="false"/>
+            <slot name="peca" type="peca" optional="false" multivalued="false"/>
+            <slot name="funcionario" type="funcionario" optional="false" multivalued="false"/>
+            <slot name="maquina" type="maquina" optional="false" multivalued="false"/>
+            <slot name="dataInicio" type="dateTime" optional="false" multivalued="false"/>
+            <slot name="dataFinal" type="dateTime" optional="true" multivalued="false"/>
+        </record>
         <record name="retornoRelatorio">
             <slot name="maquinaTrabalhando" type="maquinaTrabalhando" optional="true" multivalued="true"/>
             <slot name="pecaMortas" type="integer" optional="false" multivalued="false" minValue="0"/>
@@ -404,7 +417,7 @@
             <slot name="tempoEstimadoMinutos" type="integer" optional="false" multivalued="false"/>
             <slot name="status" type="statusPeca" optional="false" multivalued="false"/>
             <slot name="valor" type="money" optional="false" multivalued="false"/>
-            <slot name="motivoPerda" type="string" optional="false" multivalued="false"/>
+            <slot name="motivoPerda" type="string" optional="true" multivalued="false"/>
         </record>
         <record name="funcionario">
             <slot name="id" type="string" format="uuid" optional="true" multivalued="false"/>

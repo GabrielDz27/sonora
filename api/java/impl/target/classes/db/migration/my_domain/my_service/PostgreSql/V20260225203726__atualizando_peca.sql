@@ -1,0 +1,1 @@
+ALTER TABLE peca ALTER COLUMN motivo_perda DROP NOT NULL;

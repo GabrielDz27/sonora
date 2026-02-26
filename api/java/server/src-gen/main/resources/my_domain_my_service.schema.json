@@ -1,6 +1,34 @@
 {
     "id": "my_domain.my_service",
     "properties": {
+        "recordRegistroProducao" : {
+        	"type" : "object",
+        	"id" : "recordRegistroProducao",
+        	"properties" : {
+            	"id" : {
+            		"type": "string"
+            	},
+            	"peca" : {
+            		"$ref": "#/properties/peca"
+            	},
+            	"funcionario" : {
+            		"$ref": "#/properties/funcionario"
+            	},
+            	"maquina" : {
+            		"$ref": "#/properties/maquina"
+            	},
+            	"dataInicio" : {
+            		"type": "string",
+            		"format": "date-time"
+            	},
+            	"dataFinal" : {
+            		"type": "string",
+            		"format": "date-time"
+            	}
+        	},
+        	"required" : ["peca","funcionario","maquina","dataInicio"]
+        }
+        ,
         "retornoRelatorio" : {
         	"type" : "object",
         	"id" : "retornoRelatorio",
@@ -99,7 +127,7 @@
             		"type": "string"
             	}
         	},
-        	"required" : ["nome","codigoDesenho","tempoEstimadoMinutos","status","valor","motivoPerda"]
+        	"required" : ["nome","codigoDesenho","tempoEstimadoMinutos","status","valor"]
         }
         ,
         "funcionario" : {

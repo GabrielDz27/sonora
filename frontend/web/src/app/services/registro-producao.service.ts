@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class RegistroProducaoService {
   private apiEntityUrl = `${environment.apiUrl}my_domain/my_service/entities/registroProducao`;
   private apiActionUrl = `${environment.apiUrl}my_domain/my_service/actions/registroProducao`;
+  private apiActioMudarStatusnUrl = `${environment.apiUrl}my_domain/my_service/actions/mudarStatusPeca`;
   private apiQueryUrl = `${environment.apiUrl}my_domain/my_service/queries/retornaRegistroProducao`;
 
   constructor(
@@ -47,7 +48,12 @@ export class RegistroProducaoService {
     if (dados.id) {
       return this.http.put<RegistroProducaoDto>(`${this.apiEntityUrl}/${dados.id}`, dados);
     }
+    
     return this.http.post<RegistroProducaoDto>(this.apiEntityUrl, dados);
+  }
+
+  mudarStatusPeca(id: string, status: string): Observable<RegistroProducaoDto> {
+    return this.http.post<RegistroProducaoDto>(`${this.apiActioMudarStatusnUrl}`, { id, status });
   }
 
   excluir(id: string): Observable<void> {

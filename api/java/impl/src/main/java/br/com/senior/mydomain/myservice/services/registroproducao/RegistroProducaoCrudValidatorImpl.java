@@ -37,11 +37,11 @@ public class RegistroProducaoCrudValidatorImpl implements RegistroProducaoCrudVa
     }
 
     private void validadorMaquina(UUID idMaquina) {
-        if (maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)) {
+        if (!maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)) {
             throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.maquinaNaoAtiva"));
         }
 
-        if (registroProducaoRepository.isMaquinaUsada(LocalDateTime.now(), idMaquina)) {
+        if (!registroProducaoRepository.isMaquinaUsada(LocalDateTime.now(), idMaquina)) {
             throw new ServiceException(ErrorCategory.BAD_REQUEST, translationHubApi.getMessage("br.com.senior.my_domain.my_service.maquinaJaUsada"));
         }
     }
@@ -62,4 +62,6 @@ public class RegistroProducaoCrudValidatorImpl implements RegistroProducaoCrudVa
     public void beforeDelete(RegistroProducao.Id id) {
 
     }
+
+
 }

@@ -1,15 +1,18 @@
 package br.com.senior.mydomain.myservice.services.registroproducao;
 
 import br.com.senior.messaging.model.ServiceException;
+import br.com.senior.mydomain.myservice.RecordRegistroProducao;
 import br.com.senior.mydomain.myservice.RegistroProducaoEntity;
 import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;
 import br.com.senior.mydomain.myservice.repositories.registroproducao.RegistroProducaoRepository;
 import br.com.senior.platform.translationhub.api.TranslationHubApi;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,6 +35,11 @@ public class RegistroProducaoServiceTest {
     private RegistroProducaoEntity entity;
 
     private final UUID uuid = UUID.randomUUID();
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void deveFinalizarComSucesso() {
@@ -65,5 +73,23 @@ public class RegistroProducaoServiceTest {
         verify(repository).findById(uuid);
         verify(translation).getMessage("br.com.senior.my_domain.my_service.mensagemRetornoIdInvalido");
         verifyNoMoreInteractions(repository, translation);
+    }
+
+    @Test
+    public void deveRetornarListaDeRegistros() {
+
+        List<RecordRegistroProducao> listaMock =
+                List.of(mock(RecordRegistroProducao.class),
+                        mock(RecordRegistroProducao.class));
+
+        when(repository.findAllCompleto()).thenReturn(listaMock);
+
+        List<RecordRegistroProducao> resultado =
+                service.listagemRegistroProducao();
+
+        assertEquals(listaMock, resultado);
+
+        verify(repository).findAllCompleto();
+        verifyNoMoreInteractions(repository);
     }
 }

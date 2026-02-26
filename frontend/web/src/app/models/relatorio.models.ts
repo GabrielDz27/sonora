@@ -1,23 +1,34 @@
 export interface RelatorioQuery {
-    dataInicio: string; // ISO DateTime
+    dataInicio: string;
     dataFinal: string;
-    tipoRelatorio: 'PERIODO' | 'MENSAL' | 'ANALITICO'; // Ajuste conforme seu Enum
+    tipoRelatorio: 'PERIODO' | 'MENSAL' | 'ANALITICO'; 
     turno?: string;
-    funcionario?: string[]; // O "*" do Java vira Array
+    funcionario?: string[]; 
     maquina?: string[];
     codigoDesenho?: string[];
 }
 
+export interface MaquinaRelatorio {
+  id: string;
+  nome: string;
+  _discriminator?: string;
+}
+
+export interface MaquinaTrabalhandoRelatorio {
+  maquina?: MaquinaRelatorio;
+  horas: number;
+}
+
+export interface PecaFuncionarioRelatorio {
+  peca?: { id: string; nome: string };
+  funcionario?: { id: string; nome: string };
+  maquina?: MaquinaRelatorio;
+}
+
 export interface RetornoRelatorio {
-  maquinaTrabalhando?: {
-    maquina?: { id: string; nome: string };
-    horas: number;
-  };
+  maquinaTrabalhando?: MaquinaTrabalhandoRelatorio[];
   pecaMortas: number;
-  pecaFuncionario?: {
-    peca?: { id: string; nome: string };
-    funcionario?: { id: string; nome: string };
-  };
+  pecaFuncionario?: PecaFuncionarioRelatorio[];
 }
 
 export interface RelatorioResponse {

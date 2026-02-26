@@ -62,7 +62,6 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
                 );
             }
 
-            // ---------- FUNCIONARIO ----------
             Funcionario funcionarioDto = null;
             if (fe != null) {
                 funcionarioDto = new Funcionario(
@@ -115,7 +114,6 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
 
         BooleanBuilder where = new BooleanBuilder();
 
-        // ----- período -----
         if (inicio != null && fim != null) {
             where.and(
                     r.dataInicio.between(
@@ -125,7 +123,6 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
             );
         }
 
-        // ----- filtro funcionario -----
         if (funcionarios != null && !funcionarios.isEmpty()) {
             List<UUID> ids = funcionarios.stream()
                     .map(UUID::fromString)
@@ -134,12 +131,10 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
             where.and(f.id.in(ids));
         }
 
-        // ----- filtro turno -----
         if (turno != null && !turno.isBlank()) {
             where.and(f.turno.stringValue().equalsIgnoreCase(turno));
         }
 
-        // ----- query -----
         List<Tuple> rows = new JPAQuery<>(em)
                 .select(r, f, p)
                 .from(r)
@@ -158,7 +153,6 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
 
             if (re == null) continue;
 
-            // DTO peça
             Peca pecaDto = null;
             if (pe != null) {
                 pecaDto = new Peca(
@@ -173,7 +167,6 @@ public class RegistroProducaoCustomImpl implements RegistroProducaoCustom {
                 );
             }
 
-            // DTO funcionario
             Funcionario funcionarioDto = null;
             if (fe != null) {
                 funcionarioDto = new Funcionario(

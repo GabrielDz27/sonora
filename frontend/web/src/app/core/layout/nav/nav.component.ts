@@ -1,11 +1,12 @@
 import { Component, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule, Box, LayoutDashboard, Settings2, Users, Cpu, Activity, BarChart3, LogOut } from 'lucide-angular/src/icons';
 import { AutenticacaoService } from '../../../services/auth/autenticacao.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FuncionarioDto } from '../../../models/funcionario.models';
 import { toSignal } from '@angular/core/rxjs-interop';
+
 
 @Component({
   selector: 'app-nav',
@@ -24,7 +25,8 @@ export class NavComponent {
   readonly LogOut = LogOut;
 
   private auth = inject(AutenticacaoService);
-
+  router = inject(Router);
+  
   usuario = toSignal(this.auth.usuarioLogado(), { initialValue: null });
   
   iniciais = computed(() => {
@@ -38,6 +40,7 @@ export class NavComponent {
 
   fazerLogout() {
     this.auth.logout();
+    this.router.navigate(['/login']); 
   }
 }
 

@@ -64,6 +64,7 @@ export class RegistroProducaoComponent implements OnInit {
     this.service.salvar(dados).subscribe({
       next: () => {
         this.alertService.toast('success', 'Registro de produção iniciado!');
+        this.service.mudarStatusPeca(dados.peca.id!, 'PROCESSO');
         this.carregar();
         this.modalAberto.set(false);
       },

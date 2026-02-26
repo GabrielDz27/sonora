@@ -2,11 +2,10 @@ package br.com.senior.mydomain.myservice.services.registroproducao;
 
 import br.com.senior.messaging.ErrorCategory;
 import br.com.senior.messaging.model.ServiceException;
-import br.com.senior.mydomain.myservice.PecaEntity;
-import br.com.senior.mydomain.myservice.RecordRegistroProducao;
-import br.com.senior.mydomain.myservice.RegistroProducaoEntity;
-import br.com.senior.mydomain.myservice.RetornoAtualizarStatus;
+import br.com.senior.mydomain.myservice.*;
+import br.com.senior.mydomain.myservice.repositories.peca.PecaRepository;
 import br.com.senior.mydomain.myservice.repositories.registroproducao.RegistroProducaoRepository;
+import br.com.senior.mydomain.myservice.services.peca.PecaService;
 import br.com.senior.platform.translationhub.api.TranslationHubApi;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +23,17 @@ public class RegistroProducaoService {
     private RegistroProducaoRepository registroProducaoRepository;
 
     @Inject
+    private PecaRepository pecaRepository;
+
+    @Inject
     private TranslationHubApi translationHubApi;
 
     public RetornoAtualizarStatus finalizar(String id) {
         registroProducaoRepository.updateStatusById(LocalDateTime.now(), UUID.fromString(id));
+
+        RegistroProducaoEntity registroProducaoEntity = registroProducaoRepository.findById(UUID.fromString(id)).get();
+
+        pecaRepository.updateStatusById(StatusPeca.FINALIZADO, registroProducaoEntity.getPeca().getId());
 
         final Optional<RegistroProducaoEntity> convidadoOpt = registroProducaoRepository.findById(UUID.fromString(id));
         if (convidadoOpt.isPresent()) {

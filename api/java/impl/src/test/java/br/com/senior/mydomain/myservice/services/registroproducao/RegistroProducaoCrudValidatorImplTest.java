@@ -11,11 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -53,20 +50,27 @@ public class RegistroProducaoCrudValidatorImplTest {
     @Before
     public void setup() {
 
-        idPeca = UUID.randomUUID();
         idMaquina = UUID.randomUUID();
+        idPeca = UUID.randomUUID();
 
-        when(entity.getPeca()).thenReturn(peca);
-        when(entity.getMaquina()).thenReturn(maquina);
-        when(peca.getId()).thenReturn(idPeca);
-        when(maquina.getId()).thenReturn(idMaquina);
+        MaquinaEntity maq = new MaquinaEntity();
+        maq.setId(idMaquina);
 
-        when(translationHubApi.getMessage(anyString())).thenReturn("erro");
+        PecaEntity peca = new PecaEntity();
+        peca.setId(idPeca);
 
-        when(pecaRepository.isPecaStatusNotPendente(idPeca)).thenReturn(false);
-        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(false);
-        when(registroProducaoRepository.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina)))
+        entity = new RegistroProducaoEntity();
+        entity.setMaquina(maq);
+        entity.setPeca(peca);
+
+        when(pecaRepository.isPecaStatusNotPendente(idPeca))
                 .thenReturn(false);
+
+        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina))
+                .thenReturn(true);
+
+        when(registroProducaoRepository.isMaquinaUsada(any(), eq(idMaquina)))
+                .thenReturn(true);
     }
 
     @Test
@@ -86,15 +90,19 @@ public class RegistroProducaoCrudValidatorImplTest {
     }
 
     @Test(expected = ServiceException.class)
-    public void deveFalharQuandoMaquinaInativa() {
-        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina)).thenReturn(true);
+    public void deveFalharSeMaquinaInativa() {
+
+        when(maquinaRepository.isMaquinaStatusNotAtiva(idMaquina))
+                .thenReturn(false);
+
         validator.beforeCreate(entity);
     }
 
     @Test(expected = ServiceException.class)
-    public void deveFalharQuandoMaquinaEmUso() {
-        when(registroProducaoRepository.isMaquinaUsada(any(LocalDateTime.class), eq(idMaquina)))
-                .thenReturn(true);
+    public void deveFalharSeMaquinaOcupada() {
+
+        when(registroProducaoRepository.isMaquinaUsada(any(), eq(idMaquina)))
+                .thenReturn(false);
 
         validator.beforeCreate(entity);
     }
